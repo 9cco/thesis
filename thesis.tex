@@ -1,0 +1,23 @@
+\include{preamble}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   Document itself
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Import bibliographies
+\addbibresource{references.bib}
+
+\begin{document}
+  \frontmatter
+    \include{abstract}
+    \include{preface}
+    \tableofcontents
+  \mainmatter 
+    \include{introduction} 
+    \include{test}
+    \include{conclusion} 
+  \backmatter
+    \printbibliography
+\end{document}
