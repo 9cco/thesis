@@ -1,0 +1,282 @@
+\documentclass[11pt,b5paper]{memoir} % or even: book | or the koma classes: scrreprt, scrbook
+% or for a small thesis 'article' or the corresponding 'scrartcl'
+%\usepackage{microtype}
+%\usepackage[<encoding>]{fontenc} % probabilly: T1
+\usepackage{amsmath}
+% split equations with \begin{multline} ... \end{multline}
+%\allowdisplaybreaks % Page breaks ?  (\begingroup  \endgroup)
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage[utf8]{inputenc} % probabilly: utf8
+%\usepackage{palatino} % just as a matter of taste
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\geometry{top = 30mm}
+%\usepackage{csquotes} % probabilly with the option: autostyle=true
+\usepackage{ellipsis}
+%\usepackage{natbib} % or biblatex
+\usepackage{graphicx}
+%\graphicspath{ {images/} } % or whatever your "images"-directory is
+%\usepackage{todonotes} % or fixme
+%\usepackage[acronym,toc]{glossaries}
+\usepackage{pdfpages}
+%\usepackage{setspace}
+
+
+\usepackage{dsfont}
+
+%\usepackage[toc,page]{appendix}
+%
+
+\usepackage{fancyhdr}
+\usepackage{emptypage}
+\usepackage{hyperref}
+\usepackage[square,numbers,sort&compress,comma]{natbib}
+%\setcitestyle{square,numbers,sort&compress,comma}
+
+%\makeglossaries
+%\newacronym{xo}{XO}{exchange-only}
+
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{2}
+
+%\bibliographystyle{apsrev}
+\bibliographystyle{aipnum4-1}
+%\bibliographystyle{plainnat}
+%\bibliographystyle{unsrtnat}
+
+
+%\hypersetup{hidelinks}
+
+\hypersetup{colorlinks=true,
+linkcolor=blue,
+citecolor=blue,
+urlcolor=blue,
+filecolor=black
+%hidelinks
+}
+
+
+%\renewcommand{\headrulewidth}{0pt}
+%\pagestyle{fancy}
+%\fancyhf{}
+%\fancyhead[LE,RO]{\thepage}
+%\fancyhead[RE]{\thechapter\chaptername}
+%\fancyhead[LO]{\thesection}
+
+\renewcommand{\chaptermark}[1]{%
+\markboth{\MakeUppercase{\thechapter .\ #1}}{}}
+
+%\fancyhead[LE,RO]{\textsl{\rightmark}}
+%\fancyhead[LO,RE]{\textsl{\leftmark}}
+%\fancyfoot[C]{\thepage}
+
+
+
+
+
+\newcommand{\ua}{\uparrow}
+\newcommand{\da}{\downarrow}
+\newcommand{\bra}[1]{\left\langle #1\right|}
+\newcommand{\ket}[1]{|{#1}\rangle}
+\newcommand{\braket}[2]{\langle #1 | #2 \rangle}
+\newcommand{\bmk}[3]{\langle #1 | #2 | #3 \rangle}
+
+\newcommand{\vk}{\mathbf{k}}
+\newcommand{\vr}{\mathbf{r}}
+\newcommand{\vR}{\mathbf{R}}
+
+\newcommand{\comm}[2]{\left[  #1, #2 \right]}
+\newcommand{\commh}[2]{\left[ #1, #2 \right]}
+
+
+\newcommand{\suudd}{\left| \uparrow \uparrow S_m \downarrow \downarrow \right\rangle}
+\newcommand{\sudud}{\left| \uparrow \downarrow S_m \uparrow \downarrow \right\rangle}
+\newcommand{\sdudu}{\left| \downarrow \uparrow S_m \downarrow \uparrow \right\rangle}
+\newcommand{\sdduu}{\left| \downarrow \downarrow S_m \uparrow \uparrow \right\rangle}
+\newcommand{\sduud}{\left| \downarrow \uparrow S_m \uparrow \downarrow \right\rangle}
+\newcommand{\suddu}{\left| \uparrow \downarrow S_m \downarrow \uparrow \right\rangle}
+
+\newcommand{\uuuu}{\left| \uparrow \uparrow \uparrow \uparrow \right\rangle}
+\newcommand{\uuud}{\left| \uparrow \uparrow \uparrow \downarrow \right\rangle}
+\newcommand{\uudu}{\left| \uparrow \uparrow \downarrow \uparrow \right\rangle}
+\newcommand{\uudd}{\left| \uparrow \uparrow \downarrow \downarrow \right\rangle}
+\newcommand{\uduu}{\left| \uparrow \downarrow \uparrow \uparrow \right\rangle}
+\newcommand{\udud}{\left| \uparrow \downarrow \uparrow \downarrow \right\rangle}
+\newcommand{\uddu}{\left| \uparrow \downarrow \downarrow \uparrow \right\rangle}
+\newcommand{\uddd}{\left| \uparrow \downarrow \downarrow \downarrow \right\rangle}
+\newcommand{\duuu}{\left| \downarrow \uparrow \uparrow \uparrow \right\rangle}
+\newcommand{\duud}{\left| \downarrow \uparrow \uparrow \downarrow \right\rangle}
+\newcommand{\dudu}{\left| \downarrow \uparrow \downarrow \uparrow \right\rangle}
+\newcommand{\dudd}{\left| \downarrow \uparrow \downarrow \downarrow \right\rangle}
+\newcommand{\dduu}{\left| \downarrow \downarrow \uparrow \uparrow \right\rangle}
+\newcommand{\ddud}{\left| \downarrow \downarrow \uparrow \downarrow \right\rangle}
+\newcommand{\dddu}{\left| \downarrow \downarrow \downarrow \uparrow \right\rangle}
+\newcommand{\dddd}{\left| \downarrow \downarrow \downarrow \downarrow \right\rangle}
+
+\newcommand{\uuu}{\left| \uparrow \uparrow \uparrow \right\rangle}
+\newcommand{\uud}{\left| \uparrow \uparrow \downarrow \right\rangle}
+\newcommand{\udu}{\left| \uparrow \downarrow \uparrow \right\rangle}
+\newcommand{\udd}{\left| \uparrow \downarrow \downarrow \right\rangle}
+\newcommand{\duu}{\left| \downarrow \uparrow \uparrow \right\rangle}
+\newcommand{\dud}{\left| \downarrow \uparrow \downarrow \right\rangle}
+\newcommand{\ddu}{\left| \downarrow \downarrow \uparrow \right\rangle}
+\newcommand{\ddd}{\left| \downarrow \downarrow \downarrow \right\rangle}
+
+\newcommand{\uu}{\left| \uparrow \uparrow  \right\rangle}
+\newcommand{\ud}{\left| \uparrow \downarrow \right\rangle}
+\newcommand{\du}{\left| \downarrow \uparrow \right\rangle}
+\newcommand{\dd}{\left| \downarrow \downarrow \right\rangle}
+\newcommand{\sing}{\left| S_{02} \right\rangle}
+
+
+\newcommand{\cmt}[1]{{\color{red}(#1)}}
+\newcommand{\todo}[1]{\textit{\color{gray}#1}}
+\renewcommand{\cs}{{\color{blue}[Citation needed]}}
+%\newcommand{\todo}[1]{}
+
+
+
+\definecolor{chaptercolor}{gray}{0.8}
+
+
+\usepackage{tikz, blindtext}
+\makechapterstyle{box}{
+  \renewcommand*{\printchaptername}{}
+%  \renewcommand*{\chapnumfont}{\fontsize{4cm}{4cm}\selectfont\sffamily\Huge\bfseries}
+  \renewcommand*{\printchapternum}{
+    \flushright%
+%    \chapnumfont%
+    {\fontsize{4cm}{4cm}\selectfont\fontfamily{qtm}\bfseries%\sffamily\bfseries%
+    {\color{chaptercolor}%
+    \thechapter}}%
+  }
+  \renewcommand*{\chaptitlefont}{\normalfont\Huge\bfseries}
+  \renewcommand*{\printchaptertitle}[1]{\flushright\chaptitlefont##1}
+}
+\chapterstyle{box}
+
+
+
+\author{Arnau Sala Cadellans}
+\title{Exchange-only, nuclear spin-free qubits in semiconductor quantum dots}
+%\date{\today}
+\date{Trondheim, July 13, 2020}
+
+
+
+\begin{document}
+% roman numbering in the table of contents section
+
+\pagenumbering{roman}
+%\maketitle
+
+\clearpage\maketitle
+\thispagestyle{empty}
+
+
+
+%\printglossary 
+
+%\setcounter{page}{1}
+\include{preface/abstract}
+\include{preface/preface}
+\include{preface/acknowledgments}
+\cleardoublepage
+
+% Table of contents :  it is a good idea to include this into your thesis
+%\tableofcontents*
+\begin{KeepFromToc}
+  \tableofcontents
+\end{KeepFromToc}
+\cleardoublepage
+
+% The following list of figures and list of tables are optional. Remove the comments if needed
+%\listoffigures
+%\newpage
+
+%\listoftables
+%\newpage
+
+% in the main part of the document use standard Arabic numbers. Page counter resets to 1.
+\pagenumbering{arabic}
+\include{intro/intro}
+\include{spinqubits/spinqubits}
+\include{xoso/xoso}
+\include{htxoso/htxoso}
+\include{leakage/leakage}
+\include{edsr/edsr}
+\include{app/appSW}
+
+
+\include{preface/epilogue}
+
+\bibliography{refs}
+
+
+
+
+
+
+
+
+
+%% The papers
+
+\cleardoublepage
+\thispagestyle{empty}
+\begin{vplace}[0.7]
+\begin{center}
+%\linespread{2.0}
+\textbf{\huge Paper I}\\
+\vspace{3ex}
+\textbf{Arnau Sala and Jeroen Danon}\\
+\vspace{2ex}
+\textit{Exchange-only singlet-only spin qubit}\\
+\vspace{2ex}
+Physical Review B, \textbf{95}, 241303(R) (2017)
+\end{center}
+\end{vplace}
+\cleardoublepage
+\includepdf[pages=-]{papers/Paper_I.pdf}
+
+
+\cleardoublepage
+\thispagestyle{empty}
+\begin{vplace}[0.7]
+\begin{center}
+\textbf{\huge Paper II}\\
+\vspace{4ex}
+\textbf{Arnau Sala and Jeroen Danon}\\
+\vspace{2ex}
+\textit{Leakage and dephasing in $^{28}$Si-based exchange-only spin qubits}\\
+\vspace{2ex}
+Physical Review B, \textbf{98}, 245409 (2018)
+\end{center}
+\end{vplace}
+\cleardoublepage
+\includepdf[pages=-]{papers/Paper_II.pdf}
+
+
+\cleardoublepage
+\thispagestyle{empty}
+\begin{vplace}[0.7]
+\begin{center}
+\textbf{\huge Paper III}\\
+\vspace{4ex}
+\textbf{Arnau Sala, J{\o}rgen Holme Qvist and Jeroen Danon}\\
+\vspace{2ex}
+\textit{Highly tunable exchange-only singlet-only qubit in a GaAs \\triple quantum dot}\\
+\vspace{2ex}
+Physical Review Research, \textbf{2}, 012062(R) (2020)
+\end{center}
+\end{vplace}
+\cleardoublepage
+\includepdf[pages=-]{papers/Paper_III.pdf}
+
+\end{document}
+
+
+

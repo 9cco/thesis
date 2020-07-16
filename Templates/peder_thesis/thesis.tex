@@ -1,0 +1,131 @@
+\documentclass[11pt,b5paper,onecolumn,titlepage,openright,twoside,final]{book}
+\usepackage{pdfpages}
+\usepackage{dcolumn}
+\usepackage{graphicx}
+\usepackage{amsmath}
+% \usepackage{bm}
+\usepackage{epigraph}
+\usepackage{rotating}
+\usepackage[nottoc,notlof,notlot]{tocbibind}
+\usepackage{times}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage[Sonny]{fncychap}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont[Ligatures=TeX]{TeX Gyre Pagella}
+\usepackage[colorlinks=false,xetex,bookmarks=false]{hyperref} %Internal links.
+\usepackage[capitalize]{cleveref} %Automatic referencing (with capital letters)
+\usepackage[numbers, sort&compress]{natbib}
+\begin{document}
+
+\newcommand{\bv}[1]{\mathbfup{#1}}
+\newcommand{\bvh}[1]{\hat{\bv{#1}}}
+\newcommand{\dd}[0]{\text{d}}
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blu}{rgb}{0,0,01}
+\definecolor{Green}{rgb}{0,1,0}
+\definecolor{Purple}{rgb}{0.5,0,0.5}
+\newcommand{\red}{\color{Red}}
+\newcommand{\blu}{\color{Blu}}
+\newcommand{\green}{\color{Green}}
+\newcommand{\purple}{\color{Purple}}
+
+\pagestyle{empty}
+\frontmatter
+% \title{Monte-Carlo studies of\\ multi-component Ginzburg-Landau theories with competing interactions}
+% \author{Peder Notto Galteland}
+% \date{\today}
+% \maketitle
+\chapter*{Abstract}
+\input{abstract}
+
+\chapter*{Preface}
+\input{preface}
+
+\chapter*{Acknowledgements}
+\input{acknowledgements}
+
+\chapter*{List of papers}
+\input{papers}
+
+% \chapter*{My contribution to the articles}
+% \input{contr}
+
+\tableofcontents
+% \listoffigures
+% \listoftables
+\mainmatter
+
+% set page headings
+\pagestyle{fancy}
+\fancyhead{}
+\cfoot{}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ \textit{#1}}}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter. #1}{}}
+\fancyhead[LO]{\rightmark}
+\fancyhead[RO]{\thepage}
+\fancyhead[LE]{\thepage}
+\fancyhead[RE]{\leftmark}
+\chapter{Introduction}
+\input{intro}
+\chapter{Statistical Mechanics}
+\label{ch:statmech}
+\input{statmech}
+\chapter{Monte-Carlo Simulations}
+\label{ch:MC}
+\input{MC}
+\chapter{Bose-Einstein Condensates}
+\label{ch:BEC}
+\input{BEC}
+\chapter{Multiband Superconductors}
+\label{ch:MBSC}
+\input{MBSC}
+\bibliographystyle{apsrev4-1}
+\bibliography{thesis}
+\clearpage
+\pagestyle{empty}
+\ChTitleVar{\centering\Large\bfseries}
+\chapter*{Paper I}
+\addcontentsline{toc}{chapter}{Paper I}
+\centering \textit{Fluctuation effects in rotating Bose-Einstein condensates with broken
+$\mathrm{SU}(2)$and $\mathrm{U}(1)\times\mathrm{U}(1)$ symmetries in the presence of intercomponent
+density-density interactions}\\
+\bigskip
+\centering Physical Review A {\bf 91}, 013605 (2015)
+% \clearpage
+\cleardoublepage
+\includepdf[pages=-]{PaperI.pdf}
+\chapter*{Paper II}
+\addcontentsline{toc}{chapter}{Paper II}
+\centering \textit{Thermal remixing of phase-separated states in two-component bosonic condensates}\\
+\bigskip
+\centering New Journal of Physics {\bf 17}, 103040 (2015)
+\cleardoublepage
+\includepdf[pages=2-]{PaperII.pdf}
+% \chapter*{Paper III}
+% \addcontentsline{toc}{chapter}{Paper III}
+% \centering \textit{Paired phase- and density wave states in imbalanced two-dimensional Bose gases}\\
+% \bigskip
+% \centering Preprint
+% \cleardoublepage
+% \includepdf[pages=-]{PaperIII.pdf}
+\chapter*{Paper III}
+\addcontentsline{toc}{chapter}{Paper III}
+\centering \textit{Competing interactions in population imbalanced two-component Bose-Einstein
+condensates}\\
+\bigskip
+\centering Preprint
+\cleardoublepage
+\includepdf[pages=-]{PaperIV.pdf}
+\chapter*{Paper IV}
+\addcontentsline{toc}{chapter}{Paper IV}
+\centering \textit{Current-loops, phase transitions, and the Higgs mechanism in Josephson-coupled
+multi-component London superconductors}\\
+\bigskip
+\centering Preprint (submitted to Phys. Rev. B)
+\cleardoublepage
+\includepdf[pages=-]{PaperV.pdf}
+\end{document}

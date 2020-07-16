@@ -56,7 +56,8 @@
 \pagestyle{plain}
 
 % Font used for page numbers
-\addtokomafont{pagenumber}{\lining\scshape}
+%\addtokomafont{pagenumber}{\lining\scshape}
+\addtokomafont{pagenumber}{\scshape}
 
 % Use spacing instead of indentation to separate paragraphs
 %\KOMAoptions{parskip=half+} 
@@ -78,56 +79,57 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Load font management packages
+%% Load font management packages
 \usepackage[no-math]{fontspec} 
 \usepackage{unicode-math}
-\usepackage{realscripts}
-\usepackage{microtype}
-
-% Where to look for fonts
-\defaultfontfeatures{Path={fonts/}}
-
-% Scale all fonts to the same x-height
-\defaultfontfeatures{Scale=MatchLowercase}
-
-% Use italics for all math letters
-\unimathsetup%
-{ 
-  math-style=ISO,
-  nabla=upright,
-  partial=upright
-}
-
-% Turn on "contextual alternates"
-\defaultfontfeatures{RawFeature={+calt}}
-
-% Define commands to switch number style
-\newcommand{\lining}{\addfontfeature{Numbers={Lining}}}
-\newcommand{\oldstyle}{\addfontfeature{Numbers={OldStyle}}}
-
-% Serif font (used for body text)
-\setmainfont{Libertinus Serif}%
-[
-  UprightFont      = {*-Regular},
-  ItalicFont       = {*-Italic},
-  BoldFont         = {*-Semibold},
-  BoldItalicFont   = {*-SemiboldItalic},
-  Numbers          = {OldStyle},
-  PunctuationSpace = 1.125
-]
-
-% Sans font (used for titling)
-\setsansfont{URW Classico}%
-[
-  UprightFont    = {*-Regular},
-  ItalicFont     = {*-Italic},
-  BoldFont       = {*-Bold},
-  Numbers        = {Proportional,Lining},
-  Scale          = MatchUppercase
-]
-
-% Math font (used for equations)
-\setmathfont{Libertinus Math}
+%\usepackage{realscripts}
+%\usepackage{microtype}
+%
+%% Where to look for fonts
+%\defaultfontfeatures{Path={fonts/}}
+%
+%% Scale all fonts to the same x-height
+%\defaultfontfeatures{Scale=MatchLowercase}
+%
+%% Use italics for all math letters
+%\unimathsetup%
+%{ 
+%  math-style=ISO,
+%  nabla=upright,
+%  partial=upright
+%}
+%
+%% Turn on "contextual alternates"
+%\defaultfontfeatures{RawFeature={+calt}}
+%
+%% Define commands to switch number style
+%\newcommand{\lining}{\addfontfeature{Numbers={Lining}}}
+%\newcommand{\oldstyle}{\addfontfeature{Numbers={OldStyle}}}
+%
+%% Serif font (used for body text)
+%\setmainfont{Libertinus Serif}%
+%[
+%  UprightFont      = {*-Regular},
+%  ItalicFont       = {*-Italic},
+%  BoldFont         = {*-Semibold},
+%  BoldItalicFont   = {*-SemiboldItalic},
+%  Numbers          = {OldStyle},
+%  PunctuationSpace = 1.125
+%]
+\setmainfont[Ligatures=TeX]{TeX Gyre Pagella}
+%
+%% Sans font (used for titling)
+%\setsansfont{URW Classico}%
+%[
+%  UprightFont    = {*-Regular},
+%  ItalicFont     = {*-Italic},
+%  BoldFont       = {*-Bold},
+%  Numbers        = {Proportional,Lining},
+%  Scale          = MatchUppercase
+%]
+%
+%% Math font (used for equations)
+%\setmathfont{Libertinus Math}
 
 
 
@@ -149,11 +151,11 @@
 % Fix vertical spacing after table of contents title
 \BeforeTOCHead[toc]{\RedeclareSectionCommand[beforeskip=1sp,afterskip=1sp]{chapter}}
 
-% Use tabular lining figures for the sections, but oldstyle figures for the pages
-\settocstylefeature{entryhook}{\lining}
-\settocstylefeature{pagenumberhook}{\oldstyle}
-\settocstylefeature[0]{entryhook}{\lining\bfseries}
-\settocstylefeature[0]{pagenumberhook}{\oldstyle\bfseries}
+%% Use tabular lining figures for the sections, but oldstyle figures for the pages
+%\settocstylefeature{entryhook}{\lining}
+%\settocstylefeature{pagenumberhook}{\oldstyle}
+%\settocstylefeature[0]{entryhook}{\lining\bfseries}
+%\settocstylefeature[0]{pagenumberhook}{\oldstyle\bfseries}
 
 
 
@@ -163,6 +165,8 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\usepackage{fancyhdr}
+\usepackage[Lenny]{fncychap}
 % Change the font used for headings
 \addtokomafont{disposition}{\sffamily}
 
@@ -170,16 +174,16 @@
 \addtokomafont{chapter}{\LARGE}
 \addtokomafont{section}{\large}
 
-% Change spacing around chapters and sections
-\RedeclareSectionCommand[beforeskip=-0.0\baselineskip,afterskip=0.5\baselineskip]{chapter}
-\RedeclareSectionCommand[beforeskip=-1.0\baselineskip,afterskip=0.5\baselineskip]{section}
-
-% Bringhurst-style chapter numbers in the margin
-\makeatletter
-  \newsavebox{\feline@chapter}
-  \newcommand{\feline@chapter@marker}[1][4cm]{\sbox\feline@chapter{\resizebox{!}{#1}{\setlength{\fboxsep}{0pt}\color{gray}\thechapter}}\parbox[b][0.5cm]{1.5cm}{\usebox{\feline@chapter}\vspace*{-1.325cm}}}
-  \renewcommand*{\chapterformat}{\sbox\feline@chapter{\feline@chapter@marker[1.6cm]}\makebox[0pt][l]{\makebox[\dimexpr\textwidth+2.0\marginparsep+\wd\feline@chapter\relax][r]{\usebox\feline@chapter}}}
-\makeatother
+%% Change spacing around chapters and sections
+%\RedeclareSectionCommand[beforeskip=-0.0\baselineskip,afterskip=0.5\baselineskip]{chapter}
+%\RedeclareSectionCommand[beforeskip=-1.0\baselineskip,afterskip=0.5\baselineskip]{section}
+%
+%% Bringhurst-style chapter numbers in the margin
+%\makeatletter
+%  \newsavebox{\feline@chapter}
+%  \newcommand{\feline@chapter@marker}[1][4cm]{\sbox\feline@chapter{\resizebox{!}{#1}{\setlength{\fboxsep}{0pt}\color{gray}\thechapter}}\parbox[b][0.5cm]{1.5cm}{\usebox{\feline@chapter}\vspace*{-1.325cm}}}
+%  \renewcommand*{\chapterformat}{\sbox\feline@chapter{\feline@chapter@marker[1.6cm]}\makebox[0pt][l]{\makebox[\dimexpr\textwidth+2.0\marginparsep+\wd\feline@chapter\relax][r]{\usebox\feline@chapter}}}
+%\makeatother
 
 
 
@@ -189,11 +193,11 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Change the font used for captions
-\addtokomafont{caption}{\small}
-
-% Change the font used for labels
-\addtokomafont{captionlabel}{\bfseries\lining}
+%% Change the font used for captions
+%\addtokomafont{caption}{\small}
+%
+%% Change the font used for labels
+%\addtokomafont{captionlabel}{\bfseries\lining}
 
 % Add 2em margins on each side of the caption. (Since the default 
 % \parindent is 1em, this implies that the left end of the caption 
@@ -219,7 +223,8 @@
 %\addtokomafont{footnote}{\sffamily}
 
 % Change the footnote marks to lining numbers
-\renewcommand{\thefootnote}{\lining{\arabic{footnote}}}
+%\renewcommand{\thefootnote}{\lining{\arabic{footnote}}}
+\renewcommand{\thefootnote}{\arabic{footnote}}
 
 % Change the footnote marks to Latin letters
 %\renewcommand{\thefootnote}{\textit{\alph{footnote}}}
@@ -316,26 +321,26 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Enforce a consistent Greek style
-%\AtBeginDocument{\let\nabla=𝛁}
-\AtBeginDocument%
-{
-  \let\epsilon=\varepsilon
-  \let\phi=\varphi
-}
+%% Enforce a consistent Greek style
+%%\AtBeginDocument{\let\nabla=𝛁}
+%\AtBeginDocument%
+%{
+%  \let\epsilon=\varepsilon
+%  \let\phi=\varphi
+%}
 
 % Change the font used for tables
 \AtBeginEnvironment{tabular}{\small}
 \AtBeginEnvironment{tabular*}{\small}
 
-% Use lining numbers for chemistry and physics
-\mhchemoptions{textfontcommand=\lining}
-\sisetup{text-rm=\lining}
-
-% Format for typesetting physical units
-\sisetup{range-units=single}
-\sisetup{range-phrase=--}
-\sisetup{detect-all=true} 
+%% Use lining numbers for chemistry and physics
+%\mhchemoptions{textfontcommand=\lining}
+%\sisetup{text-rm=\lining}
+%
+%% Format for typesetting physical units
+%\sisetup{range-units=single}
+%\sisetup{range-phrase=--}
+%\sisetup{detect-all=true} 
 
 % Use 2em equation indentation
 \makeatletter

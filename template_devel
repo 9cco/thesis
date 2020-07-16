@@ -1,0 +1,38 @@
+#-------------------------------------------------------------------#
+#    To change header in KOMA Script
+#-_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_-#
+
+Usually the way to got a custom formatting of the chapter title is to use the
+titesec package, however this does not work with the KOMA Script style, therefore
+we will have to do a manual overwrite of the \chapterformat and 
+\chapterlinesformat commands, using \renewcommand. \chapterformat formats the
+\chapter command while \chapterlinesformat formats the \chapter* command which
+does not have number associated with it.
+
+
+#-------------------------------------------------------------------#
+#    Functions associated with manual heading editing
+#-_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_-#
+
+makebox[width][pos]{text}
+Creates a single line box, optionally of fixed width, but otherwise large enough
+to hold its content. Can be used to keep text that belongs together from begin
+separated on separate line. You cannot place line breaks \\ within a makebox.
+
+savebox{cmd}[width][pos]{text}
+Formats text as if within a makebox, however instead of printing the box, it
+saves it to cmd, such that the box can be printer later with \usebox immediately
+followed by cmd.
+
+\relax
+Stops the expansion of the previous command. E.g. if using \\ \relax [...], it
+prevents what is in the brackets from being interpreted as a dimension that would
+add vertical space.
+
+\resizebox{horizontal lenth}{vertical length}{text}
+Given a size, such as 3cm, transform material to make it that size. If either
+horizontal length or vertical length is an exclamation point ! then the other 
+argument is used to determine a scale factor for both directions.
+
+\thechapter
+This prints the label, i.e. the number of the chapter.
