@@ -11,6 +11,21 @@ does not have number associated with it.
 
 
 #-------------------------------------------------------------------#
+#    Header and footer
+#-_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_-#
+
+Information about his is contained in the KOMA script manual at
+https://ctan.uib.no/macros/latex/contrib/koma-script/doc/scrguien.pdf
+
+Examples of chapter formats for normal latex
+https://ctan.uib.no/macros/latex/contrib/fncychap/fncychap.sty
+
+LaTeX 2e font selection
+https://www.latex-project.org/help/documentation/fntguide.pdf
+
+
+
+#-------------------------------------------------------------------#
 #    Functions associated with manual heading editing
 #-_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_-#
 
@@ -18,11 +33,12 @@ makebox[width][pos]{text}
 Creates a single line box, optionally of fixed width, but otherwise large enough
 to hold its content. Can be used to keep text that belongs together from begin
 separated on separate line. You cannot place line breaks \\ within a makebox.
+\mbox is a shortform of \makebox with the options assumed not to be there.
 
 savebox{cmd}[width][pos]{text}
 Formats text as if within a makebox, however instead of printing the box, it
 saves it to cmd, such that the box can be printer later with \usebox immediately
-followed by cmd.
+followed by cmd. \sbox is a shortform of \savebox as \mbox is for \makebox.
 
 \relax
 Stops the expansion of the previous command. E.g. if using \\ \relax [...], it
@@ -36,3 +52,59 @@ argument is used to determine a scale factor for both directions.
 
 \thechapter
 This prints the label, i.e. the number of the chapter.
+
+\chapterheadstartvskip
+\chapterheadendvskip
+Can be redefined to provide more or less space before and after chapter headings.
+
+\raisebox{distance}[extend-above][extend-below]{text}
+Raises (or lowerst if distance is negative) the text. Makes LaTeX think that the
+text extends above and below the line by the optional argument amount.
+
+\parbox[position][height]{width}{contents}
+Acts like a minipage, but without the ability for footnotes, does not allow
+verbatim, does not reset the \@listdepth counter.
+The position option can be c, m, t or b. This is a fragile command.
+
+\selectfont
+Used after e.g. \fontsize{size}{bskip} to make the parameter change active.
+Selects a text font, based on the current values of the font attributes. There
+Must be a \selectfont command immediately after any settings of font parameters
+by (some) fo the 6 commands
+\fontencoding{encoding}
+\fontfamily{family}
+\fontseries{series}
+\fontshape{shape}
+\fontsize{size}{baseline-skip}
+\linespread{factor}
+For more on changin font see:
+https://www.overleaf.com/learn/latex/font_typefaces#Reference_guide
+
+\par
+LaTeX primitive for ending the line. Same as a blank line.
+
+\rule[raise]{width}{thickness}
+Produces a simple black box. With determines the width of the box, while thickness
+dermines its height. The raise option can raise or lower the rule above or below
+the baseline. 
+
+\hskip
+Draws horizontal space. The command can be followed immediately with a length
+like \hskip1pt.
+
+\autodot
+
+\endskip
+
+\color
+
+\raggedleft
+
+\raggedsection
+
+\scalebox
+
+\chapappifchapterprefix
+
+\nobreakspace
+

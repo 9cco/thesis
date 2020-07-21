@@ -165,8 +165,6 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage{fancyhdr}
-\usepackage[Lenny]{fncychap}
 % Change the font used for headings
 \addtokomafont{disposition}{\sffamily}
 
@@ -184,6 +182,11 @@
 %  \newcommand{\feline@chapter@marker}[1][4cm]{\sbox\feline@chapter{\resizebox{!}{#1}{\setlength{\fboxsep}{0pt}\color{gray}\thechapter}}\parbox[b][0.5cm]{1.5cm}{\usebox{\feline@chapter}\vspace*{-1.325cm}}}
 %  \renewcommand*{\chapterformat}{\sbox\feline@chapter{\feline@chapter@marker[1.6cm]}\makebox[0pt][l]{\makebox[\dimexpr\textwidth+2.0\marginparsep+\wd\feline@chapter\relax][r]{\usebox\feline@chapter}}}
 %\makeatother
+
+% Create Lenny-style chapter titles
+\renewcommand*{\chapterformat}{%
+    \par
+}
 
 
 
