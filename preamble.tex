@@ -85,11 +85,11 @@
 %\usepackage{realscripts}
 %\usepackage{microtype}
 %
-%% Where to look for fonts
-%\defaultfontfeatures{Path={fonts/}}
-%
-%% Scale all fonts to the same x-height
-%\defaultfontfeatures{Scale=MatchLowercase}
+% Where to look for fonts
+%\defaultfontfeatures{Path={Fonts/}}
+
+% Scale all fonts to the same x-height
+\defaultfontfeatures{Scale=MatchLowercase}
 %
 %% Use italics for all math letters
 %\unimathsetup%
@@ -119,18 +119,20 @@
 \setmainfont[Ligatures=TeX]{TeX Gyre Pagella}
 %
 %% Sans font (used for titling)
-%\setsansfont{URW Classico}%
-%[
-%  UprightFont    = {*-Regular},
-%  ItalicFont     = {*-Italic},
-%  BoldFont       = {*-Bold},
-%  Numbers        = {Proportional,Lining},
-%  Scale          = MatchUppercase
-%]
+\setsansfont{URW Classico}%
+[
+  UprightFont    = {*-Regular},
+  ItalicFont     = {*-Italic},
+  BoldFont       = {*-Bold},
+  Numbers        = {Proportional,Lining},
+  Scale          = MatchUppercase
+]
 %
 %% Math font (used for equations)
 %\setmathfont{Libertinus Math}
 
+% Create a specific font family for heading prefix
+\newfontfamily\prefixFont[Ligatures=TeX]{URW Classico}%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -183,9 +185,41 @@
 %  \renewcommand*{\chapterformat}{\sbox\feline@chapter{\feline@chapter@marker[1.6cm]}\makebox[0pt][l]{\makebox[\dimexpr\textwidth+2.0\marginparsep+\wd\feline@chapter\relax][r]{\usebox\feline@chapter}}}
 %\makeatother
 
+% Changing the font of the chapter number prefix
+%\newkomafont{customChapterPrefix}{%
+%    \bfseries%
+%}
+
 % Create Lenny-style chapter titles
+\newsavebox{\thechapternumber}
+\newsavebox{\chapterPrefix}
+\newlength\prefixLength
+\newlength\ruleWidth
+\setlength{\ruleWidth}{1pt}
 \renewcommand*{\chapterformat}{%
-    \par
+    \parbox[c]{\textwidth}{%
+        \savebox{\thechapternumber}{\,\color{gray}\scalebox{2.5}{\thechapter\autodot}} % Definition of box of the chapter number.
+        \savebox{\chapterPrefix}{{\fontfamily{cmm}\fontshape{n}\selectfont\Large \chapapp}{\fontfamily{cmtt}\fontshape{n}\selectfont\Large apt}\enskip} % Definition of box containing "Chapter" text.
+        \setlength{\prefixLength}{\dimexpr\wd\chapterPrefix+\wd\thechapternumber\relax}
+%
+        % Vertical left line.
+        \vspace{10pt}\rule[\dimexpr\ht\chapterPrefix+1pt\relax]{\ruleWidth}{\dimexpr\ht\thechapternumber-\ht\chapterPrefix-1pt\relax}\hspace{-\ruleWidth}%
+        % Top left horizontal line
+        \rule[\ht\thechapternumber]{\dimexpr\wd\chapterPrefix\relax}{\ruleWidth}\hspace{\dimexpr-\wd\chapterPrefix\relax}%
+        % Boxes and lower right horizontal line
+        \usebox{\chapterPrefix}\raisebox{2pt}{\usebox{\thechapternumber}}\rule{\dimexpr\textwidth-\prefixLength-1pt\relax}{\ruleWidth}%
+        % Top right horizontal line.
+        \hspace{\dimexpr -\textwidth+\prefixLength + 1pt\relax}%
+        \rule[\ht\thechapternumber]{\dimexpr\textwidth -\prefixLength-1pt\relax}{\ruleWidth}%
+        % Vertical right line
+        \hspace{-\ruleWidth}\rule{\ruleWidth}{\ht\thechapternumber}
+    }
+}
+\newlength{\chapterVSpace}
+\setlength{\chapterVSpace}{2em}
+\renewcommand*{\chapterlinesformat}[3]{%
+    \parbox[b]{\textwidth}{#2}\par\vspace{\chapterVSpace}%
+    #3\par%
 }
 
 
@@ -349,6 +383,11 @@
 \makeatletter
   \setlength\@mathmargin{2em}
 \makeatother
+
+% Set width of a column
+\newlength\colparwidth
+%\setlength{\colparwidth}{\dimexpr\textwidth-2\fboxsep}
+\setlength{\colparwidth}{\dimexpr\textwidth-6pt}
 
 % Replace \cite with the more flexible \autocite
 \let\cite=\autocite

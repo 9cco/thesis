@@ -23,22 +23,39 @@ https://ctan.uib.no/macros/latex/contrib/fncychap/fncychap.sty
 LaTeX 2e font selection
 https://www.latex-project.org/help/documentation/fntguide.pdf
 
+Guide to writing a PhD thesis in LaTeX
+http://ctan.net/info/dickimaw/dickimaw-thesis.pdf
+
+
+#-------------------------------------------------------------------#
+#    Log
+#-_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_-#
+
+Installing needed packages to compile the thesis project I found a nice method
+which is that when latexmk -lualatex [path to .tex file] gives the error that
+whatever .sty file is missing, then I just do
+$ sudo apt-cache search [.sty style name]
+and this usually gives the texlive package I need to install for the style to
+be installed as well.
 
 
 #-------------------------------------------------------------------#
 #    Functions associated with manual heading editing
 #-_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_-#
 
-makebox[width][pos]{text}
+\makebox[width][pos]{text}
 Creates a single line box, optionally of fixed width, but otherwise large enough
 to hold its content. Can be used to keep text that belongs together from begin
 separated on separate line. You cannot place line breaks \\ within a makebox.
 \mbox is a shortform of \makebox with the options assumed not to be there.
 
-savebox{cmd}[width][pos]{text}
+\savebox{\cmd}[width][pos]{text}
 Formats text as if within a makebox, however instead of printing the box, it
 saves it to cmd, such that the box can be printer later with \usebox immediately
 followed by cmd. \sbox is a shortform of \savebox as \mbox is for \makebox.
+
+After a savebox have been defined as \cmd we may retrieve the boxes dimensions
+with width=\wd\cmd and height=\ht\cmd and depth=\dp\cmd.
 
 \relax
 Stops the expansion of the previous command. E.g. if using \\ \relax [...], it
@@ -67,6 +84,8 @@ verbatim, does not reset the \@listdepth counter.
 The position option can be c, m, t or b. This is a fragile command.
 
 \selectfont
+This is a very low level LaTeX2e apporach to selecting fonts and should not
+really be used unless defining a macro or creating a package.
 Used after e.g. \fontsize{size}{bskip} to make the parameter change active.
 Selects a text font, based on the current values of the font attributes. There
 Must be a \selectfont command immediately after any settings of font parameters
@@ -92,7 +111,29 @@ the baseline.
 Draws horizontal space. The command can be followed immediately with a length
 like \hskip1pt.
 
+\scshape
+Turns on smallcaps style where lowercase letters are rendered in the shape of
+capital letters but with smaller size; the same size as lowercase letters. Used
+as {\scshape ... }
+
+\enskip
+Prints horizontal spacing of half an em.
+
 \autodot
+KOMA-script macro that adds a predefined horizontal space after a full-stop after
+counter number.
+
+\dimexpr
+Allows basic arithmatic expressions using operators + - / * and parenthesis ().
+It must produce a dimension. An example is
+\the\dimexpr 1pt * 10\relax
+\dimexpr \textwidth - 2\fboxsep
+
+\fboxsep
+The distance from the frame in a framebox (\fbox or \framebox) to the enclosed box.
+The default is 3pt. 
+
+\addtokomafonts
 
 \endskip
 
