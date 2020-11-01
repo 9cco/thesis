@@ -5,7 +5,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Use 'KOMA-Script Book' as the document class
-\documentclass[toc=bibliography,toc=indentunnumbered,listof=totoc]{scrbook}
+\documentclass%
+[%
+    toc=bibliography,%
+    toc=indentunnumbered,%
+    listof=totoc,%
+    chapterprefix=true%
+]{scrbook}
 
 
 
@@ -17,7 +23,8 @@
 
 % Load some required packages
 \usepackage{etoolbox}                   % Modding standard environments
-\usepackage[fleqn,intlimits]{amsmath}   % Common mathematical environments
+\usepackage[intlimits]{amsmath}   % Common mathematical environments.
+                                        % Option fleqn removed for centered eqs.
 \usepackage[svgnames]{xcolor}           % Enables coloring of text and pages
 \usepackage{hyperref}                   % Enables hyperlink generation
 
@@ -132,7 +139,8 @@
 %\setmathfont{Libertinus Math}
 
 % Create a specific font family for heading prefix
-\newfontfamily\prefixFont[Ligatures=TeX]{URW Classico}%
+\newfontfamily\prefixFont[Ligatures=TeX]{Tex Gyre Pagella}%
+\newfontfamily\headerTypeface[Ligatures=TeX]{URW Classico}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -176,7 +184,7 @@
 
 %% Change spacing around chapters and sections
 %\RedeclareSectionCommand[beforeskip=-0.0\baselineskip,afterskip=0.5\baselineskip]{chapter}
-%\RedeclareSectionCommand[beforeskip=-1.0\baselineskip,afterskip=0.5\baselineskip]{section}
+\RedeclareSectionCommand[beforeskip=-1.0\baselineskip,afterskip=0.5\baselineskip]{section}
 %
 %% Bringhurst-style chapter numbers in the margin
 %\makeatletter
@@ -191,15 +199,23 @@
 %}
 
 % Create Lenny-style chapter titles
+% Change spacing around chapters
+\newlength{\chapterVSpace}
+\setlength{\chapterVSpace}{2.5\baselineskip}
+\RedeclareSectionCommand[beforeskip=6\baselineskip,afterskip=\chapterVSpace]{chapter}
+% Defining boxes and lengths
 \newsavebox{\thechapternumber}
 \newsavebox{\chapterPrefix}
 \newlength\prefixLength
 \newlength\ruleWidth
 \setlength{\ruleWidth}{1pt}
+% Adjusting prefix typeface.
+\addtokomafont{chapterprefix}{\prefixFont\scshape\Large}
+% Redefining chapter prefix and number
 \renewcommand*{\chapterformat}{%
     \parbox[c]{\textwidth}{%
-        \savebox{\thechapternumber}{\,\color{gray}\scalebox{2.5}{\thechapter\autodot}} % Definition of box of the chapter number.
-        \savebox{\chapterPrefix}{{\fontfamily{cmm}\fontshape{n}\selectfont\Large \chapapp}{\fontfamily{cmtt}\fontshape{n}\selectfont\Large apt}\enskip} % Definition of box containing "Chapter" text.
+        \savebox{\thechapternumber}{\,\color{gray}\scalebox{3}{\headerTypeface\thechapter\autodot}} % Definition of box of the chapter number.
+        \savebox{\chapterPrefix}{\chapappifchapterprefix{\enskip}} % Definition of box containing "Chapter" text.
         \setlength{\prefixLength}{\dimexpr\wd\chapterPrefix+\wd\thechapternumber\relax}
 %
         % Vertical left line.
@@ -215,12 +231,18 @@
         \hspace{-\ruleWidth}\rule{\ruleWidth}{\ht\thechapternumber}
     }
 }
-\newlength{\chapterVSpace}
-\setlength{\chapterVSpace}{2em}
-\renewcommand*{\chapterlinesformat}[3]{%
-    \parbox[b]{\textwidth}{#2}\par\vspace{\chapterVSpace}%
+% Redefining overall chapter header when prefix option is used.
+\renewcommand*{\chapterlineswithprefixformat}[3]{%
+    \parbox[b]{\textwidth}{#2}\par\vspace{0.5\chapterVSpace}%
     #3\par%
 }
+
+% The default koma script definition of \chapterformat
+
+%\renewcommand*{\chapterformat}{%
+%    \mbox{\chapappifchapterprefix{\nobreakspace}{\thechapter\autodot}%
+%    \IfUsePrefixLine{}{\enskip}}
+%}
 
 
 
@@ -350,6 +372,10 @@
 \usepackage{mhchem}     % Proper formatting of chemicals
 \usepackage{lipsum}     % Insertion of arbitrary content
 
+% Load custom packages
+\usepackage{dirtytalk}
+\usepackage{amsthm}     % Customization of theorem environments
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -415,12 +441,26 @@
 \newcommand{\ie}{i.e.\ }
 \newcommand{\cf}{c.f.\ }
 \newcommand{\etal}{et al.\ }
+\newcommand{\irr}{irrep.\ }
+\newcommand{\ham}{\mathcal{H}}
+\newcommand{\hil}{\mathscr{H}}
+\newcommand{\hilB}{\mathcal{B}}
 
 % Common notation
 \renewcommand{\d}[1]{\mathop{\textrm{d}\kern0em#1\kern0.1em}}
+%\let\Oldint=\int
+%\renewcommand{\int}{ds\Oldint\!\!\!\!}
+\newcommand{\sint}{\int\!}
+\newcommand{\avg}[1]{\langle #1 \rangle}
 \newcommand{\up}{\uparrow}
 \newcommand{\dn}{\downarrow}
 \newcommand{\trans}{{\symsfup{T}}}
+\newcommand{\boltz}{k_\textrm{B}}
+\renewcommand{\v}[1]{{\symbfit{#1}}}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\ket}[1]{\lvert #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 \rvert}
+\newcommand{\braket}[2]{\langle #1 \mid #2 \rangle}
 
 % Common functions
 \DeclareMathOperator{\tr}{Tr}
@@ -432,7 +472,11 @@
 \DeclareMathOperator{\asinh}{asinh}
 \DeclareMathOperator{\acos}{acos}
 \DeclareMathOperator{\acosh}{acosh}
+\DeclareMathOperator{\Span}{span}
 
-
+% Theorem environments
+\theoremstyle{plain}
+\newtheorem{defi}{Def.}[chapter]
+\newtheorem{thm}{Thm.}[chapter]
 
 

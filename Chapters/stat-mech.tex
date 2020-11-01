@@ -1,0 +1,191 @@
+\chapter{Statistical Mechanics}
+
+In statistical mechanics we attempt to describe an ensamble of particles that may be interacting
+to extract not precise information about what each and every particle is doing, but statistical
+information about what most of the particles are doing. We zoom out and look upon the bunch of
+particles and try to answer the question of what is this bunch doing. What is the most significant
+behavior of this bunch as a whole.
+
+\section{Canonical ensamble and the partition function}
+
+Most of the business of statistical mechanics is about calculating what is known as the partition-
+function. Once this function is known, all the heavy lifting is done since most important statistical
+quantities can be extracted from it following already established systematic steps.
+To calculate the partition function is theoretically very simple: we sum the quantity $e^{-\beta E_i}$
+over all the possible states of the system. Every state is a particular configuration of things in
+the system and since all things in the system has a certain energy, if we sum the energy of all the
+things in the system for each state, we can say that each state has a certain energy. If we label
+each state of the system with the index $i$, then we can denote the energy of each state $E_i$. The
+definition of the partition function $Z$ in the canonical ensamble can then be written
+\begin{equation}
+    Z = \sum_i e^{-\beta E_i},
+    \label{eq:statMech:partDef}
+\end{equation}
+where $\beta = 1/(\boltz T)$ and $\boltz$ is the Boltzmann constant given by 
+$\boltz \approx \SI{1.380649d-23}{JK^{-1}}$.
+
+As we can see, the essential ingrediants needed to calculate the partition function is to be able to
+enumerate all possible states $i$ of the system and also calculate their corresponding energy $E_i$.
+Since we have used the summation sign $\sum_i$ in Eq.~\eqref{eq:statMech:partDef}, we have implicitely
+assumed that there exists a finite number of different states. However if there is one thing in the
+system that can change in a continuous fashion, which we would measure using the set of real numbers
+$\mathbb{R}$ and some unit, then the number of states is infinite. In this case we sum over the
+different numbers of states by simply integrating over the things that are continuous and the unit
+of the partition function becomes the product of the units of the continuous variables (things).
+In most cases, it is the position and momentum of particles in the system that are continuous, hence
+the definition of the partition function becomes%
+\footnote{The reason why there is a $\sim$ sign in Eq.~\eqref{eq:statMech:partContDef} is that specifically there is a factor
+of Planck's constant $h$ in the denominator for each $\d{r}\d{p}$ in the integral measure since this makes the partition function
+dimensionless and thus consistent with the definition in terms of finite number of states.}
+\begin{equation}
+    Z \sim \sint\d{^3r}\sint\d{^3p} e^{-\beta E(\v{r},\v{p})}.
+    \label{eq:statMech:partContDef}
+\end{equation}
+
+\section{Calculating observables}
+
+An observable in statistical mechanics is anything that we want to measure. In quantum mechanics observables
+are restricted to operators that have real eigenvalues which makes sense considering that we don't really
+have an intuition for complex numbers, which is the alternative, and thus we want to restrict things we
+can observe to things we can understand in terms of a point on a single line (the real axis). 
+
+Since we are interested again in ensambles of many particles we are restricting our attention to statistical
+information about this ensamble. To get this information we need some kind of probability distribution of the
+particular states of the system. We are imagining that we for each such state (indexed by $j$) can calulate
+a real number for the thing (observable) we are interested in measuring. Let's call this observable $O$. Then
+$O$ is a statistical variable but takes a particular value $o_j$ in the state $j$ of the system. If we
+now let $P_j$ be the probability distribution, i.e. the probability that the system exists in state $j$, then
+we know from probability theory that the mean of the observaible is
+\begin{equation}
+    \label{eq:statMech:statMean}
+    \avg{O} = \sum_jo_jP_j.
+\end{equation}
+The probability distribution $P_j$ is given by
+\begin{equation}
+    \label{eq:statMech:probDist}
+    P_j = e^{-\beta E_j}/Z,
+\end{equation}
+in terms of the partition function $Z$. Inserting this we get
+\begin{equation}
+    \label{eq:stateMech:statMeanFull}
+    \avg{O} = \sum_j\frac{o_je^{-\beta E_j}}{Z}.
+\end{equation}
+
+\section{Ginzburg-Landau model}
+
+The experimental discovery of superconductivity was a surprise to the scientists at the time. No theoretical model
+had so far predicted the properties that the experimentalists were measuring. On the contrary, they predicted
+very different results no matter how they were twisted and turned, and thus superconductivity seemed to demand
+a radically different understanding of how electrons moved in a material.
+
+\subsection{Landau Model}
+
+Before such an understanding had been developed, Landau took a shortcut and came up with a theory
+that could describe the phenomenon of superconductivity without knowing its microscopic origin. In other words
+he treated superconductivity as a black box and instead of asking what was inside to give the boxes output,
+he used the output to determine a small set of \emph{material parameters} which could then be used to predict
+how the box would react to a large range of stimuli or conditions. The merit of the theory was that
+he used symmetry arguments to reduce this set as much as possible.
+
+The Ginzburg-Landu theory of superconductivity is based on Landau's previous work on a theory for general second
+order phase-transitions\footnote{2nd order phase-transitions are phase transitions of systems whose free energy
+has a discontinuous second order derivative at the transition point, but is continuous for lower orders.
+Since the specific heat is given by the second order derivative, then the specific heat is discontinuous in this case.}
+The approach is given by two ideas. The first is simply that the phase transition should be able to be characterized
+by the appearence of some kind of measurable
+order that can be described by a function $\psi$ which we call the \emph{order parameter}. In the liquid water to ice transition,
+it is the position of the molecules that become ordered in a lattice\footnote{The astute reader might have noticed that this
+example is a first order phase transition because of the existance of latent heat. Actually first order phase transitions
+is also able to be described by a modified Landau theory, however we will here focus on the second order kind.},
+in the magnetization of a metal it is the individual spins that become ordered along a particular direction.
+
+The second idea is that at the phase transition, it is the appearence of this order that should dominate the behaviour
+of the system, to the exclusion of all other effects. Thus the system should be described in terms of the order-parameter
+and since this is infinitesimally small close to the transition, the free energy\footnote{In this case we are talking
+about the Helmholtz free energy which is related to the partition function through a logarithm while at the same time
+the Legendre transformation of the internal energy of the thermodynamic system.} can be expanded in a Maclaurin-series
+with respect to this parameter as
+\begin{equation}
+    \label{eq:statMech:LandauMaclaurin}
+    F = F_0 + c_1 \psi + c_2 \psi^2 + c_3 \psi^3 + c_4 \psi^4 + c_5 \psi^5 + \ldots
+\end{equation}
+
+The real constants $F_0$ and $c_i$ constitute the set of material parameters of the theory and this set can then
+be reduced by any symmetries that we suspect should be inherent in the underlying theory. For example, if $\psi$
+should represent the order parameter of magnetization of a system of ising spins, which can point either up or
+down, then the free energy should be invariant of this global choice, i.e. we need to enforce that the free energy
+be invariant with respect to the transformation $\psi \mapsto -\psi$. Then all the constants $c_j$ for odd $j$
+vanish.
+
+In the case of superconductivity the order parameter $\Psi$ represents the probability amplitude of the collective
+state of the superfluid of Cooper paired electrons such that $\abs{\Psi}$ can be interpreted as the density of such
+electron pairs. Since $\Psi$ is complex it has to be combined with its complex conjugate $\Psi^\ast$ in ways that
+yield real numbers to produce terms that are valid in the free energy since $F$ itself should be a real number.
+Furthermore, the phenomenon of superconductivity is produced as a result of the breaking of $U(1)$ symmetry, so $F$
+needs also to be $U(1)$ symmetric, i.e. it has to be invariant under the transformation $\Psi \mapsto e^{i\phi}\Psi$
+for $\phi\in\mathbb{R}$. These restrictions result in the free energy
+\begin{equation}
+    \label{eq:statMech:LandauU1}
+    F = F_0 - a\abs{\Psi}^2 + b\abs{\Psi}^4,
+\end{equation}
+when keeping the lowest order terms that produce a phase transition.
+
+Thermodynamic equilibrium is reached at the minimum of free energy. This restricts $b\geq0$ since negative $b$ yields
+a free energy with no definite minimum. The minimum is then found by the condition
+\begin{equation}
+    \label{eq:statMech:LandauExtreme}
+    \frac{\partial F}{\partial \Psi^\ast} = (-a + 2b\abs{\Psi}^2)\Psi = 0,
+\end{equation}
+which yields the possibilities $\abs{\Psi} = 0$ or $\abs{\Psi} = \sqrt{a/2b}$. The first case gives the energy $F = F_0$, while the second
+gives $F = F_0 - a^2/(4b)$. We see that the second case is energetically favorable, but only exists and is different from
+the first case when $a>0$. Furthermore, the second case represents the ordered state since in this case the order-parameter $\abs{\Psi} \neq 0$,
+in the conventional Landau theory\footnote{Actually this only represents when Cooper-pairs are forming and the real onset
+of superconductivity is determined by the point in parameter-space where the gauge-mass becomes non-zero, which is closely
+related but not exactly the same as where the density of Cooper-pairs becomes non-zero. The real onset of superconductivity is
+thus more related to when the phase of the wave-function settles on a value.}.
+
+In superconductivity it is the parameter of temperature which conventionally determines when the system enters the superconducting regime.
+Looking at the free energy in Eq.~\eqref{eq:statMech:LandauU1}, the order parameter $\Psi$ is the dynamical variable 
+of the theory while the explicit temperature dependence lies in the material parameters $a$ and $b$. Denoting the
+temperature at which the phase transition happens --- the critical temperature: $T_c$, the dimensionless parameter
+$t = (T-T_c)/T_c$ is small close to the critical point which means it can be used to expand the temperature dependence
+of the material parameters such that
+\begin{equation}
+    \label{eq:statMech:matTempExpan}
+    \begin{split}
+        a(T) &= a_0 + a_1t + \ldots\\
+        b(T) &= b_0 + b_1t + \ldots
+    \end{split}
+\end{equation}
+
+Now we argue for what terms to keep in these expansions. Since $a(T)$ should change sign at $t=0$ then we only keep odd terms.
+Since we need $b(T)>0$ for the theory to be thermodynamically stable it seems that $b_0$ is the important term which need to be
+larger than any negative contributions from the other terms. Keeping only lowest order terms then the expansions reduce to
+$a(T) = a_1(T-T_c)/T_c$ and $b(T) = b_0$. Since the ordered state is the solution of the theory when $a>0$ and this ordered
+state exists at temperatures $T<T_c$ then $a_1<0$ and the final temperature dependence of $a$ becomes
+$a(T) = -\abs{a_1}(T-T_c)/T_c$. From this temperature dependence, it is straight forward to derive critical exponents, the specific
+heat etc.
+
+\subsection{Gradient Terms}
+
+The simple Landau theory described above is a type of mean field theory in that there is no spatial dependence in the
+solution, and thus gives a simplified picture that can only be valid far away from any defects or boundaries. This simple approach
+can be extended to include spatial variation by allowing terms with gradients of the order parameter in the free energy through
+a gradient expansion
+\begin{equation}
+    \label{eq:statMech:gradTerms:gradExpansion}
+    F = \int\d{^3r}f(\Psi, \nabla\Psi, \nabla^2\Psi, \nabla^3\Psi, \ldots).
+\end{equation}
+Keeping only the lowest order in this expansion that is invariant under $U(1)$ symmetry we get the term
+$\abs{\nabla\Psi}^2$.
+
+Perhaps the single most important phenomenon of superconductivity from a theoretical stand-point is the fact that it expells
+magnetic fields, hence it is clear that any theory that attempts to explain superconductivity needs to have some way the
+superconducting order interacts with magnetic fields. The standard way to acheive this is through the recipe of
+\emph{minimal coupling}, where the vector potential $\v{A}$ times a constant is subtracted with from any momentum
+in the previously neutral theory. Specifically $\v{p}\mapsto \v{p}-q/c\v{A}$ where $q$ is the charge of the particle and
+$c$ is the speed of light.
+\begin{equation}
+    \label{eq:statMech:gradTerms:GLequation}
+    f = f_0 - a\abs{\Psi}^2 + b\abs{\Psi}^4 + K\abs{(\nabla+ig\v{A})\Psi}^2 - \int_0^{B_a}\v{M}\cdot\d{\v{B}_a}
+\end{equation}<++>

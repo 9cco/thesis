@@ -1,0 +1,278 @@
+\chapter{Group Theory}
+
+In this chapter we will introduce the minimum mathematical framework needed to
+understand the phrase \say{This free energy is the $\Gamma^-_{5u}$ irreducible
+representation of the $D_{4h}$ symmetry group}.
+
+A few words about notation. We will use the semicolon `$;$' in equations as notation for the words `such that', \eg when defining sets.
+A colon `$\colon$' is used when defining maps where the symbol representing the mapping itself should be on the left while the the sets
+being related or how the elements of the sets are related is on the right of the colon. The colon `$:$' is also used as a shortcut for the
+words `applied through its representation to' for when group elements are applied to vectors, where the correct representation to use
+for this application should be implicitely understood.
+
+\section{Discrete groups}
+
+\section{Irreducible representations}
+
+To know what an irreducible representation is, let's start with what we mean by a reducible representation.
+\begin{defi}
+    A matrix representation is \textbf{reducible} if there exists a non-trivial invariant subspace of the vector space of the representation.
+\end{defi}
+The intuition is then that the vector space of the representation is reducible if a ``smaller'' representation is contained within it. Since
+there is a smaller vector space within the vector space of the original representation and this vector space is invariant, it is possible
+to define another representation on this smaller vector space, \ie\emph{reduce} the original representation. We have now used the word
+``invariant'' a couple of times, so let's define what it means more precisely.
+
+\begin{defi}
+    Let $D(g)$ a representation of the group $G$ on the vector space $V$ such that $D(g)\colon V\rightarrow V$. Then
+    a subspace $U\subseteq V$ is \textbf{invariant} if 
+    \begin{equation}
+        \label{eq:Group:Irr:invariantDef}
+        \forall g\in G\quad u\in U \implies D(g)u\in U.
+    \end{equation}
+\end{defi}
+In other words: a vector space is invariant if it is not possible for any vector in it to escape using a representation of any group element.
+All representations applied to any vector in the invariant subspace must necessarily land in that same subspace from which it started.
+
+\begin{thm}[Shur's Lemma]
+    If $D(g)$ is an irreducible complex representation with vector space $V$ and $L(V)$ is the set of all linear maps, then
+    \begin{equation}
+        \label{eq:Group:Irr:ShursLemma}
+        \{A\in L(V) ; \; AD(g) = D(g)A\;\forall g\in G\} = \{c\mathbb{1};\; c\in\mathbb{C}\}.
+    \end{equation}
+\end{thm}
+
+\subsection{Application of group elements}
+
+To apply group theory to physical problems, we need to know how the objects we are working with in the physical theory transform under group elements.
+The most important vector space in quantum mechanics is arguably the Hilbert space where particle states are determined by a momentum and spin
+quantum number. A basis for this space is given by the vectors $\ket{\v{k},s}$ in the Dirac notation. Given $\v{k}\in\mathbb{R}^d$ and $s\in\{\up,\dn\}$,
+these basis vectors transform according to
+\begin{equation}
+    \label{eq:Group:App}
+    g : \ket{\v{k}',s'} = \sum_{\v{k}s}\ket{\v{k},s}D_{g\;ss'}\delta_{\v{k},g\v{k}'},
+\end{equation}
+under a group element $g$. Here $g\v{k}'$ means application of $g$ to the vector $\v{k}'$ through the standard representation of $g$ in $\mathbb{R}^d$,
+and $D_{g\;ss'}$ is the $SU(2)$ representation.
+
+\subsection{Projection Operators}
+
+Let us assume that we are in a vector space $V$ that can be divided into possibly several different irreducible representations $D^{(\alpha)}$ of some
+symmetry group $G$. Further, let the basis vectors of these irreducible representations be denoted by $b^{(\alpha)}_m$ where $m$ thus counts the number
+of basis vectors in each \irr Then an arbitrary vector $f\in V$ can be written in terms of these basis vectors as
+\begin{equation}
+    \label{eq:Group:Irr:Pro:basisDecomp}
+    f = \sum_\alpha\sum_m c_m^{(\alpha)}b^{(\alpha)}_m.
+\end{equation}
+
+A projection operator can be used to extract any combination of constant $c_m^{(\alpha)}$ multiplied by a basis vector $b^{(\alpha)}_n$, where
+$m$ and $n$ can in general be different. Denoting the projection operator that picks out the $m$th constant multiplied by the $l$th basis vector
+in the \irr $\beta$ of the expansion of $f$: $P^{(\beta)}_{lm}$, then
+\begin{equation}
+    \label{eq:Group:Irr:Pro:generalProApplication}
+    P^{(\beta)}_{lm}f = c_m^{(\beta)}b_l^{(\beta)}.
+\end{equation}
+This is extremely useful in finding a bases for the irreducible representations.
+To acheive this, the projection operator is defined as
+\begin{equation}
+    \label{eq:Group:Irr:Pro:proOpDef}
+    P^{(\beta)}_{l,m} = \frac{d_\beta}{\abs{G}}\sum_{g\in G}D_{lm}^{(\beta)}(g)^\ast g:,
+\end{equation}
+where $d_\beta$ is the dimension of \irr $\beta$, $D_{lm}^{(\beta)}(g)$ is the $lm$ element of the matrix representation of the group element $g$ and
+finally we have used the notation $g:$ to denote application on vectors by the relevant representation. An example is the application of $g$ to the
+basis vectors $b_m^{(\alpha)}$. Since the relevant representation of $g$ in this case is the irreducible representation for which $b_m^{(\alpha)}$ is
+a basis vector, the application becomes
+\begin{equation}
+    \label{eq:Group:Irr:Pro:gApplication}
+    g : b_m^{(\alpha)} = \sum_nb_n^{(\alpha)}D_{nm}^{(\alpha)}(g).
+\end{equation}
+
+Usually, the full generality of the
+projection operators $P^{(\beta)}_{l,m}$ isn't needed and it suffices to consider the diagonal projection operators
+$P^{(\beta)}_{l,l} \equiv P^{(\beta)}_l$ or indeed their sum, in which case the resulting operator can be written only in terms of the \irr characters
+$\chi^{(\alpha)}(g)$ since
+\begin{equation}
+    \label{eq:Group:Irr:Pro:charPro}
+    P^{(\beta)}\equiv\sum_lP^{(\beta)}_l = \frac{d_\beta}{\abs{G}}\sum_{g\in G}\sum_lD_{ll}^{(\beta)}(g)^\ast g: = \frac{d_\beta}{\abs{G}}\sum_{g\in G}\chi^{(\beta)}(g)^\ast g:.
+\end{equation}
+
+\subsection{Representation on product spaces}
+
+\section{Fermionic symmetry transformations}
+
+\section{Time-reversal symmetry}
+
+\section{Square Lattice Harmonics}
+
+
+\section{BCS Hilbert Space}
+
+We define the BCS Hilbert space as the Hilbert space upon which BCS-type potentials operate. Specifically this is a reduced form of the two-state
+fermionic product Hilbert space $\hil_2 = \hil\otimes\hil$ where $\hil = \Span\{\ket{\v{k},s}\}$ and we only consider states that have opposite momentum.
+Thus this Hilbert space is given by 
+\begin{equation}
+    \label{eq:Group:BCSHil:space}
+    \mathcal{B} = \Span\{\ket{\v{k},s_1}\ket{-\v{k},s_2}\},
+\end{equation}
+and the identity operator in this space can be written
+\begin{equation}
+    \label{eq:Group:BCSHil:id}
+    \hat{\mathbb{1}} = \sum_{\v{k}\,s_1s_2}\ket{\v{k},s_1}\ket{-\v{k},s_2}\bra{-\v{k},s_2}\bra{\v{k},s_1}.
+\end{equation}
+Acting on the arbitrary vector $\ket{v}\in\hilB$ with this identity operator, we find that in terms of this basis it can be written
+\begin{equation}
+    \label{eq:Group:BCSHil:arbitrary}
+    \ket{v} = \sum_{\v{k}\,s_1s_2}v_{s_1s_2}(\v{k})\ket{\v{k},s_1}\ket{-\v{k},s_2},
+\end{equation}
+where
+\begin{equation}
+    \label{eq:Group:BCSHil:arbitrary}
+    v_{s_1s_2}(\v{k}) = \bra{-\v{k},s_2}\braket{\v{k},s_1}{v}.
+\end{equation}
+The indices $s_1$ and $s_2$ can take on only two values each, namely $s_1,s_2\in\{\up,\dn\}$. In total there are thus $4$ different realizations
+of pairs, $s_1s_2$ e.g. $\up\up$ for $v_{s_1s_2}(\v{k})$. Putting these different realizations of $v_{s_1s_2}(\v{k})$ as elements in a $2\times2$ matrix
+we get
+\begin{equation}
+    \label{eq:Group:BCSHil:arb:mat}
+    v_{s_1s_2}(\v{k}) =
+    \begin{pmatrix}
+        v_{\up\up}(\v{k}) & v_{\up\dn}(\v{k})\\
+        v_{\dn\up}(\v{k}) & v_{\dn\dn}(\v{k})
+    \end{pmatrix}.
+\end{equation}
+Any $2\times 2$ matrix can be written in the conventional basis of the $4$ Pauli matrices $\sigma^0 = \mathbb{1}_{2\times 2}$, $\sigma^x$, $\sigma^y$,
+and $\sigma^z$. This means that we could write the matrix in Eq.~\eqref{eq:Group:BCSHil:arb:mat}
+\begin{equation}
+    \label{eq:GroupBCSHil:arb:pauliExp}
+    v_{s_1s_2}(\v{k}) = v^0_\v{k}\sigma^0_{s_1s_2} + v^i_\v{k}\sigma^i_{s_1s_2}.
+\end{equation}
+It is however conventional to factor out a Pauli matrix $i\sigma^y$ to the right in the expansion since this results in nice transformation properties
+of the coefficients as we shall see.
+With the spin-indices expanded in this basis it is conventional to let the function of $\v{k}$
+that is in front of $\sigma^0$ be called $\psi_\v{k}$. The three others are conventionally denoted $d_{\v{k},i}$. Expanded in this conventional basis
+then $v_{s_1s_2}(\v{k})$ takes the form
+\begin{equation}
+    \label{eq:Group:BCSHil:arb:pauli}
+    v_{s_1s_2}(\v{k}) = (\psi_\v{k}\sigma^0_{s_1s'} + d_{\v{k},i}\sigma^i_{s_1s'})i\sigma^y_{s's_2},
+\end{equation}
+and finally the state $\ket{v}$ can be written
+\begin{equation}
+    \label{eq:Group:BCSHil:arb:ket}
+    \ket{v} = \sum_{\v{k}\,s_1s_2}[(\psi_\v{k}\sigma^0 + \v{d}_\v{k}\cdot\v{\sigma})i\sigma^y]_{s_1s_2}\ket{\v{k},s_1}\ket{-\v{k},s_2}.
+\end{equation}
+Going one step back and writing out the different combinations of $s_1s_2$ in $v_{s_1s_2}(\v{k})$ as a matrix like we did in
+Eq.~\eqref{eq:Group:BCSHil:arb:mat}, but now multiplying out the Pauli matrices in Eq.~\eqref{eq:Group:BCSHil:arb:pauli} we get
+\begin{equation}
+    \label{eq:Group:BCSHil:arb:mat:Pauli}
+    \begin{pmatrix}
+        v_{\up\up}(\v{k}) & v_{\up\dn}(\v{k})\\
+        v_{\dn\up}(\v{k}) & v_{\dn\dn}(\v{k})
+    \end{pmatrix} =
+    \begin{pmatrix}
+        -d_{\v{k},x}+id_{\v{k},y} & \psi_\v{k}+d_{\v{k},z}\\
+        -\psi_\v{k}+d_{\v{k},z} & d_{\v{k},x}+id_{\v{k},y}
+    \end{pmatrix}.
+\end{equation}
+This set of linear relations is easily inverted to yield
+\begin{align}
+    \label{eq:Group:BCSHil:arb:inverseRel:psi}
+    \psi_\v{k} &= \frac{1}{2}(v_{\up\dn}(\v{k}) - v_{\dn\up}(\v{k}))\\
+    \label{eq:Group:BCSHil:arb:inverseRel:dx}
+    d_{\v{k},x} &= \frac{1}{2}(v_{\dn\dn}(\v{k})-v_{\up\up}(\v{k}))\\
+    \label{eq:Group:BCSHil:arb:inverseRel:dy}
+    d_{\v{k},y} &= -\frac{i}{2}(v_{\up\up}(\v{k})+v_{\dn\dn}(\v{k}))\\
+    \label{eq:Group:BCSHil:arb:inverseRel:dz}
+    d_{\v{k},z} &= \frac{1}{2}(v_{\up\dn}(\v{k})+v_{\dn\up}(\v{k})).
+\end{align}
+
+Since the space $\hilB$ is fermionic we have the symmetry 
+\begin{equation}
+    \label{eq:Group:BCSHil:fermSymm}
+    \ket{\v{k},s_1}\ket{-\v{k},s_2} = -\ket{-\v{k},s_2}\ket{\v{k},s_1}.
+\end{equation}
+Using this symmetry transformation on the basis vectors in the expansion of $\ket{v}$ in Eq.~\eqref{eq:Group:BCSHil:arbitrary}, then renaming indices
+and finally equating coefficients term by term, we see that for the coefficients of $\ket{v}$, this symmetry takes the form
+\begin{equation}
+    \label{eq:GroupBCSHil:fermSymmCoeff}
+    v_{s_1s_2}(\v{k}) = -v_{s_2s_1}(-\v{k}).
+\end{equation}
+
+\section{Decomposition of the Potential}
+
+Let at first $\hat{V}$ be a general two-body operator that acts on an $N$-particle state which is a vector in $\hil_N = \otimes_{i=1}^N\hil$. The
+single particle Hilbert space $\hil$ in question is quantified by momentum and spin such that $\hil=\Span\{\ket{\v{k},s}\}$. Denoting specific combinations
+of $\v{k}$ and $s$ as $\alpha$ as a shorthand for the moment, then $\hat{V}$ acts on basis vectors in $\hil_N$ as
+\begin{equation}
+    \label{eq:Group:Potential:twoBodyInteraction}
+    \hat{V}\ket{\alpha_1}\ldots\ket{\alpha_N} = \sum_{1\leq i<j\leq N}\hat{V}_{ij}\ket{\alpha_1}\ldots\ket{\alpha_N},
+\end{equation}
+by definition of being a two-body operator. Here $\hat{V}_{ij}$ is an operator that only acts on the $i$th and $j$th ket. Even though $\hat{V}$ acts on
+$\hil_N$, because of how it can be written in terms of $\hat{V}_{ij}$ and this only acts on two states at a time, it follows that $\hat{V}$ is
+completely determined by its action on the reduced Hilbert space $\hil_2$. This implies that $\hat{V}$ is fully described by its matrix elements
+\begin{equation}
+    \label{eq:Group:Potential:genTwoBodyMatrixElem}
+    \bra{\alpha}\bra{\alpha'}\hat{V}\ket{\beta}\ket{\beta'}.
+\end{equation}
+Inserting back the $\ket{\v{k},s}$ notation, these matrix elements are referred to as
+\begin{equation}
+    \label{eq:Group:Potential:momSpinPotentialMatrixElems}
+    V_{\v{k}_1\v{k}_2\v{k}_3\v{k}_4;\,s_1s_2s_3s_4} = \bra{\v{k}_1s_1}\bra{\v{k}_2s_2}\hat{V}\ket{\v{k}_4s_4}\ket{\v{k}_3s_3}.
+\end{equation}
+When $\hat{V}$ is a BCS operator acting on the BCS Hilbert space described in the previous section, these matrix elements are denoted
+\begin{equation}
+    \label{eq:Group:Potential:bcsTwoBodyMatrixElem}
+    V_{\v{k}\v{k}';\,s_1s_2s_3s_4} = \bra{\v{k}s_1}\bra{-\v{k}s_2}\hat{V}\ket{\v{k}'s_4}\ket{-\v{k}'s_3}.
+\end{equation}
+
+Since $\hat{V}$ is Hermitian, it must be diagonalizable in a basis of eigenfunctions. Barring accidental degeneracy, a basis for a $d$-degenerate
+eigenvalue is also a basis for an irreducible representation of the symmetry group $G$ of the Hamiltonian. In the case of accidental degeneracy
+then this $d$-dimensional vector space consists of several non-intersecting subspaces where each subspace is a basis for a different \irr Note
+that this does not mean that (barring accidental degeneracy) there exists one seperate eigenvalue for each \irr of $G$ since there might be
+several different eigenvalues with different eigenspace bases but where all of them are bases for the same \irr Regardless of these details,
+this connection between irreducible representations and the eigenvalues of $\hat{V}$ is a great help in finding the bases for which it is
+diagonal.
+
+We let the basis for a $d_\Gamma$-dimensional \irr $\Gamma$ be denoted $\{\ket{\Gamma,q_\Gamma,m}\}_{m=1}^{d_\Gamma}$, where $\hat{V}$ has an eigenvalue $V_{\Gamma,q_\Gamma}$
+for the vectors in this basis and $q_\Gamma$ is an index enumerating the different versions of bases of $\Gamma$ that $\hat{V}$ might have
+in its set of eigenspace bases. Since $\hat{V}$ then is in this set of bases then
+\begin{equation}
+    \label{eq:Group:Potential:potIrrepDecomp}
+    \hat{V} = \sum_{\Gamma q_\Gamma}V_{\Gamma,q_\Gamma}\sum_{m=1}^{d_\Gamma}\ket{\Gamma,q_\Gamma,m}\bra{\Gamma,q_\Gamma,m}.
+\end{equation}
+Because of the potential for accidental degeneracy we can not guarantee that $V_{\Gamma,q_\Gamma}\neq V_{\Gamma',q_{\Gamma'}}$ for different $\Gamma$ and $\Gamma'$.
+Inserting this expression for $\hat{V}$ into the matrix elements in Eq.~\eqref{eq:Group:Potential:bcsTwoBodyMatrixElem} lets us write them in terms of
+irreducible representation basis vectors in the momentum spin function representation:
+\begin{equation}
+    \label{eq:Group:Potential:irrepPotMatrixElem}
+    V_{\v{k}\v{k}';\,s_1s_2s_3s_4} = \sum_\Gamma V_{\Gamma,q_\Gamma}\sum_{m=1}^{d_\Gamma}\Psi_{s_1s_2}^{\Gamma,q_\Gamma}(\v{k})\Psi_{s_3s_4}^{\Gamma,q_\Gamma}(-\v{k}')^\dagger,
+\end{equation}
+where
+\begin{equation}
+    \label{eq:Group:Potential:irrepPotMatrixElem:coeff}
+    \Psi_{s_1s_2}^{\Gamma,q_\Gamma}(\v{k}) = \bra{\v{k},s_1}\braket{-\v{k},s_2}{\Gamma,q_\Gamma,m}.
+\end{equation}
+
+We can separate the set of different irreducible representation bases into bases that have vectors that transform either symmetrically or anti-symmetrically
+with respect to the group element of space inversion $P$. We call the representations of such bases even or odd representations. Even representations are those that map
+$P$ to the identity operator $\mathbb{1}$ and as a consequence have $\Psi^{\Gamma,q_\Gamma,m}_{s_1s_2}(-\v{k}) = \Psi^{\Gamma,q_\Gamma,m}_{s_1s_2}(\v{k})$. Writing
+the spin-indices in these functions in terms of Pauli matrices by using the expansion in Eq.~\eqref{eq:Group:BCSHil:arb:pauli} and using the fermionic symmetry then
+even representations $a$ have
+\begin{equation}
+    \label{eq:Group:Potential:evenIrrepFunctions}
+    \Psi^{a,q_a,m}_{s_1s_2}(\v{k}) = \psi^{a,q_a,m}_\v{k}i\sigma^y_{s_1s_2}.
+\end{equation}
+Odd representations $b$ map $P$ to the inversion operator $I$ such that $\Psi^{b,q_b,m}_{s_1s_2}(-\v{k}) = -\Psi^{b,q_b,m}_{s_1s_2}(\v{k})$. Expanding in Pauli
+matrices then yields
+\begin{equation}
+    \label{eq:Group:Potential:oddIrrepFunctions}
+    \Psi^{b,q_b,m}_{s_1s_2}(\v{k}) = \v{d}^{b,q_b,m}_{\v{k}}\cdot(\v{\sigma}i\sigma^y)_{s_1s_2}.
+\end{equation}
+Separating the sum over irreducible representations $\Gamma$ into sums over even ($a$) and odd ($b$) representations in the potential operator matrix elements in
+Eq.~\eqref{eq:Group:Potential:irrepPotMatrixElem}, we arrive at the fully expanded expression
+\begin{equation}
+    \label{eq:Group:Potential:fullyExpandedPotMatrixElem}
+    \begin{split}
+        &V_{\v{k}\v{k}';\,s_1s_2s_3s_4} = \sum_{aq_a}V_{a,q_a}\sum_{m=1}^{d_a}\psi_\v{k}^{a,q_a,m}i\sigma^y_{s_1s_2}\big(\psi_{-\v{k}'}^{a,q_a,m}i\sigma^y_{s_3s_4}\big)^\dagger\\
+        & + \sum_{bq_b}V_{b,q_b}\sum_{m=1}^{d_b}\big(\v{d}^{b,q_b,m}_{\v{k}}\cdot\v{\sigma}i\sigma^y\big)_{s_1s_2}\Big[\big(\v{d}^{b,q_b,m}_{-\v{k}'}\cdot\v{\sigma}i\sigma^y\big)_{s_3s_4}\Big]^\dagger.
+    \end{split}
+\end{equation}
