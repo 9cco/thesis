@@ -42,71 +42,8 @@ All representations applied to any vector in the invariant subspace must necessa
     \end{equation}
 \end{thm}
 
-\subsection{Application of group elements}
-
-To apply group theory to physical problems, we need to know how the objects we are working with in the physical theory transform under group elements.
-The most important vector space in quantum mechanics is arguably the Hilbert space where particle states are determined by a momentum and spin
-quantum number. A basis for this space is given by the vectors $\ket{\v{k},s}$ in the Dirac notation. Given $\v{k}\in\mathbb{R}^d$ and $s\in\{\up,\dn\}$,
-these basis vectors transform according to
-\begin{equation}
-    \label{eq:Group:App}
-    g : \ket{\v{k}',s'} = \sum_{\v{k}s}\ket{\v{k},s}D_{g\;ss'}\delta_{\v{k},g\v{k}'},
-\end{equation}
-under a group element $g$. Here $g\v{k}'$ means application of $g$ to the vector $\v{k}'$ through the standard representation of $g$ in $\mathbb{R}^d$,
-and $D_{g\;ss'}$ is the $SU(2)$ representation.
-
-\subsection{Projection Operators}
-
-Let us assume that we are in a vector space $V$ that can be divided into possibly several different irreducible representations $D^{(\alpha)}$ of some
-symmetry group $G$. Further, let the basis vectors of these irreducible representations be denoted by $b^{(\alpha)}_m$ where $m$ thus counts the number
-of basis vectors in each \irr Then an arbitrary vector $f\in V$ can be written in terms of these basis vectors as
-\begin{equation}
-    \label{eq:Group:Irr:Pro:basisDecomp}
-    f = \sum_\alpha\sum_m c_m^{(\alpha)}b^{(\alpha)}_m.
-\end{equation}
-
-A projection operator can be used to extract any combination of constant $c_m^{(\alpha)}$ multiplied by a basis vector $b^{(\alpha)}_n$, where
-$m$ and $n$ can in general be different. Denoting the projection operator that picks out the $m$th constant multiplied by the $l$th basis vector
-in the \irr $\beta$ of the expansion of $f$: $P^{(\beta)}_{lm}$, then
-\begin{equation}
-    \label{eq:Group:Irr:Pro:generalProApplication}
-    P^{(\beta)}_{lm}f = c_m^{(\beta)}b_l^{(\beta)}.
-\end{equation}
-This is extremely useful in finding a bases for the irreducible representations.
-To acheive this, the projection operator is defined as
-\begin{equation}
-    \label{eq:Group:Irr:Pro:proOpDef}
-    P^{(\beta)}_{l,m} = \frac{d_\beta}{\abs{G}}\sum_{g\in G}D_{lm}^{(\beta)}(g)^\ast g:,
-\end{equation}
-where $d_\beta$ is the dimension of \irr $\beta$, $D_{lm}^{(\beta)}(g)$ is the $lm$ element of the matrix representation of the group element $g$ and
-finally we have used the notation $g:$ to denote application on vectors by the relevant representation. An example is the application of $g$ to the
-basis vectors $b_m^{(\alpha)}$. Since the relevant representation of $g$ in this case is the irreducible representation for which $b_m^{(\alpha)}$ is
-a basis vector, the application becomes
-\begin{equation}
-    \label{eq:Group:Irr:Pro:gApplication}
-    g : b_m^{(\alpha)} = \sum_nb_n^{(\alpha)}D_{nm}^{(\alpha)}(g).
-\end{equation}
-
-Usually, the full generality of the
-projection operators $P^{(\beta)}_{l,m}$ isn't needed and it suffices to consider the diagonal projection operators
-$P^{(\beta)}_{l,l} \equiv P^{(\beta)}_l$ or indeed their sum, in which case the resulting operator can be written only in terms of the \irr characters
-$\chi^{(\alpha)}(g)$ since
-\begin{equation}
-    \label{eq:Group:Irr:Pro:charPro}
-    P^{(\beta)}\equiv\sum_lP^{(\beta)}_l = \frac{d_\beta}{\abs{G}}\sum_{g\in G}\sum_lD_{ll}^{(\beta)}(g)^\ast g: = \frac{d_\beta}{\abs{G}}\sum_{g\in G}\chi^{(\beta)}(g)^\ast g:.
-\end{equation}
-
-\subsection{Representation on product spaces}
-
-\section{Fermionic symmetry transformations}
-
-\section{Time-reversal symmetry}
-
-\section{Square Lattice Harmonics}
-
-
 \section{BCS Hilbert Space}
-
+\label{sec:Group:BCSHil}
 We define the BCS Hilbert space as the Hilbert space upon which BCS-type potentials operate. Specifically this is a reduced form of the two-state
 fermionic product Hilbert space $\hil_2 = \hil\otimes\hil$ where $\hil = \Span\{\ket{\v{k},s}\}$ and we only consider states that have opposite momentum.
 Thus this Hilbert space is given by 
@@ -197,6 +134,145 @@ and finally equating coefficients term by term, we see that for the coefficients
     v_{s_1s_2}(\v{k}) = -v_{s_2s_1}(-\v{k}).
 \end{equation}
 
+
+\section{Application of group elements}
+
+When we are talking about applying some symmetry transformation to a state, this is synonymous with applying a group element to a vector.
+Even more specifically, the `applying' part means that we have some natural representation of the group on the vector space we have defined
+states on, and we are using the linear transformation of the representation of the group element to act on the state vector. In this
+thesis we will use the notation $g:\ket{\psi}$ to refer to this procedure.
+
+Let $g$ be an arbitrary group element in the symmetry group $G$ and $D$ be a representation of $G$ on the $d$-dimensional vector space $V$.
+Let $V$ have a basis $\{b_i\}_{i=1}^d$. The application of a group element to a basis vector is then defined as
+\begin{equation}
+    \label{eq:Group:Prod:basisApp}
+    g:b_i = \sum_jb_jD_{ji}(g).
+\end{equation}
+The application of a group element to any vector in $V$ then is calculated by expanding the vector in the basis and applying the representation
+$D$ to each basis vector separately as a linear transformation:
+\begin{equation}
+    \label{eq:Group:App:linearTransformApp}
+    g:v = \sum_iv_ig:b_i.
+\end{equation}
+
+\subsection{Active vector transformation}
+
+As $g:$ has been defined in Eq.~\eqref{eq:Group:Prod:basisApp} it is defined in a passive perspective where the transformation is happening
+to the basis vectors. Applying $g$ to a vector $v$ in the basis $\{b_i\}$ it is sometimes useful to consider this as an application not
+on the vectors themselves but on the expansion coefficients $v_i$ of $v$ in the basis. This is the active view of the transformation.
+Inserting Eq.~\eqref{eq:Group:Prod:basisApp} into Eq.~\eqref{eq:Group:App:linearTransformApp} we get
+\begin{equation}
+    \label{eq:Group:App:activeTransform}
+    \begin{split}
+        g:v &= \sum_iv_i\sum_jb_jD_{ji}(g) = \sum_j\Big(\sum_iD_{ji}(g)v_i\Big)b_j\\
+        &= \sum_iv'_ib_i,
+    \end{split}
+\end{equation}
+where we have defined the transformed coefficients
+\begin{equation}
+    \label{eq:Group:App:transformedCoeff}
+    v'_i = \sum_jD_{ij}(g)v_j.
+\end{equation}
+From this calculation we see that we can consider the application of $g$ as a transformation of the coefficients of the vector as
+\begin{equation}
+    \label{eq:Group:App:coeffTransformation}
+    g:v_i = \sum_jD_{ij}(g)v_j.
+\end{equation}
+This defines the active transformation of a vector $v$ by a group element $g$.
+
+\subsection{Representation on product spaces}
+
+The product space $V\otimes V$ then has a basis $\{b_ib_j\}_{i,j=1}^d$. A derived representation can be constructed from $D$ on this product space
+called the product representation $D^{(D\times D)}(g)$. This is defined through its application on the basis by
+\begin{equation}
+    \label{eq:Group:Prod:prodBasisApp}
+    g:b_ib_j = \sum_{kl}b_kb_l\big[D^{(D\times D)}(g)\big]_{kl,ij} = \sum_{kl}b_kb_lD_{ki}(g)D_{lj}(g).
+\end{equation}
+
+To apply group theory to physical problems, we need to know how the objects we are working with in the physical theory transform under group elements.
+The most important vector space in quantum mechanics is arguably the Hilbert space where particle states are determined by a momentum and spin
+quantum number. Each quantum number has its own vector space defined by the basis vectors $\ket{\v{k}}$ and $\ket{s}$ in the Dirac notation. The
+combination of both quantum numbers in the description of a particle state then gives a state in the product space of these vector spaces.
+A basis for this space is given by the vectors $\ket{\v{k},s} = \ket{\v{k}}\ket{s}$. Given $\v{k}\in\mathbb{R}^d$ and $s\in\{\up,\dn\}$,
+these basis vectors transform according to the product representation of the representations on each vector space, given by
+\begin{equation}
+    \label{eq:Group:App}
+    g : \ket{\v{k}',s'} = \sum_{\v{k}s}\ket{\v{k},s}D^{(\v{k}\times s)}_{\v{k}s;\,\v{k}'s'} = \sum_{\v{k}s}\ket{\v{k},s}D_{g\;ss'}\delta_{\v{k},g\v{k}'},
+\end{equation}
+under a group element $g$. Here $g\v{k}'$ means application of $g$ to the vector $\v{k}'$ through the standard representation of $g$ in $\mathbb{R}^d$.
+$D_{g\;ss'}$ is a representation on the spin-up spin-down vector space given by the matrix
+\begin{equation}
+    \label{eq:Group:Prod:spinRepMatrix}
+    D_{g\;ss'} = \sigma^0_{ss'}\cos(\phi/2) - i\hat{\v{u}}\cdot\v{\sigma}_{ss'}\sin(\phi/2),
+\end{equation}
+where $\hat{\v{u}}$ is the rotation axis unity vector, while $\phi$ is the angle that defines the proper rotation associated with $g$. $\v{\sigma}$ is
+the vector notation for the $3$ Pauli matrices and $\sigma^0_{ss'}=\delta_{ss'}$.
+
+In the BCS Hilbert space which we discussed in more detail in Section~\ref{sec:Group:BCSHil},
+the basis vectors are outer products of the momentum spin basis vectors with opposite momentum: $\{\ket{\v{k},s_1}\ket{-\v{k},s_2}\}$. The product
+representation on this vector space then transforms the basis vectors according to
+\begin{equation}
+    \label{eq:Group:Prod:BCSProdRep}
+    g:\ket{\v{k}',s_1'}\ket{-\v{k}',s_2'} = \sum_{\v{k}\,s_1s_2}\ket{\v{k},s_1}\ket{-\v{k},s_2}D^{(D\times D)}_{\v{k}\,s_1s_2;\,\v{k}'\,s_1's_2'}(g),
+\end{equation}
+where
+\begin{equation}
+    \label{eq:group:prod:BCSProdMatrix}
+    D^{(D\times D)}_{\v{k}\,s_1s_2;\,\v{k}'\,s_1's_2'}(g) = D_{g\,s_1s_1'}\delta_{\v{k},g\v{k}'}D_{g\,s_2s_2'}\delta_{-\v{k},g-\v{k}'}.
+\end{equation}
+
+The coefficients of the basis expansion of a vector in the BCS Hilbert space were given in the conventional $\psi$-$\v{d}$ notation in 
+Eq.~\eqref{eq:Group:BCSHil:arb:ket}.
+
+\subsection{Projection Operators}
+
+Let us assume that we are in a vector space $V$ that can be divided into possibly several different irreducible representations $D^{(\alpha)}$ of some
+symmetry group $G$. Further, let the basis vectors of these irreducible representations be denoted by $b^{(\alpha)}_m$ where $m$ thus counts the number
+of basis vectors in each \irr Then an arbitrary vector $f\in V$ can be written in terms of these basis vectors as
+\begin{equation}
+    \label{eq:Group:Irr:Pro:basisDecomp}
+    f = \sum_\alpha\sum_m c_m^{(\alpha)}b^{(\alpha)}_m.
+\end{equation}
+
+A projection operator can be used to extract any combination of constant $c_m^{(\alpha)}$ multiplied by a basis vector $b^{(\alpha)}_n$, where
+$m$ and $n$ can in general be different. Denoting the projection operator that picks out the $m$th constant multiplied by the $l$th basis vector
+in the \irr $\beta$ of the expansion of $f$: $P^{(\beta)}_{lm}$, then
+\begin{equation}
+    \label{eq:Group:Irr:Pro:generalProApplication}
+    P^{(\beta)}_{lm}f = c_m^{(\beta)}b_l^{(\beta)}.
+\end{equation}
+This is extremely useful in finding a bases for the irreducible representations.
+To acheive this, the projection operator is defined as
+\begin{equation}
+    \label{eq:Group:Irr:Pro:proOpDef}
+    P^{(\beta)}_{l,m} = \frac{d_\beta}{\abs{G}}\sum_{g\in G}D_{lm}^{(\beta)}(g)^\ast g:,
+\end{equation}
+where $d_\beta$ is the dimension of \irr $\beta$, $D_{lm}^{(\beta)}(g)$ is the $lm$ element of the matrix representation of the group element $g$ and
+finally we have used the notation $g:$ to denote application on vectors by the relevant representation. An example is the application of $g$ to the
+basis vectors $b_m^{(\alpha)}$. Since the relevant representation of $g$ in this case is the irreducible representation for which $b_m^{(\alpha)}$ is
+a basis vector, the application becomes
+\begin{equation}
+    \label{eq:Group:Irr:Pro:gApplication}
+    g : b_m^{(\alpha)} = \sum_nb_n^{(\alpha)}D_{nm}^{(\alpha)}(g).
+\end{equation}
+
+Usually, the full generality of the
+projection operators $P^{(\beta)}_{l,m}$ isn't needed and it suffices to consider the diagonal projection operators
+$P^{(\beta)}_{l,l} \equiv P^{(\beta)}_l$ or indeed their sum, in which case the resulting operator can be written only in terms of the \irr characters
+$\chi^{(\alpha)}(g)$ since
+\begin{equation}
+    \label{eq:Group:Irr:Pro:charPro}
+    P^{(\beta)}\equiv\sum_lP^{(\beta)}_l = \frac{d_\beta}{\abs{G}}\sum_{g\in G}\sum_lD_{ll}^{(\beta)}(g)^\ast g: = \frac{d_\beta}{\abs{G}}\sum_{g\in G}\chi^{(\beta)}(g)^\ast g:.
+\end{equation}
+
+
+\section{Fermionic symmetry transformations}
+
+\section{Time-reversal symmetry}
+
+\section{Square Lattice Harmonics}
+
+
 \section{Decomposition of the Potential}
 
 Let at first $\hat{V}$ be a general two-body operator that acts on an $N$-particle state which is a vector in $\hil_N = \otimes_{i=1}^N\hil$. The
@@ -226,15 +302,15 @@ When $\hat{V}$ is a BCS operator acting on the BCS Hilbert space described in th
 
 Since $\hat{V}$ is Hermitian, it must be diagonalizable in a basis of eigenfunctions. Barring accidental degeneracy, a basis for a $d$-degenerate
 eigenvalue is also a basis for an irreducible representation of the symmetry group $G$ of the Hamiltonian. In the case of accidental degeneracy
-then this $d$-dimensional vector space consists of several non-intersecting subspaces where each subspace is a basis for a different \irr Note
+then this $d$-dimensional vector space consists of several non-intersecting subspaces where each subspace is a basis for a (possibly different) \irr Note
 that this does not mean that (barring accidental degeneracy) there exists one seperate eigenvalue for each \irr of $G$ since there might be
 several different eigenvalues with different eigenspace bases but where all of them are bases for the same \irr Regardless of these details,
-this connection between irreducible representations and the eigenvalues of $\hat{V}$ is a great help in finding the bases for which it is
+the connection between irreducible representations and the eigenvalues of $\hat{V}$ is a great help in finding the bases for which it is
 diagonal.
 
 We let the basis for a $d_\Gamma$-dimensional \irr $\Gamma$ be denoted $\{\ket{\Gamma,q_\Gamma,m}\}_{m=1}^{d_\Gamma}$, where $\hat{V}$ has an eigenvalue $V_{\Gamma,q_\Gamma}$
 for the vectors in this basis and $q_\Gamma$ is an index enumerating the different versions of bases of $\Gamma$ that $\hat{V}$ might have
-in its set of eigenspace bases. Since $\hat{V}$ then is in this set of bases then
+in its set of eigenspace bases. Since $\hat{V}$ then is diagonal in this set of bases then
 \begin{equation}
     \label{eq:Group:Potential:potIrrepDecomp}
     \hat{V} = \sum_{\Gamma q_\Gamma}V_{\Gamma,q_\Gamma}\sum_{m=1}^{d_\Gamma}\ket{\Gamma,q_\Gamma,m}\bra{\Gamma,q_\Gamma,m}.
@@ -276,3 +352,4 @@ Eq.~\eqref{eq:Group:Potential:irrepPotMatrixElem}, we arrive at the fully expand
         & + \sum_{bq_b}V_{b,q_b}\sum_{m=1}^{d_b}\big(\v{d}^{b,q_b,m}_{\v{k}}\cdot\v{\sigma}i\sigma^y\big)_{s_1s_2}\Big[\big(\v{d}^{b,q_b,m}_{-\v{k}'}\cdot\v{\sigma}i\sigma^y\big)_{s_3s_4}\Big]^\dagger.
     \end{split}
 \end{equation}
+In this use of the dagger notation, the adjoint acts on both of the matrix indices such that $\v{d}_{-\v{k}}^\dagger = \v{d}_\v{k}^\ast$ and $\sigma_{s_1s_2}^\dagger = \sigma_{s_2s_1}^\ast$.
