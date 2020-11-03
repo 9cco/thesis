@@ -197,7 +197,7 @@ A basis for this space is given by the vectors $\ket{\v{k},s} = \ket{\v{k}}\ket{
 these basis vectors transform according to the product representation of the representations on each vector space, given by
 \begin{equation}
     \label{eq:Group:App}
-    g : \ket{\v{k}',s'} = \sum_{\v{k}s}\ket{\v{k},s}D^{(\v{k}\times s)}_{\v{k}s;\,\v{k}'s'} = \sum_{\v{k}s}\ket{\v{k},s}D_{g\;ss'}\delta_{\v{k},g\v{k}'},
+    g : \ket{\v{k}',s'} = \sum_{\v{k}s}\ket{\v{k},s}D^{(\v{k}\times s)}_{\v{k}s;\,\v{k}'s'} = \sum_{\v{k}s}\ket{\v{k},s}D_{g\;ss'}\delta_{\v{k},g:\v{k}'},
 \end{equation}
 under a group element $g$. Here $g\v{k}'$ means application of $g$ to the vector $\v{k}'$ through the standard representation of $g$ in $\mathbb{R}^d$.
 $D_{g\;ss'}$ is a representation on the spin-up spin-down vector space given by the matrix
@@ -217,12 +217,47 @@ representation on this vector space then transforms the basis vectors according 
 \end{equation}
 where
 \begin{equation}
-    \label{eq:group:prod:BCSProdMatrix}
-    D^{(D\times D)}_{\v{k}\,s_1s_2;\,\v{k}'\,s_1's_2'}(g) = D_{g\,s_1s_1'}\delta_{\v{k},g\v{k}'}D_{g\,s_2s_2'}\delta_{-\v{k},g-\v{k}'}.
+    \label{eq:Group:Prod:BCSProdMatrix}
+    D^{(D\times D)}_{\v{k}\,s_1s_2;\,\v{k}'\,s_1's_2'}(g) = D_{g\,s_1s_1'}\delta_{\v{k},g:\v{k}'}D_{g\,s_2s_2'}\delta_{-\v{k},g:-\v{k}'}.
 \end{equation}
+Since group representations on $\v{k}$ is a linear transformation then $\delta_{-\v{k},g:-\v{k}'} = \delta_{\v{k},g:\v{k}'}$, such that the last
+Kronecker delta function becomes superfluous.
+
+\subsection{Representation on $\psi$-$\v{d}$ functions}
 
 The coefficients of the basis expansion of a vector in the BCS Hilbert space were given in the conventional $\psi$-$\v{d}$ notation in 
-Eq.~\eqref{eq:Group:BCSHil:arb:ket}.
+Eq.~\eqref{eq:Group:BCSHil:arb:ket}. Taking the active view of group transformations we can say that the expansion coefficients of arbitrary states
+in the BCS Hilbert space $\hilB$ transforms like the $v_i$ in Eq.~\eqref{eq:Group:App:coeffTransformation} but where now the representation
+matrix $D$ is given by the matrix $D^{(D\times D)}_{\v{k}\,s_1s_2;\,\v{k}'\,s_1's_2'}$ above in Eq.~\eqref{eq:Group:Prod:BCSProdMatrix}. Written
+out then, the coefficients transform according to
+\begin{equation}
+    \label{eq:Group:pdRep:coeffTrans}
+    g:v_{s_1s_2}(\v{k}) = \sum_{\v{k}'\,s_1's_2'}D^{(D\times D)}_{\v{k}\,s_1s_2;\,\v{k}'\,s_1's_2'}v_{s_1's_2'}(\v{k}').
+\end{equation}
+Let now $\ket{v}$ be a state that is even in space, meaning that its expansion only consists of coefficients $\psi(\v{k})$ in the $\psi$-$\v{d}$
+notation. Then we see from Eq.~\eqref{eq:Group:BCSHil:arb:mat:Pauli} that $\psi(\v{k})$ can be written $\psi(\v{k}) = v_{\up\dn}(\v{k})$.
+The transformation properties of $\psi(\v{k})$ are thus given by
+\begin{equation}
+    \label{eq:Group:pdRep:psiRep}
+    \begin{split}
+        g:\psi(\v{k}) &= g:v_{\up\dn}(\v{k}) = \sum_{\v{k}'\,s_1's_2'}D^{(D\times D)}_{\v{k}\,\up\dn;\,\v{k}'\,s_1's_2'}\psi(\v{k}')(i\sigma^y)_{s_1's_2'}\\
+        &=\psi(g^{-1}:\v{k})\big(i\sigma^y)_{\up\dn} = \psi(g^{-1}:\v{k}).
+    \end{split}
+\end{equation}
+In this calculation we inserted the expression of $D^{(D\times D)}_{\v{k}\,s_1s_2;\,\v{k}'\,s_1's_2'}$ in Eq.~\eqref{eq:Group:Prod:BCSProdMatrix} and used
+the equation $D_gi\sigma^y D_g^\trans = i\sigma^y$, where $D_g$ are the spin representation matrices given in Eq.~\eqref{eq:Group:Prod:spinRepMatrix}.
+
+To find the transformation properties of $\v{d}_\v{k}$ the principle is the same as above for $\psi(\v{k})$ but the calculations become more involved.
+We assume that the spin-momentum basis expansion of state $\ket{v}$ consists of only odd coefficients so that
+$v_{s_1s_2}(\v{k}) = \v{d}_\v{k}\cdot(\v{\sigma}i\sigma^y)_{s_1s_2}$. Inserting this into the active transformation of the coefficients of $\ket{V}$ in
+Eq.~\eqref{eq:Group:pdRep:coeffTrans} and also inserting the expression for $D^{(D\times D)}_{\v{k}\,s_1s_2;\,\v{k}'\,s_1's_2'}$ as we did before yields
+\begin{equation}
+    \label{eq:Group:pdRep:oddCoeffTrans}
+    \begin{split}
+        g:v_{s_1s_2}(\v{k}) &= \sum_{\v{k}'\,s_1's_2'}\delta_{\v{k},g:\v{k}'}D_{g\,s_1s_1'}D_{g\,s_2s_2}\v{d}_{\v{k}'}\cdot(\v{\sigma}i\sigma^y)_{s_1's_2'}\\
+        &= \sum_s\Big(D_g\v{\sigma}\sigma^yD_g^\trans\sigma^y\Big)_{s_1s}\cdot\v{d}_{g^{-1}:\v{k}}i\sigma^y_{ss_2}
+    \end{split}
+\end{equation}
 
 \subsection{Projection Operators}
 
