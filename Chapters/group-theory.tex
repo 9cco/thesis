@@ -255,9 +255,54 @@ Eq.~\eqref{eq:Group:pdRep:coeffTrans} and also inserting the expression for $D^{
     \label{eq:Group:pdRep:oddCoeffTrans}
     \begin{split}
         g:v_{s_1s_2}(\v{k}) &= \sum_{\v{k}'\,s_1's_2'}\delta_{\v{k},g:\v{k}'}D_{g\,s_1s_1'}D_{g\,s_2s_2}\v{d}_{\v{k}'}\cdot(\v{\sigma}i\sigma^y)_{s_1's_2'}\\
-        &= \sum_s\Big(D_g\v{\sigma}\sigma^yD_g^\trans\sigma^y\Big)_{s_1s}\cdot\v{d}_{g^{-1}:\v{k}}i\sigma^y_{ss_2}
+        &= \sum_s\Big(D_g\v{\sigma}\sigma^yD_g^\trans\sigma^y\Big)_{s_1s}\cdot\v{d}_{g^{-1}:\v{k}}\;i\sigma^y_{ss_2}.
     \end{split}
 \end{equation}
+Since a group transformation (aka. the linear transformation given by a group representation) can not bring a state that was even to be odd or vice versa,
+then the resulting state given by the transformed coefficients $g:v_{s_1s_2}(\v{k})$ has to remain odd, and thus they can be expanded in terms of a new
+$\v{d}'$ such that 
+\begin{equation}
+    \label{eq:Group:pdRep:oddCoeffTrans:transExpansion}
+    g:v_{s_1s_2}(\v{k}) = \sum_s\v{d}'_{g^{-1}:\v{k}}\cdot\v{\sigma}_{s_1s}i\sigma^y_{ss_2}.
+\end{equation}
+Having expanded both sides of the transformed coefficients with a common factor $i\sigma^y$ to the right we can equate the remaining $2\times2$ spin
+matrices which gives an expression for $\v{d}'_{g^{-1}:\v{k}}\cdot\v{\sigma}$ by comparing Eq.~\eqref{eq:Group:pdRep:oddCoeffTrans} and
+Eq.~\eqref{eq:Group:pdRep:oddCoeffTrans:transExpansion}.
+Furthermore, using the anti-commutation property $\{\sigma^i,\sigma^j\} = 2\delta_{ij}\sigma^0$ of Pauli matrices we find that
+\begin{equation}
+    \label{eq:Group:pdRep:projectingD}
+    d'_{\v{k},i} = \frac{1}{4}\tr\big(\{\sigma^i, \v{d}'_\v{k}\cdot\v{\sigma}\big\}).
+\end{equation}
+Inserting the expression for $\v{d}'_{g^{-1}:\v{k}}\cdot\v{\sigma}$ and the full expression of the $SU(2)$ spin-representation matrices $D_g$, which
+is found in  Eq.~\eqref{eq:Group:Prod:spinRepMatrix}, yields after some algebra
+\begin{equation}
+    \label{eq:Group:pdRep:transformedD}
+    \begin{split}
+        d'_{g^{-1}:\v{k},i} &= \frac{1}{4}\tr\big(\{\sigma^i, \v{d}_{g^{-1}:\v{k}}\cdot D_g\v{\sigma}\sigma^yD_v^\trans\sigma^y\}\big)\\
+        &= R_{ij}(\hat{\v{u}},\phi)d_{g^{-1}:\v{k},j},
+    \end{split}
+\end{equation}
+where we have defined the matrix
+\begin{equation}
+    \label{eq:Group:pdRep:rotMatrixIndices}
+    \begin{split}
+        &R_{ij}(\hat{\v{u}},\phi) = \delta_{ij}\cos\phi + \hat{u}_i\hat{u}_j(1-\cos\phi)-\epsilon_{ijk}\hat{u}_k\sin\phi\\
+        & = 
+        \left(\begin{smallmatrix}
+            \cos\phi + \hat{u}_x^2(1-\cos\phi) & \hat{u}_x\hat{u}_y(1-\cos\phi)-\hat{u}_z\sin\phi & \hat{u}_x\hat{u}_z(1-\cos\phi)+\hat{u}_y\sin\phi\\
+            \hat{u}_y\hat{u}_x(1-\cos\phi)+\hat{u}_z\sin\phi & \cos\phi+\hat{u}_y^2(1-\cos\phi) & \hat{u}_y\hat{u}_z(1-\cos\phi)-\hat{u}_x\sin\phi\\
+            \hat{u}_z\hat{u}_x(1-\cos\phi)-\hat{u}_y\sin\phi & \hat{u}_z\hat{u}_y(1-\cos\phi)+\hat{u}_x\sin\phi & \cos\phi+\hat{u}_z^2(1-\cos\phi)
+        \end{smallmatrix}\right).
+    \end{split}
+\end{equation}
+This matrix is in fact the rotation matrix of a vector in $\mathbb{R}^3$ by an angle $\phi$ about a unit vector $\hat{\v{u}}$. Since the coefficients
+ of an odd state $\ket{v}$ are fully determined by the vector $\v{d}$, their transformation can be regarded just as a tranformation of $\v{d}$ itself
+ which thus takes the form
+\begin{equation}
+    \label{eq:Group:pdRep:dTranformation}
+    g:d_{\v{k},i} = R_{ij}(\hat{\v{u}},\phi)d_{g^{-1}:\v{k},j},
+\end{equation}
+where $\hat{\v{u}}$ and $\phi$ gives the unit vector and angle respectively, of the proper rotation associated with $g$.
 
 \subsection{Projection Operators}
 
