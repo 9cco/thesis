@@ -143,29 +143,29 @@ states on, and we are using the linear transformation of the representation of t
 thesis we will use the notation $g:\ket{\psi}$ to refer to this procedure.
 
 Let $g$ be an arbitrary group element in the symmetry group $G$ and $D$ be a representation of $G$ on the $d$-dimensional vector space $V$.
-Let $V$ have a basis $\{b_i\}_{i=1}^d$. The application of a group element to a basis vector is then defined as
+Let $V$ have a basis $\{\v{b}_i\}_{i=1}^d$. The application of a group element to a basis vector is then defined as
 \begin{equation}
     \label{eq:Group:Prod:basisApp}
-    g:b_i = \sum_jb_jD_{ji}(g).
+    g:\v{b}_i = \sum_j\v{b}_jD_{ji}(g).
 \end{equation}
 The application of a group element to any vector in $V$ then is calculated by expanding the vector in the basis and applying the representation
 $D$ to each basis vector separately as a linear transformation:
 \begin{equation}
     \label{eq:Group:App:linearTransformApp}
-    g:v = \sum_iv_ig:b_i.
+    g:\v{v} = \sum_iv_ig:\v{b}_i.
 \end{equation}
 
 \subsection{Active vector transformation}
 
 As $g:$ has been defined in Eq.~\eqref{eq:Group:Prod:basisApp} it is defined in a passive perspective where the transformation is happening
-to the basis vectors. Applying $g$ to a vector $v$ in the basis $\{b_i\}$ it is sometimes useful to consider this as an application not
-on the vectors themselves but on the expansion coefficients $v_i$ of $v$ in the basis. This is the active view of the transformation.
+to the basis vectors. Applying $g$ to a vector $\v{v}$ in the basis $\{\v{b}_i\}$ it is sometimes useful to consider this as an application not
+on the vectors themselves but on the expansion coefficients $v_i$ of $\v{v}$ in the basis. This is the active view of the transformation.
 Inserting Eq.~\eqref{eq:Group:Prod:basisApp} into Eq.~\eqref{eq:Group:App:linearTransformApp} we get
 \begin{equation}
     \label{eq:Group:App:activeTransform}
     \begin{split}
-        g:v &= \sum_iv_i\sum_jb_jD_{ji}(g) = \sum_j\Big(\sum_iD_{ji}(g)v_i\Big)b_j\\
-        &= \sum_iv'_ib_i,
+        g:\v{v} &= \sum_iv_i\sum_j\v{b}_jD_{ji}(g) = \sum_j\Big(\sum_iD_{ji}(g)v_i\Big)\v{b}_j\\
+        &= \sum_iv'_i\v{b}_i,
     \end{split}
 \end{equation}
 where we have defined the transformed coefficients
@@ -182,11 +182,11 @@ This defines the active transformation of a vector $v$ by a group element $g$.
 
 \subsection{Representation on product spaces}
 
-The product space $V\otimes V$ then has a basis $\{b_ib_j\}_{i,j=1}^d$. A derived representation can be constructed from $D$ on this product space
+The product space $V\otimes V$ then has a basis $\{\v{b}_i\v{b}_j\}_{i,j=1}^d$. A derived representation can be constructed from $D$ on this product space
 called the product representation $D^{(D\times D)}(g)$. This is defined through its application on the basis by
 \begin{equation}
     \label{eq:Group:Prod:prodBasisApp}
-    g:b_ib_j = \sum_{kl}b_kb_l\big[D^{(D\times D)}(g)\big]_{kl,ij} = \sum_{kl}b_kb_lD_{ki}(g)D_{lj}(g).
+    g:\v{b}_i\v{b}_j = \sum_{kl}\v{b}_k\v{b}_l\big[D^{(D\times D)}(g)\big]_{kl,ij} = \sum_{kl}\v{b}_k\v{b}_lD_{ki}(g)D_{lj}(g).
 \end{equation}
 
 To apply group theory to physical problems, we need to know how the objects we are working with in the physical theory transform under group elements.
@@ -224,6 +224,7 @@ Since group representations on $\v{k}$ is a linear transformation then $\delta_{
 Kronecker delta function becomes superfluous.
 
 \subsection{Representation on $\psi$-$\v{d}$ functions}
+\label{sec:Group:pdRep}
 
 The coefficients of the basis expansion of a vector in the BCS Hilbert space were given in the conventional $\psi$-$\v{d}$ notation in 
 Eq.~\eqref{eq:Group:BCSHil:arb:ket}. Taking the active view of group transformations we can say that the expansion coefficients of arbitrary states
@@ -302,24 +303,26 @@ This matrix is in fact the rotation matrix of a vector in $\mathbb{R}^3$ by an a
     \label{eq:Group:pdRep:dTranformation}
     g:d_{\v{k},i} = R_{ij}(\hat{\v{u}},\phi)d_{g^{-1}:\v{k},j},
 \end{equation}
-where $\hat{\v{u}}$ and $\phi$ gives the unit vector and angle respectively, of the proper rotation associated with $g$.
+where $\hat{\v{u}}$ and $\phi$ gives the unit vector and angle respectively, of the proper rotation associated with $g$. The conclusion is thus that
+$\v{d}$ transforms as a vector by the proper rotation associated with $g$.
 
 \subsection{Projection Operators}
+\label{sec:Group:Pro}
 
 Let us assume that we are in a vector space $V$ that can be divided into possibly several different irreducible representations $D^{(\alpha)}$ of some
-symmetry group $G$. Further, let the basis vectors of these irreducible representations be denoted by $b^{(\alpha)}_m$ where $m$ thus counts the number
-of basis vectors in each \irr Then an arbitrary vector $f\in V$ can be written in terms of these basis vectors as
+symmetry group $G$. Further, let the basis vectors of these irreducible representations be denoted by $\v{b}^{(\alpha)}_m$ where $m$ thus counts the number
+of basis vectors in each \irr Then an arbitrary vector $\v{f}\in V$ can be written in terms of these basis vectors as
 \begin{equation}
     \label{eq:Group:Irr:Pro:basisDecomp}
-    f = \sum_\alpha\sum_m c_m^{(\alpha)}b^{(\alpha)}_m.
+    \v{f} = \sum_\alpha\sum_m c_m^{(\alpha)}\v{b}^{(\alpha)}_m.
 \end{equation}
 
-A projection operator can be used to extract any combination of constant $c_m^{(\alpha)}$ multiplied by a basis vector $b^{(\alpha)}_n$, where
+A projection operator can be used to extract any combination of constant $c_m^{(\alpha)}$ multiplied by a basis vector $\v{b}^{(\alpha)}_n$, where
 $m$ and $n$ can in general be different. Denoting the projection operator that picks out the $m$th constant multiplied by the $l$th basis vector
-in the \irr $\beta$ of the expansion of $f$: $P^{(\beta)}_{lm}$, then
+in the \irr $\beta$ of the expansion of $\v{f}$: $P^{(\beta)}_{lm}$, then
 \begin{equation}
     \label{eq:Group:Irr:Pro:generalProApplication}
-    P^{(\beta)}_{lm}f = c_m^{(\beta)}b_l^{(\beta)}.
+    P^{(\beta)}_{lm}\v{f} = c_m^{(\beta)}\v{b}_l^{(\beta)}.
 \end{equation}
 This is extremely useful in finding a bases for the irreducible representations.
 To acheive this, the projection operator is defined as
@@ -329,7 +332,7 @@ To acheive this, the projection operator is defined as
 \end{equation}
 where $d_\beta$ is the dimension of \irr $\beta$, $D_{lm}^{(\beta)}(g)$ is the $lm$ element of the matrix representation of the group element $g$ and
 finally we have used the notation $g:$ to denote application on vectors by the relevant representation. An example is the application of $g$ to the
-basis vectors $b_m^{(\alpha)}$. Since the relevant representation of $g$ in this case is the irreducible representation for which $b_m^{(\alpha)}$ is
+basis vectors $\v{b}_m^{(\alpha)}$. Since the relevant representation of $g$ in this case is the irreducible representation for which $\v{b}_m^{(\alpha)}$ is
 a basis vector, the application becomes
 \begin{equation}
     \label{eq:Group:Irr:Pro:gApplication}
@@ -350,8 +353,59 @@ $\chi^{(\alpha)}(g)$ since
 
 \section{Time-reversal symmetry}
 
+\section{Symmetries of the Square Lattice}
+
+The symmetry group of the square lattice is denoted $C_{4v}$ in the Sch\"onflies notation. It contains $8$ elements in total:
+\begin{itemize}
+    \item[$e$:] The identity element (do nothing),
+    \item[$C_4$:] Rotation by $90^\circ$ in the positive direction (ccw),
+    \item[$C_4^{-1}$:] Rotation by $90^\circ$ in the negative direction (cw),
+    \item[$C_4^2$:] Rotation by $180^\circ$,
+    \item[$\sigma_x$:] Mirror about the $zy$-plane,
+    \item[$\sigma_y$:] Mirror about the $zx$-plane,
+    \item[$\sigma_{d_1}$:] Mirror about the downwards diagonal plane\footnote{We are assuming the western bias of left-to-right movement
+        here. More precisely it is the plane containing the $z$ axis and the axis $y=-x$},
+    \item[$\sigma_{d_2}$:] Mirror about the upwards diagonal plane.
+\end{itemize}
+This results in the group multiplication table in 
+\begin{table}
+    \centering
+    \begin{tabular}{c|cccccccc}
+        & $e$ & $C_4$ &$C_4^2$ & $C_4^{-1}$ & $\sigma_x$ & $\sigma_y$ & $\sigma_{d_1}$ & $\sigma_{d_2}$\\ \hline
+        $e$ & $e$ & $C_4$ & $C_4^2$ & $C_4^{-1}$ & $\sigma_x$ & $\sigma_y$ & $\sigma_{d_1}$ & $\sigma_{d_2}$\\
+        $C_4$ & $C_4$ & $C_4^2$ & $C_4^{-1}$ & $e$ & $\sigma_{d_1}$ & $\sigma_{d_2}$ & $\sigma_y$ & $\sigma_x$\\
+        $C_4^2$ & $C_4^2$ & $C_4^{-1}$ & $e$ & $C_4$ & $\sigma_y$ & $\sigma_x$ & $\sigma_{d_2}$ & $\sigma_{d_1}$\\
+        $C_4^{-1}$ & $C_4^{-1}$ & $e$ & $C_4$ & $C_4^2$ & $\sigma_{d_2}$ & $\sigma_{d_1}$ & $\sigma_x$ & $\sigma_y$
+    \end{tabular}
+    \caption{Group multiplication table for the group $C_{4v}$.}
+    \label{tab:Group:Symm:multTab}
+\end{table}
+
 \section{Square Lattice Harmonics}
 
+Since $\psi(\v{k})$ and $\v{d}_\v{k}$ are invariant with respect to translation by any resiprocal lattice vector $\v{Q}$: $\psi(\v{k}+\v{Q}) = \psi(\v{k})$,
+they can be expanded in a discrete Fourier transform over the real lattice, such that
+\begin{equation}
+    \label{eq:Group:SLH:psiFourier}
+    \psi(\v{k}) = \frac{1}{\sqrt{N}}\sum_\v{R}\psi_\v{R}\cos\v{R}\cdot\v{k},
+\end{equation}
+and
+\begin{equation}
+    \label{eq:Group:SLH:dFourier}
+    \v{d}_\v{k} = \frac{1}{\sqrt{N}}\sum_\v{R}\v{d}_\v{R}\sin\v{R}\cdot\v{k},
+\end{equation}
+where the exponential of the Fourier transform has been reduced to trigonometric functions by the parity of the functions.
+
+We are interested in the basis vectors $\ket{\Gamma,q,m}$ of the representations of the symmetry group $C_{4v}$ of the $2D$ square lattice. In this
+ket notation, $\Gamma$ gives the \irr, $m$ enumerates the basis vectors in case the \irr is multi-dimensional, while $q$ gives the version of
+the \irr in case the space of possible $\ket{v}$ permits multiple versions of the same \irr In the active
+view of group transformations, the question of finding the basis vectors translates to finding the basis functions of the functions $\psi(\v{k})$
+and $\v{d}_\v{k}$. In Section~\ref{sec:Group:pdRep} we
+saw how these functions transformed under group transformations. In Section~\ref{sec:Group:Pro} we saw how the projection operators could be used
+to extract individual basis vectors. We will now use these operators on the Fourier expansions of $\psi(\v{k})$ and $\v{d}_\v{k}$ to extract possible
+basis functions given the symmetry group of the square lattice.
+
+\subsection{Even basis functions}
 
 \section{Decomposition of the Potential}
 
