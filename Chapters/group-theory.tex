@@ -367,19 +367,145 @@ The symmetry group of the square lattice is denoted $C_{4v}$ in the Sch\"onflies
         here. More precisely it is the plane containing the $z$ axis and the axis $y=-x$},
     \item[$\sigma_{d_2}$:] Mirror about the upwards diagonal plane.
 \end{itemize}
-This results in the group multiplication table in 
+This results in the group multiplication table in Table~\ref{tab:Group:Symm:multTab}. We can check that this is correct by
+performing the group transformations in the top row followed by the one in the left column and seeing that this results
+in the group transformations where these two intersect. As an example consider the vector $(x,y)^\trans$. Transforming this
+by the $90^\circ$ counter clockwise rotation $C_4$ we get $(-y,x)^\trans$. Then mirroring this result about the $yz$-plane
+yields $(y,x)^\trans$. We now realize that this is the same as mirroring the original vector about the axis $y=x$, hence
+$\sigma_xC_4=\sigma_{d_2}$ as the multiplication table says.
 \begin{table}
     \centering
-    \begin{tabular}{c|cccccccc}
+    \begin{tabular}{c|cccc|cccc}
         & $e$ & $C_4$ &$C_4^2$ & $C_4^{-1}$ & $\sigma_x$ & $\sigma_y$ & $\sigma_{d_1}$ & $\sigma_{d_2}$\\ \hline
         $e$ & $e$ & $C_4$ & $C_4^2$ & $C_4^{-1}$ & $\sigma_x$ & $\sigma_y$ & $\sigma_{d_1}$ & $\sigma_{d_2}$\\
         $C_4$ & $C_4$ & $C_4^2$ & $C_4^{-1}$ & $e$ & $\sigma_{d_1}$ & $\sigma_{d_2}$ & $\sigma_y$ & $\sigma_x$\\
         $C_4^2$ & $C_4^2$ & $C_4^{-1}$ & $e$ & $C_4$ & $\sigma_y$ & $\sigma_x$ & $\sigma_{d_2}$ & $\sigma_{d_1}$\\
-        $C_4^{-1}$ & $C_4^{-1}$ & $e$ & $C_4$ & $C_4^2$ & $\sigma_{d_2}$ & $\sigma_{d_1}$ & $\sigma_x$ & $\sigma_y$
+        $C_4^{-1}$ & $C_4^{-1}$ & $e$ & $C_4$ & $C_4^2$ & $\sigma_{d_2}$ & $\sigma_{d_1}$ & $\sigma_x$ & $\sigma_y$\\ \hline
+        $\sigma_x$ & $\sigma_x$ & $\sigma_{d_2}$ & $\sigma_y$ & $\sigma_{d_1}$ & $e$ & $C_4^2$ & $C_4^{-1}$ & $C_4$\\
+        $\sigma_y$ & $\sigma_y$ & $\sigma_{d_1}$ & $\sigma_x$ & $\sigma_{d_2}$ & $C_4^2$ & $e$ & $C_4$ & $C_4^{-1}$\\
+        $\sigma_{d_1}$ & $\sigma_{d_1}$ & $\sigma_x$ & $\sigma_{d_2}$ & $\sigma_y$ & $C_4$ & $C_4^{-1}$ & $e$ & $C_4^2$\\
+        $\sigma_{d_2}$ & $\sigma_{d_2}$ & $\sigma_y$ & $\sigma_{d_1}$ & $\sigma_x$ & $C_4^{-1}$ & $C_4$ & $C_4^2$ & $e$
     \end{tabular}
-    \caption{Group multiplication table for the group $C_{4v}$.}
+    \caption{Group multiplication table of the group $C_{4v}$.}
     \label{tab:Group:Symm:multTab}
 \end{table}
+
+The conjugation classes of a group is the sets of group elements that is conjugate to each other, meaning that there exists a group element $g$ such
+that $gAg^{-1} = B$ between conjugate elements $A$ and $B$. Since conjugation is an equivalence relation it subdivides the group elements
+exactly into conjugation classes. The conjugation classes of the group $C_{4v}$ are $e = \{e\}$, $2C_4 = \{C_4,C_4^{-1}\}$, $C_4^2 = \{C_4^2\}$,
+$2\sigma_d = \{\sigma_{d_1},\sigma_{d_2}\}$ and $2\sigma_v = \{\sigma_x,\sigma_y\}$. The character $\chi^\Gamma(g)$ of a representation $\Gamma$ is the trace of the representation
+matrix $D^\Gamma(g)$ of a certain group element $g$. Since the trace is cyclic, then for conjugate group elements $A$ and $B$
+\begin{equation}
+    \label{eq:Group:Symm:conjugateCharacter}
+    \begin{split}
+        \chi^\Gamma(B) &= \tr\Big(D^\Gamma(g)D^\Gamma(A)D^\Gamma(g^{-1})\Big)\\
+        &= \tr\Big(D^\Gamma(g^{-1})D^\Gamma(g)D^\Gamma(A)\Big)\\
+        &= \tr\Big(D^\Gamma(g^{-1}g)D^\Gamma(A)\Big) = \chi^\Gamma(A).
+    \end{split}
+\end{equation}
+This means that the representation of all group elements in a certain conjugation class has the same character. 
+
+It is useful to list the characters of the different conjugation classes in a table of the different irreducible representations of a group.
+This is because the number of conjugation classes of a finite group is the same as the number of irreducible representations of that group.
+This table is known as the character table of the group. The character table of
+the group $C_{4v}$ is shown in Table~\ref{tab:Group:Symm:characterTable}. This table can be derived without knowing the details of the irreducible
+representations but in stead using character relations from basic group theory\footnote{Many of these relations are derived from the great orthogonality
+theorem which can be found \eg in \cite{Inui90}.}. 
+
+The dimensionality of the \irr can be found in Table~\ref{tab:Group:Symm:characterTable} by looking up the first column, i.e. the column giving
+the character of the conjugation class $\{e\}$.
+Since the group element $e$ maps to the identity transformation in all representations then its
+trace gives the dimension of the representation. From the table we see that all the irreducible representations are $1$-dimensional except for
+$\Gamma_5$ which is $2$ dimensional.
+\begin{table}
+    \centering
+    \begin{tabular}{c|ccccc}
+        $C_{4v}$ & $e$ & $2C_4$ & $C_4^2$ & $2\sigma_v$ & $2\sigma_d$\\ \hline
+        $\Gamma_1$ & $1$ & $1$ & $1$ & $1$ & $1$\\
+        $\Gamma_2$ & $1$ & $1$ & $1$ & $-1$ & $-1$\\
+        $\Gamma_3$ & $1$ & $-1$ & $1$ & $1$ & $-1$\\
+        $\Gamma_4$ & $1$ & $-1$ & $1$ & $-1$ & $1$\\
+        $\Gamma_5$ & $2$ & $0$ & $-2$ & $0$ & $0$
+    \end{tabular}
+    \caption{Character table of the group $C_{4v}$.}
+    \label{tab:Group:Symm:characterTable}
+\end{table}
+All the $1$-dimensional irreducible representation matrices are then completely determined by the character table since they are just given by
+the characters themselves, \ie $D^{\Gamma_2}(\sigma_x) = -1$.
+
+To find a $2$-dimensional representation of $C_{4v}$ we can imagine how a normal $2$D vector $(x,y)^\trans\in\mathbb{R}^2$ behaves under its transformations.
+We take again the example of a counter clockwise rotation by $90^\circ$ which tranforms a vector
+\begin{equation}
+    \label{eq:Group:Symm:C4transform}
+    C_4:\begin{pmatrix}
+        x\\
+        y
+    \end{pmatrix} = 
+    \begin{pmatrix}
+        -y\\
+        x
+    \end{pmatrix} = 
+    \begin{pmatrix}
+        0 & -1\\
+        1 & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+        x\\
+        y
+    \end{pmatrix}.
+\end{equation}
+Obviously, the matrix 
+\begin{equation}
+    \label{eq:Group:Symm:C4G5D}
+    D^{(\Gamma_5)}(C_4) = 
+    \begin{pmatrix}
+        0 & -1\\
+        1 & 0
+    \end{pmatrix},
+\end{equation}
+is the representation matrix of a two-dimensional representation of $C_4$. Continuing in this way for all the group tranformations yields the matrices
+\begin{subequations}
+    \label{eq:Group:Symm:G5D}
+\begin{align}
+    D^{(\Gamma_5)}(e) &=
+    \begin{pmatrix}
+        1 & 0\\
+        0 & 1
+    \end{pmatrix}, & D^{(\Gamma_5)}(C_4) &=
+    \begin{pmatrix}
+        0 & -1\\
+        1 & 0
+    \end{pmatrix},\\
+    D^{(\Gamma_5)}(C_4^{-1}) &=
+    \begin{pmatrix}
+        0 & 1\\
+        -1 & 0
+    \end{pmatrix}, & D^{(\Gamma_5)}(C_4^2) &= 
+    \begin{pmatrix}
+        -1 & 0\\
+        0 & -1
+    \end{pmatrix},\\
+    D^{(\Gamma_5)}(\sigma_x) &= 
+    \begin{pmatrix}
+        -1 & 0\\
+        0 & 1
+    \end{pmatrix}, & D^{(\Gamma_5)}(\sigma_y) &=
+    \begin{pmatrix}
+        1 & 0\\
+        0 & -1
+    \end{pmatrix},\\
+    D^{(\Gamma_5)}(\sigma_{d_1}) &=
+    \begin{pmatrix}
+        0 & -1\\
+        -1 & 0
+    \end{pmatrix}, & D^{(\Gamma_5)}(\sigma_{d_2}) &=
+    \begin{pmatrix}
+        0 & 1\\
+        1 & 0
+    \end{pmatrix}.
+\end{align}
+\end{subequations}
+
 
 \section{Square Lattice Harmonics}
 
