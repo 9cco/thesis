@@ -354,6 +354,7 @@ $\chi^{(\alpha)}(g)$ since
 \section{Time-reversal symmetry}
 
 \section{Symmetries of the Square Lattice}
+\label{sec:Group:Symm}
 
 The symmetry group of the square lattice is denoted $C_{4v}$ in the Sch\"onflies notation. It contains $8$ elements in total:
 \begin{itemize}
@@ -505,6 +506,10 @@ is the representation matrix of a two-dimensional representation of $C_4$. Conti
     \end{pmatrix}.
 \end{align}
 \end{subequations}
+Taking the trace of these matrices, we see that this representations characters are the same as the ones for the \irr $\Gamma_5$ in the character table
+(Table~\ref{tab:Group:Symm:characterTable}). This implies that $\sum_g|\chi^{\Gamma_5u}(g)|^2 = |C_{4_v}|$ which implies in turn that the representation
+given by the matrices in Eq.~\eqref{eq:Group:Symm:G5D} is irreducible. Thus this is indeed the $\Gamma_5$ irreducible representation as advertised,
+and we have thus completed the description of the representation matrices for all the irreducible representations of $C_{4v}$.
 
 
 \section{Square Lattice Harmonics}
@@ -523,15 +528,50 @@ and
 where the exponential of the Fourier transform has been reduced to trigonometric functions by the parity of the functions.
 
 We are interested in the basis vectors $\ket{\Gamma,q,m}$ of the representations of the symmetry group $C_{4v}$ of the $2D$ square lattice. In this
-ket notation, $\Gamma$ gives the \irr, $m$ enumerates the basis vectors in case the \irr is multi-dimensional, while $q$ gives the version of
+ket notation, $\Gamma$ gives the irrep., $m$ enumerates the basis vectors in case the \irr is multi-dimensional, while $q$ gives the version of
 the \irr in case the space of possible $\ket{v}$ permits multiple versions of the same \irr In the active
 view of group transformations, the question of finding the basis vectors translates to finding the basis functions of the functions $\psi(\v{k})$
-and $\v{d}_\v{k}$. In Section~\ref{sec:Group:pdRep} we
+and $\v{d}_\v{k}$ for even and odd bases respectively. In Section~\ref{sec:Group:pdRep} we
 saw how these functions transformed under group transformations. In Section~\ref{sec:Group:Pro} we saw how the projection operators could be used
 to extract individual basis vectors. We will now use these operators on the Fourier expansions of $\psi(\v{k})$ and $\v{d}_\v{k}$ to extract possible
 basis functions given the symmetry group of the square lattice.
 
 \subsection{Even basis functions}
+
+We remember from Eq.~\eqref{eq:Group:pdRep:psiRep} that the function $\psi(\v{k})$ transforms as $g:\psi(\v{k}) = \psi(g^{-1}:\v{k})$ under a group
+transformation $g$. Operating on the Fourier expansion of $\psi(\v{k})$ in Eq.~\eqref{eq:Group:SLH:psiFourier} with the projection operator
+defined in Eq.~\eqref{eq:Group:Irr:Pro:proOpDef} by an arbitrary \irr $\Gamma$ yields
+\begin{equation}
+    \label{eq:Group:SLH:even:Ppsi}
+    \begin{split}
+        P_{l,l}^{(\Gamma)}\psi(\v{k}) &= \frac{d_\Gamma}{8\sqrt{N}}\sum_\v{R}\psi_\v{R}\Big[\big(D_{ll}^{(\Gamma)}(e)+D_{ll}^{(\Gamma)}(C_4^2)\big)\cos(\v{R}\cdot\v{k})\\
+        + & \big(D_{ll}^{(\Gamma)}(C_4) + D_{ll}^{(\Gamma)}(C_4^{-1})\big)\cos(R_xk_y-R_yk_x)\\
+        + & \big(D_{ll}^{(\Gamma)}(\sigma_x) + D_{ll}^{(\Gamma)}(\sigma_y)\big)\cos(R_xk_x-R_yk_y)\\
+        + & \big(D_{ll}^{(\Gamma)}(\sigma_{d_1}) + D_{ll}^{(\Gamma)}(\sigma_{d_2})\big)\cos(R_xk_y+R_yk_x).
+    \end{split}
+\end{equation}
+Since $\v{k}\in\mathbb{R}^2$ we have in this calculation used the natural $2D$ representation given by the matrices in Eq.~\eqref{eq:Group:Symm:G5D}
+of the group elements in $C_{4v}$ to calculate the expressions $g^{-1}:\v{k}$ inside the cosine functions. Inserting the matrix element of the different
+irreducible representations of $C_{4v}$ which we discussed in Section~\ref{sec:Group:Symm} we get the projected functions 
+\begin{subequations}
+    \label{eq:Group:SLH:even:projections}
+    \begin{align}
+        \label{eq:Group:SLH:even:projections:G1}%
+        P_{1,1}^{(\Gamma_1)}\psi(\v{k}) &\propto \sum_\v{R}\psi_\v{R}\big[\cos R_xk_x\cos R_yk_y + \cos R_xk_y\cos R_yk_x\big],\\[-30pt]
+        \label{eq:Group:SLH:even:projections:G2}%
+        P_{1,1}^{(\Gamma_2)}\psi(\v{k}) &\propto \sum_\v{R}\psi_\v{R}\big[\sin R_xk_y\sin R_yk_x - \sin R_xk_x\sin R_yk_y\big],\\
+        \label{eq:Group:SLH:even:projections:G3}%
+        P_{1,1}^{(\Gamma_3)}\psi(\v{k}) &\propto \sum_\v{R}\psi_\v{R}\big[\cos R_xk_x\cos R_yk_y - \cos R_xk_y\cos R_yk_x\big],\\
+        \label{eq:Group:SLH:even:projections:G4}%
+        P_{1,1}^{(\Gamma_4)}\psi(\v{k}) &\propto \sum_\v{R}\psi_\v{R}\big[\sin R_xk_x\sin R_yk_y + \sin R_xk_y\sin R_yk_x\big],\\
+        \label{eq:Group:SLH:even:projections:G51}%
+        P_{1,1}^{(\Gamma_5)}\psi(\v{k}) &\propto 0,\\
+        \label{eq:Group:SLH:even:projections:G52}%
+        P_{2,2}^{(\Gamma_5)}\psi(\v{k}) &\propto 0.
+    \end{align}
+\end{subequations}
+
+\subsection{Odd basis functions}
 
 \section{Decomposition of the Potential}
 
