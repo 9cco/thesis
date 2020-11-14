@@ -509,7 +509,7 @@ is the representation matrix of a two-dimensional representation of $C_4$. Conti
 Taking the trace of these matrices, we see that this representations characters are the same as the ones for the \irr $\Gamma_5$ in the character table
 (Table~\ref{tab:Group:Symm:characterTable}). This implies that $\sum_g|\chi^{\Gamma_5u}(g)|^2 = |C_{4_v}|$ which implies in turn that the representation
 given by the matrices in Eq.~\eqref{eq:Group:Symm:G5D} is irreducible. Thus this is indeed the $\Gamma_5$ irreducible representation as advertised,
-and we have thus completed the description of the representation matrices for all the irreducible representations of $C_{4v}$.
+and we have thus completed the description of the representation matrices of all the irreducible representations of $C_{4v}$.
 
 
 \section{Square Lattice Harmonics}
@@ -553,23 +553,76 @@ defined in Eq.~\eqref{eq:Group:Irr:Pro:proOpDef} by an arbitrary \irr $\Gamma$ y
 Since $\v{k}\in\mathbb{R}^2$ we have in this calculation used the natural $2D$ representation given by the matrices in Eq.~\eqref{eq:Group:Symm:G5D}
 of the group elements in $C_{4v}$ to calculate the expressions $g^{-1}:\v{k}$ inside the cosine functions. Inserting the matrix element of the different
 irreducible representations of $C_{4v}$ which we discussed in Section~\ref{sec:Group:Symm} we get the projected functions 
-\begin{subequations}
+%
+\begin{equation}
     \label{eq:Group:SLH:even:projections}
-    \begin{align}
-        \label{eq:Group:SLH:even:projections:G1}%
-        P_{1,1}^{(\Gamma_1)}\psi(\v{k}) &\propto \sum_\v{R}\psi_\v{R}\big[\cos R_xk_x\cos R_yk_y + \cos R_xk_y\cos R_yk_x\big],\\[-30pt]
-        \label{eq:Group:SLH:even:projections:G2}%
+    \begin{split}
+        P_{1,1}^{(\Gamma_1)}\psi(\v{k}) &\propto \sum_\v{R}\psi_\v{R}\big[\cos R_xk_x\cos R_yk_y + \cos R_xk_y\cos R_yk_x\big],\\
         P_{1,1}^{(\Gamma_2)}\psi(\v{k}) &\propto \sum_\v{R}\psi_\v{R}\big[\sin R_xk_y\sin R_yk_x - \sin R_xk_x\sin R_yk_y\big],\\
-        \label{eq:Group:SLH:even:projections:G3}%
         P_{1,1}^{(\Gamma_3)}\psi(\v{k}) &\propto \sum_\v{R}\psi_\v{R}\big[\cos R_xk_x\cos R_yk_y - \cos R_xk_y\cos R_yk_x\big],\\
-        \label{eq:Group:SLH:even:projections:G4}%
         P_{1,1}^{(\Gamma_4)}\psi(\v{k}) &\propto \sum_\v{R}\psi_\v{R}\big[\sin R_xk_x\sin R_yk_y + \sin R_xk_y\sin R_yk_x\big],\\
-        \label{eq:Group:SLH:even:projections:G51}%
         P_{1,1}^{(\Gamma_5)}\psi(\v{k}) &\propto 0,\\
-        \label{eq:Group:SLH:even:projections:G52}%
         P_{2,2}^{(\Gamma_5)}\psi(\v{k}) &\propto 0.
+    \end{split}
+\end{equation}
+%
+Since the projection operators $P_{ll}^{(\Gamma)}$ projects onto the subspace of vectors belonging to the irreducible representation $\Gamma$, if we
+let the different basis functions of the irreps. $\Gamma$ be denoted $\psi^{(\Gamma),q,m}(\v{k})$, then we expect the projection to produce the result
+\begin{equation}
+    \label{eq:Group:SLH:even:expectedProjection}
+    P_{l,l}^{(\Gamma)}\psi(\v{k}) = \sum_{q}c_{q,l}\psi^{(\Gamma),q,l}(\v{k}).
+\end{equation}
+Here $q$ again enumerates the version of the basis of $\Gamma$ possible in the space of different $\psi(\v{k})$, and $c_{q,l}$ are the coefficients of
+$\psi(\v{k})$ in the basis of the irrep. basis functions. Comparing Eqs.~\eqref{eq:Group:SLH:even:expectedProjection} and \eqref{eq:Group:SLH:even:projections},
+we see that different sets of basis vectors can be obtained for the irreducible representations by including different order terms in the $\v{R}$-sum,
+\ie different lattice neighbour sites. It is also worth noting that the irreducible representation $\Gamma_5$ does not exist in the space of possible $\psi(\v{k})$,
+since it is an odd representation.
+
+Including on-site, nearest neighbor and next-nearest neighbor sites in the $\v{R}$ sum of the projected arbitrary function $\psi(\v{k})$ on the $\Gamma_1$ subspace in
+Eq.~\eqref{eq:Group:SLH:even:expectedProjection} we see that any such function can be constructed from the three basis functions
+\begin{subequations}
+    \label{eq:Group:SLH:even:G1basis}
+    \begin{align}
+        \label{eq:Group:SLH:even:G1basis:1}
+        \psi^{(\Gamma_1),1}(\v{k}) &= \frac{1}{2\pi},\\
+        \label{eq:Group:SLH:even:G1basis:2}
+        \psi^{(\Gamma_1),2}(\v{k}) &= \frac{1}{2\pi}(\cos k_x + \cos k_y),\\
+        \label{eq:Group:SLH:even:G1basis:3}
+        \psi^{(\Gamma_1),3}(\v{k}) &= \frac{1}{\pi}\cos k_x \cos k_y.
     \end{align}
 \end{subequations}
+Each of these functions give a complete basis function set of the $\Gamma_1$ irreducible representation which can be checked by calculating how they transform under
+group elements $g\in C_{4v}$. In this case, since this is the trivial $\Gamma_1$ representation, the functions are symmetric under all group elements $g$ which
+produces the character $1$ for all conjugation classes (compare with first row in Table~\ref{tab:Group:Symm:characterTable}). These basis functions are automatically
+orthogonal since they belong to different irreducible representation version subspaces and their normalization coefficients have been chosen such that they are normal
+on the $1^\text{st}$ Brillouin zone, \ie
+\begin{equation}
+    \label{eq:Group:SLH:even:G1orthonormal}
+    \int_{-\pi}^\pi\int_{-\pi}^\pi\!\textrm{d}k_x\textrm{d}k_y\;\psi^{(\Gamma_1),q}(\v{k})^\ast\psi^{(\Gamma_1),q'}(\v{k}) = \delta_{qq'}.
+\end{equation}
+
+Inserting up to next-nearest neighbor sites for $\v{R}$ in the projected functions under the remaining irreducible representations we find the orthonormal basis 
+functions
+\begin{subequations}
+    \label{eq:Group:SLH:even:bases}
+    \begin{align}
+        \label{eq:Group:SLH:even:bases:G3}
+        \psi^{(\Gamma_3)}(\v{k}) &= \frac{1}{2\pi}(\cos k_x - \cos k_y),\\
+        \label{eq:Group:SLH:even:bases:G4}
+        \psi^{(\Gamma_4)}(\v{k}) &= \frac{1}{\pi}\sin k_x\sin k_y,
+    \end{align}
+\end{subequations}
+of the representations $\Gamma_3$ and $\Gamma_4$ respectively. The $\Gamma_3$ basis is found by expansion of $\v{R}$ to nearest neighbor, while the one for $\Gamma_4$
+is found at next-nearest neighbor. To get a basis vector for the representation $\Gamma_2$ we would need to expand beyond the next-nearest neighbor site.
+
+These basis functions are also known as square lattice harmonics. The set of square lattice harmonic functions includes the set of functions found when expanding
+$\v{R}$ to arbitrary sites. As we have seen, they can be grouped and found through consideration of the irreducible representations of the symmetry group of the
+square lattice. We have so far only considered even-in-$\v{k}$ basis functions. In the next section we will complete our discussion of square lattice harmonics
+with the inclusion of odd functions.
+
+\subsection{Odd basis functions}
+
+
 
 \subsection{Odd basis functions}
 
