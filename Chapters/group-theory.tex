@@ -353,7 +353,7 @@ $\chi^{(\alpha)}(g)$ since
 
 \section{Time-reversal symmetry}
 
-\section{Symmetries of the Square Lattice}
+za\section{Symmetries of the Square Lattice}
 \label{sec:Group:Symm}
 
 The symmetry group of the square lattice is denoted $C_{4v}$ in the Sch\"onflies notation. It contains $8$ elements in total:
@@ -391,6 +391,8 @@ $\sigma_xC_4=\sigma_{d_2}$ as the multiplication table says.
     \label{tab:Group:Symm:multTab}
 \end{table}
 
+\subsection{Conjugation classes}
+
 The conjugation classes of a group is the sets of group elements that is conjugate to each other, meaning that there exists a group element $g$ such
 that $gAg^{-1} = B$ between conjugate elements $A$ and $B$. Since conjugation is an equivalence relation it subdivides the group elements
 exactly into conjugation classes. The conjugation classes of the group $C_{4v}$ are $e = \{e\}$, $2C_4 = \{C_4,C_4^{-1}\}$, $C_4^2 = \{C_4^2\}$,
@@ -412,6 +414,8 @@ This table is known as the character table of the group. The character table of
 the group $C_{4v}$ is shown in Table~\ref{tab:Group:Symm:characterTable}. This table can be derived without knowing the details of the irreducible
 representations but in stead using character relations from basic group theory\footnote{Many of these relations are derived from the great orthogonality
 theorem which can be found \eg in \cite{Inui90}.}. 
+
+\subsection{Irreducible representations}
 
 The dimensionality of the \irr can be found in Table~\ref{tab:Group:Symm:characterTable} by looking up the first column, i.e. the column giving
 the character of the conjugation class $\{e\}$.
@@ -509,8 +513,68 @@ is the representation matrix of a two-dimensional representation of $C_4$. Conti
 Taking the trace of these matrices, we see that this representations characters are the same as the ones for the \irr $\Gamma_5$ in the character table
 (Table~\ref{tab:Group:Symm:characterTable}). This implies that $\sum_g|\chi^{\Gamma_5u}(g)|^2 = |C_{4_v}|$ which implies in turn that the representation
 given by the matrices in Eq.~\eqref{eq:Group:Symm:G5D} is irreducible. Thus this is indeed the $\Gamma_5$ irreducible representation as advertised,
-and we have thus completed the description of the representation matrices of all the irreducible representations of $C_{4v}$.
+and we have completed the description of the representation matrices of all the irreducible representations of $C_{4v}$.
 
+\subsection{Representation on odd BCS functions $\v{d}_\v{k}$}
+
+When discussing the representation of general group elements on states in the BCS Hilbert space in Section~\ref{sec:Group:pdRep} we learned from
+Eq.~\eqref{eq:Group:pdRep:dTranformation} that the coefficient $\v{d}_\v{k}\in\mathbb{R}^3$ of odd states transforms by a proper rotation $R(\hat{\v{u}},\phi)$.
+A proper rotation of a group element $g$ is the rotation obtained when writing $g$ as a rotation followed by an inversion $P$ or identity. We thus
+obtain the representation matrices of the $3$D-representation of group elements $g\in C_{4v}$ directly from the $3$D rotation matrix $R(\hat{\v{u}},\phi)$ by
+envisioning the combination of a rotation and $C_{4}^2=P$ or $e$ that leads to $g$. Because of this, we denote the representation matrices of this
+representation $R(g)$. As an example $\sigma_x = C_4^2R(\hat{\v{x}},\pi)$, such that the representation $R(\sigma_x) = R(\hat{\v{x}},\pi)$. Written
+out in its full matrix form this yields the representation matrices
+%
+\begin{subequations}
+    \label{eq:Group:Symm:dRepresentation}
+    \begin{align}
+        \label{eq:Group:Symm:dRepresentation:C4}
+        R(C_4) &= 
+        \begin{pmatrix}
+            0 & -1 & 0\\
+            1 & 0 & 0\\
+            0 & 0 & 1
+        \end{pmatrix}, & R(C_4^{-1}) &= 
+        \begin{pmatrix}
+            0 & 1 & 0\\
+            -1 & 0 & 0\\
+            0 & 0 & 1
+        \end{pmatrix},\\
+        R(e) &= 
+        \begin{pmatrix}
+            1 & 0 & 0\\
+            0 & 1 & 0\\
+            0 & 0 & 1
+        \end{pmatrix}, & R(C_4^2) &=
+        \begin{pmatrix}
+            -1 & 0 & 0\\
+            0 & -1 & 0\\
+            0 & 0 & 1
+        \end{pmatrix},\\
+        R(\sigma_x) &= 
+        \begin{pmatrix}
+            1 & 0 & 0\\
+            0 & -1 & 0\\
+            0 & 0 & -1
+        \end{pmatrix}, & R(\sigma_y) &=
+        \begin{pmatrix}
+            -1 & 0 & 0\\
+            0 & 1 & 0\\
+            0 & 0 & -1
+        \end{pmatrix},\\
+        R(\sigma_{d_1}) &=
+        \begin{pmatrix}
+            0 & 1 & 0\\
+            1 & 0 & 0\\
+            0 & 0 & -1
+        \end{pmatrix}, & R(\sigma_{d_2}) &=
+        \begin{pmatrix}
+            0 & -1 & 0\\
+            -1 & 0 & 0\\
+            0 & 0 & -1
+        \end{pmatrix}.
+    \end{align}
+\end{subequations}
 
 \section{Square Lattice Harmonics}
 
@@ -620,11 +684,11 @@ $\v{R}$ to arbitrary sites. As we have seen, they can be grouped and found throu
 square lattice. We have so far only considered even-in-$\v{k}$ basis functions. In the next section we will complete our discussion of square lattice harmonics
 with the inclusion of odd functions.
 
+
+
 \subsection{Odd basis functions}
 
 
-
-\subsection{Odd basis functions}
 
 \section{Decomposition of the Potential}
 
