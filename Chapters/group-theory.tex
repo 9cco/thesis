@@ -657,8 +657,10 @@ Eq.~\eqref{eq:Group:SLH:even:expectedProjection} we see that any such function c
 \end{subequations}
 Each of these functions give a complete basis function set of the $\Gamma_1$ irreducible representation which can be checked by calculating how they transform under
 group elements $g\in C_{4v}$. In this case, since this is the trivial $\Gamma_1$ representation, the functions are symmetric under all group elements $g$ which
-produces the character $1$ for all conjugation classes (compare with first row in Table~\ref{tab:Group:Symm:characterTable}). These basis functions are automatically
-orthogonal since they belong to different irreducible representation version subspaces and their normalization coefficients have been chosen such that they are normal
+produces the character $1$ for all conjugation classes (compare with first row in Table~\ref{tab:Group:Symm:characterTable}). 
+
+These basis functions are automatically
+mutually orthogonal since they belong to different irreducible representation version subspaces and their normalization coefficients have been chosen such that they are normal
 on the $1^\text{st}$ Brillouin zone, \ie
 \begin{equation}
     \label{eq:Group:SLH:even:G1orthonormal}
@@ -685,10 +687,33 @@ square lattice. We have so far only considered even-in-$\v{k}$ basis functions. 
 with the inclusion of odd functions.
 
 
-
 \subsection{Odd basis functions}
 
-
+Any state made out of odd basis functions is fully determined by the coefficients $\v{d}_\v{k}$. These coefficients transform as $g:\v{d}_\v{k} = R(g)\v{d}_{g^{-1}:\v{k}}$
+under group elements $g\in C_{4v}$, see Eq.~\eqref{eq:Group:pdRep:dTranformation}, where $R(g)$ are the representation matrices in Eq.~\eqref{eq:Group:Symm:dRepresentation}.
+Acting on the Fourier expansion of the arbitrary function $\v{d}_\v{k}$ in Eq.~\eqref{eq:Group:SLH:dFourier} with the projection operators Eq.~\eqref{eq:Group:Irr:Pro:proOpDef}
+down on the subspace of the irreducible representation $\Gamma_5$ of the symmetry group $C_{4v}$ yields the results
+\begin{subequations}
+    \label{eq:Group:SLH:odd:projections}
+    \begin{align}
+        \label{eq:Group:SLH:odd:projections:1}
+        P_{1,1}^{(\Gamma_5)}\v{d}_\v{k} &= \frac{\hat{\v{z}}}{\sqrt{N}}\sum_\v{R}d_{\v{R},z}\cos R_xk_x \sin R_yk_y,\\
+        \label{eq:Group:SLH:odd:projections:2}
+        P_{2,2}^{(\Gamma_5)}\v{d}_\v{k} &= \frac{\hat{\v{z}}}{\sqrt{N}}\sum_\v{R}d_{\v{R},z}\sin R_xk_y\cos R_yk_y,
+    \end{align}
+\end{subequations}
+for the two basis functions of $\Gamma_5$. As in the spin-singlet case we get different versions of the $\Gamma_5$ basis vectors depending on the order of our expansion in $\v{R}$.
+Expanding to nearest neighbor sites and normalizing such that the states are orthonormal produces the basis functions
+\begin{subequations}
+    \label{eq:Group:SLH:odd:G5basis}
+    \begin{align}
+        \label{eq:Group:SLH:odd:G5basis:1}
+        \v{d}^{(\Gamma_5),1}_\v{k} &= -\frac{\hat{\v{z}}}{2\pi}\sin k_y,\\
+        \label{eq:Group:SLH:odd:G5basis:2}
+        \v{d}^{(\Gamma_5),2}_\v{k} &= \frac{\hat{\v{z}}}{2\pi}\sin k_x,
+    \end{align}
+\end{subequations}
+of the two-dimensional irreducible representation $\Gamma_5$.
 
 \section{Decomposition of the Potential}
 
