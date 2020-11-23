@@ -12,8 +12,54 @@ expression for the action through the Hubbard-Stratonovich transformation.
 The Hubbard-Stratonovich transformation is a transformation in the fields of a theory where a new complex field is introduced
 in order to covert a term that is square and thus non-linear in an existing field variable, into a linear term in this
 variable that is coupled to the new field. This is particularly useful when the existing field is Fermionic and thus
-a Gra\ss mann variable since it makes it possible to consider low energy exitations of the theory by use of a saddle-point
-approximation.
+a Gra\ss mann variable since it makes it possible to consider low energy exitations of the theory using \eg a saddle-point
+approximation. It is however important to point out that the transformation itself is not in any way approximative, but is
+an exact transformation that maintains all information in the original theory.
+
+In technical terms, the Hubbard-Stratonovich transformation can be viewed simply as the solution of a complex multivariate integral.
+Let $A$ have a strictly positive Hermitian part, $\v{z}$ be a complex vector of integration variables, while $\v{J}$ is a vector of
+coefficients that could contain Gra\ss mann variables or complex variables. Then
+\begin{equation}
+    \label{eq:Field:HS:complexIntegral}
+    e^{\v{J}^\dagger A \v{J}} = \det A^{-1}\prod_{i}\bigg[\frac{\sint\mathrm{d}z_i^\ast\mathrm{d}z_i}{2\pi i}\bigg]e^{-\v{z}^\dagger A^{-1}\v{z} + \v{z}^\dagger \v{J} + \v{J}^\dagger\v{z}}.
+\end{equation}
+In the less general case that $A$ is an Hermitian matrix, this formula is proved simply by completing the square, then
+diagonalizing $A$ by a unitary tranformation and calculating the resulting integrals by the formula 
+$\int\!\mathrm{d}z^\ast\mathrm{d}z\,e^{-azz^\ast} = 2\pi i /a$. 
+
+From Eq.~\eqref{eq:Field:HS:complexIntegral} we see that
+what we have to do to perform the Hubbard-Stratonovich transformation is first to make a choice for what to interpret as part
+of the matrix $A$ and what to interpret as part of $\v{J}$. We then have to check that this definition of $A$ leads to its
+Hermitian part having only positive eigenvalues. Finally we need to know an analytical expression for its inverse.
+It is usually the first step that is the most difficult since this dictates the low energy excitation a subsequent saddle point
+approximation will produce.
+Typically we are interested in transforming a Fermionic interaction potential of the form
+\begin{equation}
+    \label{eq:Field:HS:typicalInteactionPotential}
+    V = \frac{1}{2}\sum_{\alpha\beta\gamma\delta}V_{\alpha\beta\gamma\delta}\xi^\ast_\alpha\xi^\ast_\beta\xi_\delta\xi_\gamma,
+\end{equation}
+where $\xi_\alpha$ are Gra\ss mann variables, which can be sketched in the way of single-vertex diagram in Figure~\ref{fig:Field:HS:twoBodyInteraction}.
+\begin{figure}[h]
+    \begin{center}
+
+\feynmandiagram [horizontal = i1 to f1] {
+  i1 [particle=$\delta$] -- [fermion] a [dot] -- [anti fermion] i2 [particle=$\gamma$],
+  f1 [particle=$\alpha$] -- [anti fermion] a -- [fermion] f2 [particle=$\beta$],
+};
+
+    \end{center}
+    \caption{Generic two-body interaction.}
+    \label{fig:Field:HS:twoBodyInteraction}
+\end{figure}
+The HS-transformation is classified into being done in a specific \emph{channel} depending on which pair of Gra\ss mann variables are
+considered to be part of $\v{J}$ and consequently $\v{J}^\dagger$. The direct channel\footnote{Also known as the density-density channel.} is given by 
+the identification $J_i \sim \xi_\alpha^\ast\xi_\delta$,
+the Cooper channel\footnote{Also known as the particle-particle channel.} is defined by the identification $J_i \sim \xi_\delta\xi_\gamma$ while the
+exchange channel is given by the identification $J_i \sim \xi_\alpha^\ast\xi_\gamma$. If the goal is a theory for superconductivity, the Cooper channel is usually
+the correct choice.
+
+\subsection{Transformation in symmetry channels}
+
 
 \section{Extended Nambu notation}
 
