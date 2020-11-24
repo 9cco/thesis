@@ -17,22 +17,25 @@ approximation. It is however important to point out that the transformation itse
 an exact transformation that maintains all information in the original theory.
 
 In technical terms, the Hubbard-Stratonovich transformation can be viewed simply as the solution of a complex multivariate integral.
-Let $A$ have a strictly positive Hermitian part, $\v{z}$ be a complex vector of integration variables, while $\v{J}$ is a vector of
+Let $A$ have a strictly positive Hermitian part and $\v{J}$ be a vector of
 coefficients that could contain Gra\ss mann variables or complex variables. Then
 \begin{equation}
     \label{eq:Field:HS:complexIntegral}
-    e^{\v{J}^\dagger A \v{J}} = \det A^{-1}\prod_{i}\bigg[\frac{\sint\mathrm{d}z_i^\ast\mathrm{d}z_i}{2\pi i}\bigg]e^{-\v{z}^\dagger A^{-1}\v{z} + \v{z}^\dagger \v{J} + \v{J}^\dagger\v{z}}.
+    e^{\v{J}^\dagger A \v{J}} = \det A^{-1}\int_{\mathbb{C}}\prod_{i}\bigg[\frac{\mathrm{d}z_i^\ast\mathrm{d}z_i}{2\pi i}\bigg]e^{-\v{z}^\dagger A^{-1}\v{z} + \v{z}^\dagger \v{J} + \v{J}^\dagger\v{z}},
 \end{equation}
+exchanges a quadratic term in $\v{J}$ with a integration over the complex $\v{z}$ variable.
+Since $\v{J}$ usually represents some field in a field theory, the new $\v{z}$ is called the auxhillary field or the conjugate
+field because of its linear coupling to $\v{J}$.
 In the less general case that $A$ is an Hermitian matrix, this formula is proved simply by completing the square, then
 diagonalizing $A$ by a unitary tranformation and calculating the resulting integrals by the formula 
-$\int\!\mathrm{d}z^\ast\mathrm{d}z\,e^{-azz^\ast} = 2\pi i /a$. 
+$\int_{\mathbb{C}}\!\mathrm{d}z^\ast\mathrm{d}z\,e^{-azz^\ast} = 2\pi i /a$. 
 
 From Eq.~\eqref{eq:Field:HS:complexIntegral} we see that
 what we have to do to perform the Hubbard-Stratonovich transformation is first to make a choice for what to interpret as part
 of the matrix $A$ and what to interpret as part of $\v{J}$. We then have to check that this definition of $A$ leads to its
 Hermitian part having only positive eigenvalues. Finally we need to know an analytical expression for its inverse.
 It is usually the first step that is the most difficult since this dictates the low energy excitation a subsequent saddle point
-approximation will produce.
+approximation or a stationary phase approximation will produce.
 Typically we are interested in transforming a Fermionic interaction potential of the form
 \begin{equation}
     \label{eq:Field:HS:typicalInteactionPotential}
@@ -44,7 +47,7 @@ where $\xi_\alpha$ are Gra\ss mann variables, which can be sketched in the way o
 
 \feynmandiagram [horizontal = i1 to f1] {
   i1 [particle=$\delta$] -- [fermion] a [dot] -- [anti fermion] i2 [particle=$\gamma$],
-  f1 [particle=$\alpha$] -- [anti fermion] a -- [fermion] f2 [particle=$\beta$],
+  f1 [particle=$\beta$] -- [anti fermion] a -- [fermion] f2 [particle=$\alpha$],
 };
 
     \end{center}
@@ -53,13 +56,45 @@ where $\xi_\alpha$ are Gra\ss mann variables, which can be sketched in the way o
 \end{figure}
 The HS-transformation is classified into being done in a specific \emph{channel} depending on which pair of Gra\ss mann variables are
 considered to be part of $\v{J}$ and consequently $\v{J}^\dagger$. The direct channel\footnote{Also known as the density-density channel.} is given by 
-the identification $J_i \sim \xi_\alpha^\ast\xi_\delta$,
+the identification $J_i \sim \xi_\alpha^\ast\xi_\gamma$,
 the Cooper channel\footnote{Also known as the particle-particle channel.} is defined by the identification $J_i \sim \xi_\delta\xi_\gamma$ while the
-exchange channel is given by the identification $J_i \sim \xi_\alpha^\ast\xi_\gamma$. If the goal is a theory for superconductivity, the Cooper channel is usually
-the correct choice.
+exchange channel is given by the identification $J_i \sim \xi_\alpha^\ast\xi_\delta$. Depending on exactly how $\v{J}$ is chosen, the Gaussian
+integral in Eq.~\eqref{eq:Field:HS:complexIntegral} might have to be modified. For example in the case of the direct- and exchange-channel, the
+exponential argument on the left side will have the form $\v{J}^\trans A\v{J}$ which necessitates the Gaussian integral identity
+\begin{equation}
+    \label{eq:Field:HS:realIntegral}
+    e^{-\frac{1}{2}\v{J}^\trans A\v{J}} = \sqrt{\det A^{-1}}\int_{\mathbb{R}}\!\prod_i\bigg[\frac{\mathrm{d}x_i}{\sqrt{2\pi}}\bigg]e^{-\frac{1}{2}\v{x}^\trans A^{-1}\v{x} - i\v{J}^\trans\v{x}},
+\end{equation}
+where the auxhillary field $\v{x}$ now is a real conjugate field.
+
 
 \subsection{Transformation in symmetry channels}
 
+In the Cooper-channel of the Hubbard-Stratonovich transformation, the complex field $\v{z}$ is conjugate to some combination
+of pairs of annihilation operators $\hat{c}_\delta \hat{c}_\gamma$ (or their corresponding Gra\ss mann variables).
+The symmetry of the specific combination in turn then determines the symmetry of any low energy field theory obtained
+through a subsequent stationary phase approximation. By diagonalizing the interaction potential $\hat{V}$ into its particular
+irreducible representations as we did in Section~\ref{sec:Group:Potential} then a Hubbard-Stratonovich transformation
+in a specific symmetry channel is done by identifying $\v{J}$ with irrep. basis functions. 
+
+Lets take the case of a BCS theory of superconductivity where the interaction can be written in terms of odd
+basis functions $d^{(b),m}_{s_1s_2}(\v{k})$ such that the diagonalized interaction takes the form
+\begin{equation}
+    \label{eq:Field:HS:Symm:diagonalizedV}
+    \hat{V} = \sum d^{(b),m}_{s_1s_2}(\v{k})^\ast v_{(b)}d^{(b),m}_{s_1's_2'}(\v{k}') c_{\frac{\v{q}}{2}+\v{k}\,s_1}^\dagger c_{\frac{\v{q}}{2}-\v{k}\,s_2}^\dagger c_{\frac{\v{q}}{2}-\v{k}'s_2'}c_{\frac{\v{q}}{2}+\v{k}'s_1'},
+\end{equation}
+where $\sum$ indicates the sum over the indices, $\v{k}, \v{k}', \v{q}, s_1, s_2, s_1', s_2', b$ and $m$. Here $b$ specifies the irreducible representation
+while $m$ enumerates the representation basis.
+Identifying
+\begin{equation}
+    \label{eq:Field:HS:Symm:identification}
+    \hat{J}_\v{q}^{(b),m} = \sum_{\v{k}s_1s_2}d^{(b),m}_{s_1s_2}(\v{k})\hat{c}_{\frac{\v{q}}{2}-\v{k},s_1}\hat{c}_{\frac{\v{q}}{2}+\v{k},s_2},
+\end{equation}
+the interaction potential is simply written
+\begin{equation}
+    \label{eq:Field:HS:Symm:HSpreparedV}
+    \hat{V} = \sum_{\v{q},b,m}\hat{J}_\v{q}^{(b),m\,\dagger}v^{(b)}\hat{J}_\v{q}^{(b),m}.
+\end{equation}
 
 \section{Extended Nambu notation}
 
