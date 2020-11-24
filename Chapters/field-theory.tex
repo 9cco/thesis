@@ -21,7 +21,7 @@ Let $A$ have a strictly positive Hermitian part and $\v{J}$ be a vector of
 coefficients that could contain Gra\ss mann variables or complex variables. Then
 \begin{equation}
     \label{eq:Field:HS:complexIntegral}
-    e^{\v{J}^\dagger A \v{J}} = \det A^{-1}\int_{\mathbb{C}}\prod_{i}\bigg[\frac{\mathrm{d}z_i^\ast\mathrm{d}z_i}{2\pi i}\bigg]e^{-\v{z}^\dagger A^{-1}\v{z} + \v{z}^\dagger \v{J} + \v{J}^\dagger\v{z}},
+    e^{\v{J}^\dagger A \v{J}} = \det A^{-1}\int_{\mathbb{C}}\prod_{i}\bigg[\frac{\mathrm{d}z_i^\ast\mathrm{d}z_i}{2\pi i}\bigg]e^{-(\v{z}^\dagger A^{-1}\v{z} + \v{z}^\dagger \v{J} + \v{J}^\dagger\v{z})},
 \end{equation}
 exchanges a quadratic term in $\v{J}$ with a integration over the complex $\v{z}$ variable.
 Since $\v{J}$ usually represents some field in a field theory, the new $\v{z}$ is called the auxhillary field or the conjugate
@@ -77,7 +77,7 @@ through a subsequent stationary phase approximation. By diagonalizing the intera
 irreducible representations as we did in Section~\ref{sec:Group:Potential} then a Hubbard-Stratonovich transformation
 in a specific symmetry channel is done by identifying $\v{J}$ with irrep. basis functions. 
 
-Lets take the case of a BCS theory of superconductivity where the interaction can be written in terms of odd
+Lets take the case of a BCS theory of superconductivity where the interaction can be written in terms of
 basis functions $d^{(b),m}_{s_1s_2}(\v{k})$ such that the diagonalized interaction takes the form
 \begin{equation}
     \label{eq:Field:HS:Symm:diagonalizedV}
@@ -88,13 +88,46 @@ while $m$ enumerates the representation basis.
 Identifying
 \begin{equation}
     \label{eq:Field:HS:Symm:identification}
-    \hat{J}_\v{q}^{(b),m} = \sum_{\v{k}s_1s_2}d^{(b),m}_{s_1s_2}(\v{k})\hat{c}_{\frac{\v{q}}{2}-\v{k},s_1}\hat{c}_{\frac{\v{q}}{2}+\v{k},s_2},
+    \hat{J}_\v{q}^{(b_m)} = \sum_{\v{k}s_1s_2}d^{(b),m}_{s_1s_2}(\v{k})\hat{c}_{\frac{\v{q}}{2}-\v{k},s_1}\hat{c}_{\frac{\v{q}}{2}+\v{k},s_2},
 \end{equation}
 the interaction potential is simply written
 \begin{equation}
     \label{eq:Field:HS:Symm:HSpreparedV}
-    \hat{V} = \sum_{\v{q},b,m}\hat{J}_\v{q}^{(b),m\,\dagger}v^{(b)}\hat{J}_\v{q}^{(b),m}.
+    \hat{V} = \sum_{\v{q},b,m}\hat{J}_\v{q}^{(b_m)\,\dagger}v^{(b)}\hat{J}_\v{q}^{(b_m)}.
 \end{equation}
+In the path-integral representation of the partition function, the annihilation operators become Gra\ss mann variables which we denote
+by writing $J$ in stead of $\hat{J}$ such that the contribution from the interaction potential results in the exponential
+\begin{equation}
+    \label{eq:Field:HS:Symm:potentialExp}
+    \mathcal{Z}_I = e^{-\int_0^\beta\!\mathrm{d}\tau\sum_{\v{q},b,m}J_\v{q}^{(b_m)\,\dagger}v^{(b)}J_\v{q}^{(b_m)}}.
+\end{equation}
+Now it is straight forward to use the Hubbard-Statonovich formula
+\begin{equation}
+    \label{eq:Field:HS:Symm:fieldHSTransform}
+    e^{\int_0^\beta\!\mathrm{d}\tau\sum_{ij} J_i^\ast A_{ij}J_{j}} = \int\!\mathcal{D}[\eta_i^\ast\eta_i]e^{-\int_0^\beta\!\mathrm{d}\tau\big(\eta_i^\ast A^{-1}_{ij}\eta_j + J_i^\ast\eta_i+J_i\eta_i^\ast\big)},
+\end{equation}
+which is a path integral version of Eq.~\eqref{eq:Field:HS:complexIntegral}, to transform each pair of irreducible representation basis vectors to
+individual conjugate fields. In the notation of Eq.~\eqref{eq:Field:HS:Symm:fieldHSTransform} implicit summation over repeated indices is used and each index $i$ is a collection $i = (b,m,\v{q})$ of indices.
+Comparing Eq.~\eqref{eq:Field:HS:Symm:fieldHSTransform} and \eqref{eq:Field:HS:Symm:potentialExp} we gather that
+\begin{equation}
+    \label{eq:Field:HS:Symm:Matrix}
+    A_{ij} = A_{b,m,\v{q};\,b',m',\v{q}'} = -\delta_{\v{q}\v{q}'}\delta_{mm'}\delta_{bb'}v^{(b)},
+\end{equation}
+which is trivially Hermetic and positive definite provided $v^{(b)}<0$. In this case we say that the irreducible representation $b$ is an
+attractive channel. $A$ is in this case also trivially invertible with $A_{ij}^{-1} = -\delta_{ij}/v^{(b)}$.
+Writing out all the indices we finally arrive at the Hubbard-Statonovich transformation of the interaction potential in individually
+attractive symmetry channels
+\begin{equation}
+    \label{eq:Field:HS:Symm:HSTransformedPotentialExp}
+    \mathcal{Z}_I = \int\!\mathcal{D}[\eta_\v{q}^{(b_m)\,\ast}\eta_\v{q}^{(b_m)}]e^{\int_0^\beta\!\mathrm{d}\tau\!\sum\limits_{\v{q}bm}\big[\frac{|\eta_\v{q}^{(b_m)}|}{v^{(b)}} - \big(J_\v{q}^{(b_m)\,\ast}\eta_\v{q}^{(b_m)} + J_\v{q}^{(b_m)}\eta_\v{q}^{(b_m)}\big)\big]},
+\end{equation}
+where
+\begin{equation}
+    \label{eq:Field:HS:Symm:JRedef}
+    J^{(b_m)}_\v{q} = \sum_{\v{k}\,s_1s_2}d_{s_1s_2}^{(b),m}(\v{k})\xi_{\frac{\v{q}}{2}-\v{k},s_1}\xi_{\frac{\v{q}}{2}+\v{k},s_2}
+\end{equation}
+in terms of Gra\ss mann variables $\xi$. We note that this derivation does not assume either odd or even basis functions for the
+irreducible representations and works just as well for either.
 
 \section{Extended Nambu notation}
 
