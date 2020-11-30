@@ -5,7 +5,100 @@ and complex numbers in the calculation of the field-integrals on the
 statistical-mechanical partition function and how they can be used to transform the
 expression for the action through the Hubbard-Stratonovich transformation.
 
-\section{Pfaffian}
+A field theoretic expression for the quantum mechanical partition function $\mathcal{Z}$
+is obtained by using a coherent state basis. A coherent state is the eigen-state of an annihilation operator, thus it
+produces an eigenvalue when operated on by the annihilation operator. Letting $\hat{H}$ be the quantum mechanical
+Hamiltonian of the system for which we are interested in calculating the parition function, $\mu$ the the chemical
+potential and $\hat{N}$ is the number operator then the partition function
+\begin{equation}
+    \label{eq:Field:partitionFunction}
+    \mathcal{Z} = \tr(e^{-\beta(\hat{H}-\mu\hat{N})}).
+\end{equation}
+Inserting a basis of coherent states $\{\ket{\xi}\}$ when calculating the trace, we obtain a functional integral over
+the coherent state eigenvalues $\xi_\alpha$ and $\xi^\ast_\alpha$ which substitute the annihilation and creation operators
+$c_\alpha$ and $c_\alpha^\dagger$ respectively. Here $\alpha$ symbolize the collection of quantum-numbers needed to specify
+a state. The functional integral then takes the form
+\begin{equation}
+    \label{eq:Field:fieldPartition}
+    \mathcal{Z} = \int\!\mathcal{D}[\xi^\ast\,\xi]e^{-\int_0^\beta\!\mathrm{d}\tau\sum_\alpha [\xi^\ast_\alpha(\partial_\tau-\mu)\xi_\alpha + H(\xi_\alpha,\xi_\alpha^\ast)]}.
+\end{equation}
+The integration variable $\tau$ is the imaginary time and a $\tau$ dependence is implicit in the notation such that $\xi_\alpha = \xi_\alpha(\tau)$.
+This path-integral notation is a shorthand for a more involved expression where the imaginary time-dependence of $\tau$ is
+split into a collection of time-indexed coherent state eigenfunctions $\xi_{\alpha,\tau}$ and the integration measure
+is a product over these indices and the quantum-state indices $\alpha$. For further detail we refer to Ref.~\cite{NegeleOrland98}
+which we will follow for a large part of this chapter.
+
+\section{Calculation of Fermionic Field Integrals}
+
+Because of the anti-commuting property of the fermion annihilation operators, any coherent state\footnote{An eigenstate
+of the annihilation operator} has to have eigenvalues that anti-commute as well. This leads to the partition function
+written in the convenient basis of the coherent states being constructed with Gra\ss mann numbers as the central
+variables.
+
+\subsection{Gra\ss mann algebras}
+A Gra\ss mann algebra is constructed on a set of generators $\{\xi_\alpha\}$ such that a specific product
+of the generators $\xi_{\alpha_1}\xi_{\alpha_2}\cdots\xi_{\alpha_n}$ together with a complex coefficient $\phi$ constitute a
+number in the algebra and the generators anti-commute such that $\xi_\alpha\xi_\beta = -\xi_\beta\xi_\alpha$. On such
+an algebra, differentiation can be defined such that
+\begin{equation}
+    \label{eq:Field:Ferm:Grass:diff}
+    \frac{\mathrm{d}}{\mathrm{d}\xi_{\alpha_m}}\;\phi\xi_{\alpha_1}\cdots\xi_{\alpha_n} = (-1)^m\phi\xi_{\alpha_1}\cdots\xi_{\alpha_{m-1}}\xi_{\alpha_{m+1}}\cdots\xi_{\alpha_n},
+\end{equation}
+provided the generator $\xi_{\alpha_m}$ is in the number and $0$ otherwise. The factors of $(-1)$ comes from anti-commuting
+the generator $\xi_{\alpha_m}$ such that it is next to the differentiation operator. In Gra\ss mann algebra, integration
+can be (perhaps a little non-intuitively) be defined such that it acts in the same way as differentiation, i.e. generators
+have to be anti-commuted until they are next to the symbolic differential symbol $\mathrm{d}\xi_{\alpha}$, and then
+\begin{equation}
+    \label{eq:Field:Ferm:Grass:int}
+    \int\!\mathrm{d}\xi\;\xi = 1,
+\end{equation}
+while
+\begin{equation}
+    \label{eq:Field:Ferm:Grass:int2}
+    \int\!\mathrm{d}\xi\;1 = 0.
+\end{equation}
+On an algebra consisting of $2n$ generators we define conjugation as a map from the first half of the generators $\{\xi_{\alpha_i}\}_{i=1}^n$
+to the other half $\{\xi_{\alpha_i}^\ast\}_{i=1}^n$ and in such a way that when applied to a particular number
+\begin{equation}
+    \label{eq:Field:Ferm:Grass:conj}
+    (\phi\xi_\alpha\xi_\beta)^\ast = \phi^\ast\xi_\beta^\ast\xi_\alpha^\ast.
+\end{equation}
+
+\subsection{Nambu Notation}
+
+In the Nambu notation we group spin-dependent Gra\ss mann numbers $\xi_\up$ and $\xi_\dn^\ast$, which correspond to the
+annihilation- and creation-operators $\hat{c}_\up^\dagger$ and $\hat{c}_\dn$, in a Nambu vector
+\begin{equation}
+    \label{eq:Field:Ferm:Nambu:vector}
+    \v{\xi} = 
+    \begin{pmatrix}
+        \xi_\up\\
+        \xi_\dn^\ast
+    \end{pmatrix}.
+\end{equation}
+A sesquilinear form can then be created with this vector and its adjoint such that
+\begin{equation}
+    \label{eq:Field:Ferm:Nambu:terms}
+    \v{\xi}^\dagger S\v{\xi} = S_{11}\xi_\up^\ast\xi_\up + S_{22}\xi_\dn^\ast\xi_\dn + S_{12}\xi_\up^\ast\xi_\dn^\ast + S_{21}\xi_\up\xi_\dn.
+\end{equation}
+This allows any action that contains spin-dependent terms of the form of the right hand side of Eq.~\eqref{eq:Field:Ferm:Nambu:terms} to
+be put on sesquilinear form. Assuming this is the case, then the partition function in the field-integral representation takes the form
+\begin{equation}
+    \label{eq:Field:Ferm:Nambu:partitionFunction}
+    \mathcal{Z} = \int\!\mathcal{D}[\xi^\ast\,\xi]\;e^{-\int_0^\beta\!\mathrm{d}\tau\;\v{\xi}^\dagger_\gamma S_{\gamma\delta}\v{\xi}_\delta}.
+\end{equation}
+In this equation, the indices $\gamma$ and $\delta$ is an arbitrary collection of quantum numbers needed to specify a state other than spin,
+for example they could be momentum indices $\gamma = \v{k}, \delta = \v{k}'$, and summation over these repeated indices is implicitly understood.
+
+Splitting the integral over $\tau$ into imaginary time-slices and expanding the path integral measure into a product of individual integrals
+over specific quantum numbered and time-sliced Gra\ss mann variables $\xi_i$, the path-integral in Eq.~\eqref{eq:Field:Ferm:Nambu:partitionFunction}
+can be evaluated by the Gaussian Gra\ss mann integral identity
+\begin{equation}
+    \label{eq:Field:Ferm:Nambu:quadraticGrassmannInt}
+    \int\prod_i(\mathrm{d}\xi_i^\ast\mathrm{d}\xi_i)\;e^{-\xi_i^\ast S_{ij}\xi_j} = \det S,
+\end{equation}
+for which a derivation is found in Ref.~\cite{NegeleOrland98}. The determinant is in this equation a determinant of the full matrix.
+
 
 \section{Hubbard-Stratonovich transformation}
 
