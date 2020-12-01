@@ -42,7 +42,7 @@ number in the algebra and the generators anti-commute such that $\xi_\alpha\xi_\
 an algebra, differentiation can be defined such that
 \begin{equation}
     \label{eq:Field:Ferm:Grass:diff}
-    \frac{\mathrm{d}}{\mathrm{d}\xi_{\alpha_m}}\;\phi\xi_{\alpha_1}\cdots\xi_{\alpha_n} = (-1)^m\phi\xi_{\alpha_1}\cdots\xi_{\alpha_{m-1}}\xi_{\alpha_{m+1}}\cdots\xi_{\alpha_n},
+    \frac{\mathrm{d}}{\mathrm{d}\xi_{\alpha_m}}\;\phi\,\xi_{\alpha_1}\cdots\xi_{\alpha_n} = (-1)^m\phi\,\xi_{\alpha_1}\cdots\xi_{\alpha_{m-1}}\xi_{\alpha_{m+1}}\cdots\xi_{\alpha_n},
 \end{equation}
 provided the generator $\xi_{\alpha_m}$ is in the number and $0$ otherwise. The factors of $(-1)$ comes from anti-commuting
 the generator $\xi_{\alpha_m}$ such that it is next to the differentiation operator. In Gra\ss mann algebra, integration
@@ -64,10 +64,10 @@ to the other half $\{\xi_{\alpha_i}^\ast\}_{i=1}^n$ and in such a way that when 
     (\phi\xi_\alpha\xi_\beta)^\ast = \phi^\ast\xi_\beta^\ast\xi_\alpha^\ast.
 \end{equation}
 
-\subsection{Nambu Notation}
+\subsection{Nambu Spinor}
 
 In the Nambu notation we group spin-dependent Gra\ss mann numbers $\xi_\up$ and $\xi_\dn^\ast$, which correspond to the
-annihilation- and creation-operators $\hat{c}_\up^\dagger$ and $\hat{c}_\dn$, in a Nambu vector
+annihilation- and creation-operators $\hat{c}_\up^\dagger$ and $\hat{c}_\dn$, in a vector called a Nambu spinor
 \begin{equation}
     \label{eq:Field:Ferm:Nambu:vector}
     \v{\xi} = 
@@ -90,14 +90,105 @@ be put on sesquilinear form. Assuming this is the case, then the partition funct
 In this equation, the indices $\gamma$ and $\delta$ is an arbitrary collection of quantum numbers needed to specify a state other than spin,
 for example they could be momentum indices $\gamma = \v{k}, \delta = \v{k}'$, and summation over these repeated indices is implicitly understood.
 
-Splitting the integral over $\tau$ into imaginary time-slices and expanding the path integral measure into a product of individual integrals
-over specific quantum numbered and time-sliced Gra\ss mann variables $\xi_i$, the path-integral in Eq.~\eqref{eq:Field:Ferm:Nambu:partitionFunction}
+Splitting the integral over $\tau$ into $M$ imaginary time-slices and expanding the path integral measure into a product of individual integrals
+over specific quantum numbered and time-sliced Gra\ss mann variables such that 
+\begin{equation}
+    \label{eq:Field:Ferm:Nambu:fieldMeasure}
+    \int\!\mathcal{D}[\xi^\ast\,\xi] \;\propto\; \lim_{M\rightarrow\infty}\int\prod_{\tau=1}^M\prod_\alpha\mathrm{d}\xi^\ast_{\alpha,\tau}\mathrm{d}\xi_{\alpha,\tau},
+\end{equation}
+the path-integral in Eq.~\eqref{eq:Field:Ferm:Nambu:partitionFunction}
 can be evaluated by the Gaussian Gra\ss mann integral identity
 \begin{equation}
     \label{eq:Field:Ferm:Nambu:quadraticGrassmannInt}
     \int\prod_i(\mathrm{d}\xi_i^\ast\mathrm{d}\xi_i)\;e^{-\xi_i^\ast S_{ij}\xi_j} = \det S,
 \end{equation}
-for which a derivation is found in Ref.~\cite{NegeleOrland98}. The determinant is in this equation a determinant of the full matrix.
+for which a derivation is found in Ref.~\cite{NegeleOrland98}. This identity holds for any Hermitian matrix $S$, even if it is not positive definite.
+The result is then that the partition function in Eq.~\eqref{eq:Field:Ferm:Nambu:partitionFunction}
+becomes $\mathcal{Z} = \det S$. To calculate this determinant one has to consider the matrix $S$ as also a matrix with
+time-slice indices. This is perhaps most easily accomplished using the Matsubara formalism in which the $\tau$ dependence is substituted with a dependence on Matsubara
+frequencies through a Fourier-like transform.
+
+\subsection{Extended Nambu Spinor}
+
+From Eq.~\eqref{eq:Field:Ferm:Nambu:terms} we see that the Nambu spinor sesquilinear product fails to accomodate terms in a Hamiltonian that mix creation and annihilation
+operators of differing spins, e.g. a term $\propto \hat{c}_\up^\dagger\hat{c}_\dn$. 
+In general, a quadratic Hamiltonian can contain any combination of spin-indices of the form $\hat{c}_{s_1}\hat{c}_{s_2}$, $\hat{c}_{s_1}^\dagger\hat{c}_{s_2}$,
+$\hat{c}_{s_1}\hat{c}_{s_2}^\dagger$ and
+$\hat{c}_{s_1}^\dagger\hat{c}_{s_2}^\dagger$. This gives in total $16$ different combinations and to accomodate them all we thus need a $4\times4$ matrix.
+Exchanging to Gra\ss mann numbers we define the vector
+\begin{equation}
+    \label{eq:Field:Ferm:ExNambu:spinor}
+    \v{\xi}_\gamma = 
+    \begin{pmatrix}
+        \xi_{\gamma,\up}^\ast\\
+        \xi_{\gamma,\up}\\
+        \xi_{\gamma,\dn}^\ast\\
+        \xi_{\gamma,\dn}
+    \end{pmatrix},
+\end{equation}
+where all quantum numbers except spin is included in the index $\gamma$.
+Writing the elements of this vector $(\v{\xi}_\gamma)_i = \tilde{\xi}_{\gamma,i}$ regardless of whether it is a conjugate or not, 
+we can write all quadratic terms of a Hamiltonian on the bilinear form
+\begin{equation}
+    \label{eq:Field:Ferm:ExNambu:bilinear}
+    \v{\xi}_\gamma^\trans S_{\gamma\delta}\v{\xi}_\delta = \tilde{\xi}_{\gamma,i}S_{\gamma i; \delta j}\tilde{\xi}_{\delta, j},
+\end{equation}
+where $S_{\gamma\delta}$ is a $4\times4$ anti-symmetric\footnote{To see why this matrix can always be said to be anti-symmetric lets first simplify the notation
+and write the bilinear product as $\tilde{\xi}_iS_{ij}\tilde{\xi}_j$. Then the matrix $S = (S + S^\trans)/2 + (S - S^\trans)/2$, such that we can write it as a
+symmetric matrix ${\mathcal{S} = (S+S^\trans)/2}$ and an anti-symmetric matrix $\mathcal{A} = (S-S^\trans)/2$. Considering only the symmetric part of the bilinear
+form we get
+\begin{equation*}
+    \begin{split}
+        \tilde{\xi}_i\mathcal{S}_{ij}\tilde{xi}_j = -\tilde{\xi}_j\mathcal{S}_{ij}\tilde{\xi}_i = -\tilde{\xi}_i\mathcal{S}_{ji}\tilde{\xi}_j = -\tilde{\xi}_i\mathcal{S}_{ij}\tilde{\xi}_j.
+    \end{split}
+\end{equation*}
+Hence $\tilde{\xi}_i\mathcal{S}_{ij}\tilde{\xi}_j = 0$ and all that remains is the antisymmetric bilinear form.}
+matrix, and $S_{\gamma i; \delta j}$ denotes its elements. Let there be $n$ number of different quantum numbers,
+now including spin. Then there must be $2n$ different Gra\ss mann generators $\tilde{\xi}_{\gamma,i}$. All of these are integrated over in the discrete version
+of the partition function field integral
+\begin{equation}
+    \label{eq:Field:Ferm:ExNambu:partitionFunction}
+    \mathcal{Z} = \int\!\mathcal{D}[\xi^\ast\,\xi]\;e^{-\int_0^\beta\!\mathrm{d}\tau\;\tilde{\xi}_{\gamma,i}S_{\gamma i; \delta j}\tilde{\xi}_{\delta, j}}.
+\end{equation}
+Even though this superficially looks like the field integral in Eq.~\eqref{eq:Field:Ferm:Nambu:partitionFunction}, we now have a bilinear and not a sesquilinear
+form, and $S$ is now a $2n\times2n$ matrix and not an $n\times n$ matrix. This means that we can not use the integral in Eq.~\eqref{eq:Field:Ferm:Nambu:quadraticGrassmannInt}
+to evaluate the integral but instead have to rely on the more general Gaussian Gra\ss mann integral
+\begin{equation}
+    \label{eq:Field:Ferm:ExNambu:pfaffianIntegral}
+    \int\prod_{i}(\mathrm{d}\tilde{\xi}_i)\;e^{-\frac{1}{2}\tilde{\xi}_iS_{ij}\tilde{\xi}_j} = \pfaff(S),
+\end{equation}
+which applies for any anti-symmetric matrix $S$. The right hand side is called the Pfaffian $\pfaff(S)$ of the matrix $S$ and is defined for any anti-symmetric
+matrix to be given by
+\begin{equation}
+    \label{eq:Field:Ferm:ExNambu:pfaffianDef}
+    \pfaff[S] = \frac{1}{2^nn!}\sum_{P\in S_n}(-1)^PS_{P_1P_2}\cdots S_{P_{n-1}P_n},
+\end{equation}
+where $P$ is a permutation in the finite group $S_n$ of all possible permutations of $n$ numbers. This matrix function is related to the determinant
+by the relation $\pfaff(S)^2 = \det(S)$. 
+
+Applying the integral identity in Eq.~\eqref{eq:Field:Ferm:ExNambu:pfaffianIntegral} to the partition function%
+%
+\footnote{In relating the discrete version of
+Eq.~\eqref{eq:Field:Ferm:ExNambu:pfaffianIntegral} to \eqref{eq:Field:Ferm:ExNambu:partitionFunction} we have to make sure that the spinor elements $\tilde{\xi}_i$
+are defined in terms of $\xi_i$ and $\xi_i^\ast$ in such a way as to get a correspondence to the sequence of Gra\ss mann
+generators $\mathrm{d}\xi^\ast_i\mathrm{d}\xi_i$ in the measure to avoid any sign errors. One solution
+is to set $\xi_i^\ast = \tilde{\xi}_{2i-1}$ and $\xi_i = \tilde{\xi}_{2i}$ as we have done in Eq.~\eqref{eq:Field:Ferm:ExNambu:spinor}. With this definition,
+then the measure $\int\prod_i\mathrm{d}\xi_i^\ast\mathrm{d}\xi_i$, which results from the discretized version of the field-integral measure, becomes
+equal to $\int\prod_{i=1}^{2n}\mathrm{d}\tilde{\xi}_i$ such that Eq.~\eqref{eq:Field:Ferm:ExNambu:pfaffianIntegral} can be directly applied.%
+} %
+%
+in Eq.~\eqref{eq:Field:Ferm:ExNambu:partitionFunction}
+after applying the proper discretization of the imaginary time then yields the result
+\begin{equation}
+    \label{eq:Field:Ferm:ExNambu:partitionFinal}
+    \mathcal{Z} = \int\!\mathcal{D}[\xi^\ast\,\xi]\;e^{-\int_0^\beta\!\mathrm{d}\tau\;\tilde{\xi}_{\gamma,i}S_{\gamma i; \delta j}\tilde{\xi}_{\delta, j}} = \sqrt{\det(S)}.
+\end{equation}
+We have chosen the positive result in $\pfaff(S) = \pm\sqrt{\det(S)}$ since the partition function $\mathcal{Z}$ needs to be positive on physical grounds.
+The matrix $S$ to be taken the derminant of on the right hand side of Eq.~\eqref{eq:Field:Ferm:ExNambu:partitionFinal} is the full matrix one gets after
+discretizing the imaginary-time in slices which we usually have done through the Matsubara-frequency formalism.
+
+\section{Matsubara formalism}
+
 
 
 \section{Hubbard-Stratonovich transformation}
@@ -221,7 +312,5 @@ where
 \end{equation}
 in terms of Gra\ss mann variables $\xi$. We note that this derivation does not assume either odd or even basis functions for the
 irreducible representations and works just as well for either.
-
-\section{Extended Nambu notation}
 
 \section{Log-expansion}
