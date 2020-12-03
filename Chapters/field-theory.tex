@@ -28,7 +28,7 @@ split into a collection of time-indexed coherent state eigenfunctions $\xi_{\alp
 is a product over these indices and the quantum-state indices $\alpha$. For further detail we refer to Ref.~\cite{NegeleOrland98}
 which we will follow for a large part of this chapter.
 
-\section{Calculation of Fermionic Field Integrals}
+\section{Quadratic Fermionic Field Integrals}
 
 Because of the anti-commuting property of the fermion annihilation operators, any coherent state\footnote{An eigenstate
 of the annihilation operator} has to have eigenvalues that anti-commute as well. This leads to the partition function
@@ -187,9 +187,128 @@ We have chosen the positive result in $\pfaff(S) = \pm\sqrt{\det(S)}$ since the 
 The matrix $S$ to be taken the derminant of on the right hand side of Eq.~\eqref{eq:Field:Ferm:ExNambu:partitionFinal} is the full matrix one gets after
 discretizing the imaginary-time in slices which we usually have done through the Matsubara-frequency formalism.
 
+Now that we know the partition function is given in terms of the determinant of the action-matrix $S$ we can use this information to manipulate the definition
+of $\tilde{\xi}_{\gamma,i}$ so that we can still write the action as a sesquilinear form. In particular, switching the position of $\xi_{\gamma,s}^\ast$ and
+$\xi_{\gamma,s}$ for both spins in the transposed vector on the left of the bilinear form $\v{\xi}_\gamma^\trans S_{\gamma\delta} \v{\xi}$, the transposed
+vector becomes the adjoint vector. This affects the matrix $S$ by switching two pairs of rows. Denoting the matrix where the rows are switched $S'$ then
+we have rewritten the bilinear form such that
+\begin{equation}
+    \label{eq:Field:Ferm:ExNambu:bilinearToSesqui}
+    \v{\xi}_\gamma^\trans S_{\gamma\delta}\v{\xi}_\delta = \v{\xi}_\gamma^\dagger S'_{\gamma\delta}\v{\xi}_\delta.
+\end{equation}
+Now the integral over the exponent has not changed since all we have done is simply re-ordering its terms. However, since exchange of rows in a determinant
+at most produces a minus sign and we do this twice we get that $\det S = \det S'$ and we can write
+\begin{equation}
+    \label{eq:Field:Ferm:ExNambu:partitionFunction:sesquilinear}
+    \mathcal{Z} = \int\!\mathcal{D}[\xi^\ast\,\xi]\;e^{-\int_0^\beta\!\mathrm{d}\tau\;\v{\xi}_{\gamma}^\dagger S'_{\gamma\delta}\v{\xi}_{\delta}} = \sqrt{\det(S')}.
+\end{equation}
+where we need to remember that $S'$ is the row switched matrix of an anti-symmetric matrix $S$.
+
 \section{Matsubara formalism}
 
+The Matsubara formalism\footnote{Named after the Japanese physicst Matsubara, Takeo.} is a way of handling the imaginary time $\tau$
+dependence of the coherent state eigenvalue fields $\xi_\alpha(\tau)$, where $\alpha$ denotes
+a collection of quantum numbers sufficient to specify a state, without having to go back to the time-sliced path-integral. It also lets us
+automatically satisfy the imaginary-time boundary conditions $\xi_\alpha(0) = \zeta\xi_\alpha(\beta)$, where $\zeta = +1$ for bosons
+and $\zeta = -1$ for fermions. Imagining that $\tau$ is a continuous
+variable as suggested in the path-integral notation, we define two countable infinite sets of new field-variables through the Fourier-transforms
+\begin{subequations}
+    \label{eq:Field:Mats:transformDef}
+    \begin{align}
+    \xi_{\alpha,n} &= \frac{1}{\sqrt{\beta}}\int_0^\beta\!\!\mathrm{d}\tau\;e^{i\omega_n\tau}\xi_\alpha(\tau),\label{eq:Field:Mats:transformDef:xi}\\
+    \xi_{\alpha,n}^\ast &= \frac{1}{\sqrt{\beta}}\int_0^\beta\!\!\mathrm{d}\tau\;e^{-i\omega_n\tau}\xi_\alpha^\ast(\tau).\label{eq:Field:Mats:transformDef:xiAst}
+    \end{align}
+\end{subequations}
+The frequencies $\omega_n$ are called Matsubara frequencies and are defined by $\omega_n = (2n+1)\pi/\beta$ with $n\in\mathbb{Z}$ for fermions. For bosons we use in stead the notation
+$\nu_n$ where $\nu_n = 2n\pi/\beta$. The inverse relations are given by 
+\begin{subequations}
+    \label{eq:Field:Mats:inverseTransform}
+    \begin{align}
+        \xi_\alpha(\tau) &= \sum_{n\in\mathbb{Z}}e^{-i\omega_n\tau}\xi_{\alpha,n},\label{eq:Field:Mats:inverseTransform:xi}\\
+        \xi_\alpha^\ast(\tau) &= \sum_{n\in\mathbb{Z}}e^{i\omega_n\tau}\xi_{\alpha,n}^\ast.\label{eq:Field:Mats:inverseTransform:xiAst}
+    \end{align}
+\end{subequations}
 
+\subsection{Matsubara sums}
+
+When the Matsubara formalism $\xi_{\alpha,n}$ is used for the field variables in the action of a partition-function field integral we will often
+need to evaluate infinite  sums of Matsubara frequencies of the form $\sum_nh(i\omega_n)$, where $\omega_n$ is a Matsubara frequency, 
+to evaluate the field integral. A useful strategy in such evaluations is to transform the sum to a complex integral by using reverse residue
+integration. We consider the complex contour integral along a path running counter-clockwise around the complex plane infinitesimally close to
+the imaginary axis as shown in Fig.~\ref{fig:Field:Mats:integrationContour}. 
+%
+\newcommand\hor{1.5}
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+	\def\cross[#1,#2,#3]{% Defines a diagonal cross with three arguments: x-pos, y-pos and size.
+	  \draw [blue] (#1-#3/2,#2-#3/2) -- (#1+#3/2,#2+#3/2);
+	  \draw [blue] (#1+#3/2,#2-#3/2) -- (#1-#3/2,#2+#3/2);
+	}
+    % Enlarged integration contour starting from upper left.
+    \draw[green, thick, dashed, decoration={markings, mark=at position 0.5 with {\arrow{latex}}}, postaction={decorate}] (-2.4,3.5) to[out=220, in=90] (-3.8, 0.55);
+    \draw[green, thick, dashed] (-3.8, 0.55) -- (-3.5+\hor, 0.55);
+    % Start of left small circle
+    \draw[green, thick, dashed, decoration={markings, mark=at position 1.0 with {\arrow{latex}}}, postaction={decorate}] (-3.5+\hor, 0.55) to[out=90, in=180] (-3.2+\hor, 0.8);
+    \draw[green, thick, dashed] (-3.2+\hor, 0.8) to[out=0, in=90] (-2.9+\hor, 0.5);
+    \draw[green, thick, dashed, decoration={markings, mark=at position 1.0 with {\arrow{latex}}}, postaction={decorate}] (-2.9+\hor, 0.5) to[out=270, in=0] (-3.2+\hor, 0.2);
+    \draw[green, thick, dashed] (-3.2+\hor, 0.2) to[out=180, in=270] (-3.5+\hor, 0.45);
+    % End circle
+    \draw[green, thick, dashed] (-3.5+\hor, 0.45) -- (-3.8, 0.45);
+    \draw[green, thick, dashed] (-3.8, 0.45) -- (-3.8, -0.55);
+    \draw[green, thick, dashed, decoration={markings, mark=at position 0.5 with {\arrow{latex}}}, postaction={decorate}] (-3.8, -0.55) to[out=270, in=130] (-2.4,-4);
+    % End left contour
+    % Branch cut
+    \foreach \x in {2.0, 2.2, ..., 3.8}
+    \draw [blue] (\x-0.1,-0.05) -- (\x, 0.05) (\x, 0.05) -- (\x+0.1,-0.05);
+    % End branch cut
+    % Enlarged countour right
+    \draw[green, thick, dashed, decoration={markings, mark=at position 0.5 with {\arrow{latex}}}, postaction={decorate}] (2.4,-4) to[out=50, in=270] (3.9, -0.1);
+    \draw[green, thick, dashed, decoration={markings, mark=at position 0.5 with {\arrow{latex}}}, postaction={decorate}] (3.9, -0.1) -- (1.8, -0.1);
+    \draw[green, thick, dashed] (1.8, -0.1) to[out=180, in=180] (1.8, 0.1);
+    \draw[green, thick, dashed, decoration={markings, mark=at position 0.5 with {\arrow{latex}}}, postaction={decorate}] (1.8, 0.1) -- (3.9, 0.1);
+    \draw[green, thick, dashed, decoration={markings, mark=at position 0.5 with {\arrow{latex}}}, postaction={decorate}] (3.9, 0.1) to[out=90, in=320] (2.4,3.5);
+
+  % Axis
+  \draw[->] (0,-4) -- (0,4) node[right] {$\Im$};
+  \draw[->] (-4,0) -- (4.1,0);
+  \node at (4.2,-0.25) {$\Re$};
+  % Complex plane node
+  \node at (-3.5,3.5) {$\mathbb{C}$};
+  % Imaginary axis poles
+  \foreach \a in {-3.75, -3.25,...,3.75}
+  	\cross[0,\a,0.2];
+  % Oritinal contour
+  \draw[green, thick, decoration={markings,
+  		mark=at position 0.2 with {\arrow{latex}},
+	  mark=at position 0.9 with {\arrow{latex}}}, postaction={decorate}] (0.5,-4) .. controls(0.6,0) .. (0.5,3.5);
+  \draw[green, thick, decoration={markings,
+  		mark=at position 0.2 with {\arrow{latex}},
+	  mark=at position 0.9 with {\arrow{latex}}}, postaction={decorate}] (-0.5,3.5) .. controls(-0.6,0) .. (-0.5,-4);
+  % Left pole
+  \cross[-3.2+\hor,0.5,0.2];
+\end{tikzpicture}
+\caption{Integration contour for the Matsubara sum $\sum_nh(i\omega_n)$. The contour is marked by a solid line and is imagined to continue
+to $\pm i\infty$.
+The crosses along the imaginary axis symbolizes the simple poles of the Fermi-Dirac distribution-function.
+A deformed integration contour is shown with dashed lines that is imagined to cross the real axis at $\pm\infty$.
+This contour then encloses a simple pole on the left and a branch cut on the right belonging to the summand.}
+  \label{fig:Field:Mats:integrationContour}
+\end{figure}
+%
+The integrand we consider is given by the product of the summand
+and the complex continuation of the Fermi-Dirac- or Bose-Einstein-distribution function
+\begin{equation}
+    \label{eq:Field:Mats:distributionFunction}
+    n(z) = (e^{\beta z} - \zeta)^{-1},\quad z\in\mathbb{C},
+\end{equation}
+depending on whether the Matsubara
+frequency in the sum is of fermionic ($\zeta = +1$) or bosonic ($\zeta = -1$) nature.
+
+\begin{equation}
+    \label{eq:Field:Mats:formula}
+    \sum_{n\in\mathbb{Z}}\frac{1}{(i\omega_n - x)(i\omega_n - y)} = \frac{\beta}{x-y}\bigg(\frac{1}{1+e^{\beta x}} - \frac{1}{1+e^{\beta y}}\bigg).
+\end{equation}
 
 \section{Hubbard-Stratonovich transformation}
 
@@ -313,4 +432,7 @@ where
 in terms of Gra\ss mann variables $\xi$. We note that this derivation does not assume either odd or even basis functions for the
 irreducible representations and works just as well for either.
 
-\section{Log-expansion}
+\section{Field theory approximations}
+
+\subsection{Stationary phase approximation}
+\subsection{Gradient expansion}
