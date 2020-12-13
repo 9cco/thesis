@@ -219,7 +219,7 @@ variable as suggested in the path-integral notation, we define two countable inf
     \xi_{\alpha,n}^\ast &= \frac{1}{\sqrt{\beta}}\int_0^\beta\!\!\mathrm{d}\tau\;e^{-i\omega_n\tau}\xi_\alpha^\ast(\tau).\label{eq:Field:Mats:transformDef:xiAst}
     \end{align}
 \end{subequations}
-The frequencies $\omega_n$ are called Matsubara frequencies and are defined by $\omega_n = (2n+1)\pi/\beta$ with $n\in\mathbb{Z}$ for fermions. For bosons we use in stead the notation
+The frequencies $\omega_n$ are called Matsubara frequencies and are defined by $\omega_n = (2n+1)\pi/\beta$ with $n\in\mathbb{Z}$ for fermions. For bosons we use instead the notation
 $\nu_n$ where $\nu_n = 2n\pi/\beta$. The inverse relations are given by 
 \begin{subequations}
     \label{eq:Field:Mats:inverseTransform}
@@ -232,18 +232,23 @@ $\nu_n$ where $\nu_n = 2n\pi/\beta$. The inverse relations are given by
 \subsection{Matsubara sums}
 
 When the Matsubara formalism $\xi_{\alpha,n}$ is used for the field variables in the action of a partition-function field integral we will often
-need to evaluate infinite  sums of Matsubara frequencies of the form $\sum_nh(i\omega_n)$, where $\omega_n$ is a Matsubara frequency, 
+need to evaluate infinite  sums of Matsubara frequencies of the form
+\begin{equation}
+    \label{eq:Field:Mats:genSum}
+    \sum_nh(if_n),
+\end{equation}
+where $f_n$ is either a fermionic or bosonic Matsubara frequency, 
 to evaluate the field integral. A useful strategy in such evaluations is to transform the sum to a complex integral by using reverse residue
-integration. We consider the complex contour integral along a path running counter-clockwise around the complex plane infinitesimally close to
+integration. We consider the complex contour integral along a path $\mathcal{C}$ running counter-clockwise around the complex plane infinitesimally close to
 the imaginary axis as shown in Fig.~\ref{fig:Field:Mats:integrationContour}. 
 %
 \newcommand\hor{1.5}
 \begin{figure}[h]
   \centering
-  \begin{tikzpicture}
+  \begin{tikzpicture}[scale=0.7]
 	\def\cross[#1,#2,#3]{% Defines a diagonal cross with three arguments: x-pos, y-pos and size.
-	  \draw [blue] (#1-#3/2,#2-#3/2) -- (#1+#3/2,#2+#3/2);
-	  \draw [blue] (#1+#3/2,#2-#3/2) -- (#1-#3/2,#2+#3/2);
+	  \draw [violet] (#1-#3/2,#2-#3/2) -- (#1+#3/2,#2+#3/2);
+	  \draw [violet] (#1+#3/2,#2-#3/2) -- (#1-#3/2,#2+#3/2);
 	}
     % Enlarged integration contour starting from upper left.
     \draw[green, thick, dashed, decoration={markings, mark=at position 0.5 with {\arrow{latex}}}, postaction={decorate}] (-2.4,3.5) to[out=220, in=90] (-3.8, 0.55);
@@ -260,7 +265,7 @@ the imaginary axis as shown in Fig.~\ref{fig:Field:Mats:integrationContour}.
     % End left contour
     % Branch cut
     \foreach \x in {2.0, 2.2, ..., 3.8}
-    \draw [blue] (\x-0.1,-0.05) -- (\x, 0.05) (\x, 0.05) -- (\x+0.1,-0.05);
+    \draw [violet] (\x-0.1,-0.05) -- (\x, 0.05) (\x, 0.05) -- (\x+0.1,-0.05);
     % End branch cut
     % Enlarged countour right
     \draw[green, thick, dashed, decoration={markings, mark=at position 0.5 with {\arrow{latex}}}, postaction={decorate}] (2.4,-4) to[out=50, in=270] (3.9, -0.1);
@@ -272,7 +277,9 @@ the imaginary axis as shown in Fig.~\ref{fig:Field:Mats:integrationContour}.
   % Axis
   \draw[->] (0,-4) -- (0,4) node[right] {$\Im$};
   \draw[->] (-4,0) -- (4.1,0);
-  \node at (4.2,-0.25) {$\Re$};
+  \node at (4.25,-0.3) {$\Re$};
+  \node at (0.9, 1.0) {$\mathcal{C}$};
+  \node at (3.5, 3.0) {$\mathcal{C}'$};
   % Complex plane node
   \node at (-3.5,3.5) {$\mathbb{C}$};
   % Imaginary axis poles
@@ -288,7 +295,7 @@ the imaginary axis as shown in Fig.~\ref{fig:Field:Mats:integrationContour}.
   % Left pole
   \cross[-3.2+\hor,0.5,0.2];
 \end{tikzpicture}
-\caption{Integration contour for the Matsubara sum $\sum_nh(i\omega_n)$. The contour is marked by a solid line and is imagined to continue
+\caption{Integration contour for the Matsubara sum $\sum_nh(if_n)$. The contour is marked by a solid line and is imagined to continue
 to $\pm i\infty$.
 The crosses along the imaginary axis symbolizes the simple poles of the Fermi-Dirac distribution-function.
 A deformed integration contour is shown with dashed lines that is imagined to cross the real axis at $\pm\infty$.
@@ -300,15 +307,32 @@ The integrand we consider is given by the product of the summand
 and the complex continuation of the Fermi-Dirac- or Bose-Einstein-distribution function
 \begin{equation}
     \label{eq:Field:Mats:distributionFunction}
-    n(z) = (e^{\beta z} - \zeta)^{-1},\quad z\in\mathbb{C},
+    n_\zeta(z) = (e^{\beta z} - \zeta)^{-1},\quad z\in\mathbb{C},
 \end{equation}
 depending on whether the Matsubara
-frequency in the sum is of fermionic ($\zeta = +1$) or bosonic ($\zeta = -1$) nature.
-
+frequency in the sum is of fermionic ($\zeta = +1$) or bosonic ($\zeta = -1$) nature. This function has simple poles\footnote{That
+the poles are simple, i.e. $1$st order, is easily seen by expanding the exponential around $if_n$ to leading order.} %
+ at $z = if_n$ and thus integration
+around the contour results in a sum of residues of the integrand at these poles such that we get
 \begin{equation}
-    \label{eq:Field:Mats:formula}
-    \sum_{n\in\mathbb{Z}}\frac{1}{(i\omega_n - x)(i\omega_n - y)} = \frac{\beta}{x-y}\bigg(\frac{1}{1+e^{\beta x}} - \frac{1}{1+e^{\beta y}}\bigg).
+    \label{eq:Field:Mats:sumToIntegral}
+    \sum_nh(if_n) = \frac{\zeta\beta}{2\pi i}\oint_{\mathcal{C}}\!\mathrm{d}z\;h(z)n_\zeta(z),
 \end{equation}
+given that $h(z)$ does not contain any poles at these points. The contour can now be continuously deformed at will as long as it does not cross any
+singularities which can greatly facilitate the calculation of the integral. The default approach is to see if the integrand vanishes as $\abs{z}\to\infty$,
+in which case it is usually useful to expand the contour as much as possible as illustrated by the deformed contour $\mathcal{C}'$ in
+Figure~\ref{fig:Field:Mats:integrationContour}. 
+
+Using the method outlined above, we may calculate the sums
+\begin{subequations}
+    \label{eq:Field:Mats:sums}
+    \begin{align}
+        \label{eq:Field:mats:sums:singlePole}
+        \sum_{n\in\mathbb{Z}}\frac{1}{if_n-x} &= -\zeta\beta n_\zeta(x),\\
+        \sum_{n\in\mathbb{Z}}\frac{1}{(i\omega_n - x)(i\omega_n - y)} &= \frac{\beta}{x-y}\bigg(\frac{1}{1+e^{\beta x}} - \frac{1}{1+e^{\beta y}}\bigg),\label{eq:Field:Mats:sums:twoPoles}\\
+        \sum_{n\in\mathbb{Z}}\ln[\beta(i\omega_n + x)] &= \ln(1+e^{-\beta x}).\label{eq:Field:Mats:sums:ln}
+    \end{align}
+\end{subequations}
 
 \section{Hubbard-Stratonovich transformation}
 
@@ -399,7 +423,7 @@ the interaction potential is simply written
     \hat{V} = \sum_{\v{q},b,m}\hat{J}_\v{q}^{(b_m)\,\dagger}v^{(b)}\hat{J}_\v{q}^{(b_m)}.
 \end{equation}
 In the path-integral representation of the partition function, the annihilation operators become Gra\ss mann variables which we denote
-by writing $J$ in stead of $\hat{J}$ such that the contribution from the interaction potential results in the exponential
+by writing $J$ instead of $\hat{J}$ such that the contribution from the interaction potential results in the exponential
 \begin{equation}
     \label{eq:Field:HS:Symm:potentialExp}
     \mathcal{Z}_I = e^{-\int_0^\beta\!\mathrm{d}\tau\sum_{\v{q},b,m}J_\v{q}^{(b_m)\,\dagger}v^{(b)}J_\v{q}^{(b_m)}}.
@@ -434,5 +458,74 @@ irreducible representations and works just as well for either.
 
 \section{Field theory approximations}
 
-\subsection{Stationary phase approximation}
+\subsection{Stationary phase and the one loop expansion}
+
+Let $Z$ be the partition function
+\begin{equation}
+    \label{eq:Field:Stat:partitionFunction}
+    Z(l) = \int\!\mathcal{D}[\eta^\ast_\alpha\,\eta_\alpha]\;e^{-lS(\eta^\ast_\alpha, \eta_\alpha)},
+\end{equation}
+given in terms of bosonic fields $\eta^\ast_\alpha, \eta_\alpha$ and where $l$ is some large parameter $l\gg 1$.
+In what is called the stationary phase approximation%
+%
+\footnote{The name is misleading in the case of the many-particle partition function
+since we do not have a strict phase in the exponent but in general a complex function because $\eta_\alpha\in\mathbb{C}$.
+Technically it is the method of steepest descent in the case of an exponent with stationary points that is used in this
+case.} %
+%
+of a bosonic field integral we create an expansion of the free energy around
+the field configuration $\{\eta^c_\alpha\}$ where the action $S$ is stationary and a minimum. This configuration
+is the main contribution to the integral in Eq.~\eqref{eq:Field:Stat:partitionFunction} since it provides the maximum of
+the exponent,
+and determines the leading order asymptotic behavior as $l\to\infty$. It also corresponds in a sense to a classical solution
+and gives in the case of the feynman path integral for the evolution operator of a single particle in an external potential,
+the classical Euler-Lagrange equations.
+The configuration is found in the path-integral notation by varying the fields in the action such that
+\begin{equation}
+    \label{eq:Field:Stat:stationaryCondition}
+    \frac{\delta S}{\delta \eta_\alpha} = 0\quad\land\quad
+    \frac{\delta S}{\delta \eta_\alpha^\ast} = 0.
+\end{equation}
+
+As an example, the Hubbard-model can be expressed by a bosonic field integral through a Hubbard-Statonovich transformation.
+The stationary field configuration $\{\eta^c_q(\tau)\}$ is in this case given by a imaginary-time- and spatialy-independent
+field-configuration $\eta^c$. Assuming such a solution, the action reduces to
+\begin{equation}
+    \label{eq:Field:Stat:meanFieldHubbard}
+    S(\eta^{c\;\ast}, \eta^c) = \frac{\beta N}{U}|\eta^c|^2 - \sum_\v{q}\ln\Big[\Big(1+e^{\beta E_\v{q}}\Big)\Big(1+e^{-\beta E_\v{q}}\Big)\Big],
+\end{equation}
+where $E_\v{q} = \sqrt{(\epsilon(\v{q})-\mu)^2 + |\eta^c|^2}$, $N$ is the number of hopping sites, $\epsilon(\v{q})$ is the Fourier transformed
+kinetic hopping energy, $\mu$ is the chemical potential, and $U$ is the repulsive Hubbard interaction strength. The stationary action condition
+in Eq.~\eqref{eq:Field:Stat:stationaryCondition} then yields the equation
+\begin{equation}
+    \label{eq:Field:Stat:hubbardStationary}
+    |\eta^c|\Big(\frac{1}{U} - \frac{1}{N}\sum_\v{q}\frac{1}{2E_\v{q}}\tanh\frac{\beta E_\v{q}}{2}\Big) = 0,
+\end{equation}
+which has two solution: one given by $\eta^c = 0$ and one given by setting the terms in parenthesis equal to $0$. The last non-trivial solution
+is a form of the BCS solution and represents the order-parameter in an $s$-wave superconductor. Because of the parameter $\beta$, this
+solution will be temperature dependent and dissapears at some critical temperature at which the two solutions for $\eta_c$ converge.
+
+The stationary phase expansion is then the expansion resulting from expanding the action around the stationary solution. Setting
+$\tilde{\eta}_\alpha = \sqrt{l}(\eta_\alpha-\eta^c_\alpha)$ we get in general the expansion
+\begin{equation}
+    \label{eq:Field:Stat:stationaryPhaseExpansion}
+    \begin{split}
+        S(\tilde{\eta}_\alpha,\tilde{\eta}_\alpha^\ast) &= S_c + \frac{1}{l}\bigg[\frac{1}{2!}\frac{\delta^2S}{\delta\eta_\alpha\delta\eta_\beta}\Big|_{\eta_c}\tilde{\eta}_\alpha\tilde{\eta}_\beta\\
+        + \frac{1}{2!}&\frac{\delta^2S}{\delta\eta_\alpha^\ast\delta\eta_\beta^\ast}\Big|_{\eta_c}\tilde{\eta}^\ast_\alpha\tilde{\eta}^\ast_\beta
+        + \frac{\delta^2S}{\delta\eta_\alpha\delta\eta_\beta^\ast}\Big|_{\eta_c}\tilde{\eta}_\alpha\tilde{\eta}_\beta^\ast\bigg] +  \mathcal{O}\Big(\frac{1}{l\sqrt{l}}\Big)\\
+        &= \sum_{n_1+n_2\geq 2}\frac{1}{n_1!n_2!}\frac{\delta^{n_1+n_2}S}{\delta\eta_\alpha^{n_1}\delta\eta_\beta^{\ast\;n_2}}\tilde{\eta}_\alpha^{n_1}\tilde{\eta}_\beta^{\ast\;n_2}\Big|_{\eta_c}\frac{1}{l^{(n_1+n_2)/2}}.
+    \end{split}
+\end{equation}
+We have used implicit summation over repeated indices and on the last line we have assumed that new indices should be introduced and summed for each $n_1$ and $n_2$.
+This is simply the multivariate Taylor expansion around $\eta_c$ where we have treated $\eta$ and $\eta^\ast$ as independent variables.
+
+A simpler expansion can be found when the bosonic fields corresponds to order parameter in a system close to a phase transition. In this case
+we can assume the fields $\eta_\alpha$ to be small in general such that $S$ can be expanded about $0$. If the system is fermionic, then
+the basonic field integral of the order-parameters will have resulted from a Hubbard-Stratonovich transformation
+
+
+In general, when the bosonic fields in $Z(l)$ represents some order parameter, then assuming we are close to the critical point
+then the fields must necessarily be small. An expansion about the stationary phase approximation then amounts to an expansion in the
+bosonic fields.
+
 \subsection{Gradient expansion}

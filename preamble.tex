@@ -10,7 +10,9 @@
     toc=bibliography,%
     toc=indentunnumbered,%
     listof=totoc,%
-    chapterprefix=true%
+    chapterprefix=true,%
+    captions=tableheading% Makes the heading of tables have formatting
+                          % appropriate to being placed above them.    
 ]{scrbook}
 
 
@@ -110,7 +112,7 @@
 %\defaultfontfeatures{RawFeature={+calt}}
 %
 %% Define commands to switch number style
-%\newcommand{\lining}{\addfontfeature{Numbers={Lining}}}
+\newcommand{\lining}{\addfontfeature{Numbers={Lining}}}
 %\newcommand{\oldstyle}{\addfontfeature{Numbers={OldStyle}}}
 %
 %% Serif font (used for body text)
@@ -253,10 +255,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Change the font used for captions
-%\addtokomafont{caption}{\small}
+\addtokomafont{caption}{\small}
 %
 %% Change the font used for labels
-%\addtokomafont{captionlabel}{\bfseries\lining}
+\addtokomafont{captionlabel}{\bfseries}
 
 % Add 2em margins on each side of the caption. (Since the default 
 % \parindent is 1em, this implies that the left end of the caption 
