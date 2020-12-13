@@ -520,12 +520,43 @@ We have used implicit summation over repeated indices and on the last line we ha
 This is simply the multivariate Taylor expansion around $\eta_c$ where we have treated $\eta$ and $\eta^\ast$ as independent variables.
 
 A simpler expansion can be found when the bosonic fields corresponds to order parameter in a system close to a phase transition. In this case
-we can assume the fields $\eta_\alpha$ to be small in general such that $S$ can be expanded about $0$. If the system is fermionic, then
-the basonic field integral of the order-parameters will have resulted from a Hubbard-Stratonovich transformation
-
-
-In general, when the bosonic fields in $Z(l)$ represents some order parameter, then assuming we are close to the critical point
-then the fields must necessarily be small. An expansion about the stationary phase approximation then amounts to an expansion in the
-bosonic fields.
+we can assume the fields $\eta_\alpha$ to be small in general such that $S$ simply can be expanded about $0$. If the system is fermionic, then
+the bosonic field integral of the order-parameters will have resulted from a Hubbard-Stratonovich transformation, in which case we will have
+a contribution to the integral of the form
+\begin{equation}
+    \label{eq:Field:Stat:determinantContribution}
+    \sqrt{\det G^{-1}(\eta_\alpha,\eta_\alpha^\ast)} = e^{\frac{1}{2}\tr\ln G^{-1}},
+\end{equation}
+where $G^{-1}$ is the result of the integration of a quadratic fermionic action, and will in general depend on the auxhillary bosonic fields
+$\eta_\alpha$ and $\eta_\alpha^\ast$ in a linear way. Then the matrix $G^{-1}$ can be decomposed in a matrix $G_0^{-1}$ that results purely
+from fermionic integration, and a matrix $\phi$ that is dependent on the auxhillary fields $\eta_\alpha$ and importantly vanishes as $\eta_\alpha\to0$,
+such that $G^{-1} = G_0^{-1} + \phi$. When the system is close the the phase transition such that the auxhillary fields are small, then this
+allows for the expansion of the logarithm in Eq.~\eqref{eq:Field:Stat:determinantContribution} such that
+\begin{equation}
+    \label{eq:Field:Stat:logarithmExpansion}
+    \begin{split}
+        \frac{1}{2}\tr\ln(G_0^{-1} + \phi) &= \frac{1}{2}\Big(\tr\ln G_0^{-1} + \tr\ln(1+G_0\phi)\Big)\\
+        &= \frac{1}{2}\Big(\tr\ln G_0^{-1} + \sum_{n=1}^\infty\frac{\tr (-G_0\phi)^n}{n}\Big).
+    \end{split}
+\end{equation}
+This is known as the one-loop expansion since in terms of perturbation theory, $G_0$ is the fermionic propagator such that the sum in the
+last line of Eq.~\eqref{eq:Field:Stat:logarithmExpansion} corresponds to a series of propagators and interactions that are connected in
+a closed loop by the trace.
 
 \subsection{Gradient expansion}
+
+The gradient expansion rests on the assumption that the fields are sufficiently smooth such that progressively higher order derivatives with
+respect to the field parameters, are progressively smaller,
+\ie we assume 
+\begin{equation}
+    \label{eq:Field:Grad:gradientComparison}
+    l_\alpha^n|\partial_\alpha^n\eta_\alpha| \gg l_\alpha^{n+1}|\partial_\alpha^{n+1}\eta_\alpha|,
+\end{equation}
+where $l_\alpha$ is some appropriate length scale such as to make $l_\alpha\partial_\alpha$ dimensionless.
+In practice this usually means that given a momentum-dependent action, $S(\eta_{\v{q},\alpha}^\ast,\eta_{\v{q},\alpha};\v{q})$, we assume $q_i$ small compared to the lattice
+spacing\footnote{This could be the spacing between hopping sites, \ie stationary ions in an electron model.} $a_i$. Then we expand the
+explicit $\v{q}$ dependence in the action in the small parameters $a_iq_i$ as a McLaurien series
+\begin{equation}
+    \label{eq:Field:Grad:actionExpansion}
+    S(\eta_{\v{q},\alpha}^\ast,\eta_{\v{q},\alpha};\v{q}) = S
+\end{equation}<++>
