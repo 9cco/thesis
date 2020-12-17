@@ -2,6 +2,21 @@
 
 In this chapter we discuss some techniques useful in Monte-Carlo simulations
 of systems in statistical-physics.
+In such systems these techniques wil be used to calculate thermal averages using random numbers. Let
+$Z$ denote the partition function and $\mathcal{H}$ the Hamiltonian of the system. Then the thermal
+average of an observable $\mathcal{O}$ is defined as
+\begin{equation}
+    \label{eq:Monte:thermalAverage}
+    \langle\mathcal{O}\rangle = \frac{1}{Z}\sum_\psi\mathcal{O}(\psi)e^{-\beta\mathcal{H}(\psi)},
+\end{equation}
+where $\psi$ denotes states of the system and we thus sum over all possible states. In the case of
+a quantum system, then this sum turns into a multi-dimensional integral over quantum coherent states.
+What Monte-Carlo techniques then provides is a way of using random numbers in calculating
+Eq.~\eqref{eq:Monte:thermalAverage} without actually summing over all the states. We do this by drawing random states
+$\psi_i$ from a carefully selected probability distribution and using statistics to estimate how close the resulting
+thermal average is likely to be to the true thermal average.
+
+\section{Markov-Chain Monte-Carlo method}
 
 \section{Metropolis-Hastings method}
 

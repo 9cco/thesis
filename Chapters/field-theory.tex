@@ -513,13 +513,13 @@ $\tilde{\eta}_\alpha = \sqrt{l}(\eta_\alpha-\eta^c_\alpha)$ we get in general th
         S(\tilde{\eta}_\alpha,\tilde{\eta}_\alpha^\ast) &= S_c + \frac{1}{l}\bigg[\frac{1}{2!}\frac{\delta^2S}{\delta\eta_\alpha\delta\eta_\beta}\Big|_{\eta_c}\tilde{\eta}_\alpha\tilde{\eta}_\beta\\
         + \frac{1}{2!}&\frac{\delta^2S}{\delta\eta_\alpha^\ast\delta\eta_\beta^\ast}\Big|_{\eta_c}\tilde{\eta}^\ast_\alpha\tilde{\eta}^\ast_\beta
         + \frac{\delta^2S}{\delta\eta_\alpha\delta\eta_\beta^\ast}\Big|_{\eta_c}\tilde{\eta}_\alpha\tilde{\eta}_\beta^\ast\bigg] +  \mathcal{O}\Big(\frac{1}{l\sqrt{l}}\Big)\\
-        &= \sum_{n_1+n_2\geq 2}\frac{1}{n_1!n_2!}\frac{\delta^{n_1+n_2}S}{\delta\eta_\alpha^{n_1}\delta\eta_\beta^{\ast\;n_2}}\tilde{\eta}_\alpha^{n_1}\tilde{\eta}_\beta^{\ast\;n_2}\Big|_{\eta_c}\frac{1}{l^{(n_1+n_2)/2}}.
+        &= \sum_{n_1+n_2\geq 2}\frac{1}{n_1!n_2!}\frac{\delta^{n_1+n_2}S}{\delta\tilde{\eta}_\alpha^{n_1}\delta\tilde{\eta}_\beta^{\ast\;n_2}}\tilde{\eta}_\alpha^{n_1}\tilde{\eta}_\beta^{\ast\;n_2}\Big|_{\eta_c}\frac{1}{l^{(n_1+n_2)/2}}.
     \end{split}
 \end{equation}
 We have used implicit summation over repeated indices and on the last line we have assumed that new indices should be introduced and summed for each $n_1$ and $n_2$.
 This is simply the multivariate Taylor expansion around $\eta_c$ where we have treated $\eta$ and $\eta^\ast$ as independent variables.
 
-A simpler expansion can be found when the bosonic fields corresponds to order parameter in a system close to a phase transition. In this case
+A simpler expansion can be found when the bosonic fields correspond to order parameters in a system close to a phase transition. In this case
 we can assume the fields $\eta_\alpha$ to be small in general such that $S$ simply can be expanded about $0$. If the system is fermionic, then
 the bosonic field integral of the order-parameters will have resulted from a Hubbard-Stratonovich transformation, in which case we will have
 a contribution to the integral of the form
@@ -536,7 +536,7 @@ allows for the expansion of the logarithm in Eq.~\eqref{eq:Field:Stat:determinan
     \label{eq:Field:Stat:logarithmExpansion}
     \begin{split}
         \frac{1}{2}\tr\ln(G_0^{-1} + \phi) &= \frac{1}{2}\Big(\tr\ln G_0^{-1} + \tr\ln(1+G_0\phi)\Big)\\
-        &= \frac{1}{2}\Big(\tr\ln G_0^{-1} + \sum_{n=1}^\infty\frac{\tr (-G_0\phi)^n}{n}\Big).
+        &= \frac{1}{2}\Big(\tr\ln G_0^{-1} - \sum_{n=1}^\infty\frac{\tr (-G_0\phi)^n}{n}\Big).
     \end{split}
 \end{equation}
 This is known as the one-loop expansion since in terms of perturbation theory, $G_0$ is the fermionic propagator such that the sum in the
@@ -553,10 +553,64 @@ respect to the field parameters, are progressively smaller,
     l_\alpha^n|\partial_\alpha^n\eta_\alpha| \gg l_\alpha^{n+1}|\partial_\alpha^{n+1}\eta_\alpha|,
 \end{equation}
 where $l_\alpha$ is some appropriate length scale such as to make $l_\alpha\partial_\alpha$ dimensionless.
-In practice this usually means that given a momentum-dependent action, $S(\eta_{\v{q},\alpha}^\ast,\eta_{\v{q},\alpha};\v{q})$, we assume $q_i$ small compared to the lattice
+In practice this usually means that given a momentum-dependent action density, $S(\eta_{\v{q},\alpha}^\ast,\eta_{\v{q},\alpha};\v{q})$, we assume $q_i$ small compared to the lattice
 spacing\footnote{This could be the spacing between hopping sites, \ie stationary ions in an electron model.} $a_i$. Then we expand the
-explicit $\v{q}$ dependence in the action in the small parameters $a_iq_i$ as a McLaurien series
+explicit $\v{q}$ dependence in the action density in the small parameters $a_iq_i$ as a McLaurien series. In the following notation, we will
+assume the length parameter $a^i$ is present in the notation $q^i$ where appropriate. The momentum dependence of the fields
+themselves should not be expanded as our goal is terms of the form $(q^i)^n(\tilde{\eta}_{\v{q},\alpha})^m$. If we then let partial momentum-derivatives
+only act on the explicite momentum-dependence in $S$, and neglecting the field dependence in the notation
+for $S$, the expanded action can be written as the series
 \begin{equation}
     \label{eq:Field:Grad:actionExpansion}
-    S(\eta_{\v{q},\alpha}^\ast,\eta_{\v{q},\alpha};\v{q}) = S
-\end{equation}<++>
+    S(\v{q}) = S(\v{0}) + \frac{\partial S}{\partial q^i}(\v{0})\,q^i + \frac{1}{2!}\frac{\partial^2S}{\partial q^i\partial q^j}(\v{0})\,q^iq^j + \mathcal{O}(q^3).
+\end{equation}
+Usually, the linear term cancels by symmetry of the underlying lattice. In general it is smart to here check for terms that cancel by considering any internal
+momentum sums that may be included in the coefficients.
+
+Terms with products between fields $\eta_{\v{q},\alpha}$ and $q^i$ lead to gradients of the spatially dependent fields $\eta_{\v{R},\alpha}$, which is why the
+expansion in Eq.~\eqref{eq:Field:Grad:actionExpansion} can be called a gradient expansion. The spatially dependent fields are defined as the coefficients in the inverse Fourier transform
+\begin{equation}
+    \label{eq:Field:Grad:inverseFourier}
+    \eta_{\v{q},\alpha} = \frac{1}{\sqrt{N}}\sum_\v{R}e^{i\v{q}\cdot\v{R}}\eta_{\alpha}(\v{R}),
+\end{equation}
+where $N$ is the number of terms in the sums $\sum_\v{q}$ and $\sum_\v{R}$. One way of now obtaining gradients of the spatial fields is to
+realize that since $q^i$ is small we can set
+\begin{equation}
+    \label{eq:Field:Grad:exponential}
+    q^i \approx \sin(q^i) = \frac{1}{2i}\Big(e^{iq^i} - e^{-iq^i}\Big).
+\end{equation}
+With this identification, all the momentum dependence in $S(\v{q})$ exists as phases such that the sum $\sum_\v{q}S(\v{q})$ results in a series of
+Kronicker-delta functions which we evaluate by the $\sum_\v{R}$ sums coming from the inverse Fourier transforms in Eq.~\eqref{eq:Field:Grad:inverseFourier}.
+Grouping terms of displaced spatial fields, we can identify derivaties, such that
+\begin{equation}
+    \label{eq:Field:Grad:derivativeId}
+    \eta_\alpha(\v{R}+a\hat{e}_i) - \eta_\alpha(\v{R}) \approx a\frac{\partial}{\partial R^i}\eta_\alpha(\v{R}).
+\end{equation}
+These identifications are justified by going to the continuum limit where $a\to0$.
+
+As an example, consider the sum
+\begin{equation}
+    \label{eq:Field:Grad:Ex:sum}
+    S = \sum_\v{q}K_{\alpha\beta\,ij}q^iq^j\eta_{\v{q},\alpha}^\ast\eta_{\v{q},\beta},
+\end{equation}
+where there is an implicit summation over repeated indices $i,j,\alpha$ and $\beta$. Fourier transforming the fields according to Eq.~\eqref{eq:Field:Grad:inverseFourier}
+and writing $q^i$ as $\sin q^i$, we can group terms such that
+\begin{equation}
+    \label{eq:Field:Grad:Ex:calculation}
+    \begin{split}
+        S &= \frac{1}{N}\sum_{\v{R}_1\v{R}_2}K_{\alpha\beta\,ij}\eta_\alpha(\v{R}_1)^\ast\eta_\beta(\v{R}_2)\frac{1}{4}\sum_\v{q}\Big[e^{i\v{q}\cdot(\v{R}_2-\v{R}_1+a\hat{e}_i-a\hat{e}_j)}\\
+        + &e^{i\v{q}\cdot(\v{R}_2-\v{R}_1+a\hat{e}_j-a\hat{e}_i)} - e^{i\v{q}\cdot(\v{R}_2-\v{R}_1+a\hat{e}_i+a\hat{e}_j)} - e^{i\v{q}\cdot(\v{R}_2-\v{R}_1-a\hat{e}_i-a\hat{e}_j)}\Big]\\
+        &= \sum_{\v{R}}K_{\alpha\beta\,ij}a^2\frac{\partial}{\partial R_i}\eta_\alpha(\v{R})^\ast\frac{\partial}{\partial R_j}\eta_\beta(\v{R}).
+    \end{split}
+\end{equation}
+
+A more conventional way of converting to gradients, is to use integration by parts. Then the product rule of partial derivatives is used to obtain
+\begin{equation}
+    \label{eq:Field:Grad:productRuleDerivative}
+    q^j\eta_\alpha(\v{R})e^{i\v{q}\cdot\v{R}} = i\frac{\partial\eta_\alpha}{\partial R^i}e^{i\v{q}\cdot\v{R}} - i\frac{\partial}{\partial R^i}\Big[\eta_\alpha(\v{R})e^{i\v{q}\cdot\v{R}}\Big].
+\end{equation}
+Summing on both sides and arguing that the bounary term vanishes because $\eta_\alpha(\v{R})\to0$ as $R^i\to\infty$, then
+\begin{equation}
+    \label{eq:Field:Grad:partialIntegraion}
+    \sum_\v{R}q^j\eta_\alpha(\v{R})e^{i\v{q}\cdot\v{R}} = i\sum_\v{R}e^{i\v{q}\cdot\v{R}}\nabla_i\eta_\alpha(\v{R}).
+\end{equation}
