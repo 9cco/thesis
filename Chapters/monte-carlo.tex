@@ -11,14 +11,112 @@ average of an observable $\mathcal{O}$ is defined as
 \end{equation}
 where $\psi$ denotes states of the system and we thus sum over all possible states. In the case of
 a quantum system, then this sum turns into a multi-dimensional integral over quantum coherent states.
+Now any attempt at estimating these integrals through an interpolation scheme is destined to fail because if we divide
+a $1$-dimensional integral into $M$ pieces and the error of the interpolation scheme scales as $\sim M^{-\kappa}$,
+then applied to a $d$-dimensional integral, its error will scale as $M^{-\kappa/d}$.
 What Monte-Carlo techniques then provides is a way of using random numbers in calculating
 Eq.~\eqref{eq:Monte:thermalAverage} without actually summing over all the states. We do this by drawing random states
 $\psi_i$ from a carefully selected probability distribution and using statistics to estimate how close the resulting
-thermal average is likely to be to the true thermal average.
+thermal average is likely to be to the true thermal average. Letting $M$ be the number of samples, then the
+error scales as $M^{-1/2}$ and is independent of the number of dimensions of the integral.
+
+As in the case of the stationary phase approximation, the calculation of the sum in Eq.~\eqref{eq:Monte:thermalAverage} can be made much more effective
+by considering which terms give large contributions. If we have a probability distribution $\pi(\psi)$ of sampled states $\psi$ that has peaked at states
+that gives large contributions to $\langle\mathcal{O}\rangle$, then our estimate will converge much quicker to the true value than if we were to
+sample states uniformely. In a sense we are interested in sampling only the important states, and hence this is called importance sampling. Let
+$\{\tilde{\psi}_i\}$ be a set of states that are uniformly sampled, while $\{\psi_i\}$ are sampled with probability distribution $\pi(\psi_i)$. The
+statistical estimator $\bar{\langle\mathcal{O}\rangle}$ of the thermal average of the observable $\mathcal{O}$ is then
+\begin{equation}
+    \label{eq:Monte:importanceSampledThermAvg}
+    \bar{\langle\mathcal{O}\rangle} = \sum_{i}\mathcal{O}(\tilde{\psi}_i)\frac{e^{-\beta\mathcal{H}(\tilde{\psi}_i)}}{Z(\{\tilde{\psi}_i\})} = \sum_{i}\mathcal{O}(\psi_i)\frac{e^{-\beta\mathcal{H}(\psi_i)}}{\pi(\psi_i)Z(\{\psi_i\})}.
+\end{equation}
+Now assuming that the state-dependence of the observaible is less important than the exponential, then the largest contributions to the sum will
+come from states that are such that $e^{-\beta\mathcal{H}}/Z$ is large. We thus want to pick states such that $\pi(\psi_i) = e^{-\beta\mathcal{H}(\psi_i)}/Z$.
+Then, given $M$ states sampled according to this probability distribution, the statistical estimator reduces to the arithmetic average
+\begin{equation}
+    \label{eq:Monte:arithmTherm:Avg}
+    \bar{\langle\mathcal{O}\rangle} = \frac{1}{M}\sum_i\mathcal{O}(\psi_i).
+\end{equation}
 
 \section{Markov-Chain Monte-Carlo method}
 
+\ac{mcmc} is a strategy of obtaining a sample of random states $\psi_k$ where the the states are drawn sequentially in such
+a way that the probability $P_k(\psi)$ of drawing a new state $\psi_k=\psi$ is only dependent on what the last
+state $\psi_{k-1}$ was. The chain developed by drawing states in this way thus has no memory of the rest of the content
+of the chain, except for its last link $\psi_{k-1}$. A chain with this property is called a Markov-Chain, hence the name.
+
+We want the sampled states to be drawn according to the probability distribution $\pi(\psi_k)$ discussed above. This is assured
+with the criteria of ergodicity and detailed balance. Ergodicity means in this context that the states are drawn in such a way
+that if we were to draw infinitely many states, then we would have drawn all possible states $\psi$ in the original sum in
+Eq.~\eqref{eq:Monte:thermalAverage}.
+
+The criterion of detailed balance comes from the idea that we want the probability that
+a certain state is drawn to be independent of when the state is drawn in the chain. Let $P_k(\psi)$ be the probability
+that $\psi$ is drawn at the $k$th point in the chain. Because of the Markov-chain property, this probability is fully determined
+by the probability that the previous state in the chain transitions into the state $\psi$. Let $\mathcal{T}(\psi'\to\psi)$ denote
+the probability that state $\psi'$ transitions into state $\psi$, \ie that the state $\psi$ is drawn given a previously drawn
+state $\psi'$. Then the probability that the state drawn at the point $k+1$ in the chain is $\psi$, is given by
+\begin{equation}
+    \label{eq:Monte:pointProbability}
+    \begin{split}
+        P_{k+1}(\psi) &= \sum_{\psi'}P(\psi_k = \psi'\;\land\;\psi'\text{ transitions to }\psi)\\
+        &= \sum_{\psi'}P_k(\psi')\mathcal{T}(\psi'\to\psi)\\
+        &= P_k(\psi) + \sum_{\psi'}\Big[P_k(\psi')\mathcal{T}(\psi'\to\psi) - P_k(\psi)\mathcal{T}(\psi\to\psi')\Big],
+    \end{split}
+\end{equation}
+where we have used that $\sum_{\psi'}\mathcal{T}(\psi\to\psi') = 1$ since the state must transition to some state. Now since
+the probability should be invariant of the point in the chain and be given by our desired probability density,
+we demand $P_{k+1}(\psi) = P_k(\psi) = \pi(\psi)$ such that the sum vanishes.
+Because the probability density $\mathcal{T}$ is arbitrary, the sum needs to vanish term-wise, yielding the final condition
+of detailed balance:
+\begin{equation}
+    \label{eq:Monte:detailedBalance}
+    \pi(\psi')\mathcal{T}(\psi'\to\psi) = \pi(\psi)\mathcal{T}(\psi\to\psi').
+\end{equation}
+This states that for the process to be invariant of the point in the chain, it has be reversible.
+
 \section{Metropolis-Hastings method}
+
+The Metropolis-Hastings method is an algorithm for drawing states in a Markov-Chain that spesifies a transition probability
+$\mathcal{T}(\psi\to\psi')$ between states $\psi$ and $\psi'$ that satisfies the detailed balance criterion. The algorithm proceeds
+as follows:
+\begin{enumerate}
+    \item Given a state $\psi_k$, pick a new state $\psi_p$ where the process of picking this state has an, as of now, arbitrary
+        probability distribution denoted $q(\psi_p\,|\,\psi_k)$ with the only requirement being that it leads to ergodic selection.
+    \item Accept this new proposed state $\psi_p$, with the probability $\alpha(\psi_p\,|\,\psi_k)$,
+        defined as
+        \begin{equation}
+            \label{eq:Monte:MH:acceptanceProb}
+            \alpha(\psi_p\,|\,\psi_k) = \min\bigg\{1,\;\frac{\pi(\psi_p)q(\psi_k\,|\,\psi_p)}{\pi(\psi_k)q(\psi_p\,|\,\psi_k)}\bigg\}.
+        \end{equation}
+    \item If $\psi_p$ is accepted we set $\psi_{k+1}=\psi_p$. If not, then $\psi_{k+1}=\psi_k$. Finally return to 1. to pick the next
+        state in the chain.
+\end{enumerate}
+By this procedure, then the probability of transitioning between a state $\psi$ at point $k$ to a state $\psi'$ at point $k+1$ is
+given by probability that the state $\psi'$ is picked and that $\psi'$ is accepted such that
+\begin{equation}
+    \label{eq:Monte:MH:transitionProb}
+    \mathcal{T}(\psi\to\psi') = \alpha(\psi'\,|\,\psi)\,q(\psi'\,|\,\psi).
+\end{equation}
+This transition probability satisfies detailed balance since inserting Eq.~\eqref{eq:Monte:MH:transitionProb} and
+\eqref{eq:Monte:MH:acceptanceProb} yields
+\begin{equation}
+    \label{eq:Monte:MH:detailedBalance}
+    \begin{split}
+        \pi(\psi')\mathcal{T}(\psi'\to\psi) &= \min\{\pi(\psi)q(\psi'\,|\,\psi),\;\pi(\psi')q(\psi\,|\,\psi')\}\\
+        &= \pi(\psi)\mathcal{T}(\psi\to\psi').
+    \end{split}
+\end{equation}
+
+\subsection{Practical considerations}
+
+Usually, the above is a bit too general for practical implementation since we would have to calculate, or know, the probability
+distribution $q(\psi'\,|\,\psi)$ used in picking new proposed states. If we assume $q$ to be symmetric such that
+\begin{equation}
+    \label{eq:Monte:MH:pickDistributionSymmetry}
+    q(\psi'\,|\,\psi) = q(\psi\,|\,\psi'),
+\end{equation}
+then we don't need to calculate it explicitely since it cancels out of the equation for $\alpha$ in Eq.~\eqref{eq:Monte:MH:transitionProb}.
 
 \section{Importance sampling of observables}
 

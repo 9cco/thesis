@@ -378,6 +378,7 @@
 \usepackage{dirtytalk}
 \usepackage{amsthm}     % Customization of theorem environments
 \usepackage{tikz-feynman}
+\usepackage[acronym]{glossaries}
 
 
 
@@ -483,4 +484,8 @@
 \newtheorem{defi}{Def.}[chapter]
 \newtheorem{thm}{Thm.}[chapter]
 
-
+% Acronyms
+\makeglossaries
+\setacronymstyle{long-short}
+\def\ac{\gls*}
+\newacronym{mcmc}{MCMC}{Markov-Chain Monte-Carlo}
