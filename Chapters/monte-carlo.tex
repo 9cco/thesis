@@ -1,6 +1,6 @@
 \chapter{Monte-Carlo Techniques}
 
-In this chapter we discuss some techniques useful in Monte-Carlo simulations
+In this chapter we discuss some techniques useful in \ac{mc} simulations
 of systems in statistical-physics.
 In such systems these techniques wil be used to calculate thermal averages using random numbers. Let
 $Z$ denote the partition function and $\mathcal{H}$ the Hamiltonian of the system. Then the thermal
@@ -14,7 +14,7 @@ a quantum system, then this sum turns into a multi-dimensional integral over qua
 Now any attempt at estimating these integrals through an interpolation scheme is destined to fail because if we divide
 a $1$-dimensional integral into $M$ pieces and the error of the interpolation scheme scales as $\sim M^{-\kappa}$,
 then applied to a $d$-dimensional integral, its error will scale as $M^{-\kappa/d}$.
-What Monte-Carlo techniques then provides is a way of using random numbers in calculating
+What \ac{mc} techniques then provides is a way of using random numbers in calculating
 Eq.~\eqref{eq:Monte:thermalAverage} without actually summing over all the states. We do this by drawing random states
 $\psi_i$ from a carefully selected probability distribution and using statistics to estimate how close the resulting
 thermal average is likely to be to the true thermal average. Letting $M$ be the number of samples, then the
@@ -31,7 +31,11 @@ statistical estimator $\bar{\langle\mathcal{O}\rangle}$ of the thermal average o
     \bar{\langle\mathcal{O}\rangle} = \sum_{i}\mathcal{O}(\tilde{\psi}_i)\frac{e^{-\beta\mathcal{H}(\tilde{\psi}_i)}}{Z(\{\tilde{\psi}_i\})} = \sum_{i}\mathcal{O}(\psi_i)\frac{e^{-\beta\mathcal{H}(\psi_i)}}{\pi(\psi_i)Z(\{\psi_i\})}.
 \end{equation}
 Now assuming that the state-dependence of the observaible is less important than the exponential, then the largest contributions to the sum will
-come from states that are such that $e^{-\beta\mathcal{H}}/Z$ is large. We thus want to pick states such that $\pi(\psi_i) = e^{-\beta\mathcal{H}(\psi_i)}/Z$.
+come from states that are such that $e^{-\beta\mathcal{H}}/Z$ is large. We thus want to pick states such that 
+\begin{equation}
+    \label{eq:Monte:boltzmannDist}
+    \pi(\psi_i) = e^{-\beta\mathcal{H}(\psi_i)}/Z.
+\end{equation}
 Then, given $M$ states sampled according to this probability distribution, the statistical estimator reduces to the arithmetic average
 \begin{equation}
     \label{eq:Monte:arithmTherm:Avg}
@@ -118,10 +122,129 @@ distribution $q(\psi'\,|\,\psi)$ used in picking new proposed states. If we assu
 \end{equation}
 then we don't need to calculate it explicitely since it cancels out of the equation for $\alpha$ in Eq.~\eqref{eq:Monte:MH:transitionProb}.
 
-\section{Importance sampling of observables}
+A further simplification can be acheived by inserting the expression for $\pi(\psi)$ in Eq.~\eqref{eq:Monte:boltzmannDist} into the $q$
+symmetric version of $\alpha$, which in this case reduces to
+\begin{equation}
+    \label{eq:Monte:MH:reducedTransitionProb}
+    \alpha(\psi'\,|\,\psi) = \min\Big\{1,\;e^{-\beta\big[\mathcal{H}(\psi') - \mathcal{H}(\psi)\big]}\Big\}.
+\end{equation}
+The significance of this form is that we see the transition probability is only dependent on the difference between the energy of the
+updated state and the original state. If the state of the system $\psi$ is a collection of site-dependent sub-states $\phi(\v{r}_j)$,
+\eg how the state of an Ising chain is given by a collection of site-dependent spins, then the calculation of $\mathcal{H}(\psi)$
+has to take into account all the sites. If we update only a single site $\v{r}_j$ of $\psi$ to get $\psi'$, which we call a local
+\ac{mc} update, then all the sites that do not have an interaction with $\v{r}_j$ cancels out in the
+difference $\mathcal{H}(\psi')-\mathcal{H}(\psi)$. Then we only need to calculate the the difference in the sub-states that are
+affected by $\v{r}_j$ to calculate the energy-difference. This is an essential property to have when creating a parallelized version
+of this algorithm since different parts of the lattice of sites then can be updated in an asynchronuous manner without affecting
+each other. In other words: by simplifying to the energy difference, the update scheme becomes local which makes local \ac{mc}
+updates grid-parallelizable.
+
+To use pseudo-random numbers to accept a new state $\psi'$ with probability $\alpha$ we pick a uniformely distributed number $r\in(0,1]$. Then
+we use the fact that
+\begin{equation}
+    \label{eq:Monte:MH:rProbability}
+    P[r \leq \alpha(\psi'\,|\,\psi)] = \alpha(\psi'\,|\,\psi),
+\end{equation}
+so that updating the state if $r\leq\alpha$ is equivalent to updating the state with probability $\alpha$. Given the form of $\alpha$ in
+Eq.~\eqref{eq:Monte:MH:reducedTransitionProb} then
+\begin{equation}
+    \label{eq:Monte:MH:rEquivalences}
+    r \leq \alpha(\psi'\,|\,\psi)\;\Leftrightarrow\;\ln r \leq -\beta[\mathcal{H}(\psi')-\mathcal{H}(\psi)].
+\end{equation}
+To update the state with probability $\alpha$ we thus simply take the natural logarithm of $r$ and update the state if the right hand
+side of Eq.~\eqref{eq:Monte:MH:rEquivalences} is true.
+
+To obtain good statistics, we want, as a rule of thumb, the acceptance rate to be about $30-60\%$ for high temperature states%
+\footnote{High temperature states refers to states that are well above any transition temperature of the system.}. %
+The acceptance rate is defined as the
+number of proposed states $\psi'$ that are accepted, divided by the total number of proposed states, and will in general be proportional
+to the transition probability $\alpha(\psi'\,|\,\alpha)$. This can be adjusted by changing the way
+new states $\psi'$ are proposed. Let $\psi$ be composed of site specific substates $\phi(\v{r}_j)$ and let a state $\psi'$ be proposed
+by changing the values of the sub-state $\phi(\v{r}_0)$. Choosing values closer to the original sub-state $\phi(\v{r}_o)$, the difference
+$\mathcal{H}(\psi')-\mathcal{H}(\psi)$ decreases such that $\alpha(\psi'\,|\,\psi)$ in
+Eq.~\eqref{eq:Monte:MH:reducedTransitionProb} approaches $1$ and the acceptance rate increases.
+
+Proposing states such that the acceptance rate is very high, in this case means that the states do not change very much with each \ac{mc} update. This
+can lead to freezing of the simulation, where the measurements do not change even after a significant number of \ac{mc} updates because
+a large number of \ac{mc} updates in a certain direction is needed to significantly change the measurements. On the other hand, too low
+of a acceptance rate will also freeze the simulation since then obviously states are very unlikely to change, leading to the same
+measurements repeatedly. Ultimately, whether the acceptance rate should be considered too high or too low, should be guided by the physics of
+the system since in the case that the system has reached a gobal minimum in the energy-lanscape and has low temperature,
+the proper statistics is obtained by
+an update scheme that gives a low acceptance rate. It is not advisable to change the acceptance rate during a measurement run over
+decreasing temperatures as this has tended to freeze the measurements at varying temperatures leading to confusion when trying to
+find a transition point.
 
 \section{Thermalization procedures}
 
+Thermalization in a \ac{mcmc} simulation refers to the process of discarding a number of \ac{mc} updates before starting to measure the
+states in the Markov-chain. The reason for doing this is because the first states in the chain will usually be very unlikely states in the
+ensamble of states, and thus give these states an artificially high statistical weight, unless we measure long enough.
+That time could be very long indeed if the starting states are very unlikely, thus to get
+measurements in a reasonable time, these unlikely starting states are discarded.
+
+How many states to discard is usually estimated with the help of an energy vs. \ac{mcs}%
+\footnote{A Monte-Carlo sweep is a term used for attempting to update all the different sites of a system once.} %
+plot as shown in Figure~\ref{fig:Monte:therm_plot}. Since the initial state usually has a different energy than the average energy in the Markov-chain,
+the energy can be seen to rapidly stabilize to the average value in such a plot. 
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\textwidth]{thermalization_plot_1compXY.pdf}
+    \caption{Thermalization of a $64^3$ single-component $XY$-system from random initial states to a numerical temperature $T=0.5$.
+    The different curves represent the energy of different realizations of the same
+    system initialized at different random states over several \ac{mcs}s. The random initial states have a relatively high energy that stabilizes
+    to the same value for all realizations in an exponential fashion.}
+    \label{fig:Monte:therm_plot}
+\end{figure}
+
+Whether the energy stabilizes from above or below will depend
+on what the initial state is and what the temperature of the simulation is set to. For an ab-iniito state, in which the values of the sub-states
+are set to uniformly distributed random values in their validity range, this normally corresponds to a very high temperature and
+high energy state, hence thermalizing from such a state will have the energy stabilize from above. Another possibility for an ab-inito
+state is some kind of mean-field minimal solution of the Hamiltonian where sub-states at different sites are correlated. In this case the
+energy will usually be low and the thermalization energy will stabilize from below. This option has the disadvantage that if the mean field
+solution lies inside some local energy minimum then simulations based on it might not be able to get out and find the global miniomum,
+as opposed to states that are thermalized from high energy where some might find this local minimum while others fall down in the global one.
+In general it is best to thermalize several independent systems from different initial conditions that yield quantitatively similar results
+to make it less likely that the results come from a local minimum.
+
+A last suggestion for an initial state of the system,
+is the last state of a previous simulation. In this case the thermalization will stabilize depending on the relative temperature
+of the two simulations. To be sure that the measurements are not correlated with the measurements of the last simulation one should discard
+This is a useful practice if gathering results over an extended temperature range where the systems need a large
+thermalization time in order to stabilize. One would then typically start measuring at a high temperature and then decrease the temperature
+sucessively in steps with a thermalization period and measure period for each step.
+
+For systems prone to fall into local minima it was found that a more careful thermalization period analogous to the measurement procedure 
+described above, decreased the probability of freezing into such minima. Instead of thermalizing from a high energy - high temperature state
+directly down to the desired temperature, which we wall quenching, a cooldown period was added. During the cooldown period, the temperature was
+lowered stepwise from a high temperature $T_0$ to a target temperature $T$ with intermediate temperatures
+\begin{equation}
+    \label{eq:Monte:Therm:geometricTemperatures}
+    T_k = \Big(\frac{T}{T_0}\Big)^{\frac{k}{N}}T_0.
+\end{equation}
+The intermediate temperatures were geometrically distributed to ensure highest density of intermediate steps at lower temperatures. At
+each temperature step, a fixed number of \ac{mcs}s were preformed such that more \ac{mcs}s were done towards the lower temperature than
+higher. This was done because the simulations in general took longer to thermalize when the temperature decreased. An example of how the
+energy changed during such a thermalization period is shown in Figure~\ref{fig:Monte:cooldown_plot}.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\textwidth]{cooldown_full_model.pdf}
+    \caption{Energy pr. site of a $64^3$ site model system of a $p+ip$ chiral superconductor during the cooldown stage. The temperature is
+    lowered as a geometric sequence and a fixed number of \ac{mcs}s are done at each temperature step. Comparing with the thermalization
+    in Figure~\ref{fig:Monte:therm_plot} we see that the cooldown period gives a significantly more gradual thermalization.}
+    \label{fig:Monte:cooldown_plot}
+\end{figure}
+
+The cooldown period was then followed by a conventional thermalization stage where the temperature was held constant at $T$. In
+most cases the energy had already stabilized at this point such that the energy measurements during this extra thermalization
+stage typically only showed fluctuations around the mean.
+
+
 \section{Parallell tempering}
+
+\section{Grid parallelization}
 
 \section{Reweighting}
