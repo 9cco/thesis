@@ -81,7 +81,7 @@ This states that for the process to be invariant of the point in the chain, it h
 
 \section{Metropolis-Hastings method}
 
-The Metropolis-Hastings method is an algorithm for drawing states in a Markov-Chain that spesifies a transition probability
+The \ac{mh} method is an algorithm for drawing states in a Markov-Chain that spesifies a transition probability
 $\mathcal{T}(\psi\to\psi')$ between states $\psi$ and $\psi'$ that satisfies the detailed balance criterion. The algorithm proceeds
 as follows:
 \begin{enumerate}
@@ -218,7 +218,7 @@ sucessively in steps with a thermalization period and measure period for each st
 
 For systems prone to fall into local minima it was found that a more careful thermalization period analogous to the measurement procedure 
 described above, decreased the probability of freezing into such minima. Instead of thermalizing from a high energy - high temperature state
-directly down to the desired temperature, which we wall quenching, a cooldown period was added. During the cooldown period, the temperature was
+directly down to the desired temperature, which we call quenching, a cooldown period was added. During the cooldown period, the temperature was
 lowered stepwise from a high temperature $T_0$ to a target temperature $T$ with intermediate temperatures
 \begin{equation}
     \label{eq:Monte:Therm:geometricTemperatures}
@@ -243,7 +243,67 @@ most cases the energy had already stabilized at this point such that the energy 
 stage typically only showed fluctuations around the mean.
 
 
-\section{Parallell tempering}
+\section{Parallel tempering}
+
+Parallel tempering is a method of simulating multiple systems over a range of different temperatures where the systems can exchange
+positions with their neighbors in this temperature range according to a \ac{mh}-like update step. Since all the different systems all have the same parameters
+except for temperature, when viewed from the perspective of a single temperature, this leads to a normal Metropolis-Hastings \ac{mcmc}
+simulation with an occational global update of all sites of the system whenever the current system exchanges with the system at a neighboring
+temperature. From the dual perspective of a single system, \ac{pt} allows the system to move in temperature space.
+
+This global updating, or movement in temperature space, has the advantage that it can prevent systems from getting stuck in local minima
+by allowing them to move to a higher temperature where it is easier to fluctuate to a more favorable configuration. In systems that
+has a jagged energy-landscape with lots of local minima this can be of great benefit and can reduce the required time it takes
+to measure observables with a certain accuracy by several orders of magnitude \cite{Katzgraber09}.
+
+To implement parallel tempering \ac{mcmc} in a temperature centric perspective,
+let $\{T_i\}_{i=1}^M$ be a sorted list of $M$ ascending temperatures, and let $\{\lambda_i\}_{i=1}^M$
+be a list of indices $\lambda$, that refer to replica states $\{\psi_\lambda\}_{\lambda=1}^M$ of the system such that the replica with temperature $T_i$
+is given by $\psi_{\lambda_i}$ and its energy is given by $E_{\lambda_i}$.
+The simulation then proceeds according to the algorithm
+\begin{enumerate}
+    \item Preform $\Delta t$ normal Monte-Carlo updates on all replica states, \eg using the \ac{mh} method.
+    \item For each replica state $\psi_\lambda$ calculate the corresponding energy $E_\lambda$.
+    \item For each pair of neighboring temperatures $T_i$ and $T_{i+1}$ where $T_i<T_{i+1}$:
+        \begin{enumerate}
+            \item calculate the quantity
+            \begin{equation}
+                \label{eq:Monte:PT:delta}
+                \Delta = (E_{\lambda_{i+1}} - E_{\lambda_i})\Big(\frac{1}{T_{i+1}} - \frac{1}{T_i}\Big).
+            \end{equation}
+            \item Then swap the indices $\lambda_i \leftrightarrow \lambda_{i+1}$ with probability $\min\{1, e^\Delta\}$. This can
+                as in the \ac{mh} method be done by generating a random number $r\in[0,1)$ and then swapping indices if
+                $\ln r \leq \Delta$.
+        \end{enumerate}
+    \item If the replicas $\psi_\lambda$ have internal knowledge of their temperatures, then distribute $T_i$ to $\psi_{\lambda_i}$, for all
+        temperatures $T_i$.
+    \item Sample observables and return to 1.
+\end{enumerate}
+
+This algorithm is very efficiently parallelizable since the bulk of computing time will be going to doing the $\Delta t$ \ac{mc} updates which can
+be performed in parallel by having each replica state $\psi_\lambda$ be assigned to a separate thread / processor. If each thread in addition
+keeps track of the replicas energy at the end of the \ac{mc} updates, the only information that needs to be transferred between worker processes and
+the process doing the \ac{pt} update step is the values of the energies to the \ac{pt} process, and afterwards: the set of new temperatures
+back to the worker processes. The \ac{pt} process itself only has to 
+calculate $M-1$ values and move around the indices in an array.
+
+For the parallel tempering method to generate good statistics efficiently, some care should be taken in the distribution of the temperatures $T_i$.
+A rule of thumb is to distribute them geometrically, \ie according to
+\begin{equation}
+    \label{eq:Monte:PT:geometricTemperatures}
+    T_i = \bigg(\frac{T_M}{T_1}\bigg)^{\frac{k-1}{M-1}}T_1,
+\end{equation}
+with the argument that lower temperatures generally have a lower relaxation rate. With geometric distribution, the temperatures are denser towards
+the low end such that the accpetance rate of swaps of replicas at neighboring temperatures would in general become more flat and independent of temperature.
+Should the specific heat diverge at some point in the temperature range as in the case of a phase transition, then this distribution would no
+longer be optimal since the acceptance probability of temperature swaps is inversely proportional to $C_v$ and thus the accpetance rate would no
+longer be flat.
+
+From the perspective of an individual replica, the overall goal with the distribution of temperatures is to maximize the number of the replica moves
+from the lowest temperature $T_1$, up to the highest temperature $T_M$ and back to the lowest temperature again. This will then maximize the number
+of statistically independent visits of the system at each temperature. The hope then is that a flat accpetance rate with respect to the distributed
+temperatures will provide a good number of round-trips. With more advanced methods such as the feedback-optimized parallel-tempering Monte-Carlo
+method the number of round-trips can be optimized \cite{Katzgraber06}.
 
 \section{Grid parallelization}
 
