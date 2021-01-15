@@ -307,4 +307,262 @@ method the number of round-trips can be optimized \cite{Katzgraber06}.
 
 \section{Grid parallelization}
 
+A simple way of utlizing multiple processor cores, or cpus on a multi-cpu system, is to run indipendent monte-carlo simulation on each processor. This
+is usually very efficient if a parameter of the system such as temperature is to be varied over some intervall. Then each simulation could have a
+different value of this parameter. In this case it is recommended to also implement parallel tempering since the extra overhead is minimal and the
+speedup of the simulations can be significant.
+
+Alternatively, all the simulations can run with the same value on different processes and the samples from the individual simulations can then,
+be combined to a super-sample. This has the advantage that the individual sampling runs can be shortened and the implementation of the parallelization
+is straight-forward. A drawback with this method is however that separate simulations has to be thermalized individually, such that the more the
+super-sample is split on different processes, the more processor time is wasted on thermalization. Additionally, if the individual simulation
+runs depend on some sort of freezing like how vorticies freeze to the numeric lattice, then individual simulations could freeze at different
+angles such that they can not be combined to form good statistics.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\textwidth]{sub_cuboids.png}
+    \caption{Illustration of the sub-division of the numerical grid into sub-cuboids. The right side illustrates that the sites in each sub-cuboid
+    can be categorized as either internal sites, which can be updated asynchronuously on different sub-cuboids and is illustrated in the figure
+    by the internal orange cube, or sites in a border region.}
+    \label{fig:Monte:numerical_grid}
+\end{figure}
+
+A solution to the above issues with this simple parallelization is provided by grid-parallelization. This parallelization method is suited for
+simulations that consist of interacting sites either in $2$D or $3$D where local Monte-Carlo updates is to be preformed.
+We will focus on the case of a $3$D simulation where the sub-sites
+are organized in a numerical cubic lattice. The idea is to split the cube into different sub-cuboids as illustrated on the left side of
+Figure~\ref{fig:Monte:numerical_grid}. Each sub-cuboids internal sites can then
+be updated in the normal Monte-Carlo fashion in parallell with the internal sites of other sub-cuboids. If the individual sites of the original
+system interacts with neighboring sites\footnote{In the case of a local \ac{mh} update this can take the form of an energy-difference of
+the system at a proposed update-site that depends on the value of fields at neighboring sites.}, then it will be necessary for each sub-cuboid to have
+a border whose thickness depends on the range of the interaction. The sites in this border-region will then have an interaction with sites in
+the border-region of other sub-cuboids such that care has to be taken not to update a site based on the value of a neighboring site that is no
+longer valid. One solution to this is simply updating all the sites in the border-regions serially, \ie update the border sites in a single sub-cuboid,
+communicate the updated values to the affected neighboring sub-cuboids, then move to the next sub-cuboid, etc. Or, it could be even more effective
+to parallelize the updates of the border sites as well by further sub-dividing the border-sites into different categories. As an example, one could
+define internal border-sites on the face of a sub-cuboid to be the border-sites that only depend on sites in the single neighboring sub-cuboid that
+is in the direction of the face-plane normal vector. Then all the right-facing internal border-sites can be done in parallel on all sub-cuboids, followed
+by all the top-facing internal border-sites, etc.
+
 \section{Reweighting}
+
+Reweigting techniques are methods of finding estimates of parameter-dependent observables at specific parameter values based on previously obtained
+samples of these observables from \ac{mc}-simulations that have been done at parameter values independent or the reweighting parameters.
+Given a set of samples of some observable $\{o_i\}_{i=1}^M$ from previous \ac{mc} simulation(s), these techniques provide
+a set of weights $\{w(\beta')_i\}_{i=1}^M$ that can be used to estimate the observable at a parameter value $\beta'$ by the reweighting
+\begin{equation}
+    \label{eq:Monte:Reweighting:generalReweighting}
+    \hat{o}(\beta') = \sum_iw(\beta')_io_i.
+\end{equation}
+This is very useful when estimating some observable over a temperature-range since then a single simulation can yield results
+not only for a single temperature, but for an extended region. If this region is close to a phase-transition then this can be used as a way of avoiding the
+critical slowing down of simulations at phase transitions by instead simulating at temperatures close to the phase-transition and then using reweighting
+techniques to estimate results at the phase-transition temperature. All this is possible because a simulation at a given temperature\footnote{It is possible
+to use rewighting techniques on other parameters of the simulation as well, as long as they are, like inverse-temperature, linear in the action.}
+produces a statistical distribution of energy values for the sampled states. This energy distribution will in general overlap with the energy-distribution
+produced when simulating at a temperature that is sufficiently close to the original. Because of this overlap, it is possible to statistically extrapolate
+the value of observables at the neighboring temperature.
+
+Reweighting techniques are divided into single-histogram- and multi-histogram reweighting-techniques depending on whether they use statistical information
+from a single histogram or can combine histograms generated at multiple parameter values. The single-histogram techniques is used to estimate values of the observables
+at neighboring temperature-values and has the virtue of being comparatively simple to implement and understand. The multi-histogram
+techniques, on the other hand, has the advantage that the additional statistical information in general gives better estimates and is able to even give better estimates
+at the original temperatures the simulations were preformed at, but has a more involved implementation.
+
+In our simulations we used a Julia implementation\footnote{This implementation is available at
+\url{https://github.com/Sleort/FerrenbergSwendsenReweighting.jl/tree/1.0.3_update}}
+ of the multi-histogram technique originally developed by Bojesen, a technique which they used in \cite{Bojesen13M},
+and updated for the current Julia release by us.
+
+\subsection{Ferrenberg-Swendsen single-histogram method}
+
+To derive the Ferrenberg-Swendsen single-histogram reweighting technique, let $o_i$ be samples of an observable $\mathcal{O}$ done at sample states $\psi_i$ of a system
+with Hamiltonian $\mathcal{H}$ at parameter value $\beta$, such that $\mathcal{O}(\psi_i) = o_i$.
+Then, from out discussion of importance sampling, the estimate of the average of the observable when the states are sampled
+according to a probability distribution $\pi(\psi_i)$ is given by
+\begin{equation}
+    \label{eq:Monte:Reweighting:avgEstimate}
+    \langle \hat{\mathcal{O}}\rangle_\beta = \frac{\sum_io_ie^{-\beta\mathcal{H}(\psi_i)}/\pi(\psi_i)}{\sum_ie^{-\beta\mathcal{H}(\psi_i)}/\pi(\psi_i)}.
+\end{equation}
+Using a simulation with importance sampling at parameter-value $\beta$ to generate the sampled states, the probability distribution was
+\begin{equation}
+    \label{eq:Monte:Reweighting:probDist}
+    \pi(\psi_i) = \frac{e^{-\beta\mathcal{H}(\psi_i)}}{Z_\beta} = \frac{e^{-\beta\mathcal{H}(\psi_i)}}{\sum_\psi e^{-\beta\mathcal{H}(\psi)}},
+\end{equation}
+where the sum in the denominator is over all possible states $\psi$ and not sampled states. Inserting $\pi(\psi_i)$ into $\langle\mathcal{O}\rangle_\beta$
+in Eq.~\eqref{eq:Monte:Reweighting:avgEstimate}, this equation reduces to the arithmetric average, however if we now imagine wanting an estimate of
+$\langle\mathcal{O}\rangle_{\beta'}$ at an arbitrary parameter value $\beta'$, then insertion yields
+\begin{equation}
+    \label{eq:Monte:Reweighting:FS}
+    \langle \hat{\mathcal{O}}\rangle_{\beta'} = \frac{\sum_io_ie^{-(\beta'-\beta)\mathcal{H}(\psi_i)}}{\sum_ie^{-(\beta'-\beta)\mathcal{H}(\psi_i)}}.
+\end{equation}
+This expression then gives an estimate of the average of the observable $\mathcal{O}$ at an arbitrary parameter value $\beta'$ using states $\psi_i$ that
+were sampled at a specific parameter value $\beta$. This is called the Ferrenberg-Swendsen single-histogram reweighting technique \cite{FS_1988}, and in terms of the reweighting
+expression in Eq.~\eqref{eq:Monte:Reweighting:generalReweighting} we can read off that the weights of this technique are given by
+\begin{equation}
+    \label{eq:Monte:Reweighting:FS:weights}
+    w(\beta')_i = \exp\Big[-\ln\Big(\sum_je^{-(\beta'-\beta)[\mathcal{H}(\psi_j)-\mathcal{H}(\psi_i)]}\Big)\Big].
+\end{equation}
+Although simple, this techniques ability to extract information about observables around the simulated paramter-value makes it extremely valuable 
+in for instance the study of scaling relations or to accurately calculate the peak of thermodynamic variables when the \ac{mc}-simulations themselves take a significant
+amount of computing time.
+
+\subsection{Numeric evaluation of exponential sums}
+\label{sec:Monte:Reweighting:expSums}
+
+The reason for introducing the extra exponential in the form of $w(\beta')_i$ in Eq.~\eqref{eq:Monte:Reweighting:FS:weights} is because sums of exponential
+numbers generally are hard to do numerically using finite-precision
+floating point numbers, however the logarithm of such a sum can be found using an iterative scheme. Let $S^{(k)}$ be a sum of $k$
+exponential numbers decreasing in magnitude that presumably are too large to be stored individually such that
+\begin{equation}
+    \label{eq:Monte:Reweighting:FS:expSum}
+    S^{(k)} = e^{a_1} + e^{a_2} + \ldots + e^{a_k},
+\end{equation}
+with $a_{i+1}\leq a_i$, is numerically hard to do. Assuming however that fractions of the numbers can be stored, then we can numerically calculate
+\begin{equation}
+    \label{eq:Monte:Reweighting:FS:initialLnSum}
+    \ln S^{(2)} = a_1 + \ln\Big(1+e^{a_2-a_1}\Big).
+\end{equation}
+Following the iteration
+\begin{equation}
+    \label{eq:Monte:Reweighting:FS:iteratedLnSum}
+    \ln S^{(k)} = \ln S^{(k-1)} + \ln\Big(1+e^{a_k-\ln S^{(k-1)}}\Big),
+\end{equation}
+then $\ln S^{(k)}$ can be found for arbitrary $k$ without ever storing a single exponential number, only fractions of such numbers that are close to each other.
+
+\subsection{Multi-histogram Ferrenberg-Swendsen method}
+
+Let $\{\psi_i^k\}_{i=1}^{N_k}$ be sets of states sampled at the $N_0$ inverse temperatures $\beta_k$ of a system with Hamiltonian $\mathcal{H}$.
+The energy of these states are then given by $E_i^k$ and samples of an observable $\mathcal{O}$ at these states are given by $\mathcal{O}(\psi_i^k) = o_i^k$.
+The energy-samples can then be used to construct $N_0$ histograms
+\begin{equation}
+    \label{eq:Monte:Reweighting:MFS:interactedLnSum}
+    h_k(E) = \sum_{i=1}^{N_k}\delta_{E,E_i^k},
+\end{equation}
+giving the number of sampled states at a certain energy in the simulation with parameter value $\beta_k$. The goal is to use these histograms to estimate the
+density of states of the system which we for the purpose of the derivation of this method will define $n(E) = \sum_\psi\delta_{E,\mathcal{H}(\psi)}$.
+The essential steps in this derivation can be found in the original paper in Ref.~\cite{FS_1989}, as well as Ref.~\cite{Newman99} and \cite{rummukainen}.
+With these
+definitions, the energetic probability distribution of the system at an inverse temperature $\beta$ is given by
+\begin{equation}
+    \label{eq:Monte:Reweighting:MFS:enProbDist}
+    W(\beta,E) = n(E)e^{-\beta E}/Z_\beta,
+\end{equation}
+where $Z_\beta = \sum_\psi e^{-\beta\mathcal{H}(\psi)}$ is the parition function. Based on the sampled histograms, $W(\beta_k,E)$ at temperature $\beta_k$ can be estimated
+by $\hat{p}_k(E) = h_k(E)/N_k$, \ie $\langle\;\hat{p}_k(E)\;\rangle = W(\beta_k,E)$. This implies that $\langle\;h_k(E)\;\rangle = N_kW(\beta_k,E)$ and assuming for now
+that the samples of states $\psi_i^k$ and $\psi_j^k$ are statistically independent, it can be shown that 
+\begin{equation}
+    \label{eq:Monte:Reweighting:MFS:avgHistogramSquared}
+    \langle\;h_k(E)^2\;\rangle = N_kW(\beta_k,E)[1 + (N_k-1)W(\beta_k,E)].
+\end{equation}
+Inserting these cumulants of the histograms into the variance we get
+\begin{equation}
+    \label{eq:Monte:Reweighting:MFS:histogramVariance}
+    \delta^2h_k(E) = \langle\;h_k(E)^2\;\rangle - \langle\;h_k(E)\;\rangle^2 = g_kN_kW(\beta_k,E),
+\end{equation}
+by assuming $W(\beta_k,E)\ll1$. The factor $g_k = 1+2\tau_k$, where $\tau_k$ is the autocorrelation time of the samples at $\beta_k$, is included to generalize the result
+to samples where $\psi_i^k$ and $\psi_j^k$ are not statistically independent.
+
+By solving Eq.~\eqref{eq:Monte:Reweighting:MFS:enProbDist} w.r.t. $n(E)$ and inserting the estimator of $W(\beta_k,E)$, an estimator of the density of states is given by
+\begin{equation}
+    \label{eq:Monte:Reweighting:MFS:DOSEstimator}
+    \hat{n}_k(E) = \hat{p}_k(E)Z_{\beta_k}e^{\beta_kE},
+\end{equation}
+where $Z_{\beta_k}$ is assumed known, an assumption we have to reconcile later. By the error propagation formula, then the variance of this estimator is given by
+\begin{equation}
+    \label{eq:Monte:Reweighting:MFS:DOSVariance}
+    \delta^2\hat{n}_k(E) = (Z_{\beta_k}e^{\beta_kE}/N_k)^2\delta^2h_k(E).
+\end{equation}
+The estimator $\hat{n}_k(E)$ is an estimator of $n(E)$ using only a single histogram. We combine the estimators of single histograms using a weighted sum
+\begin{equation}
+    \label{eq:Monte:Reweighting:MFS:DOSWeightedEstimator}
+    \hat{n}(E) = \sum_kr_k\hat{n}_k(E),
+\end{equation}
+where the coefficients $r_k$ has to satisfy the condition $\sum_kr_k = 1$ for the expectation value of $\hat{n}(E)$ to give the density of states. The coefficients
+$r_k$ are determined by minimizing the variance $\delta^2\hat{n}_k(E)$ subject to the constraint $\sum_kr_k=1$ using Lagrange multiplier which yields the estimator
+\begin{equation}
+    \label{eq:Monte:Reweighting:MFS:minimizedDOSWeightedEstimator}
+    \hat{n}(E) = \frac{\sum_{k=1}^{N_0}g_k^{-1}h_k(E)}{\sum_{l=1}^{N_0}N_lg_l^{-1}e^{-\beta_lE}Z_{\beta_l}^{-1}}.
+\end{equation}
+The assumption that $Z_{\beta_k}$ is known is now reconciled. Since we can write the partition function using the density of states through
+\begin{equation}
+    \label{eq:Monte:Reweigehting:MFS:partitionFunctionDOS}
+    Z_\beta = \sum_\psi e^{-\beta\mathcal{H}(\psi)} = \sum_En(E)e^{-\beta E},
+\end{equation}
+then we use the density of states estimator to estimate the parition function, and use this estimate of the partition function $\hat{Z}_{\beta_k}$ in the density
+of states estimator. This then creates an implicit equation for $\hat{Z}_{\beta_k}$ that has to be solved self-consistently. Inserting the definition of $h_k(E)$
+and exchanging sums to remove the histograms, this equation takes the form
+\begin{equation}
+    \label{eq:Monte:Reweighting:MFS:selfConsistencyEq}
+    \hat{Z}_{\beta} = \sum_{k=1}^{N_0}\sum_{i=1}^{N_k}\frac{g_k^{-1}e^{-\beta E_i^k}}{\sum_{l=1}^{N_0}N_lg_l^{-1}e^{-\beta_lE_i^k}\hat{Z}_{\beta_l}^{-1}},
+\end{equation}
+which gives $N_0$ equations for $N_0$ unknows $\hat{Z}_{\beta_k}$ when evaluated at the different $\beta=\beta_m$.
+
+Solving Eq.~\eqref{eq:Monte:Reweighting:MFS:selfConsistencyEq} is usually done with the help of an iterative solution method for non-linear
+equations such as the Newton-Raphson method. To numerically calculate a solution, it is inconventient to work with the full quantities $\hat{Z}_{\beta_m}$
+since these are usually extremely large. Instead it is sufficient to calculate the variables
+\begin{equation}
+    \label{eq:Monte:Reweighting:MFS:logVars}
+    L_m \equiv \ln \hat{Z}_{\beta_m} - \ln \hat{Z}_{\beta_1},
+\end{equation}
+since the weights in the reweighting of observables can be written in terms of them. Dividing Eq.~\eqref{eq:Monte:Reweighting:MFS:selfConsistencyEq} by $Z_{\beta_1}$,
+we get that the $N_0-1$ equations we need to solve self consistently for the $N_0-1$ variables $L_m$ are given by
+\begin{equation}
+    \label{eq:Monte:Reweighting:MFS:modifiedSelfConsistencyEq}
+    L_m = \ln\left\{\sum_{k=1}^{N_0}\sum_{i=1}^{N_k}\frac{g_k^{-1}e^{-\beta_mE_i^k}}{\sum_{l=1}^{N_0}g_l^{-1}e^{-\beta_lE_i^k-L_l}}\right\}.
+\end{equation}
+This form has the big advantage that the overall logarithm allows us to not have to calculate the exponential sums directly, but instead only calculate logarithms
+of these sums. For each sum $\sum_ie^{a_i}$ containing exponentials, which are potentially too large to be stored numerically, we simply re-exponentiate the entire
+sum to $\exp\ln\sum_ie^{a_i}$ and then use the method outlined in Section~\ref{sec:Monte:Reweighting:expSums} to calculate $\ln\sum_ie^{a_i}$. Because of the
+overall logarithm, the exponential drops out in the last re-exponentiation such that we never have to store a single exponential number.
+
+After finding self-consistent values for the $N_0-1$ vairables $L_m$, the weights $w_i^k$ for reweighting the observable $\mathcal{O}$ can be found. In terms of the
+density of states $n(E)$, the thermal average of the observable is written
+\begin{equation}
+    \label{eq:Monte:Reweighting:MFS:obs:thermAvg}
+    \langle\mathcal{O}\rangle_\beta = \frac{\sum_E\mathcal{O}(E)n(E)e^{-\beta E}}{\sum_En(E)e^{-\beta E}}.
+\end{equation}
+Inserting the reweighting estimate of $\hat{n}(E)$ in Eq.~\eqref{eq:Monte:Reweighting:MFS:minimizedDOSWeightedEstimator} for $n(E)$ we get the reweighting estimate
+\begin{equation}
+    \label{eq:Monte:Reweighting:MFS:obs:reweightedThermAvg}
+    \langle\hat{\mathcal{O}}\rangle_\beta = \frac{\hat{Z}_{\beta_1}}{\hat{Z}_\beta}\sum_{k=1}^{N_0}\sum_{i=1}^{N_k}\frac{o_i^kg_k^{-1}e^{-\beta E_i^k}}{\sum_{l=1}^{N_0}N_lg_l^{-1}e^{-\beta_lE_i^k-L_l}},
+\end{equation}
+where $\hat{Z}_{\beta_1}/\hat{Z}_\beta$ is given by
+\begin{equation}
+    \label{eq:Monte:Reweighting:MFS:obs:ZFraction}
+    \frac{\hat{Z}_\beta}{\hat{Z}_{\beta_1}} = \sum_{k=1}^{N_0}\sum_{i=1}^{N_k}\frac{g_k^{-1}e^{-\beta E_i^k}}{\sum_{l=1}^{N_0}N_lg_l^{-1}e^{-\beta_lE_i^k - L_l}},
+\end{equation}
+through Eq.~\eqref{eq:Monte:Reweighting:MFS:selfConsistencyEq}. The two equations for $\langle\hat{\mathcal{O}}\rangle_\beta$ in
+Eqs.~\eqref{eq:Monte:Reweighting:MFS:obs:reweightedThermAvg} and \eqref{eq:Monte:Reweighting:MFS:obs:ZFraction} together with the self-consistency equation in
+Eq.~\eqref{eq:Monte:Reweighting:MFS:modifiedSelfConsistencyEq}, is sufficient to describe the multi-histogram method. Notice that in these equations the
+histograms on which the method was derived do not figure but have been replaced by the more fundamental energy samples. This form makes the method more convenient
+to implement for systems with continuous energy distributions since it removes the need for a sum over all possible energies.
+
+When calculating the exponential sums in the weights implied by
+Eqs.~\eqref{eq:Monte:Reweighting:MFS:obs:reweightedThermAvg} and \eqref{eq:Monte:Reweighting:MFS:obs:ZFraction}, numerical overflow can be avoided by first using
+logarithms to calculate the logarithm of a set of related un-normalized weights as before, then subtracting the maximum logarithmic value for each weight such that
+each weight is $\lesssim1$ and then using the sum of these weights to properly normalize in the end.
+
+\subsection{Initial guess}
+
+An iterative non-linear solver usually needs an initial guess at the solution. In the case of the multi-histogram method equations,
+a good initial guess can be provided by the single-histogram Ferrenberg-Swendsen
+method. Since only fractions of partition function values are needed we may set that $\hat{Z}_{\beta_1}=1$ and use the Ferrenberg-Swendsen method based on
+the $\beta_1$ energies to estimate the value $\hat{Z}_{\beta_2}^0$ of $\hat{Z}_{\beta_2}$ at neighboring inverse-temperature $\beta_2$ by the formula
+\begin{equation}
+    \label{eq:Monte:Reweighting:MFS:guess:Zb2}
+    \hat{Z}_{\beta_2}^0 = \sum_{i=1}^{N_1}e^{-(\beta_2-\beta_1)E^1_i}.
+\end{equation}
+In terms of the numerically convenient variables $L_m$ then this first guess $L_{2}^0$ takes the form
+\begin{equation}
+    \label{eq:Monte:Reweighting:MFS:guess:L2}
+    L_{2}^0 = \ln\Big[\frac{1}{N_1}\sum_{i=1}^{N_1}e^{-(\beta_2-\beta_1)E_i^1}\Big].
+\end{equation}
+Continuing to estimate the partition function $\hat{Z}_{\beta_m}$ through the single-histogram Ferrenberg-Swendsen method based on the data at $\beta_{m-1}$,
+then we may find all subsequent $L_{m}^0$ by applying the iteration scheme
+\begin{equation}
+    \label{eq:Monte:Reweighting:MFS:guess:LIteration}
+    L_{m}^0 = L_{m-1}^0 + \ln\Big[\frac{1}{N_{m-1}}\sum_{i=1}^{N_{m-1}}e^{-(\beta_m-\beta_{m-1})E_i^{m-1}}\Big].
+\end{equation}
+
