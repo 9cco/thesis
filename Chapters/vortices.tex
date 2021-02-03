@@ -1,15 +1,95 @@
 \chapter{Vortices in superconductors}
-
+\label{sec:Vor}
 % Brain-log:
 % Topological defects
 % Cause of phase-transitions; vortex blow-out
 % Abikosov vortices
+
+In conventional type-I superconductors, the Meissner effect prevents any magnetic field from penetrating the superconductor when it is in the
+superconducting state. In a type-II superconductor, the transition between the normal- and superconducting state is more gradual than in the type-I case
+due to an intermediate transitional state where topological defects in the superconducting field  becomes stable allowing quanta of magnetic field
+to pass through the material. The transitional value of the external field strength below which no magnetic field penetrates the superconductor is
+called $B_{c1}$. The upper transitional field strength above which the material stops being superconducting altogether is called $B_{c2}$. The state
+with regions of topological defects through which magnetic field quanta can penetrate, which are interspersed in a sea of
+superconducing state then exists between these values. It is important to note that the Meissner effect is still present in this transitional state - preventing magnetic field
+lines from penetrating the superconducting state, however at topological defects, the material switches to the normal state and thus
+allows magnetic field lines to penetrate at these points. The final continuous transition to the normal state at $B_{c2}$ is then caused by the
+proliferation of vortex-loops, sending the whole material to the normal state.
+%TODO: cite.
+
+The regions of normal state containing a topological defect of the superconducting state and through which magnetic field quanta can penetrate are known
+as superconducting vortices because they are surrounded by a circulating superconducting current. This current is set up by the presence of the magnetic field
+and shilds the rest of the superconducting condensate from its influence.
+
+Whether a superconductor is considered type-I or type-II is conventionally given by the magnetic field penetration length $\lambda$ and the superconducting
+coherence length $\xi$ which come together to form the \ac{gl} parameter $\kappa = \lambda/\xi$.
+These parameters come out of the description of the superconducting state given by the \ac{gl} theory of a single-component complex field minimally coupled
+to a gauge field.
+If $\kappa\gg1$ then we say we have a strongly
+type-II superconductor, while is $\kappa\ll1$ the superconductor is strongly type-I. The transitional value between type-I and type-II have a theoretical
+mean-field value of $\kappa = 1/\sqrt{2}$, however numerical calculations has given it the value $\kappa = (0.76\pm0.04)/\sqrt{2}$ all within the conventional
+\ac{gl} formalism.
+
+In a type-II conventional superconductor without any structural defects, as we increase the field strength, we introduce more vortices into the material
+in order to carry the required number of magnetic field quanta. At first these vortices behave like a liquid where they mutually repel eachother if they 
+get close. As more vortices are introduced to the system, the inter-portex repulsion leads to them forming a two-dimensional lattice with equidistant lattice-spacing.
+Since the triagonal lattice is the lattice with the highest packing fraction, i.e. the lattice that have the highest density of sites at a given lattice spacing,
+the lattice formed will be triagonal. Such a triagonal (hexagonal) lattice of single quanta vortices is known as the Abrikosov lattice since it consists
+of single quantua vortices which are known as Abrikosov vortices.
 
 \section{Vorticity observables}
 
 % Local vorticity
 % Total vorticity when going around the system and why
 %    we have restrictions on the filling fraction.
+
+A condensate described by a complex field $\psi$ with phase $\theta$ can have topological defects given by discontinuities in the field $\theta$ due to its compact
+nature ($\theta\in[0,2\pi)$). These topologicals
+defects then lead to singularities in the field $\nabla\theta$ which allows a nonzero value of $\nabla\times\nabla\theta$ at these points. Integrating over the surface
+$S$ system with surface normal vector $\hat{s}$ and using Stokes theorem then yields
+\begin{equation}
+    \label{eq:Vor:Obs:vorticityIntegral}
+    \int_S\!\mathrm{d}^2r (\nabla\times\nabla\theta)\cdot\hat{s} = \oint_{\partial S}\nabla\theta\cdot\mathrm{d}\v{r} = 2\pi N_v,\quad N_v\in\mathbb{Z},
+\end{equation}
+where $\partial S$ is a path around the boundary of $S$ traversed counter-clockwise. The last equality comes from the observation that
+$\partial S$ is far away from the singularity such that $\nabla\theta$ is continuous along the path and $N_v$ thus counts the number of times the vector $\nabla\theta$
+rotates counter-clockwise back to its initial position. $N_v$ can then be interpreted as the total vorticity of the field $\theta$ over the surface $S$.
+Since $N_v$ is the total vorticity, then from Eq.~\eqref{eq:Vor:Obs:vorticityIntegral} we see that
+\begin{equation}
+    \label{eq:Vor:Obs:localVorticity}
+    \v{n}_v = \frac{\nabla\times\nabla\theta}{2\pi} 
+\end{equation}
+must be interpreted as a vector of local vorticity density.
+
+If the system $\psi$ and $\theta$ described contains a gauge field that is coupled to them, then any meaningful observable needs to be gauge-invariant.
+We clearly see that the expression in Eq.~\eqref{eq:Vor:Obs:localVorticity} is gauge-dependent by sending $\theta\to\theta+\phi$. To make a gauge-invariant observable under
+the gauge-transformation in Eq.~\eqref{eq:LM:Derivatives:gaugeTransformation}, we see that we need to modify the definition to
+\begin{equation}
+    \label{eq:Vor:Obs:localVorticity}
+    \v{n}_v = \frac{\nabla\times(\nabla\theta + g\v{A})}{2\pi}.
+\end{equation}
+This expression then defines $\v{n}_v$ as a gauge invariant vector of local vorticity density of the compact field $\theta$.
+
+In lattice models we want to discretize the vorticity density in Eq.~\eqref{eq:Vor:Obs:localVorticity} in order to effectively calculate it in Monte-Carlo simulations
+of the lattice model. In such a discrete model we have to take care to re-compactify the quantity $\nabla\theta+g\v{A}$ to only be defined on some interval of length $2\pi$.
+Using the discretization mapping of $\partial_\mu$ and $A_\mu(\v{r})$ from Eq.~\eqref{eq:LM:Field:Fluc:discretization}, we want
+$\Delta_\mu\theta + gA_{\v{r},\mu}\in[-\pi,\pi)$. Defining the operator
+\begin{equation}
+    \label{eq:Vor:Obs:moduloOperator}
+    \hat{C}_\pi\, x = \modulo(x+\pi,2\pi)-\pi,
+\end{equation}
+the discretized vorticity density can be written
+\begin{equation}
+    \label{eq:Vor:Obs:discreteLocalVorticity}
+    \begin{split}
+        \v{n}_{v,\v{r}} &= \frac{\hat{e}_\mu\epsilon_{\mu\nu\lambda}\Delta_\nu\hat{C}_\pi(\Delta_\lambda\theta_\v{r} + gA_{\v{r},\lambda})}{2\pi a^2}\\
+        &= \frac{1}{2\pi a^2}\sum_\mu \hat{e}_\mu\sum_{\boxdot_\mu}\hat{C}_\pi(\Delta_\lambda\theta_\v{r} + gA_{\v{r},\lambda}).
+    \end{split}
+\end{equation}
+Implicit summation over repeated indices is used on the first line while on the second, the components of the vector $\v{n}_{v,\v{r}}$ are written as plaquette-sums,
+which are sums of direction dependent quantities along a path $\boxdot_\mu$, which is described below Eq.~\eqref{eq:LM:Field:Fluc:plaquetteSum} and illustrated in
+Figure~\ref{fig:LM:Field:Fluc:plaquetteSum}. In the plaquette-sum the directional quantity is always chosen along the path and the path is traversed according to
+the right hand rule with normal vector $\hat{e}_\mu$.
 
 \section{Double quanta vorticies}
 
