@@ -1,4 +1,5 @@
 \chapter{Lattice Models}
+\label{sec:LM}
 
 When we have a model for the free energy of a statistical mechanical system that is too complicated to
 calculate analytically one approach is to utilize computers and Monte-Carlo techniques. To make numerical
@@ -234,6 +235,7 @@ meta-stable states and faster convergence when investigating such models by mean
 in the continuum limit.
 
 \section{Including an external field}
+\label{sec:LM:Field}
 
 The interaction between superconductors and magnetic fields is an essential aspect in the study of superconductors and thus we will need to be able to add external magnetic fields
 to our models in order to study this interaction. An external field is usually thought of as a constant homogenous magnetic field in a certain direction that is a parameter of
@@ -294,7 +296,8 @@ two restrictions on the field value $B$ because the vector potential varies in b
 where $m$ is a number $m\in\mathbb{Z}$ chosen such that there exists some $n\in\mathbb{Z}$ such that $mN_y=nN_x$, \ie $m$ is some multiple of $N_x/N_y$.
 Then the field value is given by $B = 2\pi f/ga^2$ for filling fraction $f=2m/N_x$.
 
-This gauge is a specification of the more general extended Landau gauge \cite{Nguyen99PRB,Nguyen99EPL}, which is borne purely out of the assumptions of a field $\v{B}\|\hat{z}$ pluss
+This gauge is a specification of the more general extended Landau gauge \cite{Nguyen99PRB,Nguyen99EPL}, which is borne purely out of the assumptions of a field $\v{B}\|\hat{z}$,
+$\v{A}(\v{r})$ linear in $\v{r}$ and
 periodic boundary conditions.
 
 \subsection{Fluctuating field}
@@ -325,13 +328,13 @@ and the gauge-field components by their corresponding link-variables such that
     \label{eq:LM:Field:Fluc:discretization}
     \begin{split}
         \partial_\mu &\mapsto \Delta_\mu/a_\mu,\\
-        A_\mu(\v{r}) &\mapsto A_{\v{r},\mu}.
+        A_\mu(\v{r}) &\mapsto A_{\v{r},\mu}/a_\mu.
     \end{split}
 \end{equation}
 The discretized free energy pr. lattice site then becomes
 \begin{equation}
     \label{eq:LM:Field:Fluc:discretizedFreeEnergy}
-    F_{A,\v{r}} = \frac{(\v{\Delta}\times\v{A}_\v{r})^2}{2\mu_0a^2} = \frac{1}{2\mu_0a^2}\sum_\mu(A^\boxdot_{\v{r},\mu})^2,
+    F_{A,\v{r}} = \frac{(\v{\Delta}\times\v{A}_\v{r})^2}{2\mu_0a^4} = \frac{1}{2\mu_0a^4}\sum_\mu(A^\boxdot_{\v{r},\mu})^2,
 \end{equation}
 where we have defined the link-variable plaquette-sum vector, with components given by
 \begin{equation}
