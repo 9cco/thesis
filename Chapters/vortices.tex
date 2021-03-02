@@ -283,25 +283,25 @@ Taking the average over the $z$-direction keeps the value $n$ of any vortex flux
 dimension of the system. In contrast any contributions from vortex loops which could be the result of random thermal fluctuations will vanish in the limit of a large system size, hence
 \begin{equation}
     w(\v{r}_\perp) = \int_0^{L_z}\!\mathrm{d}r_z\;n^z(\v{r}) / L_z,
-    \label{eq:Vor:Symm:FS:Cont:xyDist}
+    \label{eq:Vor:Symm:SF:Cont:xyDist}
 \end{equation}
 filters out the vortex lines from the thermal noise. This $w$ produces a distribution of vortex lines over the extent of the system in the $xy$ plane.
 Since we are interested in structural correlations in this system we preform the $2$D Fourier transform and look at its amplitudede through
 \begin{equation}
-    \label{eq:Vor:Symm:FS:Cont:unnormalized}
+    \label{eq:Vor:Symm:SF:Cont:unnormalized}
     \tilde{S}(\v{k}_\perp) = \Big|\int\!\mathrm{d}^2r\;w(\v{r}_\perp)e^{i\v{k}_\perp\cdot\v{r}_\perp}\Big|^2.
 \end{equation}
 This function then produces a reciprocal lattice of the $2$D lattice of vortex lines where Bragg-points that correspond to structural correlations have increased value. To arrive at the structure-function
 we need only now to take the thermal average to average over thermal fluctuations of the vortex lattice lines and normalize such that $S(\v{0})=1$. To find this normalization constant, we have to
 calculate the integral
 \begin{equation}
-    \label{eq:Vor:Symm:FS:Cont:normalizationInt}
+    \label{eq:Vor:Symm:SF:Cont:normalizationInt}
     \int\!\mathrm{d}^2r\;n^z(\v{r}) = ?,
 \end{equation}
 over the systems extent in the $xy$ plane. However, from the definition of $n^z(\v{r})$ the answer is given to us. Since $n^z(\v{r})$ measures the flux density of vorticity in the $xy$-plane, then the integral is simply the total vorticity,
 which can be written as $\tilde{f}L_xL_y$, by the definition of $\tilde{f}$. Finally then, we arrive at the normalized dimensionless quantity
 \begin{equation}
-    \label{eq:Vor:Symm:FS:Cont:structureFunction}
+    \label{eq:Vor:Symm:SF:Cont:structureFunction}
     S(\v{k}_\perp) = \frac{1}{(\tilde{f}L_xL_yL_z)^2}\Big\langle\Big|\int\!\mathrm{d}^3r\;n^z(\v{r})e^{i\v{k}_\perp\cdot\v{r}_\perp}\Big|^2\Big\rangle.
 \end{equation}
 Discretizing this expression through the method in Section~\ref{sec:LM}, \ie by letting $\int\!\mathrm{d}r\mapsto a\sum_\v{r}$, $n^z(\v{r})\mapsto n^z_\v{r}$ and $L_\mu = aN_\nu$ then
@@ -329,7 +329,7 @@ method for evaluating different phases of the structure of the vortex lattice fo
         \includegraphics[width=\textwidth]{hex_lattice_S.pdf}
         \caption{\label{fig:Vor:Symm:SF:hex:S}}
     \end{subfigure}
-    \caption{Plots of vorticity of the $+$-component of a $p+ip$ superconductor system. Figure~\protect\subref{fig:Vor:Symm:SF:hex:V} shows a plot of the real space vorticity which corresponds to a thermal average of a discretized version of $w(\v{r}_\perp)$ from Eq.~\eqref{eq:Vor:Symm:FS:Cont:unnormalized}. Fig.~\protect\subref{fig:Vor:Symm:SF:hex:S} shows the corresponding structure function which shows a creat hexagonal structure of the vortex line lattice.}
+    \caption{Plots of vorticity of the $+$-component of a $p+ip$ superconductor system. Figure~\protect\subref{fig:Vor:Symm:SF:hex:V} shows a plot of the real space vorticity which corresponds to a thermal average of a discretized version of $w(\v{r}_\perp)$ from Eq.~\eqref{eq:Vor:Symm:SF:Cont:unnormalized}. Fig.~\protect\subref{fig:Vor:Symm:SF:hex:S} shows the corresponding structure function which shows a creat hexagonal structure of the vortex line lattice.}
     \label{fig:Vor:Symm:SF:hex}
 \end{figure}
 

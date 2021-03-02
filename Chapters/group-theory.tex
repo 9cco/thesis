@@ -1,16 +1,17 @@
 \chapter{Group Theory}
 
 In this chapter we will introduce the minimum mathematical framework needed to
-understand the phrase \say{This free energy is the $\Gamma^-_{5u}$ irreducible
-representation of the $D_{4h}$ symmetry group}.
+understand the phrase \say{\emph{This free energy is the $\Gamma^-_{5u}$ irreducible
+representation of the $D_{4h}$ symmetry group}}.
 
 A few words about notation. We will use the semicolon `$;$' in equations as notation for the words `such that', \eg when defining sets.
-A colon `$\colon$' is used when defining maps where the symbol representing the mapping itself should be on the left while the the sets
+A colon with a trailing space `$\colon$' is used when defining maps where the symbol representing the mapping itself should be on the left while the the sets
 being related or how the elements of the sets are related is on the right of the colon. The colon `$:$' is also used as a shortcut for the
 words `applied through its representation to' for when group elements are applied to vectors, where the correct representation to use
 for this application should be implicitely understood.
 
-\section{Discrete groups}
+The material in this section is based on the material covered in Refs.~\cite{Inui90} and \cite{NegeleOrland98}, specified for the use in
+quantum mechanical theories of unconventional superconducting states.
 
 \section{Irreducible representations}
 
@@ -33,14 +34,6 @@ to define another representation on this smaller vector space, \ie\emph{reduce} 
 \end{defi}
 In other words: a vector space is invariant if it is not possible for any vector in it to escape using a representation of any group element.
 All representations applied to any vector in the invariant subspace must necessarily land in that same subspace from which it started.
-
-\begin{thm}[Shur's Lemma]
-    If $D(g)$ is an irreducible complex representation with vector space $V$ and $L(V)$ is the set of all linear maps, then
-    \begin{equation}
-        \label{eq:Group:Irr:ShursLemma}
-        \{A\in L(V) ; \; AD(g) = D(g)A\;\forall g\in G\} = \{c\mathbb{1};\; c\in\mathbb{C}\}.
-    \end{equation}
-\end{thm}
 
 \section{BCS Hilbert Space}
 \label{sec:Group:BCSHil}
@@ -86,7 +79,9 @@ and $\sigma^z$. This means that we could write the matrix in Eq.~\eqref{eq:Group
 It is however conventional to factor out a Pauli matrix $i\sigma^y$ to the right in the expansion since this results in nice transformation properties
 of the coefficients as we shall see.
 With the spin-indices expanded in this basis it is conventional to let the function of $\v{k}$
-that is in front of $\sigma^0$ be called $\psi_\v{k}$. The three others are conventionally denoted $d_{\v{k},i}$. Expanded in this conventional basis
+that is in front of $\sigma^0$ be called $\psi_\v{k}$. The three others are conventionally denoted $d_{\v{k},i}$ which are components of what we call
+the $\v{d}$-vector\footnote{Note that a state in $\hilB$ that is described by a $\v{d}$-vector does not necessarily mean that it has $d$-wave symmetry,
+which is a symmetry of its $\v{k}$-space argument. It tells us that the state is a spin-triplet state.}. Expanded in this conventional basis
 then $v_{s_1s_2}(\v{k})$ takes the form
 \begin{equation}
     \label{eq:Group:BCSHil:arb:pauli}
@@ -122,7 +117,8 @@ This set of linear relations is easily inverted to yield
     d_{\v{k},z} &= \frac{1}{2}(v_{\up\dn}(\v{k})+v_{\dn\up}(\v{k})).
 \end{align}
 
-Since the space $\hilB$ is fermionic we have the symmetry 
+Since the space $\hilB$ is fermionic we have the symmetry\footnote{We are here assuming that the state is even in (time) frequency. It is also possible
+to have superconducting states that are odd in frequency \cite{Pal17}, however we will not treat that possibility here.}
 \begin{equation}
     \label{eq:Group:BCSHil:fermSymm}
     \ket{\v{k},s_1}\ket{-\v{k},s_2} = -\ket{-\v{k},s_2}\ket{\v{k},s_1}.
@@ -158,15 +154,13 @@ $D$ to each basis vector separately as a linear transformation:
 \subsection{Active vector transformation}
 
 As $g:$ has been defined in Eq.~\eqref{eq:Group:Prod:basisApp} it is defined in a passive perspective where the transformation is happening
-to the basis vectors. Applying $g$ to a vector $\v{v}$ in the basis $\{\v{b}_i\}$ it is sometimes useful to consider this as an application not
+to the basis vectors. It is often useful and sometimes more intuitive to consider
+the application of $g$ to a vector $\v{v}$ in the basis $\{\v{b}_i\}$ as an application not
 on the vectors themselves but on the expansion coefficients $v_i$ of $\v{v}$ in the basis. This is the active view of the transformation.
 Inserting Eq.~\eqref{eq:Group:Prod:basisApp} into Eq.~\eqref{eq:Group:App:linearTransformApp} we get
 \begin{equation}
     \label{eq:Group:App:activeTransform}
-    \begin{split}
-        g:\v{v} &= \sum_iv_i\sum_j\v{b}_jD_{ji}(g) = \sum_j\Big(\sum_iD_{ji}(g)v_i\Big)\v{b}_j\\
-        &= \sum_iv'_i\v{b}_i,
-    \end{split}
+        g:\v{v} = \sum_iv_i\sum_j\v{b}_jD_{ji}(g) = \sum_iv'_i\v{b}_i,
 \end{equation}
 where we have defined the transformed coefficients
 \begin{equation}
@@ -206,7 +200,8 @@ $D_{g\;ss'}$ is a representation on the spin-up spin-down vector space given by 
     D_{g\;ss'} = \sigma^0_{ss'}\cos(\phi/2) - i\hat{\v{u}}\cdot\v{\sigma}_{ss'}\sin(\phi/2),
 \end{equation}
 where $\hat{\v{u}}$ is the rotation axis unity vector, while $\phi$ is the angle that defines the proper rotation associated with $g$. $\v{\sigma}$ is
-the vector notation for the $3$ Pauli matrices and $\sigma^0_{ss'}=\delta_{ss'}$.
+the vector notation for the $3$ Pauli matrices and $\sigma^0_{ss'}=\delta_{ss'}$ \cite{Sergi04,Merzbacher99}.
+%, \cite[][Appendix A]{Schober16}.
 
 In the BCS Hilbert space which we discussed in more detail in Section~\ref{sec:Group:BCSHil},
 the basis vectors are outer products of the momentum spin basis vectors with opposite momentum: $\{\ket{\v{k},s_1}\ket{-\v{k},s_2}\}$. The product
@@ -303,10 +298,146 @@ This matrix is in fact the rotation matrix of a vector in $\mathbb{R}^3$ by an a
     \label{eq:Group:pdRep:dTranformation}
     g:d_{\v{k},i} = R_{ij}(\hat{\v{u}},\phi)d_{g^{-1}:\v{k},j},
 \end{equation}
-where $\hat{\v{u}}$ and $\phi$ gives the unit vector and angle respectively, of the proper rotation associated with $g$. The conclusion is thus that
+where $\hat{\v{u}}$ and $\phi$ give the unit vector and angle respectively, of the proper rotation associated with $g$. The conclusion is thus that
 $\v{d}$ transforms as a vector by the proper rotation associated with $g$.
 
-\subsection{Projection Operators}
+
+\subsection{Representation on ladder operators}
+\label{sec:Group:App:Ladder}
+
+The fermionic creation and annihilation operators $c^\dagger_{\v{k},s}$ and $c_{\v{k},s}$, which we will collectively refer to as
+$c^{(\dagger)}_{\v{k},s}$, are second-quantized operators that act on multi-particle
+states in a fermionic Fock space \cite{NegeleOrland98}. To properly define how a group element $g$ transforms these operators we thus should
+strictly speaking first derive the representation $Q(g)$ of $g$ on $N$-particle states $\ket{\v{k}_1,s_1}\land\ldots\land\ket{\v{k}_N,s_N}$ for
+arbitrary $N$ and then use the relation $g:c^{(\dagger)}_{\v{k},s} = Q(g)c^{(\dagger)}_{\v{k},s}Q(g)^{-1}$ to then derive their transformation properties.
+However, luckily, a shortcut is possible because the $Q(g)$ representation is connected with how $g$ acts on the single-particle basis
+$\{\ket{\v{k},s}\}$ through the relationship
+\begin{equation}
+    \label{eq:Group:App:Ladder:quantizedRepToSingleParticleBasis}
+    Q(g)c^{(\dagger)}_{\v{k},s}Q(g)^{-1} = c^{(\dagger)}(g:\ket{\v{k},s}).
+\end{equation}
+In this notation we treat the creation and annihilation operators as respectively linear and antiunitary functions of the states that they create or
+annihilate. If the matrix-components of the representation of $g$ on the single-particle basis is denoted $D_{\v{k}s;\v{k}'s'}^{(\v{k}\times s)}$ then
+we thus have the transformation property
+\begin{equation}
+    \label{eq:Group:App:Ladder:generalTransformationBehavior}
+    g:c^{(\dagger)}_{\v{k},s} = \sum_{\v{k}'s'}c^{(\dagger)}_{\v{k}',s'}\big[D_{\v{k}'s';\v{k}s}^{(\v{k}\times s)}\big]^{(\ast)},
+\end{equation}
+where the matrix-elements are complex conjugated only if we are transforming an annihilation operator.
+
+Given that $g$ is an element of some point group such that it can be decomposed into a rotation and a parity inversion, then we may use the
+representation on $\{\ket{\v{k},s}\}$ given in Eq.~\eqref{eq:Group:App} such that
+\begin{equation}
+    \label{eq:Group:App:Ladder:pointGroupTransformation}
+    g:c^{(\dagger)}_{\v{k},s} = \sum_{s'}c^{(\dagger)}_{g:\v{k},s'}D_{g\;s's}^{(\ast)},
+\end{equation}
+where the matrix $D_{g\;ss'}$ is defined in Eq.~\eqref{eq:Group:Prod:spinRepMatrix}. As an example, a simple parity transformation $g=\hat{P}$, then
+transform the operators according to $\hat{P}:c^{(\dagger)}_{\v{k},s} = c^{(\dagger)}_{-\v{k},s}$.
+
+We will later need the translation transformation $g=\v{R}$ as well. In real space it is defined by $\v{R}:\ket{\v{r},s} = \ket{\v{r}+\v{R},s}$
+and given by linear transformation $L(\v{R}) = e^{i\v{R}\cdot\hat{\v{p}}/\hbar}$ where $\hat{\v{p}}$ is the momentum operator%
+\footnote{The form of the linear transformation $L(\v{R})$ follows directly from the multi-variate Taylor expansion.} $\hat{\v{p}} = \hbar\nabla/i$.
+It then follows by a Fourier-transformation that the fermionic operators transform according to
+\begin{equation}
+    \label{eq:Group:App:Ladder:translation}
+    \v{R}:c^{(\dagger)}_{\v{k},s} = \big(e^{-i\v{R}\cdot\v{k}}\big)^{(\ast)}c^{(\dagger)}_{\v{k},s}.
+\end{equation}
+
+Finally we discuss the transformation of time-reversal. This operation is traditionally denoted $\Theta$ and consists of flipping the sign of
+time, which implies flipping the spin and momentum. Time-reversal is special in that it is an antiunitary, \ie it transforms all linear coefficients
+to their complex conjugate. Any representation is
+because of this, often factorized into a normal linear part and a complex-conjugation operator $\hat{K}$. From its action on the
+spin-momentum basis vectors $\ket{\v{k},s}$, time-reversal transforms the fermionic creation and annihilation operators according to
+\begin{equation}
+    \label{eq:Group:App:Ladder:timeReversal}
+    \Theta:c^{(\dagger)}_{\v{k},s} = \sum_{s'}c^{(\dagger)}_{-\v{k},s'}(-i\sigma_y)_{s's}.
+\end{equation}
+Note that the matrix $-i\sigma_y$ is not complex conjugated for the fermionic annihilation operators because of the antiunitarity of $\Theta$.
+
+
+\section{Single-particle Hamiltonian symmetries}
+
+Any fermionic single-particle operator can be written in the spin-momentum basis as
+\begin{equation}
+    \label{eq:Group:Single:generalHamiltonian}
+    \hat{H} = \sum_{\v{k}\v{k}'ss'}H^{ss'}_{\v{k}\v{k}'}c^{\dagger}_{\v{k},s}c_{\v{k}'s'}.
+\end{equation}
+In this section we will employ common finite symmetry-transformations discussed in Section~\ref{sec:Group:App:Ladder} and see how this reduces the degrees
+of freedom in $\hat{H}$ so that it can be written in a more consise form. To begin we reduce the notational burden by expanding the spin-matrix
+elements in separate coefficients in the Pauli-matrix basis just as was done for the BCS Hilbert space vector coefficients $v_{s_1s_2}(\v{k})$ in
+Eq.~\eqref{eq:GroupBCSHil:arb:pauliExp} such that
+\begin{equation}
+    \label{eq:Group:Single:pauliMatrices}
+    \hat{H} = \sum_{\v{k}\v{k}'ss'}\big[\xi_{\v{k}\v{k}'}\sigma^0 + \v{\gamma}_{\v{k}\v{k}'}\cdot\v{\sigma}\big]_{ss'}c^{\dagger}_{\v{k},s}c_{\v{k}'s'}.
+\end{equation}
+
+The transformation of a quantum mechanical operator such as the Hamiltonian is defined by $g:\hat{H} = Q(g)\hat{H}Q(g)^{-1}$ for some many-body
+representation $Q(g)$. Inserting the form of $\hat{H}$ in Eq.~\eqref{eq:Group:Single:pauliMatrices} as a single-particle operator in the
+spin-momentum basis yields
+\begin{equation}
+    \label{eq:Group:Single:generalTransformedHamiltonian}
+    g:\hat{H} = \sum_{\v{k}\v{k}'ss'}\big[\xi_{\v{k}\v{k}'}\sigma^0 + \v{\gamma}_{\v{k}\v{k}'}\cdot\v{\sigma}\big]_{ss'}(g:c^\dagger_{\v{k},s})(g:c_{\v{k}'s'}),
+\end{equation}
+after inserting $Q(g)^{-1}Q(g)$ between the creation and annihilation operator. We can now use the transformation properties of these operators presented
+in Section~\ref{sec:Group:App:Ladder} to derive the transformation properties of the Hamiltonian.
+
+For a translation invariant system we need a translation invariant Hamiltonian. Using the transformation of $c^{(\dagger)}$ in
+Eq.~\eqref{eq:Group:App:Ladder:translation} under a translation $\v{R}$, we get that the coefficients $\xi_{\v{k}\v{k}'}$ and $\v{\gamma}_{\v{k}\v{k}'}$
+has to satisfy the equation
+\begin{equation}
+    \label{eq:Group:Single:Translation:condition}
+    (e^{i\v{R}\cdot(\v{k}'-\v{k})}-1)\big[\xi_{\v{k}\v{k}'}\sigma^0 + \v{\gamma}_{\v{k}\v{k}'}\cdot\v{\sigma}\big] = 0.
+\end{equation}
+Since the sigma-matrices are linearly independent and the translation $\v{R}$ is arbitrary, it follows that both $\xi_{\v{k}\v{k}'}$ and
+$\v{\gamma}_{\v{k}\v{k}'}$ must vanish whenever $\v{k}\neq\v{k}'$, \ie these coefficients must be diagonal in $\v{k}$. The Hamiltonian can then be written on the
+reduced form
+\begin{equation}
+    \label{eq:Group:Single:Translation:Hamiltonian}
+    \hat{H} = \sum_{\v{k}ss'}\big[\xi_\v{k}\sigma^0 + \v{\gamma}_\v{k}\cdot\v{\sigma}\big]_{ss'}c^{\dagger}_{\v{k},s}c_{\v{k},s'}.
+\end{equation}
+
+In the vast majority of cases, the system is Hermitian such that the Hamiltonian is self-adjoint and has real eigenvalues. Enforcing the condition
+$\hat{H}^\dagger=\hat{H}$ on the translationally invariant Hamiltonian in Eq.~\eqref{eq:Group:Single:Translation:Hamiltonian} yields the equation
+\begin{equation}
+    \label{eq:Group:Single:Hermitian:condition}
+    (\xi_\v{k}^\ast-\xi_{\v{k}})\sigma^0 + (\v{\gamma}^\ast_\v{k}-\v{\gamma}_\v{k})\cdot\v{\sigma} = 0,
+\end{equation}
+by using the self-adjoint property of the Pauli-matrices. This implies further by the linear independance of the sigma-matrices that the coefficients $\xi_\v{k}$
+and $\v{\gamma}_\v{k}$ are self-conjugate and hence real.
+
+Time-reversal symmetry of the system implies that $\hat{H}$ should be invariant under the transformation $\Theta$, which transforms fermionic creation and annihilation
+operators according to Eq.~\eqref{eq:Group:App:Ladder:timeReversal}. Transforming these operators in the translationally invariant Hamiltonian in
+Eq.~\eqref{eq:Group:Single:Translation:Hamiltonian} and remembering that $Q(\Theta)$ is an antilinear operator we get the transformed Hamiltonian
+\begin{equation}
+    \label{eq:Group:Single:TRS:transformedHamiltonian}
+    \Theta:\hat{H} = \sum_{\v{k}ss'}\big[\xi_{-\v{k}}^\ast\sigma^0 - \v{\gamma}_{-\v{k}}^\ast\cdot\v{\sigma}\big]_{ss'}c^\dagger_{\v{k},s}c_{\v{k},s'}.
+\end{equation}
+For the Hamiltonian to be invariant under time-reversal symmetry, the coefficients thus have to satisfy $\xi_\v{k} = \xi_{-\v{k}}^\ast$ and
+$\v{\gamma}_\v{k} = -\v{\gamma}_{-\v{k}}^\ast$.
+
+Finally we look at the transformation of the Hamiltonian under point-group elements $g$. Using the transformation-property of the fermionic creation and
+annihilation operators in Eq.~\eqref{eq:Group:App:Ladder:pointGroupTransformation}, then the translation-invariant Hamiltonian in
+Eq.~\eqref{eq:Group:Single:Translation:Hamiltonian} transforms according to
+\begin{equation}
+    \label{eq:Group:Single:Point:transformedHamiltonian}
+    g:\hat{H} = \sum_{\v{k}ss'}\big[\xi_{g^{-1}:\v{k}}\sigma^0 + \v{\gamma}_{g^{-1}:\v{k}}\cdot D_g\v{\sigma}D_g^\dagger\big]_{ss'}c^\dagger_{\v{k},s}c_{\v{k},s'}.
+\end{equation}
+Using the form of the spin-rotation matrix $D_g$ in Eq.~\eqref{eq:Group:Prod:spinRepMatrix} we find that
+\begin{equation}
+    \label{eq:Group:Single:Point:sigmaTransform}
+    \v{\gamma}_{g^{-1}:\v{k}}\cdot D_g\v{\sigma}D_g^\dagger = \v{\gamma}'_{g^{-1}:\v{k}}\cdot\v{\sigma},
+\end{equation}
+for the transformed vector
+\begin{equation}
+    \label{eq:Group:Single:point:transformedVector}
+    \v{\gamma}'_{\v{k}} = R(\hat{\v{u}},\phi)\v{\gamma}_\v{k},
+\end{equation}
+where $R(\hat{\v{u}},\phi)$ is the $3\times3$ matrix representation of the proper-rotation associated with $g$ given in
+Eq.~\eqref{eq:Group:pdRep:rotMatrixIndices}. Symmetry of $\hat{H}$ under point-group transformation thus implies the symmetry relations $\xi_{g:\v{k}} = \xi_{\v{k}}$
+and $R(\hat{\v{u}},\phi)\v{\gamma}_{g^{-1}:\v{k}} = \v{\gamma}_\v{k}$ on the coefficients of the Hamiltonian.
+
+
+\section{Projection Operators}
 \label{sec:Group:Pro}
 
 Let us assume that we are in a vector space $V$ that can be divided into possibly several different irreducible representations $D^{(\alpha)}$ of some
@@ -349,11 +480,7 @@ $\chi^{(\alpha)}(g)$ since
 \end{equation}
 
 
-\section{Fermionic symmetry transformations}
-
-\section{Time-reversal symmetry}
-
-za\section{Symmetries of the Square Lattice}
+\section{Symmetries of the Square Lattice}
 \label{sec:Group:Symm}
 
 The symmetry group of the square lattice is denoted $C_{4v}$ in the Sch\"onflies notation. It contains $8$ elements in total:
