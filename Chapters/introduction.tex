@@ -42,7 +42,7 @@ can behave as one. Because a macroscopic number of states share these features, 
 only significant for tiny particles, becomes apparent through these non-classical macrosopically measureable effects.
 
 
-\section{Historical development of superconductivity - a glimpse}
+\section{A brief history of superconductivity}
 
 Superconductivity was first discovered in mercury at $T_c\approx\SI{-268.99}{\degreeCelsius}$ by Heike Kamerlingh Onnes in the Netherlands in 1911 \cite{Onnes}.
 The Meissner effect was then discovered in 1933 by W. Meissner and R. Ochenfeld \cite{Meissner33}. These discoveries happened without any previous
@@ -51,97 +51,206 @@ by Garter and Casimir and then in 1935 by the phenomenological theory of the ele
 came and went and then a significant improvement on the London-model was published by V. L. Ginzburg and L. D. Landau in 1950, which built on Landau's
 previous description of a second order phase-transition by an order-parameter quantity \cite{Ginzburg50}. Based on this theory, Abrikosov introduced
 the concept of a type-II superconductor in 1952, which has negative surface energy and a mixed phase at non-zero magnetic field \cite{Abrikosov52}.
+
+An attempt at a microscopic theory was given by Fr\"olich in 1950 based on electron-phonon interaction. Even though the perturbation theory he derived
+failed to predict important superconducting properties such as the Meissner effect, his Hamiltonian later became well known as a
+fruitful starting point for the application of field theoretic methods \cite{Frolich50}.
 In 1953 Pippard introduced a second length scale, the coherence length $\xi$, through a non-local modification to the London-model \cite{Pippard53}.
 This length scale was a measure of the width of the interface between normal and superconducting regions. Although not a theory of superconductivity
 itself, Landau's fermi liquid theory which came in 1956 would prove crucial in the development of a microscopic theory and describes the electronic
 properties of many metals that at lower temperature become superconducting \cite{Landau56}. A complete microscopic theory of superconductivity was
-published by J. Bardeen, L. N. Cooper and J. R. Schrieffer in 1957 \cite{Bardeen57}. The BCS-theory was based on the idea that fermi-liquid
+published by J. Bardeen, L. N. Cooper and J. R. Schrieffer in 1957 \cite{Bardeen57,BCS}. The BCS-theory was based on the idea that fermi-liquid
 quasiparticles with opposite momentum could form an attractive interaction through an intermediate interaction with a phonon. This would then lead
 to the formation of pairs that could form a condensate, and which implied an energy gap $\Delta$ between the energies of paired electrons
-and energies of normal quasiparticle states in the Fermi-sea. 
+and energies of normal quasiparticle states in the Fermi-sea. This year Abrikosov also published his prediction of the existance of a lattice of
+vortices in the mixed state of type-II superconductors \cite{Abrikosov56}.
 
-The diagrammatic methods developed for quantum field theory was first applied to the
-problem of superconductivity by Gor'kov in 1958 \cite{Gorkov58} when he calculated Green's functions based on the ideas of BCS-theory that reproduced
-its results. He then in 1959 used these methods to prove that the Ginzburg-Landau theory follows from the BCS theory \cite{Gorkov59}.
-The application of field theoretic methods was further developed by the work of Nambu in 1960, where he introduced the Nambu-spinor for calculating the
-Gor'kov Green's functions.
+A separate form of a microscopic theory appeared in 1958 by N. N. Bogoliubov in a series of papers \cite{Bogoliubov58I, Bogoliubov58III, Bogoliubov58}.
+This methodology of solving the Fr\"olich Hamiltonian was presented in a book \cite{deGennes66} by P. G. de Gennes and has since become known as
+the Bogoliubov-de Gennes or BdG equations.
 
-The idea of an energy gap in the excitation spectrum, which was integral to the BCS theory, was given strong experimentall backing by the tunneling
+The diagrammatic methods developed for high-energy physics was first applied by Gor'kov to the
+problem of superconductivity in 1958 when he calculated Green's functions based on the ideas of BCS-theory that reproduced
+its results \cite{Gorkov58}. He then in 1959 used these methods to prove that the Ginzburg-Landau theory follows from the BCS theory in the limit $T\to T_c$ \cite{Gorkov59}.
+The application of field theoretic methods was extensively developed by the work of Nambu, published in 1960, where he introduced the Nambu-spinor
+for calculating the Gor'kov Green's functions. A perturbation theory for these Green's functions were calculated by \'Eliashberg in the same year
+following a similar apporach as Nambu which has become known as \'Eliashberg theory \cite{Eliashberg60}.
+
+The understanding of the effects of impurities got an important contribution in 1959 by what is known as Anderson's theorem \cite{Anderson59}.
+It says that any instability of the Fermi-surface that does not lift the Kramer degeneracy of time-reversed paired quasi-particles to not affect
+the mean-field transition temperature \cite{Balatsky06}.
+The idea of an energy gap in the excitation spectrum, which was integral to the BCS theory, was given strong experimental backing by the tunneling
 experiments of I. Giæver in 1960 \cite{Giaever60}.
 Such experiments were given a theoretical understanding by B. D. Josephson in 1962, through what is now known as the Josephson effect
-\cite{Josephson62}. 
+\cite{Josephson62}.
 
-Much as the alchemists of old who had a goal of synthesizing the philosopher's stone, so too have condensed matter scientists had a dream
-of one day discovering a practical material that is superconducting at room-temperature. The alchemists never acheived their goal but their
-pursuit paved the way for a plethora of important discoveries that laid the groud work for the periodic table, chemistry and science
-as we know it. In the same way, room-temperature superconductivity at normal pressures has still not been discovered, but this pursuit
-has yielded an enormously diverse field of different kinds of superconductivity with different applications \cite{Moran05}.
+From the framework of the Gor'kov Green's functions, a set of transport equations were derived for type-II superconductors in 1968 by
+Eilenberger \cite{Eilenberger68}. These equations were further simplified for the case of a dirty superconductor by Usadel in 1970 \cite{Usadel70}.
 
-\subsection{View of history of technology as progressing through knowledge of materials}
+From the perspective of our work, the discovery of a new phase in \ce{He^3} by Osheroff \etal in 1972 was of particular importance. Although a superfluid
+and not a superconducting phase, the $A$-phase of this system has an unconventional anisotropic pairing symmetry as described by Leggett in his famous
+1975 review article \cite{Leggett75}. This is the same symmetry that I have considered in our work.
 
-\subsection{Discovery of superconductivity}
+Superconductivity was found in the first heavy-fermion system \ce{CeCu2Si2} in 1979 by Steglich \etal \cite{Steglich79}. A class of systems where the superconducting
+state consists of quasiparticles that are fermions with a large effective mass and where the superconducting order is of an
+unconventional character. For a review see Ref.~\cite{White15}.
 
-\subsection{Initial theoretical description}
+The first high-$T_c$ superconductor was discovered in the form of \ce{La2CuO4} by Bednorz and M\"uller in 1986 \cite{Bednorz86}.
+This was followed up one
+year later by the discovery of \ce{YBa2Cu3O_{7-x}} by M. K. Wu \etal \cite{Wu87}. These discoveries ushered in an era of superconductivity
+research dominated by cuperates --- ceramic compounds consisting of metal oxides between planes of \ce{CuO2}. These were truely unconventional
+superconductors in that their pairing symmetry was demonstrably non-isotropic. Through a group-theoretical approach, a vast array
+of unconventional symmetries and their Ginzburg-Landau theories and physical properties were enumerated by Sigrist and Ueda in 1991 \cite{SigristUeda91}.
 
-% London-theory
-% Landau and Ginzburg-Landau theory
-% Abrikosov theory
-% Anderson's theorem
-% Theory of disorder and impurities (Abrikosov-Gorkov, Hirschfeld)
-% vortex BKT transition, Mermin-Wagner theorem, Elitzurs theorem
-% BCS theory, Eliashberg theory, BdG framework, Usadel equation, Keldysh formalism.
+In 1994 superconductivity was discovered in the perovskite structure of \ce{Sr2RuO4} by Y. Maeno \etal \cite{Maeno94}. This proved that copper
+was not a neccessary ingredient for superconductivity in layered perovskite crystal structures, and would be the starting point of a still-standing
+debate about its pairing symmetry which formed the immediate background for our own research.
 
-\subsection{Experimental discovery of high-$T_c$ superconductivity}
+A strong case was made by D. J. Scalapino in
+1995 that for cuperates, the pairing had $d_{x^2-y^2}$ symmetry caused by anti-ferromagnetic spin-fluctuations \cite{Scalapino95}. Above the superconducting transition
+temperature but below a characteristic temperature $T^\ast$ there is a hitherto undiscovered phase in such compounds where the electronic density of
+states near the Fermi-surface continues to be suppressed by an energy gap $\Delta_\text{PG}$. This phase was named the pseudogap phase by Ding \etal
+in 1996 \cite{Ding96}, and its origin continues to be a hotly debated topic.
 
-% Cuperates
-% Doping dome and quantum critical point. Anti-ferromagnetism.
-% Hevy fermion systems.
-% Mott insulator, Kondo systems
-% Superconducting polymers and organic superconductors.
-% Pseudogap, nernst phase and nematic order.
-% The discovery of superconductivity in ceramic compounds (J. Georg Bednorz, K. Alexander Muller)
-% Discovery of superfluid He-3 (David M. Lee and Douglas D. Oscheroff and Robert C. Richardson)
+2008 marked the beginning of the ``iron age'' of superconductivity research by the discovery of the first iron-based superconductor \ce{La[O_{1-x}F_x]FeAs} by
+Y. Kamihara \etal \cite{Kamihara08}. The materials in this family of superconductors, called iron-pnictides, feature high $T_c$ and several other exotic
+properties including nematic order \cite{Fernandes14}. For a review see Ref.~\cite{Paglione10}.
 
-\subsection{Unconventional vs. conventional superconductivity}
-
-% Line nodes and point-nodes, consequence on specific heat
-% Alternative mechanisms: Friedel oscillations, electron spin-fluctuations.
-% Timer reversal symmetry breaking materials: muon spin-rotation, spontaneous Hall effect, Magneto-optic effect, Polar Kerr effect
-% Spin-orbit coupling and DMI (Deyalovshinzki-Moria interaction)
-% Odd-frequency superconductivity.
-% Andreev boundary states.
-% Shiba bound states.
-% Majorana bound states.
-% Pomeranchuk phase / instability. Charge 
-% FFLO
-% Topological insulator - sc. transition ref. Eirik / Stefan.
-% Spin-triplet vs spin-singlet superconductors
-% GMR giant magneto-resistance effect.
+Lastly one could argue that we now have entered a ``hydrogen age'', as an increasing number of hydrogen-rich compounds are approaching room-temperature
+superconductivity as long as they are put under insane pressures \cite{Semenok20, Snider20}. It could also be argued that we are currently in a
+``topological age'' as topological edge states in superconductors are field under intense study \cite{Wang20} that potentially has far reaching
+consequences through their immediate application to quantum computing. Others again, would surely argue that we are in a ``graphene age'' as 
+novel forms of superconductivity have been observed in twisted layers of graphene \cite{Park21}.
+Which age we are in, I suspect, depends on what field the researcher
+you are asking works on, and a clear answer will have to be postponed until seen through the coarse-grained eyes of history.
 
 
-\subsection{Theoretical developments influence on other domains}
-% Spontaneous sc breaking, Higgs theory and Goldstone boson, Elitzurs theorem
+\section{About this work}
 
-\subsection{Development of experimental techniques}
+In the last section we saw how the research into the phenomena of superconductivity has blossomed into a myriad of different directions and sub-fields. Through
+all this research, an implicit motivation has been the search for one day finding a theory or a specific system of a material that is superconducting at
+room temperature. This has become a goal like the philosopher's stone that we still have not quite reached, but whose continued pursuit itself has borne
+numerous fruits. 
 
-% TEM, NMR, Kerr-angle, sputtering, Knight-shift, SQUID
-% ARPES and spectral function. Spin-ARPES.
-% Molecular beam epitaxy.
+As for this thesis, we have focused on a branch of unconventional superconductivity that pertains to the description of phases with
+$k_x\pm ik_y$ chiral $p$-wave pairing symmetry. The $p$ in $p$-wave implies that the pairing states internal angular momentum has $l=1$, \ie it has a $1$st order (linear) dependence
+on its internal angular momentum. The letter-convention stands for ``principal'' and comes historically from the study of atomic emission spectra 
+that result when electrons jump between different orbitals. As we mentioned, this is the same kind of state that describes the real world system of the
+\ce{He^3} superfluid $A$-phase. In that context it is often referred to as ABM-state after Anderson Brinkman and Morel who first described this pairing
+state in the context of the BCS-theory \cite{Anderson61} in 1961, and then demonstrated how this state was stable in the $A$-phase
+of \ce{He^3} in 1973 \cite{Anderson73}. It was for a long time thought that the unconventional superconducting phase of the perovskite compound \ce{Sr2RuO4}
+had such a pairing symmetry, with one of the chief reasons being that it clearly features spontaneuously broken time-reversal symmetry. This
+formed in part the motivation for much of our work.
 
+The determination of pairing symmetries is an important step in understanding what type of superconductivity is in a system because it leads to distinct
+experimental consequences. Roughly speaking one can think of the pairing symmetry as determining the $\v{k}$ dependence of the gap function
+\begin{equation}
+    \label{eq:Intro:GapFunc}
+    \Delta(\v{k}) = \sum_{m}\eta_mb_m(\v{k}),
+\end{equation}
+where $b_m(\v{k})$ are basis functions that depends on the point group symmetry of the system and $\v{k}$ determines a point on the Brillouin zone. Depending
+on these basis functions then, $\Delta(\v{k})$ could have points or lines in the Brillouin zone where it vanishes, so-called point- or line-nodes. The 
+existence of such nodes imply distinct signatures such as in the temperature dependance of the specific heat. Other examples of experimental signatures include
+the Knight-shift, any Kerr-angle rotation and the possible symmetry of lattices of magnetic vortices. For an introduction to superconductors with
+unconventional pairing symmetries we highly recommend the lecture notes by Sigrist in Ref.~\cite{Sigrist05} and \cite{Sigrist09}.
 
-\subsection{Contemporary research areas}
+Importantly, one may derive the form of the Ginzburg-Landau theory of the superconductor based solely on the pairing-symmetry as was done by Sigrist and Ueda
+for a large number of different symmetries in 1991 \cite{SigristUeda91}. The Ginzburg-Landau theory is a
+phenomenological theory, meaning that it explains the effective phenomenon observable in superconductors without necessarily knowing all the microscopic
+details. As such, any correct microscopic theory should then reduce to the phenomenological Ginzburg-Landau theory in the limit of $T\to T_c$. As we mentioned,
+Gor'kov first did this for a conventional $s$-wave superconductor in 1959 through a Green's function approach \cite{Gorkov59}. One fruitful
+starting point for such a microscopic theory is the Hubbard-Hamiltonian
+\begin{equation}
+    \label{eq:Intro:HubbardHamiltonian}
+    \hat{H} = \sum_{ijss'}H_{ij;ss'}\hat{c}_{is}^\dagger\hat{c}_{js'} + \mathcal{O}(\hat{c}^4),
+\end{equation}
+which itself can be viewed as an effective theory of the underlying many-body
+quantum mechanics. In a Hubbard-theory, electrons can occupy sites in an atomic crystal lattice and hop from one site to another. Any long-range interaction
+such as the Coulomb interaction is then written in terms
+of how electrons at different sites interact through nearest neighbor terms, next-nearest neighbor terms, etc. In Chapter~\ref{chap:Field} we will describe some of the
+tools useful in deriving an effective Ginzburg-Landau theory from such a microscopic starting point. We then in Chapter~\ref{chap:Group} present the
+group-theory needed for deriving the form of such a microscopic theory that results in a sought-after pairing-symmetry.
 
-Noncentrosymmetric superconductors such as \ce{BiPd} has been found to have topologically non-trivial properties
-due to Dirac points under the Fermi-level and spin-polarized surface states \cite{Neupane16}
+In the last chapter of Chapter~\ref{sec:Vor}, we present some tools useful when investigating magnetic vortices and vortex-lattices in chiral $p$-wave
+superconductors.
 
-Room-temperature high-pressure superconductivity has been shown to be possible by the use of various hydrogen rich material
-\cite{Semenok20, Snider20} and nickelates \cite{Si20}.
+As was said by Leggett in his nobel lecture, there are very few things that can be proved rigorously in condesed matter physcs, by which he referred to analytic
+arguments \cite{Leggett03}. To get around this difficulty we have used Monte-Carlo techniques that relies on the power of computers to simulate physical
+consequences of theoretical models, specifically for our case: a Ginzburg-Landau theory. Such techniques have a long history in our group of being successfully
+able to simulate superconductive systems. For a few examples see \cite{Nguyen99PRB, Smiseth05, Smorgrav05, Bojesen14, Galteland15}. Although similar techniques
+have been used for centuries, their modern form
+was first developed in the context of nuclear research in the Manhatten project. After the researchers had become familiar with the Monte Carlo casino in Monaco,
+they named it after the casino because of the technique's reliance on random or pseudo-random numbers to
+calculate multi-dimensional integrals \cite{Metropolis87}. In our use of Monte-Carlo techniques, which we present in Chapter~\ref{chap:Monte}, they are used
+to calculate thermal averages of statistic-mechanical
+observables. The rough procedure is that first, the theory under investigation is discretized to a corresponding lattice model as described in Chapter~\ref{sec:LM},
+such that the probability of any configuration of fields on this numerical lattice can be computed. The theory then implies a probability distribution for how
+likely certain field-configuration is to materialize in a real system.
+Then, from a pre-determined starting configuration, small changes are made incrementally to the numerical configuration in such
+as way as to yield numerous statistical samples of field configurations that follow the theoretical probability distribution after sufficient number of
+incremental changes have been done. These samples of field configurations finally are used to calculate statistical averages that correspond to taking
+thermal averages in statistical mechanics of the observables we are interested in. We begin this thesis in Chapter~\ref{chap:statMech} with a brief review
+of some relevant aspects of statistical mechanics that should refresh what is meant by thermal averages of ovservables, how these are tied to probability
+distributions of system configurations and a brief introduction of Landau and Ginzburg-Landau theory as it pertains to phase transitions.
 
-ARPES is a recently developed experimental techniques that allows the differentiation between spins when mapping electrons on the
-Fermi-surface. This has recently been used on cuperates, showing the effect of spin-orbit coupling in such systems \cite{Gotlieb18}.
-
-% Magic angle superconductivity, i.e. twisted layer graphene
-Superconductivity has been observed for materials consisting of twisted sheets of graphene. This kind of superconductivity has been dubbed
-twisted-layer superconductivity and has been found both for bi-layers as well as three layers \cite{Park21}.
-
-Write an \textsc{introduction} to the field {\prefixFont field} here. 
+%\subsection{View of history of technology as progressing through knowledge of materials}
+%
+%\subsection{Discovery of superconductivity}
+%
+%\subsection{Initial theoretical description}
+%
+%% vortex BKT transition, Mermin-Wagner theorem, Elitzurs theorem
+%% BdG framework, Keldysh formalism.
+%
+%\subsection{Experimental discovery of high-$T_c$ superconductivity}
+%
+%% Mott insulator, Kondo systems
+%% Superconducting polymers and organic superconductors.
+%% The discovery of superconductivity in ceramic compounds (J. Georg Bednorz, K. Alexander Muller)
+%% Discovery of superfluid He-3 (David M. Lee and Douglas D. Oscheroff and Robert C. Richardson)
+%
+%\subsection{Unconventional vs. conventional superconductivity}
+%
+%% Line nodes and point-nodes, consequence on specific heat
+%% Alternative mechanisms: Friedel oscillations, electron spin-fluctuations.
+%% Timer reversal symmetry breaking materials: muon spin-rotation, spontaneous Hall effect, Magneto-optic effect, Polar Kerr effect
+%% Spin-orbit coupling and DMI (Deyalovshinzki-Moria interaction)
+%% Odd-frequency superconductivity.
+%% Andreev boundary states.
+%% Shiba bound states.
+%% Majorana bound states.
+%% Pomeranchuk phase / instability. Charge 
+%% FFLO
+%% Topological insulator - sc. transition ref. Eirik / Stefan.
+%% Spin-triplet vs spin-singlet superconductors
+%% GMR giant magneto-resistance effect.
+%
+%
+%\subsection{Theoretical developments influence on other domains}
+%% Spontaneous sc breaking, Higgs theory and Goldstone boson, Elitzurs theorem
+%
+%\subsection{Development of experimental techniques}
+%
+%% TEM, NMR, Kerr-angle, sputtering, Knight-shift, SQUID
+%% ARPES and spectral function. Spin-ARPES.
+%% Molecular beam epitaxy.
+%
+%
+%\subsection{Contemporary research areas}
+%
+%The theory Andreev bound states is very interesting \cite{Escrig18}.
+%
+%Noncentrosymmetric superconductors such as \ce{BiPd} has been found to have topologically non-trivial properties
+%due to Dirac points under the Fermi-level and spin-polarized surface states \cite{Neupane16}
+%
+%Room-temperature high-pressure superconductivity has been shown to be possible by the use of various hydrogen rich material
+%\cite{Semenok20, Snider20} and nickelates \cite{Si20}.
+%
+%ARPES is a recently developed experimental techniques that allows the differentiation between spins when mapping electrons on the
+%Fermi-surface. This has recently been used on cuperates, showing the effect of spin-orbit coupling in such systems \cite{Gotlieb18}.
+%
+%% Magic angle superconductivity, i.e. twisted layer graphene
+%Superconductivity has been observed for materials consisting of twisted sheets of graphene. This kind of superconductivity has been dubbed
+%twisted-layer superconductivity and has been found both for bi-layers as well as three layers \cite{Park21}.
+%
+%Write an \textsc{introduction} to the field {\prefixFont field} here. 
