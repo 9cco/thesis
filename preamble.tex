@@ -61,9 +61,6 @@
 %\KOMAoptions{BCOR=15mm}
 %\KOMAoptions{DIV=classic}
 
-% Disable headers
-\pagestyle{plain}
-
 % Font used for page numbers
 %\addtokomafont{pagenumber}{\lining\scshape}
 \addtokomafont{pagenumber}{\scshape}
@@ -152,10 +149,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
 % Load a package for styling the table of contents
-\usepackage{tocstyle}
+%\usepackage{tocstyle}   % This package is depricated
 
 % Place page numbers right after the section entries
-\usetocstyle{nopagecolumn}
+%\usetocstyle{nopagecolumn}
+
+\KOMAoptions{chapterentrydots=true}
 
 % Do not include subsections in the table of contents
 \setcounter{tocdepth}{1}
@@ -176,6 +175,12 @@
 %   Headings
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{scrlayer-scrpage}           % Enables header customization
+% Disable headers
+%\pagestyle{plain}
+% Enable headers
+\KOMAoptions{headsepline=true}
 
 % Change the font used for headings
 \addtokomafont{disposition}{\sffamily}
@@ -374,7 +379,7 @@
 \usepackage{pdfpages}   % Enables embedding of documents
 \usepackage{booktabs}   % Proper formatting of tables
 \usepackage{siunitx}    % Proper formatting of units
-\usepackage{mhchem}     % Proper formatting of chemicals
+\usepackage[version=4]{mhchem}     % Proper formatting of chemicals
 \usepackage{lipsum}     % Insertion of arbitrary content
 
 % Load custom packages
@@ -491,7 +496,7 @@
 \newtheorem{thm}{Thm.}[chapter]
 
 % Acronyms
-\makeglossaries
+%\makeglossaries             % Removed since we won't print the glossery
 \setacronymstyle{long-short}
 \def\ac{\gls*}
 \newacronym{mcmc}{MCMC}{Markov-Chain Monte-Carlo}
@@ -500,3 +505,4 @@
 \newacronym{mh}{MH}{Metropolis-Hastings}
 \newacronym{pt}{PT}{parallel tempering}
 \newacronym{gl}{GL}{Ginzburg-Landau}
+\newacronym{ir}{IR}{irreducible representation}

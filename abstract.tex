@@ -1,17 +1,25 @@
 \chapter*{Abstract}\noindent
-This is a \textsc{latex} template intended for academic theses, and was put together by \href{https://github.com/jabirali}{Jabir Ali Ouassou} while preparing his PhD dissertation.
-The template itself is released under a Creative Commons Attribution licence (\href{https://creativecommons.org/licenses/by/4.0/}{\textsc{cc by 4.0}}).
-This basically means that you are free to use the template for any purpose as long as you give appropriate credit.
+%
+In this thesis we discuss tools, results and techniques pertaining to discussions around unconventional superconductors of chiral $p$-wave symmetry.
+This symmetry exists in the superfluid $A$-phase of \ce{He^3} and has been suggested to describe the superconductivity of \ce{Sr2RuO4}.
 
-The template bundles the \href{https://github.com/libertinus-fonts/libertinus}{Libertinus fonts}, which is used for all regular text and mathematics, and the \href{https://ctan.org/tex-archive/fonts/urw/classico}{\textsc{urw} classico} fonts, which are used for chapter and section headings.
-The former is available under the Open Font Licence (\textsc{sil ofl 1.1}), and is free for both private and commercial use.
-The latter is available under the Aladdin Free Public Licence (\textsc{afpl}), and is only free for non-commercial use.
-If commercial use is of importance, a suitable replacement for \textsc{urw} classico would be the Libertinus Sans fonts, which are also bundled with the template.
+In Paper I we use field-integral techniques to investigate the effects of spin-orbit coupling on the coefficients of the phenomenological
+Ginzburg-Landau theory of chiral $p$-wave superconductors. We find that these coefficients have a non-linear anisotropic dependence on the
+spin-orbit coupling strength and direction in spin-space. This dependence necessitates two independent phenomenological parameters for
+the mixed gradient terms and the mixed component terms respectively, even in the weak-field limit when written using
+dimensionless variables.
 
-Note that this template relies on \textsc{lualatex} for \eg font customization, and on \textsc{bibtex} for reference handling.
-For command-line users, the easiest way to compile the document is to run \texttt{latexmk -lualatex thesis.tex}.
-If using an \textsc{ide}, please check the program settings for how to enable compilation with \textsc{lualatex} and \textsc{bibtex}.
-The template is based on the \textsc{koma-script} book class (\texttt{scrbook}), so for further customization of the template, please check out \href{https://ctan.org/pkg/koma-script}{their documentation}.
+In Paper II we use large-scale Monte-Carlo simulations to investigate the vortex-matter of a superconducting system that can be modelled
+by a Ginzburg-Landau theory with chiral $p$-wave symmetry such as the one investigated in Paper I, but now in the limit of vanishing
+spin-orbit coupling. We find that a square vortex lattice consisting of single-quanta vortices is stable at high temperatures close to
+$T_c(B)$. The single-quanta vortices merge into double-quantum vortices at lower temperature which together then stabilizes a triangular
+vortex lattice.
 
-The template does not include a title page.
-This is because the style requirements typically varies between universities, and many institutions will anyway autogenerate a titlepage upon thesis submission.
+In Paper III we investigate a $Z_2$ Ising transition resulting from spontaneously broken time-reversal symmetry in the neutral sector
+of chiral $p$-wave symmetric superconductors subjected to zero external field. We find that this transition is irrevocably tied to
+the superconducting transition for all realistic values of the phenomenological parameters in our model.
+
+% Ideas: What is the first order expansion in the spin-orbit coupling strength?
+% Investigate numerically how the dimensionless parameters of the ginzburg-landua theory depends on the spin-orbit coupling strength given
+% representative values for other parameters. Will an increasing spin-orbit coupling strength move the theory away from the A-phase
+% towards the B-phase or C-phase?

@@ -1,8 +1,8 @@
 \chapter{Lattice Models}
 \label{sec:LM}
-
-When we have a model for the free energy of a statistical mechanical system that is too complicated to
-calculate analytically one approach is to utilize computers and Monte-Carlo techniques. To make numerical
+%
+\noindent When we have a model for the free energy of a statistical mechanical system that is too complicated to
+calculate analytically one approach is to utilize computers and \ac{mc} techniques. To make numerical
 methods more effective one common approach is to discretize continuous models down on a 
 numerical lattice. The lattice can in principle be of any form as long as the continuum limit reproduces
 the original theory, however in this thesis we will exclusively focus on a square (cubic) numerical lattice
@@ -62,7 +62,7 @@ The value of $f$ at $\v{r}+a\hat{\mu}$ is parallel transported back to $\v{r}$ b
     U_{\v{r},\mu} = e^{igA_{\v{r},\mu}},
 \end{equation}
 where
-$g$ is the coupeling constant between $f$ and the gauge field $A$, and
+$g$ is the coupling constant between $f$ and the gauge field $A$, and
 \begin{equation}
     \label{eq:LM:Derivatives:linkVariable}
     A_{\v{r},\mu} \equiv \int_\v{r}^{\v{r}+a\hat{\mu}}\!\mathrm{d}\v{r}\cdot\v{A}(\v{r}),
@@ -99,7 +99,7 @@ under the transformation in Eq.~\eqref{eq:LM:Derivatives:discretizedGaugeTransfo
 
 \subsection{Reduction of symmetry}
 
-One word of caution in this connection is that the discretized gradient terms will not neccessarily have all the same spatial symmetries
+One word of caution in this connection is that the discretized gradient terms will not necessarily have all the same spatial symmetries
 as the originating continuous terms because the bias of the forward direction in the forward difference and the cubic structure of the numerical
 lattice will in general break such symmetries. The effects of the cubic symmetry of the numerical lattice can be thought of as caused by
 implicit lattice potentials that increases in influence towards lower temperatures and higher field strengths when the model contains an external
@@ -118,11 +118,11 @@ by any amount, the term would still yield the same value.}
     2\sum_\v{r}\sum_\mu\rho_\v{r}^2[1-\cos(\Delta_\mu \theta_\v{r}+gA_{\v{r},\mu})].
 \end{equation}
 From this form we can see that the term is only symmetric by rotation of $90^\circ$ in the planes normal to the $x$, $y$ and $z$ directions.
-The discretized term contains cubic distortions when rotating in directions in-between these, hence the $SO(3)$ rotationall symmetry is broken
+The discretized term contains cubic distortions when rotating in directions in-between these, hence the $SO(3)$ rotational symmetry is broken
 down to the octahedral point group $O$.
 
 The forward bias of the forward difference discretization scheme can also lead to breaking of symmetries that both the continuous model and the
-numerical lattice have in common when the scalar field consist of multiple components. Consider a density term of the form
+numerical lattice have in common when the scalar field consists of multiple components. Consider a density term of the form
 \begin{equation}
     \label{eq:LM:Derivatives:ExampleMG}
     \Re\Big[D_x\eta_xD_y\eta_y\Big],
@@ -130,7 +130,7 @@ numerical lattice have in common when the scalar field consist of multiple compo
 where $\eta_x$ and $\eta_y$ are two scalar fields that transform as components of spin such that under a $90^\circ$ $\hat{z}$-rotation
 (which is called a $C_4$ transformation), then
 $D_x\to D_y$, $D_y\to -D_x$, $\eta_x\to \eta_y$ and $\eta_y\to -\eta_x$. Inserting this into the continuous density term in 
-Eq.~\eqref{eq:LM:Derivatives:ExampleMG} we see that it remains precicely the same \ie invariant. Now consider the discretization of this term,
+Eq.~\eqref{eq:LM:Derivatives:ExampleMG} we see that it remains precisely the same \ie invariant. Now consider the discretization of this term,
 which reads
 \begin{equation}
     \label{eq:LM:Derivatives:ExampleMG:Discrete}
@@ -183,7 +183,7 @@ but not the other as illustrated in Figure~\ref{fig:LM:Derivatives:nextNearestDi
         \draw [violet, dashed, opacity=0.5] (\x,-\latticeSpacing-0.1) -- (\x,-\latticeSpacing-\latticeSpacing+0.1);
         \draw [green, opacity=0.5] (\x+0.1,-\latticeSpacing-0.1) -- (\x+\latticeSpacing-0.1,-\latticeSpacing-\latticeSpacing+0.1);
     }
-    % Draw mid-point
+    % Draw midpoint
     \draw [violet, dashed, thick] (0.1,0) -- (\latticeSpacing-0.1,0);
     \draw [violet, dashed, thick] (0,0.1) -- (0,\latticeSpacing-0.1);
     \draw [green, thick] (\latticeSpacing-0.1,0.1) -- (0.1,\latticeSpacing-0.1);
@@ -238,7 +238,7 @@ in the continuum limit.
 \label{sec:LM:Field}
 
 The interaction between superconductors and magnetic fields is an essential aspect in the study of superconductors and thus we will need to be able to add external magnetic fields
-to our models in order to study this interaction. An external field is usually thought of as a constant homogenous magnetic field in a certain direction that is a parameter of
+to our models in order to study this interaction. An external field is usually thought of as a constant homogeneous magnetic field in a certain direction that is a parameter of
 the problem rather than a variable. In other words we assume the magnetic flux to be the same everywhere and unchanging, and rather than ask what consequence the existance of a superconductor
 has on this field, we are interested in the effects the field has on the superconducting state. Physically this situation is relevant \eg if a relatively small and thin sheet
 of superconducting material is placed in between two strong electromagnets as illustrated in Figure~\ref{fig:LM:Field:externalField}.
@@ -250,7 +250,7 @@ of superconducting material is placed in between two strong electromagnets as il
 \end{figure}
 
 One way to introduce a constant magnetic field in a lattice model is simply to figure out what kind of vector potential $\v{A}(\v{r})$ would give a constant magnetic field $\v{B}(\v{r})$
-through $\v{B} = \nabla\times\v{A}$, and then set the link-variables $A_{\v{r},\mu}$ accordingly with the only caviat being that for a lattice-model with periodic boundary conditions,
+through $\v{B} = \nabla\times\v{A}$, and then set the link-variables $A_{\v{r},\mu}$ accordingly with the only caveat being that for a lattice-model with periodic boundary conditions,
 then the factor $e^{igA_{\v{r},\mu}}$ has to satisfy periodic boundary conditions as well. This implies the condition
 \begin{equation}
     \label{eq:LM:Field:periodicBC}
@@ -261,7 +261,7 @@ where $m_\nu\in\mathbb{Z}$ and $\nu$ gives a direction on the lattice.
 \subsection{Landau Gauge}
 \label{sec:LM:Field:LandauGauge}
 
-As an example, lets say we are interested in having an external field in the $\hat{z}$-direction with magnitude $B$. The vector-potential components $A_x$ and $A_y$ then have to satisfy
+As an example, let's say we are interested in having an external field in the $\hat{z}$-direction with magnitude $B$. The vector-potential components $A_x$ and $A_y$ then have to satisfy
 the equation
 \begin{equation}
     \label{eq:LM:Field:vectorPotentialCondition}
@@ -320,7 +320,7 @@ components) in minimal coupling, then the Lagrangian reduces to $\mathcal{L}_M \
     F_A = \frac{1}{2\mu_0}(\nabla\times\v{A})^2.
 \end{equation}
 There are a couple of different ways of discretizing this energy for inclusion in a lattice model depending on whether one defines the link-variables compactly,
-\ie $gA_{\v{r},\mu} \in (-\pi, \pi)$, or noncompactly, \ie $gA_{\v{r},\mu} \in (-\infty,\infty)$. Both versions belong to the same universailty class and thus produce the same
+\ie $gA_{\v{r},\mu} \in (-\pi, \pi)$, or non-compactly, \ie $gA_{\v{r},\mu} \in (-\infty,\infty)$. Both versions belong to the same universality class and thus produce the same
 results in a renormalization group sense as long as the fluctuations are sufficiently small \cite{shimizu12}. For noncompact link-variables, we simply replace the gradient with the
 lattice difference operator from Eq.~\eqref{eq:LM:Derivatives:forwardDifference} divided by the lattice spacing $a$, 
 and the gauge-field components by their corresponding link-variables such that

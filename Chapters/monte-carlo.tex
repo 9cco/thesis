@@ -1,9 +1,9 @@
 \chapter{Monte-Carlo Techniques}
 \label{chap:Monte}
-
-In this chapter we discuss some techniques useful in \ac{mc} simulations
+%
+\noindent In this chapter we discuss some techniques useful in \ac{mc} simulations
 of systems in statistical-physics.
-In such systems these techniques wil be used to calculate thermal averages using random numbers. Let
+In such systems these techniques will be used to calculate thermal averages using random numbers. Let
 $Z$ denote the partition function and $\mathcal{H}$ the Hamiltonian of the system. Then the thermal
 average of an observable $\mathcal{O}$ is defined as
 \begin{equation}
@@ -18,20 +18,20 @@ then applied to a $d$-dimensional integral, its error will scale as $M^{-\kappa/
 What \ac{mc} techniques then provides is a way of using random numbers in calculating
 Eq.~\eqref{eq:Monte:thermalAverage} without actually summing over all the states. We do this by drawing random states
 $\psi_i$ from a carefully selected probability distribution and using statistics to estimate how close the resulting
-thermal average is likely to be to the true thermal average. Letting $M$ be the number of samples, then the
+thermal average is likely to be the true thermal average. Letting $M$ be the number of samples, then the
 error scales as $M^{-1/2}$ and is independent of the number of dimensions of the integral.
 
 As in the case of the stationary phase approximation, the calculation of the sum in Eq.~\eqref{eq:Monte:thermalAverage} can be made much more effective
 by considering which terms give large contributions. If we have a probability distribution $\pi(\psi)$ of sampled states $\psi$ that has peaked at states
 that gives large contributions to $\langle\mathcal{O}\rangle$, then our estimate will converge much quicker to the true value than if we were to
-sample states uniformely. In a sense we are interested in sampling only the important states, and hence this is called importance sampling. Let
+sample states uniformly. In a sense we are interested in sampling only the important states, and hence this is called importance sampling. Let
 $\{\tilde{\psi}_i\}$ be a set of states that are uniformly sampled, while $\{\psi_i\}$ are sampled with probability distribution $\pi(\psi_i)$. The
 statistical estimator $\bar{\langle\mathcal{O}\rangle}$ of the thermal average of the observable $\mathcal{O}$ is then
 \begin{equation}
     \label{eq:Monte:importanceSampledThermAvg}
     \bar{\langle\mathcal{O}\rangle} = \sum_{i}\mathcal{O}(\tilde{\psi}_i)\frac{e^{-\beta\mathcal{H}(\tilde{\psi}_i)}}{Z(\{\tilde{\psi}_i\})} = \sum_{i}\mathcal{O}(\psi_i)\frac{e^{-\beta\mathcal{H}(\psi_i)}}{\pi(\psi_i)Z(\{\psi_i\})}.
 \end{equation}
-Now assuming that the state-dependence of the observaible is less important than the exponential, then the largest contributions to the sum will
+Now assuming that the state-dependence of the observable is less important than the exponential, then the largest contributions to the sum will
 come from states that are such that $e^{-\beta\mathcal{H}}/Z$ is large. We thus want to pick states such that 
 \begin{equation}
     \label{eq:Monte:boltzmannDist}
@@ -78,11 +78,11 @@ of detailed balance:
     \label{eq:Monte:detailedBalance}
     \pi(\psi')\mathcal{T}(\psi'\to\psi) = \pi(\psi)\mathcal{T}(\psi\to\psi').
 \end{equation}
-This states that for the process to be invariant of the point in the chain, it has be reversible.
+This states that for the process to be invariant of the point in the chain, it has to be reversible.
 
 \section{Metropolis-Hastings method}
 
-The \ac{mh} method is an algorithm for drawing states in a Markov-Chain that spesifies a transition probability
+The \ac{mh} method is an algorithm for drawing states in a Markov-Chain that specifies a transition probability
 $\mathcal{T}(\psi\to\psi')$ between states $\psi$ and $\psi'$ that satisfies the detailed balance criterion. The algorithm proceeds
 as follows:
 \begin{enumerate}
@@ -121,9 +121,9 @@ distribution $q(\psi'\,|\,\psi)$ used in picking new proposed states. If we assu
     \label{eq:Monte:MH:pickDistributionSymmetry}
     q(\psi'\,|\,\psi) = q(\psi\,|\,\psi'),
 \end{equation}
-then we don't need to calculate it explicitely since it cancels out of the equation for $\alpha$ in Eq.~\eqref{eq:Monte:MH:transitionProb}.
+then we don't need to calculate it explicitly since it cancels out of the equation for $\alpha$ in Eq.~\eqref{eq:Monte:MH:transitionProb}.
 
-A further simplification can be acheived by inserting the expression for $\pi(\psi)$ in Eq.~\eqref{eq:Monte:boltzmannDist} into the $q$
+A further simplification can be achieved by inserting the expression for $\pi(\psi)$ in Eq.~\eqref{eq:Monte:boltzmannDist} into the $q$
 symmetric version of $\alpha$, which in this case reduces to
 \begin{equation}
     \label{eq:Monte:MH:reducedTransitionProb}
@@ -136,11 +136,11 @@ has to take into account all the sites. If we update only a single site $\v{r}_j
 \ac{mc} update, then all the sites that do not have an interaction with $\v{r}_j$ cancels out in the
 difference $\mathcal{H}(\psi')-\mathcal{H}(\psi)$. Then we only need to calculate the the difference in the sub-states that are
 affected by $\v{r}_j$ to calculate the energy-difference. This is an essential property to have when creating a parallelized version
-of this algorithm since different parts of the lattice of sites then can be updated in an asynchronuous manner without affecting
+of this algorithm since different parts of the lattice of sites then can be updated in an asynchronous manner without affecting
 each other. In other words: by simplifying to the energy difference, the update scheme becomes local which makes local \ac{mc}
 updates grid-parallelizable.
 
-To use pseudo-random numbers to accept a new state $\psi'$ with probability $\alpha$ we pick a uniformely distributed number $r\in(0,1]$. Then
+To use pseudo-random numbers to accept a new state $\psi'$ with probability $\alpha$ we pick a uniformly distributed number $r\in(0,1]$. Then
 we use the fact that
 \begin{equation}
     \label{eq:Monte:MH:rProbability}
@@ -160,7 +160,7 @@ To obtain good statistics, we want, as a rule of thumb, the acceptance rate to b
 The acceptance rate is defined as the
 number of proposed states $\psi'$ that are accepted, divided by the total number of proposed states, and will in general be proportional
 to the transition probability $\alpha(\psi'\,|\,\alpha)$. This can be adjusted by changing the way
-new states $\psi'$ are proposed. Let $\psi$ be composed of site specific substates $\phi(\v{r}_j)$ and let a state $\psi'$ be proposed
+new states $\psi'$ are proposed. Let $\psi$ be composed of site specific sub-states $\phi(\v{r}_j)$ and let a state $\psi'$ be proposed
 by changing the values of the sub-state $\phi(\v{r}_0)$. Choosing values closer to the original sub-state $\phi(\v{r}_o)$, the difference
 $\mathcal{H}(\psi')-\mathcal{H}(\psi)$ decreases such that $\alpha(\psi'\,|\,\psi)$ in
 Eq.~\eqref{eq:Monte:MH:reducedTransitionProb} approaches $1$ and the acceptance rate increases.
@@ -170,7 +170,7 @@ can lead to freezing of the simulation, where the measurements do not change eve
 a large number of \ac{mc} updates in a certain direction is needed to significantly change the measurements. On the other hand, too low
 of a acceptance rate will also freeze the simulation since then obviously states are very unlikely to change, leading to the same
 measurements repeatedly. Ultimately, whether the acceptance rate should be considered too high or too low, should be guided by the physics of
-the system since in the case that the system has reached a gobal minimum in the energy-lanscape and has low temperature,
+the system since in the case that the system has reached a global minimum in the energy-landscape and has low temperature,
 the proper statistics is obtained by
 an update scheme that gives a low acceptance rate. It is not advisable to change the acceptance rate during a measurement run over
 decreasing temperatures as this has tended to freeze the measurements at varying temperatures leading to confusion when trying to
@@ -180,7 +180,7 @@ find a transition point.
 
 Thermalization in a \ac{mcmc} simulation refers to the process of discarding a number of \ac{mc} updates before starting to measure the
 states in the Markov-chain. The reason for doing this is because the first states in the chain will usually be very unlikely states in the
-ensamble of states, and thus give these states an artificially high statistical weight, unless we measure long enough.
+ensemble of states, and thus give these states an artificially high statistical weight, unless we measure long enough.
 That time could be very long indeed if the starting states are very unlikely, thus to get
 measurements in a reasonable time, these unlikely starting states are discarded.
 
@@ -200,12 +200,12 @@ the energy can be seen to rapidly stabilize to the average value in such a plot.
 \end{figure}
 
 Whether the energy stabilizes from above or below will depend
-on what the initial state is and what the temperature of the simulation is set to. For an ab-iniito state, in which the values of the sub-states
+on what the initial state is and what the temperature of the simulation is set to. For an ab-initio state, in which the values of the sub-states
 are set to uniformly distributed random values in their validity range, this normally corresponds to a very high temperature and
-high energy state, hence thermalizing from such a state will have the energy stabilize from above. Another possibility for an ab-inito
+high energy state, hence thermalizing from such a state will have the energy stabilize from above. Another possibility for an ab-initio
 state is some kind of mean-field minimal solution of the Hamiltonian where sub-states at different sites are correlated. In this case the
 energy will usually be low and the thermalization energy will stabilize from below. This option has the disadvantage that if the mean field
-solution lies inside some local energy minimum then simulations based on it might not be able to get out and find the global miniomum,
+solution lies inside some local energy minimum then simulations based on it might not be able to get out and find the global minimum,
 as opposed to states that are thermalized from high energy where some might find this local minimum while others fall down in the global one.
 In general it is best to thermalize several independent systems from different initial conditions that yield quantitatively similar results
 to make it less likely that the results come from a local minimum.
@@ -215,7 +215,7 @@ is the last state of a previous simulation. In this case the thermalization will
 of the two simulations. To be sure that the measurements are not correlated with the measurements of the last simulation one should discard
 This is a useful practice if gathering results over an extended temperature range where the systems need a large
 thermalization time in order to stabilize. One would then typically start measuring at a high temperature and then decrease the temperature
-sucessively in steps with a thermalization period and measure period for each step.
+successively in steps with a thermalization period and measure period for each step.
 
 For systems prone to fall into local minima it was found that a more careful thermalization period analogous to the measurement procedure 
 described above, decreased the probability of freezing into such minima. Instead of thermalizing from a high energy - high temperature state
@@ -225,8 +225,8 @@ lowered stepwise from a high temperature $T_0$ to a target temperature $T$ with 
     \label{eq:Monte:Therm:geometricTemperatures}
     T_k = \Big(\frac{T}{T_0}\Big)^{\frac{k}{N}}T_0.
 \end{equation}
-The intermediate temperatures were geometrically distributed to ensure highest density of intermediate steps at lower temperatures. At
-each temperature step, a fixed number of \ac{mcs}s were preformed such that more \ac{mcs}s were done towards the lower temperature than
+The intermediate temperatures were geometrically distributed to ensure a higher density of intermediate steps at lower temperatures. At
+each temperature step, a fixed number of \ac{mcs}s were performed such that more \ac{mcs}s were done towards the lower temperature than
 higher. This was done because the simulations in general took longer to thermalize when the temperature decreased. An example of how the
 energy changed during such a thermalization period is shown in Figure~\ref{fig:Monte:cooldown_plot}.
 
@@ -248,8 +248,8 @@ stage typically only showed fluctuations around the mean.
 
 Parallel tempering is a method of simulating multiple systems over a range of different temperatures where the systems can exchange
 positions with their neighbors in this temperature range according to a \ac{mh}-like update step. Since all the different systems all have the same parameters
-except for temperature, when viewed from the perspective of a single temperature, this leads to a normal Metropolis-Hastings \ac{mcmc}
-simulation with an occational global update of all sites of the system whenever the current system exchanges with the system at a neighboring
+except for temperature, when viewed from the perspective of a single temperature, this leads to a normal \ac{mh} \ac{mcmc}
+simulation with an occasional global update of all sites of the system whenever the current system exchanges with the system at a neighboring
 temperature. From the dual perspective of a single system, \ac{pt} allows the system to move in temperature space.
 
 This global updating, or movement in temperature space, has the advantage that it can prevent systems from getting stuck in local minima
@@ -263,7 +263,7 @@ be a list of indices $\lambda$, that refer to replica states $\{\psi_\lambda\}_{
 is given by $\psi_{\lambda_i}$ and its energy is given by $E_{\lambda_i}$.
 The simulation then proceeds according to the algorithm
 \begin{enumerate}
-    \item Preform $\Delta t$ normal Monte-Carlo updates on all replica states, \eg using the \ac{mh} method.
+    \item Perform $\Delta t$ normal \ac{mc} updates on all replica states, \eg using the \ac{mh} method.
     \item For each replica state $\psi_\lambda$ calculate the corresponding energy $E_\lambda$.
     \item For each pair of neighboring temperatures $T_i$ and $T_{i+1}$ where $T_i<T_{i+1}$:
         \begin{enumerate}
@@ -288,67 +288,67 @@ the process doing the \ac{pt} update step is the values of the energies to the \
 back to the worker processes. The \ac{pt} process itself only has to 
 calculate $M-1$ values and move around the indices in an array.
 
-For the parallel tempering method to generate good statistics efficiently, some care should be taken in the distribution of the temperatures $T_i$.
+For the \ac{pt} method to generate good statistics efficiently, some care should be taken in the distribution of the temperatures $T_i$.
 A rule of thumb is to distribute them geometrically, \ie according to
 \begin{equation}
     \label{eq:Monte:PT:geometricTemperatures}
     T_i = \bigg(\frac{T_M}{T_1}\bigg)^{\frac{k-1}{M-1}}T_1,
 \end{equation}
 with the argument that lower temperatures generally have a lower relaxation rate. With geometric distribution, the temperatures are denser towards
-the low end such that the accpetance rate of swaps of replicas at neighboring temperatures would in general become more flat and independent of temperature.
+the low end such that the acceptance rate of swaps of replicas at neighboring temperatures would in general become more flat and independent of temperature.
 Should the specific heat diverge at some point in the temperature range as in the case of a phase transition, then this distribution would no
-longer be optimal since the acceptance probability of temperature swaps is inversely proportional to $C_v$ and thus the accpetance rate would no
+longer be optimal since the acceptance probability of temperature swaps is inversely proportional to $C_v$ and thus the acceptance rate would no
 longer be flat.
 
 From the perspective of an individual replica, the overall goal with the distribution of temperatures is to maximize the number of the replica moves
 from the lowest temperature $T_1$, up to the highest temperature $T_M$ and back to the lowest temperature again. This will then maximize the number
-of statistically independent visits of the system at each temperature. The hope then is that a flat accpetance rate with respect to the distributed
-temperatures will provide a good number of round-trips. With more advanced methods such as the feedback-optimized parallel-tempering Monte-Carlo
+of statistically independent visits of the system at each temperature. The hope then is that a flat acceptance rate with respect to the distributed
+temperatures will provide a good number of round-trips. With more advanced methods such as the feedback-optimized parallel-tempering \ac{mc}
 method the number of round-trips can be optimized \cite{Katzgraber06}.
 
 \section{Grid parallelization}
 
-A simple way of utlizing multiple processor cores, or cpus on a multi-cpu system, is to run indipendent monte-carlo simulation on each processor. This
-is usually very efficient if a parameter of the system such as temperature is to be varied over some intervall. Then each simulation could have a
-different value of this parameter. In this case it is recommended to also implement parallel tempering since the extra overhead is minimal and the
+A simple way of utilizing multiple processor cores, or cpus on a multi-cpu system, is to run independent monte-carlo simulation on each processor. This
+is usually very efficient if a parameter of the system such as temperature is to be varied over some interval. Then each simulation could have a
+different value of this parameter. In this case it is recommended to also implement \ac{pt} since the extra overhead is minimal and the
 speedup of the simulations can be significant.
 
 Alternatively, all the simulations can run with the same value on different processes and the samples from the individual simulations can then,
 be combined to a super-sample. This has the advantage that the individual sampling runs can be shortened and the implementation of the parallelization
 is straight-forward. A drawback with this method is however that separate simulations has to be thermalized individually, such that the more the
 super-sample is split on different processes, the more processor time is wasted on thermalization. Additionally, if the individual simulation
-runs depend on some sort of freezing like how vorticies freeze to the numeric lattice, then individual simulations could freeze at different
+runs depend on some sort of freezing like how vortices freeze to the numeric lattice, then individual simulations could freeze at different
 angles such that they can not be combined to form good statistics.
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=\textwidth]{sub_cuboids.png}
-    \caption{Illustration of the sub-division of the numerical grid into sub-cuboids. The right side illustrates that the sites in each sub-cuboid
-    can be categorized as either internal sites, which can be updated asynchronuously on different sub-cuboids and is illustrated in the figure
+    \caption{Illustration of the subdivision of the numerical grid into sub-cuboids. The right side illustrates that the sites in each sub-cuboid
+    can be categorized as either internal sites, which can be updated asynchronously on different sub-cuboids and is illustrated in the figure
     by the internal orange cube, or sites in a border region.}
     \label{fig:Monte:numerical_grid}
 \end{figure}
 
 A solution to the above issues with this simple parallelization is provided by grid-parallelization. This parallelization method is suited for
-simulations that consist of interacting sites either in $2$D or $3$D where local Monte-Carlo updates is to be preformed.
+simulations that consist of interacting sites either in $2$D or $3$D where local \ac{mc} updates are to be performed.
 We will focus on the case of a $3$D simulation where the sub-sites
 are organized in a numerical cubic lattice. The idea is to split the cube into different sub-cuboids as illustrated on the left side of
 Figure~\ref{fig:Monte:numerical_grid}. Each sub-cuboids internal sites can then
-be updated in the normal Monte-Carlo fashion in parallell with the internal sites of other sub-cuboids. If the individual sites of the original
+be updated in the normal \ac{mc} fashion in parallel with the internal sites of other sub-cuboids. If the individual sites of the original
 system interacts with neighboring sites\footnote{In the case of a local \ac{mh} update this can take the form of an energy-difference of
 the system at a proposed update-site that depends on the value of fields at neighboring sites.}, then it will be necessary for each sub-cuboid to have
 a border whose thickness depends on the range of the interaction. The sites in this border-region will then have an interaction with sites in
 the border-region of other sub-cuboids such that care has to be taken not to update a site based on the value of a neighboring site that is no
 longer valid. One solution to this is simply updating all the sites in the border-regions serially, \ie update the border sites in a single sub-cuboid,
 communicate the updated values to the affected neighboring sub-cuboids, then move to the next sub-cuboid, etc. Or, it could be even more effective
-to parallelize the updates of the border sites as well by further sub-dividing the border-sites into different categories. As an example, one could
+to parallelize the updates of the border sites as well by further subdividing the border-sites into different categories. As an example, one could
 define internal border-sites on the face of a sub-cuboid to be the border-sites that only depend on sites in the single neighboring sub-cuboid that
 is in the direction of the face-plane normal vector. Then all the right-facing internal border-sites can be done in parallel on all sub-cuboids, followed
 by all the top-facing internal border-sites, etc.
 
 \section{Reweighting}
 
-Reweigting techniques are methods of finding estimates of parameter-dependent observables at specific parameter values based on previously obtained
+Reweighting techniques are methods of finding estimates of parameter-dependent observables at specific parameter values based on previously obtained
 samples of these observables from \ac{mc}-simulations that have been done at parameter values independent or the reweighting parameters.
 Given a set of samples of some observable $\{o_i\}_{i=1}^M$ from previous \ac{mc} simulation(s), these techniques provide
 a set of weights $\{w(\beta')_i\}_{i=1}^M$ that can be used to estimate the observable at a parameter value $\beta'$ by the reweighting
@@ -360,7 +360,7 @@ This is very useful when estimating some observable over a temperature-range sin
 not only for a single temperature, but for an extended region. If this region is close to a phase-transition then this can be used as a way of avoiding the
 critical slowing down of simulations at phase transitions by instead simulating at temperatures close to the phase-transition and then using reweighting
 techniques to estimate results at the phase-transition temperature. All this is possible because a simulation at a given temperature\footnote{It is possible
-to use rewighting techniques on other parameters of the simulation as well, as long as they are, like inverse-temperature, linear in the action.}
+to use reweighting techniques on other parameters of the simulation as well, as long as they are, like inverse-temperature, linear in the action.}
 produces a statistical distribution of energy values for the sampled states. This energy distribution will in general overlap with the energy-distribution
 produced when simulating at a temperature that is sufficiently close to the original. Because of this overlap, it is possible to statistically extrapolate
 the value of observables at the neighboring temperature.
@@ -369,7 +369,7 @@ Reweighting techniques are divided into single-histogram- and multi-histogram re
 from a single histogram or can combine histograms generated at multiple parameter values. The single-histogram techniques is used to estimate values of the observables
 at neighboring temperature-values and has the virtue of being comparatively simple to implement and understand. The multi-histogram
 techniques, on the other hand, has the advantage that the additional statistical information in general gives better estimates and is able to even give better estimates
-at the original temperatures the simulations were preformed at, but has a more involved implementation.
+at the original temperatures the simulations were performed at, but has a more involved implementation.
 
 In our simulations we used a Julia implementation\footnote{This implementation is available at
 \url{https://github.com/Sleort/FerrenbergSwendsenReweighting.jl/tree/1.0.3_update}}
@@ -392,7 +392,7 @@ Using a simulation with importance sampling at parameter-value $\beta$ to genera
     \pi(\psi_i) = \frac{e^{-\beta\mathcal{H}(\psi_i)}}{Z_\beta} = \frac{e^{-\beta\mathcal{H}(\psi_i)}}{\sum_\psi e^{-\beta\mathcal{H}(\psi)}},
 \end{equation}
 where the sum in the denominator is over all possible states $\psi$ and not sampled states. Inserting $\pi(\psi_i)$ into $\langle\mathcal{O}\rangle_\beta$
-in Eq.~\eqref{eq:Monte:Reweighting:avgEstimate}, this equation reduces to the arithmetric average, however if we now imagine wanting an estimate of
+in Eq.~\eqref{eq:Monte:Reweighting:avgEstimate}, this equation reduces to the arithmetic average, however if we now imagine wanting an estimate of
 $\langle\mathcal{O}\rangle_{\beta'}$ at an arbitrary parameter value $\beta'$, then insertion yields
 \begin{equation}
     \label{eq:Monte:Reweighting:FS}
@@ -405,7 +405,7 @@ expression in Eq.~\eqref{eq:Monte:Reweighting:generalReweighting} we can read of
     \label{eq:Monte:Reweighting:FS:weights}
     w(\beta')_i = \exp\Big[-\ln\Big(\sum_je^{-(\beta'-\beta)[\mathcal{H}(\psi_j)-\mathcal{H}(\psi_i)]}\Big)\Big].
 \end{equation}
-Although simple, this techniques ability to extract information about observables around the simulated paramter-value makes it extremely valuable 
+Although simple, this techniques ability to extract information about observables around the simulated parameter-value makes it extremely valuable 
 in for instance the study of scaling relations or to accurately calculate the peak of thermodynamic variables when the \ac{mc}-simulations themselves take a significant
 amount of computing time.
 
@@ -450,7 +450,7 @@ definitions, the energetic probability distribution of the system at an inverse 
     \label{eq:Monte:Reweighting:MFS:enProbDist}
     W(\beta,E) = n(E)e^{-\beta E}/Z_\beta,
 \end{equation}
-where $Z_\beta = \sum_\psi e^{-\beta\mathcal{H}(\psi)}$ is the parition function. Based on the sampled histograms, $W(\beta_k,E)$ at temperature $\beta_k$ can be estimated
+where $Z_\beta = \sum_\psi e^{-\beta\mathcal{H}(\psi)}$ is the partition function. Based on the sampled histograms, $W(\beta_k,E)$ at temperature $\beta_k$ can be estimated
 by $\hat{p}_k(E) = h_k(E)/N_k$, \ie $\langle\;\hat{p}_k(E)\;\rangle = W(\beta_k,E)$. This implies that $\langle\;h_k(E)\;\rangle = N_kW(\beta_k,E)$ and assuming for now
 that the samples of states $\psi_i^k$ and $\psi_j^k$ are statistically independent, it can be shown that 
 \begin{equation}
@@ -480,7 +480,7 @@ The estimator $\hat{n}_k(E)$ is an estimator of $n(E)$ using only a single histo
     \label{eq:Monte:Reweighting:MFS:DOSWeightedEstimator}
     \hat{n}(E) = \sum_kr_k\hat{n}_k(E),
 \end{equation}
-where the coefficients $r_k$ has to satisfy the condition $\sum_kr_k = 1$ for the expectation value of $\hat{n}(E)$ to give the density of states. The coefficients
+where the coefficients $r_k$ have to satisfy the condition $\sum_kr_k = 1$ for the expectation value of $\hat{n}(E)$ to give the density of states. The coefficients
 $r_k$ are determined by minimizing the variance $\delta^2\hat{n}_k(E)$ subject to the constraint $\sum_kr_k=1$ using Lagrange multiplier which yields the estimator
 \begin{equation}
     \label{eq:Monte:Reweighting:MFS:minimizedDOSWeightedEstimator}
@@ -488,20 +488,20 @@ $r_k$ are determined by minimizing the variance $\delta^2\hat{n}_k(E)$ subject t
 \end{equation}
 The assumption that $Z_{\beta_k}$ is known is now reconciled. Since we can write the partition function using the density of states through
 \begin{equation}
-    \label{eq:Monte:Reweigehting:MFS:partitionFunctionDOS}
+    \label{eq:Monte:Reweighting:MFS:partitionFunctionDOS}
     Z_\beta = \sum_\psi e^{-\beta\mathcal{H}(\psi)} = \sum_En(E)e^{-\beta E},
 \end{equation}
-then we use the density of states estimator to estimate the parition function, and use this estimate of the partition function $\hat{Z}_{\beta_k}$ in the density
+then we use the density of states estimator to estimate the partition function, and use this estimate of the partition function $\hat{Z}_{\beta_k}$ in the density
 of states estimator. This then creates an implicit equation for $\hat{Z}_{\beta_k}$ that has to be solved self-consistently. Inserting the definition of $h_k(E)$
 and exchanging sums to remove the histograms, this equation takes the form
 \begin{equation}
     \label{eq:Monte:Reweighting:MFS:selfConsistencyEq}
     \hat{Z}_{\beta} = \sum_{k=1}^{N_0}\sum_{i=1}^{N_k}\frac{g_k^{-1}e^{-\beta E_i^k}}{\sum_{l=1}^{N_0}N_lg_l^{-1}e^{-\beta_lE_i^k}\hat{Z}_{\beta_l}^{-1}},
 \end{equation}
-which gives $N_0$ equations for $N_0$ unknows $\hat{Z}_{\beta_k}$ when evaluated at the different $\beta=\beta_m$.
+which gives $N_0$ equations for $N_0$ unknowns $\hat{Z}_{\beta_k}$ when evaluated at the different $\beta=\beta_m$.
 
 Solving Eq.~\eqref{eq:Monte:Reweighting:MFS:selfConsistencyEq} is usually done with the help of an iterative solution method for non-linear
-equations such as the Newton-Raphson method. To numerically calculate a solution, it is inconventient to work with the full quantities $\hat{Z}_{\beta_m}$
+equations such as the Newton-Raphson method. To numerically calculate a solution, it is inconvenient to work with the full quantities $\hat{Z}_{\beta_m}$
 since these are usually extremely large. Instead it is sufficient to calculate the variables
 \begin{equation}
     \label{eq:Monte:Reweighting:MFS:logVars}
@@ -518,7 +518,7 @@ of these sums. For each sum $\sum_ie^{a_i}$ containing exponentials, which are p
 sum to $\exp\ln\sum_ie^{a_i}$ and then use the method outlined in Section~\ref{sec:Monte:Reweighting:expSums} to calculate $\ln\sum_ie^{a_i}$. Because of the
 overall logarithm, the exponential drops out in the last re-exponentiation such that we never have to store a single exponential number.
 
-After finding self-consistent values for the $N_0-1$ vairables $L_m$, the weights $w_i^k$ for reweighting the observable $\mathcal{O}$ can be found. In terms of the
+After finding self-consistent values for the $N_0-1$ variables $L_m$, the weights $w_i^k$ for reweighting the observable $\mathcal{O}$ can be found. In terms of the
 density of states $n(E)$, the thermal average of the observable is written
 \begin{equation}
     \label{eq:Monte:Reweighting:MFS:obs:thermAvg}

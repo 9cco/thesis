@@ -4,14 +4,14 @@
 % Topological defects
 % Cause of phase-transitions; vortex blow-out
 % Abikosov vortices
-
-In conventional type-I superconductors, the Meissner effect prevents any magnetic field from penetrating the superconductor when it is in the
+%
+\noindent In conventional type-I superconductors, the Meissner effect prevents any magnetic field from penetrating the superconductor when it is in the
 superconducting state. In a type-II superconductor, the transition between the normal- and superconducting state is more gradual than in the type-I case
 due to an intermediate transitional state where topological defects in the superconducting field  becomes stable allowing quanta of magnetic field
 to pass through the material. The transitional value of the external field strength below which no magnetic field penetrates the superconductor is
 called $B_{c1}$. The upper transitional field strength above which the material stops being superconducting altogether is called $B_{c2}$. The state
 with regions of topological defects through which magnetic field quanta can penetrate, which are interspersed in a sea of
-superconducing state then exists between these values. It is important to note that the Meissner effect is still present in this transitional state - preventing magnetic field
+superconducting state then exists between these values. It is important to note that the Meissner effect is still present in this transitional state - preventing magnetic field
 lines from penetrating the superconducting state, however at topological defects, the material switches to the normal state and thus
 allows magnetic field lines to penetrate at these points. The final continuous transition to the normal state at $B_{c2}$ is then caused by the
 proliferation of vortex-loops, sending the whole material to the normal state.
@@ -19,7 +19,7 @@ proliferation of vortex-loops, sending the whole material to the normal state.
 
 The regions of normal state containing a topological defect of the superconducting state and through which magnetic field quanta can penetrate are known
 as superconducting vortices because they are surrounded by a circulating superconducting current. This current is set up by the presence of the magnetic field
-and shilds the rest of the superconducting condensate from its influence.
+and shields the rest of the superconducting condensate from its influence.
 
 Whether a superconductor is considered type-I or type-II is conventionally given by the magnetic field penetration length $\lambda$ and the superconducting
 coherence length $\xi$ which come together to form the \ac{gl} parameter $\kappa = \lambda/\xi$.
@@ -31,11 +31,11 @@ mean-field value of $\kappa = 1/\sqrt{2}$, however numerical calculations has gi
 \ac{gl} formalism.
 
 In a type-II conventional superconductor without any structural defects, as we increase the field strength, we introduce more vortices into the material
-in order to carry the required number of magnetic field quanta. At first these vortices behave like a liquid where they mutually repel eachother if they 
+in order to carry the required number of magnetic field quanta. At first these vortices behave like a liquid where they mutually repel each other if they 
 get close. As more vortices are introduced to the system, the inter-portex repulsion leads to them forming a two-dimensional lattice with equidistant lattice-spacing.
-Since the triagonal lattice is the lattice with the highest packing fraction, i.e. the lattice that have the highest density of sites at a given lattice spacing,
-the lattice formed will be triagonal. Such a triagonal (hexagonal) lattice of single quanta vortices is known as the Abrikosov lattice since it consists
-of single quantua vortices which are known as Abrikosov vortices.
+Since the triangular lattice is the lattice with the highest packing fraction, i.e. the lattice that have the highest density of sites at a given lattice spacing,
+the lattice formed will be triangular. Such a triangular (hexagonal) lattice of single quanta vortices is known as the Abrikosov lattice since it consists
+of single quanta vortices which are known as Abrikosov vortices.
 
 \section{Vorticity observables}
 \label{sec:Vor:Obs}
@@ -71,12 +71,12 @@ If the system described above contains a gauge field that is coupled to $\psi$, 
 We clearly see that the expression in Eq.~\eqref{eq:Vor:Obs:localVorticity} is gauge-dependent by sending $\theta\to\theta+\phi$. To make a gauge-invariant observable under
 the gauge-transformation in Eq.~\eqref{eq:LM:Derivatives:gaugeTransformation}, we see that we need to modify the definition to
 \begin{equation}
-    \label{eq:Vor:Obs:localVorticity}
+    \label{eq:Vor:Obs:localGaugeVorticity}
     \v{n}_v = \frac{\nabla\times(\nabla\theta + g\v{A})}{2\pi}.
 \end{equation}
 This expression then defines $\v{n}_v$ as a gauge invariant vector of local vorticity density of the compact field $\theta$.
 
-In lattice models we want to discretize the vorticity density in Eq.~\eqref{eq:Vor:Obs:localVorticity} in order to effectively calculate it in Monte-Carlo simulations
+In lattice models we want to discretize the vorticity density in Eq.~\eqref{eq:Vor:Obs:localGaugeVorticity} in order to effectively calculate it in \ac{mc} simulations
 of the lattice model. In such a discrete model we have to take care to re-compactify the quantity $\nabla\theta+g\v{A}$ to only be defined on some interval of length $2\pi$.
 Using the discretization mapping of $\partial_\mu$ and $A_\mu(\v{r})$ from Eq.~\eqref{eq:LM:Field:Fluc:discretization}, we want
 $\Delta_\mu\theta + gA_{\v{r},\mu}\in[-\pi,\pi)$. Defining the operator
@@ -108,15 +108,15 @@ direction with filling fraction $f$, we have to use the lattice function
 \end{equation}
 
 If the system consists of multiple condensate components $\psi^h = \rho^he^{i\theta^h}$, then we can define a separate vorticity flux density $n^{z,h}_\v{r}$ for each component
-$h$ by letting $\theta\mapsto\theta^h$ in the defintions of $n^z_\v{r}$ in Eqs.~\eqref{eq:Vor:Obs:discreteLocalVorticity} - \eqref{eq:Vor:Obs:discreteLocalVorticity:fieldSubtracted}.
+$h$ by letting $\theta\mapsto\theta^h$ in the definitions of $n^z_\v{r}$ in Eqs.~\eqref{eq:Vor:Obs:discreteLocalVorticity} - \eqref{eq:Vor:Obs:discreteLocalVorticity:fieldSubtracted}.
 
 
-\section{Unconventional vorticies}
-\label{sec:Vor:UnconventionalVorticies}
+\section{Unconventional vortices}
+\label{sec:Vor:UnconventionalVortices}
 
-In a conventional superconductor, the isotropic (\ie $s$-wave) nature of the superconducting state implies that stable vorticies can only contain a single quanta of magnetic flux.
+In a conventional superconductor, the isotropic (\ie $s$-wave) nature of the superconducting state implies that stable vortices can only contain a single quanta of magnetic flux.
 In other words, if through some random thermal fluctuation a defect appears that contains $n$ quanta of magnetic flux, this will soon decay into $n$ individual vortices,
-each of which containing a single quanta and which we thus call single-quanta vorticies.
+which each contain a single quanta and which we thus call single-quanta vortices.
 For the individual stable topological defects to contain
 multiple quanta of magnetic flux, the superconducting state has to be unconventional in some way.
 One way in which a superconductor can host stable multiple quanta vortices is if the superconducting state for some reason has an unconventional symmetry. This could \eg be
@@ -133,23 +133,23 @@ place where the sub-dominant component has winding number $n_-=0$, then the domi
 component is zero in locations far away from the vortex core by the nature of being sub-dominant. Thus, it doesn't contribute to the closed loop integral in 
 Eq.~\eqref{eq:Vor:Obs:vorticityIntegral} when integrating the supercurrent in a circle around the vortex.}.
 
-In the type of superconductor described above, the winding numbers $n_+$ and $n_-$ fully determine the structure of possible vorticies. In the following we will use the
-notation $(n_+,n_-)$ to specify these type of vorticies. The possibilities for single-quanta vorticies in this notation are thus the vorticies $(1, -1)$ and $(-1,-3)$.
+In the type of superconductor described above, the winding numbers $n_+$ and $n_-$ fully determine the structure of possible vortices. In the following we will use the
+notation $(n_+,n_-)$ to specify these types of vortices. The possibilities for single-quanta vortices in this notation are thus the vortices $(1, -1)$ and $(-1,-3)$.
 The latter type has a higher winding number in the sub-dominant component which implies a more complex core structure and has a higher energy cost pr. vortex \cite{Garaud15}
 which means that of the two, it is the $(1, -1)$ variety that will be expected to be stable in experiments.
 
-It is also possible to have double quanta vorticies, which are either of the $(2, 0)$ or $(-2, -4)$ variety. Again, the type of vortex with the higher winding number in
+It is also possible to have double quanta vortices, which are either of the $(2, 0)$ or $(-2, -4)$ variety. Again, the type of vortex with the higher winding number in
 the sub-dominant component exhibits a more complex core structure. For the choices of various internal parameters of such systems that we have studied, it is the $(2, 0)$
 type of vortex that is associated with the lowest energy cost and thus the one that is stable \cite{AsleGaraud16,Garaud15,Sauls09}.
 
 As we have mentioned, the different types of vortices will in general have different types of core-structures even though they may permit the same number of magnetic flux
-quanta to penetrate. One diagnostic tool to separate different kinds of vorticies is thus to observe the structure of the vortex core. Aside from plotting the actual vorticity
+quanta to penetrate. One diagnostic tool to separate different kinds of vortices is thus to observe the structure of the vortex core. Aside from plotting the actual vorticity
 $n_\pm$ of the component through Eq.~\eqref{eq:Vor:Obs:discreteLocalVorticity:fieldSubtracted}, this can done by \eg plotting
 the amplitudes of the dominant and sub-dominant component, the phase-difference $\theta_+-\theta_-$ of the different components or the magnetic field in the region of
 the vortex core. A rendition of the essential features of plots of dominant component vorticity density $n_+$ and phase-difference is shown in Figure~\ref{fig:Vor:schematic} for the
 two vortex types $(1,-1)$ and $(2,0)$. We see from the figure that the double quanta vortex type $(2,0)$ can be distinguished from the single quanta vortex by having an
 extended ring of vorticity density, as well as having a core region in the phase difference plot that is rotated by $\pi/2$ radians from the asymptotic value of this phase difference.
-These features were used in our work to identify double and single quanta vorticies in Monte-Carlo simulations.
+These features were used in our work to identify double and single quanta vortices in \ac{mc} simulations.
 
 \begin{figure}[h]
     \newcommand{\fractionwidth}{.38}
@@ -186,9 +186,9 @@ These features were used in our work to identify double and single quanta vortic
 
 
 % A peculiar property of this state is that
-% it features spontaneuously broken time-reversal symmetry. In terms of the superconducting components, this means that the state can be written in terms of a dominant
+% it features spontaneously broken time-reversal symmetry. In terms of the superconducting components, this means that the state can be written in terms of a dominant
 % component $\eta_+$ which has a large amplitude throughout when an external field is applied to the material, and a sub-dominant component $\eta_-$ which has zero
-% amplitude except at topological defects such as vorticies
+% amplitude except at topological defects such as vortices
 % or boundaries between normal and superconducting regions of material. These components are tied together through a time-reversal transformation, meaning that one is the
 % time-reversed version of the other. Since a magnetic field breaks time-reversal symmetry, the consequence of flipping the direction of the external magnetic field is thus
 % that $\eta_-$ becomes the dominant component, while $\eta_+$ becomes sub-dominant. In the absence of an external field, neither component is energetically favored, which
@@ -205,10 +205,10 @@ Free vortices are mobile in
 response to an electric current and this leads to energy-loss and resistance in the mixed phase. Pinning regions have the effect of resisting such movement and thus can contribute to increasing
 the amount of resistance free current \cite{Ishida19}.
 
-In the absensce of such pinning, vortex tubes that run through the material in the direction of an external magnetic field can be ordered in a lattice according to their mutual interaction.
+In the absence of such pinning, vortex tubes that run through the material in the direction of an external magnetic field can be ordered in a lattice according to their mutual interaction.
 Such a lattice is called an Abrikosov lattice or a flux line lattice since the vortex lines/tubes carry quanta of flux of the external magnetic field.
 The Abrikosov lattice then exists in the mixed phase of type-II superconductors and is destroyed when either the temperature or magnetic field strength is increased beyond a certain level
-$B_{c2}(T)$ where the material enters the normal non-superconducting phase. This transition can be characterized in terms of a proliferations of unbound vortex loops which destroyes the
+$B_{c2}(T)$ where the material enters the normal non-superconducting phase. This transition can be characterized in terms of a proliferations of unbound vortex loops which destroys the
 phase-coherence of the superconducting state \cite{Fossheim-Sudbo-Book}.
 
 If the interaction between the flux lines is weak compared to entropic forces such as thermal fluctuations, then fluctuations of the vortex flux lines can cause melting of the vortex lattice.
@@ -216,11 +216,11 @@ In this molten state, the vortex flux lines still interact repulsively which yie
 necessary number of vortices in order to carry the external magnetic field, however any directionally dependent long range correlation is lost. This corresponds to the behavior
 of particles in a liquid, and the molten state is thus called a vortex liquid. Such states are commonly found in high-$T_c$ superconductors such as \ce{YBa_2Cu_3O_{7-\delta}}.
 The transition between an ordered lattice of vortices and a vortex liquid is known as a vortex lattice melting transition.
-This transition can also be acheived by tuning the strength of the magnetic field. This implies a magnetic field strenght $B_{c1}$, below which the Meissner effect
+This transition can also be achieved by tuning the strength of the magnetic field. This implies a magnetic field strength $B_{c1}$, below which the Meissner effect
 completely excludes all magnetic fields, and a strength $B_{M}>B_{c1}$ above which the vortices behave as a liquid, \ie without any long range correlations except that of an average distance.
 Finally superconductivity is destroyed at $B_{c2}>B_M$ when a proliferation of vortex loops destroy all vortex correlations and the material enters the normal state.
 These different states of the vortex lattice map out a region in the $B-T$ parameter space such as the one shown in Figure~\ref{fig:Vor:phases}.
-There also exsists intermediate glassy phases of vortex matter between the extremes of a completely ordered lattice and a liquid when pinning of vorticies is combined
+There also exists intermediate glassy phases of vortex matter between the extremes of a completely ordered lattice and a liquid when pinning of vortices is combined
 with low temperature in an external magnetic field \cite{Sanchez19,Koch89}.
 
 \begin{figure}[t]
@@ -231,16 +231,16 @@ with low temperature in an external magnetic field \cite{Sanchez19,Koch89}.
 \end{figure}
 
 The structure and behavior of a flux-line lattice in the mixed phase of a type-II superconductor is dependent on the symmetry and nature of the superconducting phase. In conventional single-component
-superconductors with $s$-wave symmetry, the vorticies interact asymptotically\footnote{In this context ``asymptotically'' means in the asymptotic limit of large separation between vortices.}
+superconductors with $s$-wave symmetry, the vortices interact asymptotically\footnote{In this context ``asymptotically'' means in the asymptotic limit of large separation between vortices.}
 through isotropic repulsion that can be modeled by a modified Bessel function of the second kid \cite{Abrikosov56,Kramer71,Chaves11}. In a clean material, this interaction leads experimentally
 to a triangular (hexagonal) lattice of vortices due to this lattice symmetry having the largest packing-fraction of any
-two-dimensional lattice, i.e. it is the lattice that gives the highest density of vorticies given a set inter-vortex distance and thus give the lowest energy configuration \cite{Cribier66,Essmann67}.
-Theory predicts that also a square lattice of single quanta vorticies should be possible at higher fields for $\kappa \gtrsim 1/\sqrt{2}$ \cite{Kramer71}, however in the London-approximation,
+two-dimensional lattice, i.e. it is the lattice that gives the highest density of vortices given a set inter-vortex distance and thus give the lowest energy configuration \cite{Cribier66,Essmann67}.
+Theory predicts that also a square lattice of single quanta vortices should be possible at higher fields for $\kappa \gtrsim 1/\sqrt{2}$ \cite{Kramer71}, however in the London-approximation,
 which is valid at $\kappa\gg1$, the triangular symmetry is the most stable for all fields \cite{Matricon64}.
 Interestingly, the vortex lattice symmetry can be incommensurate to the underlying crystal lattice structure.
 
 In theoretical models of unconventional superconductors, such as superconductors with multiple components and non-isotropic symmetry, even more complex behavior of the mixed phase is predicted.
-We have already mentioned the appearence of a vortex-liquid state separate from the vortex lattice state in high-$T_c$ superconductors, which are overwhelmingly of the extreme type-II category
+We have already mentioned the appearance of a vortex-liquid state separate from the vortex lattice state in high-$T_c$ superconductors, which are overwhelmingly of the extreme type-II category
 and described by a single component unconventional $d$-wave symmetry.
 In superconductors with multiple components where each component can be modeled by a conventional London-approximation, a phase transition from the superconducting state to a superfluid state is possible
 in the mixed phase by melting of a composite Abrikosov vortex lattice into a state with a remaining ordered neutral mode \cite{Smiseth05}.
@@ -248,19 +248,19 @@ in the mixed phase by melting of a composite Abrikosov vortex lattice into a sta
 \subsection{Vortex matter in $p_x+ip_y$-superconductors}
 
 In our work we have been specifically interested in the vortex matter of superconductors with $p$-wave symmetry. These types of superconductors are described by two components that are intrinsically
-coupled and give rise to unconventional composite vorticies as described in Section~\ref{sec:Vor:UnconventionalVorticies}. The stable single-quanta composite vorticies, which are denoted
-as vortex type $(1, -1)$ in the notation of Section~\ref{sec:Vor:UnconventionalVorticies}, are theoretically predicted to form lattices with square symmetry \cite{Agterberg00,Heeb99,AgterbergVortex98}.
+coupled and give rise to unconventional composite vortices as described in Section~\ref{sec:Vor:UnconventionalVortices}. The stable single-quanta composite vortices, which are denoted
+as vortex type $(1, -1)$ in the notation of Section~\ref{sec:Vor:UnconventionalVortices}, are theoretically predicted to form lattices with square symmetry \cite{Agterberg00,Heeb99,AgterbergVortex98}.
 Such symmetry has been observed in the vortex lattice of the unconventional superconductor \ce{Sr2RuO4} \cite{Riseman98,Aegerter98,Ray14,Curran11} and is thus part of the body of evidence
 supporting a $p$-wave symmetry of the superconducting state of this material. The theoretical predictions are supported by numerical calculations that also show that at lower fields
 a triangular vortex lattice consisting of double-quanta $(2,0)$-vortexes is the preferred configuration \cite{AsleGaraud16}. Since these calculations did not account for thermal fluctuations in
-a convincing way, we used large-scale Monte-Carlo simulations to consider this effect on the vortex matter. Our results support the transition of a triangular vortex lattice consisting of
-double-quanta vortices to a square vortex lattice consisting of single quanta vorticies at higher fields and temperatures. These results are presented in Paper II.
+a convincing way, we used large-scale \ac{mc} simulations to consider this effect on the vortex matter. Our results support the transition of a triangular vortex lattice consisting of
+double-quanta vortices to a square vortex lattice consisting of single quanta vortices at higher fields and temperatures. These results are presented in Paper II.
 
 \section{Observables of lattice symmetry}
 \label{sec:Vor:Symm}
 
-In this section we discuss two tools useable in lattice theories for considering the symmetry of vortex line lattices. These tools are based on the observables of vortex flux density discussed
-in Section~\ref{sec:Vor:Obs}, but in this case we are interested in measureing the structural correlations of a collection of vortex lines.
+In this section we discuss two tools usable in lattice theories for considering the symmetry of vortex line lattices. These tools are based on the observables of vortex flux density discussed
+in Section~\ref{sec:Vor:Obs}, but in this case we are interested in measuring the structural correlations of a collection of vortex lines.
 
 \subsection{Structure function}
 \label{sec:Vor:Symm:SF}
@@ -286,7 +286,7 @@ dimension of the system. In contrast any contributions from vortex loops which c
     \label{eq:Vor:Symm:SF:Cont:xyDist}
 \end{equation}
 filters out the vortex lines from the thermal noise. This $w$ produces a distribution of vortex lines over the extent of the system in the $xy$ plane.
-Since we are interested in structural correlations in this system we preform the $2$D Fourier transform and look at its amplitudede through
+Since we are interested in structural correlations in this system we perform the $2$D Fourier transform and look at its amplitude through
 \begin{equation}
     \label{eq:Vor:Symm:SF:Cont:unnormalized}
     \tilde{S}(\v{k}_\perp) = \Big|\int\!\mathrm{d}^2r\;w(\v{r}_\perp)e^{i\v{k}_\perp\cdot\v{r}_\perp}\Big|^2.
@@ -311,7 +311,7 @@ Eq.~\eqref{eq:Vor:Symm:SF:def}.
 As an example of how the structure function singles out specific structural correlations, consider Figure~\ref{fig:Vor:Symm:SF:hex}. Figure~\ref{fig:Vor:Symm:SF:hex:S} shows a plot of the structure
 function for all crystal momenta $\v{k}_\perp$ in the $1$st Brillouin zone. The $6$ yellow points surrounding the origin corresponds to correlations in the structure of the vortex lattice in these
 $6$ directions, which implies a hexagonal lattice. The hexagonal lattice is shown directly in Fig.~\ref{fig:Vor:Symm:SF:hex:V}, which in this case is a hexagonal lattice of double-quanta vortices.
-Chosing specific points in the plot of Fig.~\ref{fig:Vor:Symm:SF:hex:S} and plotting the structure functions value at different values of a parameters of the system, \eg temperature, is a common
+Choosing specific points in the plot of Fig.~\ref{fig:Vor:Symm:SF:hex:S} and plotting the structure functions value at different values of a parameters of the system, \eg temperature, is a common
 method for evaluating different phases of the structure of the vortex lattice for example for measuring when the vortex lattice melts into a vortex liquid 
 \cite{Smorgrav05,Smiseth05,NguyenPhase98,Nguyen96,NguyenOnsager98}.
 
@@ -337,7 +337,7 @@ method for evaluating different phases of the structure of the vortex lattice fo
 
 Building on the idea of measuring a specific point in the structure function to signify a structural transition we developed an angular histogram approach that is robust towards rotations of the
 vortex lattice. We found this to be important in measuring the transition from a hexagonal to a square vortex lattice since the angular symmetry of the model allowed the hexagonal vortex lattice to
-freeze in various directions. To combat this rotation, we built a histogram of the angular distance between peaks in the structure function over several Monte-Carlo steps. For a hexagonal
+freeze in various directions. To combat this rotation, we built a histogram of the angular distance between peaks in the structure function over several \ac{mc} steps. For a hexagonal
 lattice, such a histogram is peaked at the bin containing  the angular distance $\pi/3$, while a square lattice would be peaked at $\pi/2$. Plotting these bins of angular distance over various
 temperatures, we were able to measure the transition from the square to the hexagonal lattice as seen in Figure~\ref{fig:Vor:Symm:AH:histogram}.
 
@@ -348,16 +348,16 @@ temperatures, we were able to measure the transition from the square to the hexa
     \label{fig:Vor:Symm:AH:histogram}
 \end{figure}
 
-The histogram was constructed algorithmically by creating a set of angular distances between peaks of the structure function for each Monte-Carlo step. We first found the radius where the peaks were
-located by searching the average structure function over the entire Monte-Carlo series, within a specified radius interval for the radius $\rho_m$ that produced the largest value of the
+The histogram was constructed algorithmically by creating a set of angular distances between peaks of the structure function for each \ac{mc} step. We first found the radius where the peaks were
+located by searching the average structure function over the entire \ac{mc} series, within a specified radius interval for the radius $\rho_m$ that produced the largest value of the
 discretization of the integral
 \begin{equation}
     \label{eq:Vor:Symm:AH:searchIntegral}
     \int_0^{2\pi}\!\!\!\!\!\!\mathrm{d}\theta\; S(\rho,\theta),
 \end{equation}
-where $S(\rho,\theta)$ is the structure function given in polar coordinates about the Bragg-point $\v{k}_\perp = \v{0}$. The entire series of Monte-Carlo data was then blocked into sections
-containing $\Delta\tau$ numbers of individual Monte-Carlo measurements of the structure function. Each such interval of structure function measurements were then averaged over to yields separate
-averaged measurements of the structure function. This blocking is absolutely neccessary in order to reveal the hidden vortex lattice from the noise. From each block $t$,
+where $S(\rho,\theta)$ is the structure function given in polar coordinates about the Bragg-point $\v{k}_\perp = \v{0}$. The entire series of \ac{mc} data was then blocked into sections
+containing $\Delta\tau$ numbers of individual \ac{mc} measurements of the structure function. Each such interval of structure function measurements were then averaged over to yields separate
+averaged measurements of the structure function. This blocking is absolutely necessary in order to reveal the hidden vortex lattice from the noise. From each block $t$,
 a structure function ring $S^t(\theta)$ was then created by selecting the highest value of the blocked structure function over a ribbon centered at radius $\rho_m$ such that
 \begin{equation}
     \label{eq:Vor:Symm:AH:ribbonMaximum}
