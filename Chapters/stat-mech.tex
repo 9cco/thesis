@@ -129,14 +129,12 @@ by the appearance of some kind of measurable
 order that can be described by a function $\psi$ which we call the \emph{order parameter}. In the liquid water to ice transition,
 it is the position of the molecules that become ordered in a lattice\footnote{The astute reader might have noticed that this
 example is a first order phase transition because of the existence of latent heat. Actually first order phase transitions
-is also able to be described by a modified Landau theory, however we will here focus on the second order kind.},
+can also be described by a modified Landau theory, however we will here focus on the second order kind.},
 in the magnetization of a metal it is the individual spins that become ordered along a particular direction.
 
 The second idea is that at the phase transition, it is the appearance of this order that should dominate the behaviour
 of the system, to the exclusion of all other effects. Thus the system should be described in terms of the order-parameter
-and since this is infinitesimally small close to the transition, the free energy\footnote{In this case we are talking
-about the Helmholtz free energy which is related to the partition function through a logarithm while at the same time
-the Legendre transformation of the internal energy of the thermodynamic system.} can be expanded in a Maclaurin-series
+and since this is infinitesimally small close to the transition, the free energy can be expanded in a Maclaurin-series
 with respect to this parameter as
 \begin{equation}
     \label{eq:statMech:LandauMaclaurin}
@@ -243,20 +241,20 @@ terms take the general form
 
 Even more complex gradient terms are possible when the order-parameter consists of multiple components, \ie there are degenerate
 states that all give significant contributions to the physics at the phase-transition. A particular case of this is when the
-pairing state is a irreducible representation of the crystal symmetry-group that is multi-dimensional (more about group theory
-and irreducible representations in Chapter~\ref{chap:Group}). In this case, instead of a single complex function $\Psi$
+pairing state is an irreducible representation of the crystal symmetry-group that is multi-dimensional\footnote{For a more detailed explanation
+of irreducible representations and group theory, see Chapter~\ref{chap:Group}.}. In this case, instead of a single complex function $\Psi$
 describing the order, we need several complex functions $\eta_i$. 
 
 A chiral $p$-wave superconductor has a pairing state that
-is such a two-dimensional irreducible representation which comes from the $\Gamma_5$ irreducible representation of the
-tetragonal symmetry group $D_{4h}$. This representation consist of two components $\eta_x$ and $\eta_y$, which combine
+belongs to such a two-dimensional irreducible representation which comes from the $\Gamma_5$ irreducible representation of the
+tetragonal symmetry group $D_{4h}$. This representation consist of two components $\eta_x$ and $\eta_y$ that combine
 to form the general gradient terms
 \begin{equation}
     \label{eq:statMech:gradTerms:chiralPWave}
     \begin{split}
         &K_1\big[|D_x\eta_x|^2 + |D_y\eta_y|^2\big] + K_2\big[|D_x\eta_y|^2 + |D_y\eta_x|^2\big]\\
-        & + K_3\big[(D_x\eta_x)^\ast(D_y\eta_y) + \text{h.c.}\big] + K_4\big[(D_x\eta_y)^\ast D_y\eta_x + \text{h.c.}\big]\\
+        & + K_3\big[(D_x\eta_x)^\ast(D_y\eta_y) + \text{c.c.}\big] + K_4\big[(D_x\eta_y)^\ast D_y\eta_x + \text{c.c.}\big]\\
         & + K_5\big[|D_z\eta_x|^2 + |D_z\eta_y|^2\big].
     \end{split}
 \end{equation}
-This is the general expression of the gradient terms in the model we have investigated in our work.
+This is the general expression of the gradient terms in the model we have investigated in our work and can be found in Ref.~\cite{SigristUeda91}.

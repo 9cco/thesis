@@ -339,13 +339,13 @@ Building on the idea of measuring a specific point in the structure function to 
 vortex lattice. We found this to be important in measuring the transition from a hexagonal to a square vortex lattice since the angular symmetry of the model allowed the hexagonal vortex lattice to
 freeze in various directions. To combat this rotation, we built a histogram of the angular distance between peaks in the structure function over several \ac{mc} steps. For a hexagonal
 lattice, such a histogram is peaked at the bin containing  the angular distance $\pi/3$, while a square lattice would be peaked at $\pi/2$. Plotting these bins of angular distance over various
-temperatures, we were able to measure the transition from the square to the hexagonal lattice as seen in Figure~\ref{fig:Vor:Symm:AH:histogram}.
+temperatures, we were able to measure the transition from the square to the hexagonal lattice as seen in Figure~\ref{fig:Vor:Symm:AH:histPrTemp}.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=.8\textwidth]{hist_plot.pdf}
     \caption{Plot of the bins of angular distance $\delta\theta = \pi/3$ and $\delta\theta = \pi/2$, as a function of simulation temperature.}
-    \label{fig:Vor:Symm:AH:histogram}
+    \label{fig:Vor:Symm:AH:histPrTemp}
 \end{figure}
 
 The histogram was constructed algorithmically by creating a set of angular distances between peaks of the structure function for each \ac{mc} step. We first found the radius where the peaks were
@@ -378,6 +378,7 @@ in this histogram of the interval $[0,2\pi)$ that contains the angular distance 
 \end{equation}
 for some non-negative $\delta\theta_-$ and $\delta\theta_+$. The value of the histogram $h(\Delta\delta\theta)$ at this bin was then calculated by
 \begin{equation}
+    \label{eq:Vor:Symm:AH:histogramDef}
     h(\Delta\delta\theta) = \frac{1}{\abs{\Delta\delta\theta}\abs{\Theta}}\sum_{\delta\theta'\in\Theta}\delta_{\delta\theta'\in\Delta\delta\theta},
 \end{equation}
 where $\abs{\Delta\delta\theta}$ is the size of bin $\Delta\delta\theta$, $\abs{\Theta}$ is the number of mutual distances $\delta\theta'$ in $\Theta$
@@ -391,6 +392,21 @@ and $\delta_{\delta\theta'\in\Delta\delta\theta}$ is the Kronecker delta functio
     \end{array}\right. .
 \end{equation}
 
+An example of the resulting histogram from calculating $h(\Delta\delta\theta)$, given equal size of the $\Delta\delta\theta$ intervals is shown in Figure~\ref{fig:Vor:Symm:AH:histogram}.
+In this figure we observe a large peak at $\delta\theta = \pi/2 \approx 1.6$. This correlation comes from the fact that there are $4$ peaks in the structure function
+that are equidistant to eachother in angular distance from the origin. From this we draw the conclusion that the histogram represents a signature of a square vortex
+lattice. The even larger peak at $\delta\theta = \pi$ comes from a mathematical symmetry of the 2D Fourier transform
+that says that $\mathcal{F}(\v{k}) = \mathcal{F}(-\v{k})^\ast$. The small peak at $\delta\theta = 3\pi/2$ is a remnant of the peak at $\pi/2$, while the peak at low $\delta\theta$
+is a artiface coming from noise in the data.
+
+\begin{figure}[hb]
+    \centering
+    \includegraphics[width=.7\textwidth]{hist_square.pdf}
+    \caption{Plot of the bins of $h$ in Eq.~\eqref{eq:Vor:Symm:AH:histogramDef} for a simulation of a square vortex lattice.
+    The bins corresponding to $\delta\theta = \pi/3$ and $\delta\theta = \pi/2$ are colored orange to mark the main contributions from
+    a triangular- and square lattice respectivly.}
+    \label{fig:Vor:Symm:AH:histogram}
+\end{figure}
 
 % Structure function
 % Peak histogram

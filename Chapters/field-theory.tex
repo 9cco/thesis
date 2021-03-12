@@ -1,22 +1,22 @@
 \chapter{Field Theory Methods}
 \label{chap:Field}
 %
-\noindent In this chapter we will give a short introduction to the use of grassmann variables
+\noindent In this chapter we will give a short introduction to the use of Gra\ss mann variables
 and complex numbers in the calculation of the field-integrals on the
-statistical-mechanics partition function and how they can be used to transform the
+partition function and how they can be used to transform the
 expression for the action through the Hubbard-Stratonovich transformation.
 
 A field theoretic expression for the quantum mechanical partition function $\mathcal{Z}$
 is obtained by using a coherent state basis. A coherent state is the eigen-state of an annihilation operator, thus it
 produces an eigenvalue when operated on by the annihilation operator. Letting $\hat{H}$ be the quantum mechanical
 Hamiltonian of the system for which we are interested in calculating the partition function, $\mu$ the the chemical
-potential and $\hat{N}$ is the number operator then the partition function
+potential and $\hat{N}$ is the number operator then the partition function is defined as
 \begin{equation}
     \label{eq:Field:partitionFunction}
     \mathcal{Z} = \tr(e^{-\beta(\hat{H}-\mu\hat{N})}).
 \end{equation}
 Inserting a basis of coherent states $\{\ket{\xi}\}$ when calculating the trace, we obtain a functional integral over
-the coherent state eigenvalues $\xi_\alpha$ and $\xi^\ast_\alpha$ which substitute the annihilation and creation operators
+the coherent state eigenvalues $\xi_\alpha$ and $\xi^\ast_\alpha$ which substitute the ladder operators
 $c_\alpha$ and $c_\alpha^\dagger$ respectively. Here $\alpha$ symbolize the collection of quantum-numbers needed to specify
 a state. The functional integral then takes the form
 \begin{equation}
@@ -32,9 +32,9 @@ which we will follow for a large part of this chapter.
 \section{Quadratic Fermionic Field Integrals}
 
 Because of the anti-commuting property of the fermion annihilation operators, any coherent state\footnote{An eigenstate
-of the annihilation operator} has to have eigenvalues that anti-commute as well. This leads to the partition function
-written in the convenient basis of the coherent states being constructed with Gra\ss mann numbers as the central
-variables.
+of the annihilation operator} has to have eigenvalues that anti-commute as well. 
+This leads to Gra\ss mann numbers being the central variables used in contructing the partition function, when this function
+is written in the convenient basis of coherent states.
 
 \subsection{Gra\ss mann algebras}
 A Gra\ss mann algebra is constructed on a set of generators $\{\xi_\alpha\}$ such that a specific product
@@ -62,8 +62,9 @@ On an algebra consisting of $2n$ generators we define conjugation as a map from 
 to the other half $\{\xi_{\alpha_i}^\ast\}_{i=1}^n$ and in such a way that when applied to a particular number
 \begin{equation}
     \label{eq:Field:Ferm:Grass:conj}
-    (\phi\xi_\alpha\xi_\beta)^\ast = \phi^\ast\xi_\beta^\ast\xi_\alpha^\ast.
+    (\phi\xi_\alpha\xi_\beta)^\ast = \phi^\ast\xi_\beta^\ast\xi_\alpha^\ast,
 \end{equation}
+for $\phi\in\mathbb{C}$.
 
 \subsection{Nambu Spinor}
 
