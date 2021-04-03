@@ -37,7 +37,8 @@ assumed that there exists a countable number of different states. However if the
 system that can change in a continuous fashion, which we would measure using the set of real numbers
 $\mathbb{R}$ and some unit, then the number of states is infinite and uncountable. In this case we sum over the
 different numbers of states by simply integrating over the things that are continuous and the unit
-of the partition function becomes the product of the units of the continuous variables (things).
+of the partition function becomes the product of the units of the continuous variables (things) unless
+we normalize by some constant dimensionful quantity.
 In most cases, it is the position $\v{r}$ and momentum $\v{p}$ of particles in the system that are continuous, hence
 the definition of the partition function becomes%
 \footnote{The reason why there is a $\sim$ sign in Eq.~\eqref{eq:statMech:partContDef} is that technically there is a factor
@@ -55,7 +56,7 @@ as the free energy) of the system through a simple exponential
     Z = e^{-\beta F}.
 \end{equation}
 Because of the exponentials inherent in the definition of $Z$, calculating realistic values often results
-in excessively high numbers. This one of the reasons why it is more useful to work with $F$ than $Z$ itself
+in excessively high numbers. This is one of the reasons why it is more useful to work with $F$, rather than $Z$ itself,
 since inverting Eq.~\eqref{eq:statMech:freeEnergy} $F = -\ln(Z)/\beta$, reducing the value of $Z$ through
 a logarithm.
 
@@ -63,15 +64,19 @@ a logarithm.
 
 An observable in statistical mechanics is a quantity that we can both calculate from the statistical theory,
 and (at least in principle) go out and measure in the real world. In quantum mechanics, observables
-are restricted to operators that have real expectation-values, as opposed to the complex values it usually
+are restricted to operators that have real expectation-values, as opposed to the complex values the theory usually
 deals with. This is to enforce the connection between observables and measurements, which we intuitively understand
 to always be reducible to a series of real values, \ie points on a line.
 
-Since we are interested again in ensembles of many particles we are restricting our attention to statistical
-information about this ensemble. To get this information we need some kind of probability distribution of the
-particular states of the system. We are imagining that we for each such state (indexed by $j$) can calculate
+We are interested in statistical information on observables of systems consisting of many quantum mechanical particles.
+To get this information we need some kind of probability distribution of the
+different states of the system. We are imagining that we for each such state (indexed by $j$) can calculate
 a real number for the thing (observable) we are interested in measuring. Let's call this observable $O$. Then
-$O$ is a statistical variable which takes a particular value $o_j$ in the state $j$ of the system. If we
+$O$ is a statistical variable which takes a particular value $o_j$ in the state $j$ of the system. Since the state is
+quantum mechanical, it is usually denoted by a Dirac bracket $\ket{j}$. A real observable $O$ corresponds to a
+Hermitian operator $\hat{O}$ in quantum mechanics whose expectation value we can then write as $o_j = \bra{j}\hat{O}\ket{j}$.
+
+If we
 now let $P_j$ be the probability distribution, i.e. the probability that the system exists in state $j$, then
 we know from probability theory that the expectation value of $O$ is
 \begin{equation}
@@ -116,9 +121,11 @@ a radically different understanding of how electrons moved inside atomic structu
 Before such an understanding had been developed, Ginzburg and Landau took a shortcut and came up with a theory
 that could describe the phenomenon of superconductivity without knowing its microscopic origin. In other words
 they treated superconductivity as a black box and instead of asking what was inside to give the box's output,
-he used the output to determine a small set of \emph{material parameters} which could then be used to predict
-how the box would react to a large range of stimuli or conditions. The merit of the theory was that
-he used symmetry arguments to reduce this set as much as possible.
+they used the output to determine a small set of \emph{material parameters} which could then be used to predict
+how the box would react to a large range of stimuli or conditions. Now given a large enough number of parameter
+you can usually construct a model to fit any set of experimental observations that you like. The merit of this theory
+came from use of symmetry arguments to reduce this set into only a few parameters, which still allowed it to describe the
+observations, while also embedding the theory with great predictive power.
 
 The \ac{gl} theory of superconductivity is based on Landau's previous work on a theory of general second
 order phase-transitions\footnote{2nd order phase-transitions are phase transitions of systems whose free energy
@@ -126,11 +133,11 @@ has a discontinuous second order derivative at the transition point, but is cont
 Since the specific heat is given by the second order derivative, then the specific heat is discontinuous in this case.}.
 The approach is given by two ideas. The first is simply that the phase transition should be able to be characterized
 by the appearance of some kind of measurable
-order that can be described by a function $\psi$ which we call the \emph{order parameter}. In the liquid water to ice transition,
+order that can be described by a function $\Psi$ which we call the \emph{order parameter}. In the liquid-water to ice-transition,
 it is the position of the molecules that become ordered in a lattice\footnote{The astute reader might have noticed that this
 example is a first order phase transition because of the existence of latent heat. Actually first order phase transitions
-can also be described by a modified Landau theory, however we will here focus on the second order kind.},
-in the magnetization of a metal it is the individual spins that become ordered along a particular direction.
+can also be described by a modified Landau theory, however we will here focus on the second order kind.}.
+In the magnetization of a metal it is the individual spins that become ordered along a particular direction.
 
 The second idea is that at the phase transition, it is the appearance of this order that should dominate the behaviour
 of the system, to the exclusion of all other effects. Thus the system should be described in terms of the order-parameter
@@ -138,19 +145,19 @@ and since this is infinitesimally small close to the transition, the free energy
 with respect to this parameter as
 \begin{equation}
     \label{eq:statMech:LandauMaclaurin}
-    F = F_0 + c_1 \psi + c_2 \psi^2 + c_3 \psi^3 + c_4 \psi^4 + c_5 \psi^5 + \ldots
+    F = F_0 + c_1 \Psi + c_2 \Psi^2 + c_3 \Psi^3 + c_4 \Psi^4 + c_5 \Psi^5 + \ldots
 \end{equation}
 
 The real constants $F_0$ and $c_i$ constitute the set of material parameters of the theory and this set can then
-be reduced by any symmetries that we suspect should be inherent in the underlying theory. For example, if $\psi$
+be reduced by any symmetries that we suspect should be inherent in the underlying theory. For example, if $\Psi$
 should represent the order parameter of magnetization of a system of ising spins, which can point either up or
-down, then the free energy should be invariant of this global choice, i.e. we need to enforce that the free energy
-be invariant with respect to the transformation $\psi \mapsto -\psi$. Then all the constants $c_j$ for odd $j$
+down, then the free energy should be invariant to this global choice, i.e. we need to enforce that the free energy
+be invariant with respect to the transformation $\Psi \mapsto -\Psi$. Then all the constants $c_i$ for odd $i$
 vanish.
 
-In the case of superconductivity the order parameter $\Psi$ represents the probability amplitude of the collective
-state of the superfluid of Cooper paired electrons such that $\abs{\Psi}$ can be interpreted as the density of such
-electron pairs. Since $\Psi$ is complex it has to be combined with its complex conjugate $\Psi^\ast$ in ways that
+In the case of superconductivity, the order parameter $\Psi$ represents the probability amplitude of the collective
+state of the superfluid of Cooper-paired electrons such that $\abs{\Psi}$ can be interpreted as the density of such
+electron pairs. Since $\Psi$ is complex, it has to be combined with its complex conjugate $\Psi^\ast$ in ways that
 yield real numbers to produce terms that are valid in the free energy since $F$ itself should be a real number.
 Furthermore, the phenomenon of superconductivity is produced as a result of the breaking of $U(1)$ symmetry, so $F$
 needs also to be $U(1)$ symmetric, i.e. it has to be invariant under the transformation $\Psi \mapsto e^{i\phi}\Psi$
@@ -162,7 +169,8 @@ for $\phi\in\mathbb{R}$. These restrictions result in the free energy
 when keeping the lowest order terms that produce a phase transition.
 
 Thermodynamic equilibrium is reached at the minimum of free energy. This restricts $b\geq0$ since negative $b$ yields
-a free energy with no definite minimum. The minimum is then found by the condition
+a free energy with no global minimum\footnote{If there is no such minimum, then we say that the theory is unbounded or divergent.}.
+The minimum is then found by the condition
 \begin{equation}
     \label{eq:statMech:LandauExtreme}
     \frac{\partial F}{\partial \Psi^\ast} = (-a + 2b\abs{\Psi}^2)\Psi = 0,
@@ -179,7 +187,7 @@ It is the thermodynamic parameter of temperature that traditionally determines w
 Looking at the free energy in Eq.~\eqref{eq:statMech:LandauU1}, the order parameter $\Psi$ is the dynamical variable 
 of the theory while the explicit temperature dependence lies in the material parameters $a$ and $b$. Denoting the
 the critical temperature where the phase transition happens $T_c$, the dimensionless parameter
-$t = (T-T_c)/T_c$ is small close to the critical point which means it can be used to expand the temperature dependence
+$t = (T-T_c)/T_c$ is small close to the critical point which means that it can be used to expand the temperature-dependence
 of the material parameters such that
 \begin{equation}
     \label{eq:statMech:matTempExpan}
@@ -190,30 +198,30 @@ of the material parameters such that
 \end{equation}
 
 Now we argue for what terms to keep in these expansions. Since $a(T)$ should change sign at $t=0$ based on the discussion of
-Eq.~\eqref{eq:statMech:LandauExtreme}, then we only keep odd terms.
+Eq.~\eqref{eq:statMech:LandauExtreme}, then we only keep odd terms of $a$.
 Since we need $b(T)>0$ for the theory to be thermodynamically stable it seems that $b_0$ is the important term that needs to be
 larger than any negative contributions from the other terms. Keeping only lowest order terms then the expansions reduce to
 $a(T) = a_1(T-T_c)/T_c$ and $b(T) = b_0$. Since the ordered state is the solution of the theory when $a>0$ and this ordered
 state exists at temperatures $T<T_c$ then $a_1<0$ and the final temperature dependence of $a$ becomes
 $a(T) = -\abs{a_1}(T-T_c)/T_c$. From this temperature dependence, it is straightforward to derive critical exponents, the specific
-heat etc.
+heat etc. See Ref.~\cite{Nishimori15}.
 
 \subsection{Gradient Terms}
 
 The simple Landau theory described above is a type of mean field theory in that there is no spatial dependence in the
-solution, and thus gives a simplified picture that can only be valid far away from any defects or boundaries. This simple approach
+order parameter $\Psi$, and thus it gives a simplified picture that can only be valid far away from any defects or boundaries. This simple approach
 can be extended to include spatial variation by allowing terms with gradients of the order parameter in the free energy through
-a gradient expansion
+a gradient expansion of $f$ in
 \begin{equation}
     \label{eq:statMech:gradTerms:gradExpansion}
     F = \int\d{^3r}f(\Psi, \nabla\Psi, \nabla^2\Psi, \nabla^3\Psi, \ldots).
 \end{equation}
 Keeping only the lowest order in this expansion that is invariant under $U(1)$ symmetry we get the term
-$\abs{\nabla\Psi}^2$.
+$\abs{\nabla\Psi}^2$ added to the free energy $F$ in Eq.~\eqref{eq:statMech:LandauU1}.
 
 Perhaps the single most important phenomenon of superconductivity from a theoretical stand-point is the fact that it expels
-magnetic fields, hence it is clear that any theory that attempts to explain superconductivity needs to have some way the
-superconducting order interacts with magnetic fields. The standard way to achieve this is through the recipe of
+magnetic fields, hence it is clear that any theory that attempts to explain superconductivity needs to have some way for the
+superconducting order to interact with magnetic fields. The standard way to achieve this is through the recipe of
 \emph{minimal coupling}, where the vector potential $\v{A}$ times a constant is subtracted with from any momentum
 in the previously neutral theory. Specifically $\v{p}\mapsto \v{p}-q/c\v{A}$ where $q$ is the charge of the particle and
 $c$ is the speed of light. Using this trick, then the free energy density becomes
@@ -222,18 +230,20 @@ $c$ is the speed of light. Using this trick, then the free energy density become
     f = f_0 - a\abs{\Psi}^2 + b\abs{\Psi}^4 + K\abs{(\nabla+ig\v{A})\Psi}^2,
 \end{equation}
 by letting $g=q/\hbar c$, which is the form of the free energy in the Ginzburg-Landau theory of conventional $s$-wave superconductivity.
-This form of the gradient resulting from minimal coupling is called the covariant derivative and is defined as 
+The form of the gradient that results from minimal coupling is called the covariant derivative and is defined as 
 \begin{equation}
     \label{eq:statMech:gradTerms:covariantGradient}
     D_\mu = \partial_\mu + igA_\mu.
 \end{equation}
 
 For unconventional symmetries, the form of the gradient terms can vary substantially from that in
-Eq.~\eqref{eq:statMech:gradTerms:GLequation}. Provided that the transition can be described by a single component, \ie a
+Eq.~\eqref{eq:statMech:gradTerms:GLequation}. Even if the transition can be described by a single component, \ie a
 single function $\Psi$, then an unconventional symmetry could still lead to anisotropies in the gradient terms such that
-$K$ becomes directionally dependent. An example is single-component pairing in a tetragonal crystal: the rotational symmetry
-in the $xy$-plane makes this gradient isotropic, but because of the lack of symmetry in the $z$-direction the gradient
-terms take the general form
+$K$ in Eq.~\eqref{eq:statMech:gradTerms:GLequation} becomes directionally dependent.
+An example is single-component pairing in a tetragonal crystal. The symmetry group of tetragonal crystals is denoted $D_{4h}$ in the Shoenflies
+notation and consists of four-fold rotations in, and mirror symmetry about the $xy$-plane. The rotational symmetry
+makes the gradient isotropic in the plane, but because of the lack of symmetry in the $z$-direction, the gradient
+terms in general must take the form
 \begin{equation}
     \label{eq:statMech:gradTerms:tetragonal}
     K_1\sum_{\mu=x,y}|(\partial_\mu+igA_\mu)\Psi)|^2 + K_2|\partial_z+igA_z)\Psi|^2.
