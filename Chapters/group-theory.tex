@@ -1,14 +1,14 @@
 \chapter{Group Theory}
 \label{chap:Group}
 %
-\noindent In this chapter we will introduce the minimum mathematical framework needed to
-understand the phrase \say{\emph{This free energy is the $\Gamma^-_{5u}$ irreducible
-representation of the $D_{4h}$ symmetry group}}.
+\noindent In this chapter we will introduce some basic group-theoretic framework to clarify the meaning of how a free energy can
+``belong'' to an irreducible representation, and to show how group-theory can be applied to quantum-mechanical concepts such as
+operators and states.
 
-A few words about notation. We will use the semicolon `$;$' in equations as notation for the words `such that', \eg when defining sets.
-A colon with a trailing space `$\colon$' is used when defining maps where the symbol representing the mapping itself should be on the left while the the sets
-being related or how the elements of the sets are related is on the right of the colon. The colon `$:$' is also used as a shortcut for the
-words `applied through its representation to' for when group elements are applied to vectors, where the correct representation to use
+A few words about notation. We will use the semicolon `$;$' in equations as notation for the words `\emph{such that}', \eg, when defining sets.
+A colon with a trailing space `$\colon$' is used when defining maps where the symbol representing the mapping itself should be on the left, while the sets
+being related or how the elements of the sets are related, is on the right of the colon. The colon `$:$' is also used as a shortcut for the
+words `\emph{applied through its representation to}' for when group elements are applied to vectors, where the correct representation to use
 for this application should be implicitly understood.
 
 The material in this section is based on the material covered in Refs.~\cite{Inui90} and \cite{NegeleOrland98}, specified for the use in
@@ -16,13 +16,13 @@ quantum mechanical theories of unconventional superconducting states.
 
 \section{Irreducible representations}
 
-To know what an \ac{ir} is, let's start with what we mean by a reducible representation.
+To know what an irreducible representation (IR) is, let's start with what we mean by a \emph{reducible} representation.
 \begin{defi}
     A matrix representation is \textbf{reducible} if there exists a non-trivial invariant subspace of the vector space of the representation.
 \end{defi}
 The intuition is then that the vector space of the representation is reducible if a ``smaller'' representation is contained within it. Since
-there is a smaller vector space within the vector space of the original representation and this vector space is invariant, it is possible
-to define another representation on this smaller vector space, \ie\emph{reduce} the original representation. We have now used the word
+there is a smaller vector space within the vector space of the original representation, and this vector space is invariant, it is possible
+to define another representation on this smaller vector space, i.e., \emph{reduce} the original representation. We have now used the word
 ``invariant'' a couple of times, so let's define what it means more precisely.
 
 \begin{defi}
@@ -43,7 +43,7 @@ All representations applied to any vector in the invariant subspace must necessa
 \label{sec:Group:BCSHil}
 We define the BCS Hilbert space as the Hilbert space upon which BCS-type potentials operate. Specifically, this is a reduced form of the two-particle
 fermionic product Hilbert space $\hil_2 = \hil\otimes\hil$ where $\hil = \Span\{\ket{\v{k},s}\}$ and we only consider states that have opposite momentum.
-Thus this Hilbert space is given by 
+Thus, this Hilbert space is given by 
 \begin{equation}
     \label{eq:Group:BCSHil:space}
     \mathcal{B} = \Span\{\ket{\v{k},s_1}\ket{-\v{k},s_2}\},
@@ -63,8 +63,8 @@ where
     \label{eq:Group:BCSHil:arbitrary:coeff}
     v_{s_1s_2}(\v{k}) = \bra{-\v{k},s_2}\braket{\v{k},s_1}{v}.
 \end{equation}
-The indices $s_1$ and $s_2$ can take on only two values each, namely $s_1,s_2\in\{\up,\dn\}$. In total there are thus $4$ different realizations
-of the pairs $s_1s_2$, \eg\ $s_1s_2=\up\up$, for $v_{s_1s_2}(\v{k})$. Putting these different realizations of $v_{s_1s_2}(\v{k})$ as elements in a $2\times2$ matrix
+The indices $s_1$ and $s_2$ can take on only two values each, namely $s_1,s_2\in\{\up,\dn\}$. In total, there are thus $4$ different realizations
+of the pairs $s_1s_2$, \eg, $s_1s_2=\up\up$, for $v_{s_1s_2}(\v{k})$. Putting these different realizations of $v_{s_1s_2}(\v{k})$ as elements in a $2\times2$ matrix,
 we get
 \begin{equation}
     \label{eq:Group:BCSHil:arb:mat}
@@ -75,23 +75,23 @@ we get
     \end{pmatrix}.
 \end{equation}
 Any $2\times 2$ matrix can be written in the conventional basis of the $4$ Pauli matrices $\sigma^0 = \mathbb{1}_{2\times 2}$, $\sigma^x$, $\sigma^y$,
-and $\sigma^z$. This means that we could write the matrix in Eq.~\eqref{eq:Group:BCSHil:arb:mat}
+and $\sigma^z$. This means that we \emph{could} write the matrix in Eq.~\eqref{eq:Group:BCSHil:arb:mat}
 \begin{equation}
     \label{eq:GroupBCSHil:arb:pauliExp}
     v_{s_1s_2}(\v{k}) = v^0_\v{k}\sigma^0_{s_1s_2} + v^i_\v{k}\sigma^i_{s_1s_2}.
 \end{equation}
-It is however conventional to factor out a Pauli matrix $i\sigma^y$ to the right in the expansion since this results in nice transformation properties
+It is, however, conventional to factor out a Pauli matrix $i\sigma^y$ to the right in the expansion, since this results in nice transformation properties
 of the coefficients as we shall see.
 With the spin-indices expanded in this basis, it is conventional to let the function of $\v{k}$
 that is in front of $\sigma^0$ be called $\psi_\v{k}$. The three others are conventionally denoted $d_{\v{k},i}$ which are components of what we call
 the $\v{d}$-vector\footnote{Note that a state in $\hilB$ that is described by a $\v{d}$-vector does not necessarily mean that it has $d$-wave symmetry,
-which is a symmetry of its $\v{k}$-space argument. Rather, it tells us that the state is a spin-triplet state.}. Expanded in this conventional basis
-then $v_{s_1s_2}(\v{k})$ takes the form
+which is a symmetry of its $\v{k}$-space argument. Rather, it tells us that the state is a spin-triplet state.}. Expanded in this conventional basis,
+then, $v_{s_1s_2}(\v{k})$ takes the form
 \begin{equation}
     \label{eq:Group:BCSHil:arb:pauli}
     v_{s_1s_2}(\v{k}) = (\psi_\v{k}\sigma^0_{s_1s'} + d_{\v{k},i}\sigma^i_{s_1s'})i\sigma^y_{s's_2},
 \end{equation}
-and finally the state $\ket{v}$ can be written
+and finally, the state $\ket{v}$ can be written
 \begin{equation}
     \label{eq:Group:BCSHil:arb:ket}
     \ket{v} = \sum_{\v{k}\,s_1s_2}[(\psi_\v{k}\sigma^0 + \v{d}_\v{k}\cdot\v{\sigma})i\sigma^y]_{s_1s_2}\ket{\v{k},s_1}\ket{-\v{k},s_2}.
@@ -109,7 +109,7 @@ Eq.~\eqref{eq:Group:BCSHil:arb:mat}, but now multiplying out the Pauli matrices 
         -\psi_\v{k}+d_{\v{k},z} & d_{\v{k},x}+id_{\v{k},y}
     \end{pmatrix}.
 \end{equation}
-This set of linear relations is easily inverted to yield
+This set of linear relations is easily inverted, which yields
 \begin{align}
     \label{eq:Group:BCSHil:arb:inverseRel:psi}
     \psi_\v{k} &= \frac{1}{2}(v_{\up\dn}(\v{k}) - v_{\dn\up}(\v{k}))\\
@@ -121,7 +121,7 @@ This set of linear relations is easily inverted to yield
     d_{\v{k},z} &= \frac{1}{2}(v_{\up\dn}(\v{k})+v_{\dn\up}(\v{k})).
 \end{align}
 
-Since the space $\hilB$ is fermionic we have the symmetry\footnote{We are here assuming that the state is even in (time) frequency. It is also possible
+Since the space $\hilB$ is fermionic, we have the symmetry\footnote{We are here assuming that the state is even in (time) frequency. It is also possible
 to have superconducting states that are odd in frequency \cite{Pal17}, however we will not treat that possibility here.}
 \begin{equation}
     \label{eq:Group:BCSHil:fermSymm}
@@ -140,7 +140,7 @@ and finally equating coefficients term by term, we see that for the coefficients
 When we are talking about applying some symmetry transformation to a state, this is synonymous with applying a group element to a vector.
 Even more specifically, the `applying' part means that we have some natural representation of the group on the vector space of the 
 states, and we are using the linear transformation of the representation of the group element to act on the state vector. In this
-thesis we will use the notation $g:\ket{\psi}$ to refer to this procedure.
+thesis, we will use the notation $g:\ket{\psi}$ to refer to this procedure.
 
 Let $g$ be an arbitrary group element in the symmetry group $G$ and $D$ be a representation of $G$ on the $d$-dimensional vector space $V$.
 Let $V$ have a basis $\{\v{b}_i\}_{i=1}^d$. The application of a group element to a basis vector is then defined as
@@ -157,12 +157,10 @@ $D$ to each basis vector separately as a linear transformation:
 \end{equation}
 
 \subsection{Active vector transformation}
-
-As $g:$ has been defined in Eq.~\eqref{eq:Group:Prod:basisApp} it is defined in a passive perspective where the transformation is happening
-to the basis vectors. It is often useful and sometimes more intuitive to consider
-the application of $g$ to a vector $\v{v}$ in the basis $\{\v{b}_i\}$ as an application not
-on the vectors themselves but on the expansion coefficients $v_i$ of $\v{v}$ in the basis. This is the active view of the transformation.
-Inserting Eq.~\eqref{eq:Group:Prod:basisApp} into Eq.~\eqref{eq:Group:App:linearTransformApp} we get
+By the definition in Eq.~\eqref{eq:Group:Prod:basisApp}, the transformation of $g:$ is viewed in a passive perspective since it is the basis vectors that change.
+It is often useful, and sometimes more intuitive, to consider the application of $g$ to a vector $\v{v}$ in the basis $\{\v{b}_i\}$ as an application not
+on the vectors themselves, but on the expansion coefficients $v_i$ of $\v{v}$ in the basis. Given the transformation of the basis vectors in
+Eq.~\eqref{eq:Group:Prod:basisApp}, we insert this into the transformation of $\v{v}$ in Eq.~\eqref{eq:Group:App:linearTransformApp}, which yields
 \begin{equation}
     \label{eq:Group:App:activeTransform}
         g:\v{v} = \sum_iv_i\sum_j\v{b}_jD_{ji}(g) = \sum_iv'_i\v{b}_i,
@@ -172,12 +170,14 @@ where we have defined the transformed coefficients
     \label{eq:Group:App:transformedCoeff}
     v'_i = \sum_jD_{ij}(g)v_j.
 \end{equation}
-From this calculation we see that we can consider the application of $g$ as a transformation of the coefficients of the vector as
+From this calculation, we see that we can consider the application of $g$ as a transformation of the coefficients of the vector as
 \begin{equation}
     \label{eq:Group:App:coeffTransformation}
     g:v_i = \sum_jD_{ij}(g)v_j.
 \end{equation}
-This defines the active transformation of a vector $v$ by a group element $g$.
+Since, in this case, the basis vectors are left invariant and static, the vector $\v{v}$ can be viewed as being actively transformed in a fixed coordinate-system. 
+Thus, the transformation $g:\v{v}$ is, when viewed in this perspective, known as an active transformation. The active- and passive-perspective can be notoriously
+difficult to differentiate since they are, in the end, mathematically equivalent. Therefore, being consistent with a single perspective can dissuade a lot of confusion.
 
 \subsection{Representation on product spaces}
 
@@ -191,7 +191,7 @@ called the product representation $D^{(D\times D)}(g)$. This is defined through 
 To apply group theory to physical problems, we need to know how the objects we are working with in the physical theory transform under group elements.
 The most important vector space in quantum mechanics is arguably the Hilbert space where particle states are determined by a momentum- and spin
 quantum numbers. Each quantum number has its own vector space defined by the basis vectors $\ket{\v{k}}$ and $\ket{s}$ in the Dirac notation. The
-combination of both quantum numbers in the description of a particle state then gives a state in the product space of these vector spaces.
+combination of both quantum numbers in the description of a particle state, then gives a state in the product space of these vector spaces.
 A basis for this space is given by the vectors $\ket{\v{k},s} = \ket{\v{k}}\ket{s}$. Given $\v{k}\in\mathbb{R}^d$ and $s\in\{\up,\dn\}$,
 these basis vectors transform according to the product representation of the representations on each vector space, given by
 \begin{equation}
@@ -208,7 +208,7 @@ where $\hat{\v{u}}$ is the rotation axis unit vector, while $\phi$ is the angle 
 the vector notation for the $3$ Pauli matrices and $\sigma^0_{ss'}=\delta_{ss'}$ \cite{Sergi04,Merzbacher99}.
 %, \cite[][Appendix A]{Schober16}.
 
-In the BCS Hilbert space which we discussed in more detail in Section~\ref{sec:Group:BCSHil},
+In the BCS Hilbert space, which we discussed in more detail in Section~\ref{sec:Group:BCSHil},
 the basis vectors are outer products of the momentum spin basis vectors with opposite momentum: $\{\ket{\v{k},s_1}\ket{-\v{k},s_2}\}$. The product
 representation on this vector space then transforms the basis vectors according to
 \begin{equation}
@@ -227,8 +227,8 @@ Kronecker delta function becomes superfluous.
 \label{sec:Group:pdRep}
 
 The coefficients of the basis expansion of a vector in the BCS Hilbert space are typically written in the conventional $\psi$-$\v{d}$ notation of 
-Eq.~\eqref{eq:Group:BCSHil:arb:ket}. Taking the active view of group transformations we can say that the expansion coefficients of arbitrary states
-in the BCS Hilbert space $\hilB$ transform like the $v_i$ in Eq.~\eqref{eq:Group:App:coeffTransformation} but where now the representation
+Eq.~\eqref{eq:Group:BCSHil:arb:ket}. Taking the active view of group transformations, we can say that the expansion coefficients of arbitrary states
+$\ket{v}$ in the BCS Hilbert space $\hilB$ transform like the $v_i$ in Eq.~\eqref{eq:Group:App:coeffTransformation}, but where now the representation
 matrix $D$ is given by the matrix $D^{(D\times D)}_{\v{k}\,s_1s_2;\,\v{k}'\,s_1's_2'}$ above in Eq.~\eqref{eq:Group:Prod:BCSProdMatrix}. Written
 out then, the coefficients transform according to
 \begin{equation}
@@ -250,8 +250,8 @@ the equation $D_gi\sigma^y D_g^\trans = i\sigma^y$, where $D_g$ are the spin rep
 
 To find the transformation properties of $\v{d}_\v{k}$, the principle is the same as above for $\psi(\v{k})$, but the calculations become more involved.
 We assume that the spin-momentum basis expansion of a state $\ket{v}$ consists of only odd coefficients so that
-$v_{s_1s_2}(\v{k}) = \v{d}_\v{k}\cdot(\v{\sigma}i\sigma^y)_{s_1s_2}$. Inserting this into the active transformation of the coefficients of $\ket{V}$ in
-Eq.~\eqref{eq:Group:pdRep:coeffTrans} and also inserting the expression for $D^{(D\times D)}_{\v{k}\,s_1s_2;\,\v{k}'\,s_1's_2'}$ as we did before yields
+$v_{s_1s_2}(\v{k}) = \v{d}_\v{k}\cdot(\v{\sigma}i\sigma^y)_{s_1s_2}$. Inserting this into the active transformation of the coefficients of $\ket{v}$ in
+Eq.~\eqref{eq:Group:pdRep:coeffTrans}, and also inserting the expression for $D^{(D\times D)}_{\v{k}\,s_1s_2;\,\v{k}'\,s_1's_2'}$ as we did before, yields
 \begin{equation}
     \label{eq:Group:pdRep:oddCoeffTrans}
     \begin{split}
@@ -259,7 +259,7 @@ Eq.~\eqref{eq:Group:pdRep:coeffTrans} and also inserting the expression for $D^{
         &= \sum_s\Big(D_g\v{\sigma}\sigma^yD_g^\trans\sigma^y\Big)_{s_1s}\cdot\v{d}_{g^{-1}:\v{k}}\;i\sigma^y_{ss_2}.
     \end{split}
 \end{equation}
-Since a group transformation (aka. the linear transformation given by a group representation) can not bring a state that was even to be odd or vice versa,
+Since a group transformation (aka. the linear transformation given by a group representation) cannot transform a state that was even into being odd, or vice versa,
 then the resulting state given by the transformed coefficients $g:v_{s_1s_2}(\v{k})$ have to remain odd, and thus they can be expanded in terms of a new
 $\v{d}'$ such that 
 \begin{equation}
@@ -269,7 +269,7 @@ $\v{d}'$ such that
 Having expanded both sides of the transformed coefficients with a common factor $i\sigma^y$ to the right, we can equate the remaining $2\times2$ spin
 matrices which gives an expression for $\v{d}'_{g^{-1}:\v{k}}\cdot\v{\sigma}$ by comparing Eq.~\eqref{eq:Group:pdRep:oddCoeffTrans} and
 Eq.~\eqref{eq:Group:pdRep:oddCoeffTrans:transExpansion}.
-Furthermore, using the anti-commutation property $\{\sigma^i,\sigma^j\} = 2\delta_{ij}\sigma^0$ of Pauli matrices we find that
+Furthermore, using the anti-commutation property $\{\sigma^i,\sigma^j\} = 2\delta_{ij}\sigma^0$ of Pauli matrices, we find that
 \begin{equation}
     \label{eq:Group:pdRep:projectingD}
     d'_{\v{k},i} = \frac{1}{4}\tr\big(\{\sigma^i, \v{d}'_\v{k}\cdot\v{\sigma}\big\}).
@@ -298,7 +298,7 @@ where we have defined the matrix
     \end{split}
 \end{equation}
 This matrix is in fact the rotation matrix of a vector in $\mathbb{R}^3$ by an angle $\phi$ about a unit vector $\hat{\v{u}}$. Since the coefficients
- of an odd state $\ket{v}$ are fully determined by the vector $\v{d}$, their transformation can be regarded just as a transformation of $\v{d}$ itself
+ of an odd state $\ket{v}$ are fully determined by the vector $\v{d}$, their transformation can be regarded just as a transformation of $\v{d}$ itself,
  which thus takes the form
 \begin{equation}
     \label{eq:Group:pdRep:dTransformation}
@@ -315,9 +315,9 @@ $\v{d}$ transforms as a vector by the proper rotation associated with $g$.
 
 The fermionic creation and annihilation operators $c^\dagger_{\v{k},s}$ and $c_{\v{k},s}$, which we will collectively refer to as
 $c^{(\dagger)}_{\v{k},s}$, are second-quantized operators that act on multi-particle
-states in a fermionic Fock space \cite{NegeleOrland98}. To properly define how a group element $g$ transforms these operators we thus should
+states in a fermionic Fock space \cite{NegeleOrland98}. To properly define how a group element $g$ transforms these operators, we should
 strictly speaking first derive the representation $Q(g)$ of $g$ on $N$-particle states $\ket{\v{k}_1,s_1}\land\ldots\land\ket{\v{k}_N,s_N}$ for
-arbitrary $N$ and then use the relation $g:c^{(\dagger)}_{\v{k},s} = Q(g)c^{(\dagger)}_{\v{k},s}Q(g)^{-1}$ to then derive their transformation properties.
+arbitrary $N$, and then use the relation $g:c^{(\dagger)}_{\v{k},s} = Q(g)c^{(\dagger)}_{\v{k},s}Q(g)^{-1}$ to derive their transformation properties.
 However, luckily, a shortcut is possible because the $Q(g)$ representation is connected with how $g$ acts on the single-particle basis
 $\{\ket{\v{k},s}\}$ through the relationship
 \begin{equation}
@@ -333,7 +333,7 @@ we thus have the transformation property
 \end{equation}
 where the matrix-elements are complex conjugated only if we are transforming an annihilation operator.
 
-Given that $g$ is an element of some point group such that it can be decomposed into a rotation and a parity inversion, then we may use the
+Given that $g$ is an element of some point-group, such that it can be decomposed into a rotation and a parity inversion, then we may use the
 representation on $\{\ket{\v{k},s}\}$ given in Eq.~\eqref{eq:Group:App} such that
 \begin{equation}
     \label{eq:Group:App:Ladder:pointGroupTransformation}
@@ -343,7 +343,7 @@ where the matrix $D_{g\;ss'}$ is defined in Eq.~\eqref{eq:Group:Prod:spinRepMatr
 transform the operators according to $\hat{P}:c^{(\dagger)}_{\v{k},s} = c^{(\dagger)}_{-\v{k},s}$.
 
 We will later need the translation transformation $g=\v{R}$ as well. In real space it is defined by $\v{R}:\ket{\v{r},s} = \ket{\v{r}+\v{R},s}$
-and given by linear transformation $L(\v{R}) = e^{i\v{R}\cdot\hat{\v{p}}/\hbar}$ where $\hat{\v{p}}$ is the momentum operator%
+and given by the linear transformation $L(\v{R}) = e^{i\v{R}\cdot\hat{\v{p}}/\hbar}$, where $\hat{\v{p}}$ is the momentum operator%
 \footnote{The form of the linear transformation $L(\v{R})$ follows directly from the multivariate Taylor expansion.} $\hat{\v{p}} = \hbar\nabla/i$.
 It then follows by a Fourier-transformation that the fermionic operators transform according to
 \begin{equation}
@@ -351,10 +351,10 @@ It then follows by a Fourier-transformation that the fermionic operators transfo
     \v{R}:c^{(\dagger)}_{\v{k},s} = \big(e^{-i\v{R}\cdot\v{k}}\big)^{(\ast)}c^{(\dagger)}_{\v{k},s}.
 \end{equation}
 
-Finally we discuss the transformation of time-reversal. This operation is traditionally denoted $\Theta$ and consists of flipping the sign of
-time, which implies flipping the spin and momentum. Time-reversal is special in that it is an antiunitary, \ie it transforms all linear coefficients
-to their complex conjugate. Any representation is
-because of this often factorized into a normal linear part and a complex-conjugation operator $\hat{K}$. From its action on the
+Finally, we discuss the transformation of time-reversal. This operation is traditionally denoted $\Theta$ and consists of flipping the sign of
+time, which implies flipping the spin and momentum. Time-reversal is special in that it is antiunitary, \ie it transforms all linear coefficients
+into their complex conjugates. Because of this, any representation of time-reversal is
+often factorized into a normal linear part and a complex-conjugation operator $\hat{K}$. From its action on the
 spin-momentum basis vectors $\ket{\v{k},s}$, time-reversal transforms the fermionic creation and annihilation operators according to
 \begin{equation}
     \label{eq:Group:App:Ladder:timeReversal}
@@ -371,17 +371,17 @@ Any fermionic single-particle operator can be written in the spin-momentum basis
     \hat{H} = \sum_{\v{k}\v{k}'ss'}H^{ss'}_{\v{k}\v{k}'}c^{\dagger}_{\v{k},s}c_{\v{k}'s'}.
 \end{equation}
 In this section we will apply the common finite symmetry-transformations discussed in the last Section and see how this reduces the degrees
-of freedom in $\hat{H}$ so that it can be written in a more concise form. To begin we reduce the notational burden by expanding the spin-matrix
+of freedom in $\hat{H}$ so that it can be written in a more concise form. To begin, we reduce the notational burden by expanding the spin-matrix
 elements in separate coefficients in the Pauli-matrix basis just as was done for the BCS Hilbert space vector coefficients $v_{s_1s_2}(\v{k})$ in
-Eq.~\eqref{eq:GroupBCSHil:arb:pauliExp} such that
+Eq.~\eqref{eq:GroupBCSHil:arb:pauliExp}, such that
 \begin{equation}
     \label{eq:Group:Single:pauliMatrices}
     \hat{H} = \sum_{\v{k}\v{k}'ss'}\big[\xi_{\v{k}\v{k}'}\sigma^0 + \v{\gamma}_{\v{k}\v{k}'}\cdot\v{\sigma}\big]_{ss'}c^{\dagger}_{\v{k},s}c_{\v{k}'s'}.
 \end{equation}
 
-The transformation of a quantum mechanical operator such as the Hamiltonian is defined by $g:\hat{H} = Q(g)\hat{H}Q(g)^{-1}$ for some many-body
+The transformation of a quantum mechanical operator such as the Hamiltonian, is defined by $g:\hat{H} = Q(g)\hat{H}Q(g)^{-1}$ for some many-body
 representation $Q(g)$. Inserting the form of $\hat{H}$ in Eq.~\eqref{eq:Group:Single:pauliMatrices} as a single-particle operator in the
-spin-momentum basis yields
+spin-momentum basis, yields
 \begin{equation}
     \label{eq:Group:Single:generalTransformedHamiltonian}
     g:\hat{H} = \sum_{\v{k}\v{k}'ss'}\big[\xi_{\v{k}\v{k}'}\sigma^0 + \v{\gamma}_{\v{k}\v{k}'}\cdot\v{\sigma}\big]_{ss'}(g:c^\dagger_{\v{k},s})(g:c_{\v{k}'s'}),
@@ -389,7 +389,7 @@ spin-momentum basis yields
 after inserting $Q(g)^{-1}Q(g)$ between the creation and annihilation operator. We can now use the transformation properties of these operators presented
 in Section~\ref{sec:Group:App:Ladder} to derive the transformation properties and symmetric form of the Hamiltonian.
 
-For a translation invariant system we need a translation invariant Hamiltonian. Using the transformation of $c^{(\dagger)}$ in
+For a translation invariant system, we need a translation invariant Hamiltonian. Using the transformation of $c^{(\dagger)}$ in
 Eq.~\eqref{eq:Group:App:Ladder:translation} under a translation $\v{R}$, we get that the coefficients $\xi_{\v{k}\v{k}'}$ and $\v{\gamma}_{\v{k}\v{k}'}$
 have to satisfy the equation
 \begin{equation}
@@ -423,14 +423,14 @@ Eq.~\eqref{eq:Group:Single:Translation:Hamiltonian}, and remembering that $Q(\Th
 For the Hamiltonian to be invariant under time-reversal symmetry, its coefficients thus have to satisfy $\xi_\v{k} = \xi_{-\v{k}}^\ast$ and
 $\v{\gamma}_\v{k} = -\v{\gamma}_{-\v{k}}^\ast$.
 
-Finally we look at the transformation of the Hamiltonian under point-group elements $g$. Using the transformation-property of the fermionic creation and
+Finally, we look at the transformation of the Hamiltonian under point-group elements $g$. Using the transformation-property of the fermionic creation and
 annihilation operators in Eq.~\eqref{eq:Group:App:Ladder:pointGroupTransformation}, then the translation-invariant Hamiltonian in
 Eq.~\eqref{eq:Group:Single:Translation:Hamiltonian} transforms according to
 \begin{equation}
     \label{eq:Group:Single:Point:transformedHamiltonian}
     g:\hat{H} = \sum_{\v{k}ss'}\big[\xi_{g^{-1}:\v{k}}\sigma^0 + \v{\gamma}_{g^{-1}:\v{k}}\cdot D_g\v{\sigma}D_g^\dagger\big]_{ss'}c^\dagger_{\v{k},s}c_{\v{k},s'}.
 \end{equation}
-Using the form of the spin-rotation matrix $D_g$ in Eq.~\eqref{eq:Group:Prod:spinRepMatrix} we find that
+Using the form of the spin-rotation matrix $D_g$ in Eq.~\eqref{eq:Group:Prod:spinRepMatrix}, we find that
 \begin{equation}
     \label{eq:Group:Single:Point:sigmaTransform}
     \v{\gamma}_{g^{-1}:\v{k}}\cdot D_g\v{\sigma}D_g^\dagger = \v{\gamma}'_{g^{-1}:\v{k}}\cdot\v{\sigma},
@@ -450,7 +450,7 @@ and $R(\hat{\v{u}},\phi)\v{\gamma}_{g^{-1}:\v{k}} = \v{\gamma}_\v{k}$ on the coe
 
 Let us assume that we are in a vector space $V$ that can be divided into possibly several different \ac{ir}s $D^{(\alpha)}$ of some
 symmetry group $G$. Further, let the basis vectors of these \ac{ir}s be denoted by $\v{b}^{(\alpha)}_m$ where $m$ thus counts the number
-of basis vectors in each \ac{ir} Then an arbitrary vector $\v{v}\in V$ can be written in terms of these basis vectors as
+of basis vectors in each \ac{ir}. Then, an arbitrary vector $\v{v}\in V$ can be written in terms of these basis vectors as
 \begin{equation}
     \label{eq:Group:Irr:Pro:basisDecomp}
     \v{v} = \sum_\alpha\sum_m c_m^{(\alpha)}\v{b}^{(\alpha)}_m.
@@ -530,8 +530,8 @@ $\sigma_xC_4=\sigma_{d_2}$ as the multiplication table says.
 
 \subsection{Conjugation classes}
 
-The conjugation classes of a group is the sets of group elements that is conjugate to each other, meaning that there exists a group element $g$ such
-that $gAg^{-1} = B$ between conjugate elements $A$ and $B$. Since conjugation is an equivalence relation it subdivides the group elements
+The conjugation classes of a group are the sets of group elements that are conjugate to each other, meaning that there exists a group element $g$ such
+that $gAg^{-1} = B$ between conjugate elements $A$ and $B$. Since conjugation is an equivalence relation, it subdivides the group elements
 exactly into conjugation classes. The conjugation classes of the group $C_{4v}$ are $e = \{e\}$, $2C_4 = \{C_4,C_4^{-1}\}$, $C_4^2 = \{C_4^2\}$,
 $2\sigma_d = \{\sigma_{d_1},\sigma_{d_2}\}$ and $2\sigma_v = \{\sigma_x,\sigma_y\}$. The character $\chi^\Gamma(g)$ of a representation $\Gamma$ is the trace of the representation
 matrix $D^\Gamma(g)$ of a certain group element $g$. Since the trace is cyclic, then for conjugate group elements $A$ and $B$
@@ -549,7 +549,7 @@ It is useful to list the characters of the different conjugation classes in a ta
 This is because the number of conjugation classes of a finite group is the same as the number of \ac{ir}s of that group.
 This table is known as the character table of the group. The character table of
 the group $C_{4v}$ is shown in Table~\ref{tab:Group:Symm:characterTable}. This table can be derived without knowing the details of the irreducible
-representations but instead using character relations from basic group theory\footnote{Many of these relations are derived from the great orthogonality
+representations, but instead using character relations from basic group theory\footnote{Many of these relations are derived from the great orthogonality
 theorem which can be found \eg in \cite{Inui90}.}. Because of this, the character table can be of immense help, and is typically the first step
 in determining the irreducible representations of a group.
 
@@ -576,7 +576,7 @@ $\Gamma_5$ which is $2$-dimensional.
 All the $1$-dimensional \ac{ir} matrices are then completely determined by the character table since they are just given by
 the characters themselves, \eg\ $D^{\Gamma_2}(\sigma_x) = -1$.
 
-To find a $2$-dimensional representation of $C_{4v}$ we can imagine how a normal $2$D vector $(x,y)^\trans\in\mathbb{R}^2$ behaves under its transformations.
+To find a $2$-dimensional representation of $C_{4v}$, we can imagine how a normal $2$D vector $(x,y)^\trans\in\mathbb{R}^2$ behaves under its transformations.
 We take again the example of a counterclockwise rotation by $90^\circ$ of the basis which transforms a vector
 \begin{equation}
     \label{eq:Group:Symm:C4transform}
@@ -606,7 +606,7 @@ Obviously, the matrix
         1 & 0
     \end{pmatrix},
 \end{equation}
-is the representation matrix of a two-dimensional representation of $C_4$. Continuing in this way for all the group transformations yields the matrices
+is the representation matrix of a two-dimensional representation of $C_4$. Continuing in this way for all the group transformations, yields the matrices
 \begin{subequations}
     \label{eq:Group:Symm:G5D}
 \begin{align}
@@ -648,9 +648,9 @@ is the representation matrix of a two-dimensional representation of $C_4$. Conti
     \end{pmatrix}.
 \end{align}
 \end{subequations}
-Taking the trace of these matrices, we see that this representations characters are the same as the ones for the \ac{ir} $\Gamma_5$ in the character table
-(Table~\ref{tab:Group:Symm:characterTable}). This implies that $\sum_g|\chi^{\Gamma_{5}}(g)|^2 = |C_{4v}|$ which implies in turn that the representation
-given by the matrices in Eq.~\eqref{eq:Group:Symm:G5D} is irreducible. Thus this is indeed the $\Gamma_5$ \ac{ir} as advertised,
+Taking the trace of these matrices, we see that this representation's characters are the same as the ones for the \ac{ir} $\Gamma_5$ in the character table
+(Table~\ref{tab:Group:Symm:characterTable}). This implies that $\sum_g|\chi^{\Gamma_{5}}(g)|^2 = |C_{4v}|$, which implies in turn that the representation
+given by the matrices in Eq.~\eqref{eq:Group:Symm:G5D} is irreducible. Thus, this is indeed the $\Gamma_5$ \ac{ir} as advertised,
 and we have completed the description of the representation matrices of all the \ac{ir}s of $C_{4v}$.
 
 \subsection{Proper rotations of the odd BCS function $\v{d}_\v{k}$}
@@ -658,8 +658,8 @@ and we have completed the description of the representation matrices of all the 
 
 When discussing the representation of general group elements on states in the BCS Hilbert space in Section~\ref{sec:Group:pdRep}, we learned from
 Eq.~\eqref{eq:Group:pdRep:dTransformation} that the coefficient $\v{d}_\v{k}\in\mathbb{R}^3$ of odd states transforms by a proper rotation $R(\hat{\v{u}},\phi)$.
-As mentioned before, a proper rotation of a group element $g$ is the rotation obtained when writing $g$ as a rotation followed by an inversion $P$ or identity. We thus
-obtain the representation matrices of the $3$D-representation of group elements $g\in C_{4v}$ directly from the $3$D rotation matrix $R(\hat{\v{u}},\phi)$ by
+As mentioned before, a proper rotation of a group element $g$ is the rotation obtained when writing $g$ as a rotation followed by an inversion $P$ or the identity transformation. We thus
+obtain the representation matrices of the $3$D-representations of group elements $g\in C_{4v}$ directly from the $3$D rotation matrix $R(\hat{\v{u}},\phi)$, by
 envisioning the combination of a rotation and $C_{4}^2=P$ or $e$ that leads to $g$. Because of this, we denote the representation matrices of this
 representation $R(g)$. As an example $\sigma_x = C_4^2R(\hat{\v{x}},\pi)$, such that the representation $R(\sigma_x) = R(\hat{\v{x}},\pi)$. Written
 out in its full matrix form, this yields the representation matrices
@@ -718,7 +718,7 @@ out in its full matrix form, this yields the representation matrices
 \section{Square Lattice Harmonics}
 
 Since $\psi(\v{k})$ and $\v{d}_\v{k}$ are invariant with respect to translation by any reciprocal lattice vector $\v{Q}$, $\psi(\v{k}+\v{Q}) = \psi(\v{k})$,
-and they can be expanded in a discrete Fourier transform over the real lattice, such that
+they can be expanded in a discrete Fourier transform over the real lattice, such that
 \begin{equation}
     \label{eq:Group:SLH:psiFourier}
     \psi(\v{k}) = \frac{1}{\sqrt{N}}\sum_\v{R}\psi_\v{R}\cos\v{R}\cdot\v{k},
@@ -733,13 +733,13 @@ where the exponential of the Fourier transform has been reduced to trigonometric
 We are interested in the basis vectors $\ket{\Gamma,q,m}$ of the representations of the symmetry group $C_{4v}$ of the $2D$ square lattice. In this
 ket notation, $\Gamma$ gives the irreducible representation, $m$ enumerates the basis vectors in case the \ac{ir} is multi-dimensional, while $q$ gives the version of
 the \ac{ir} in case the space of possible $\ket{v}$ permits multiple versions of the same \ac{ir}. In the active
-view of group transformations, the question of finding the basis vectors translates to finding the basis functions of the functions $\psi(\v{k})$
-and $\v{d}_\v{k}$ for even and odd bases respectively. In Section~\ref{sec:Group:pdRep} we
-saw how these functions transformed under group transformations. In Section~\ref{sec:Group:Pro} we saw how the projection operators could be used
+view of group transformations, the question of finding the basis vectors translates to finding the basis-functions of the functions $\psi(\v{k})$
+and $\v{d}_\v{k}$ for even and odd bases, respectively. In Section~\ref{sec:Group:pdRep}, we
+saw how these functions transformed under group transformations. In Section~\ref{sec:Group:Pro}, we saw how the projection operators could be used
 to extract individual basis vectors. We will now use these operators on the Fourier expansions of $\psi(\v{k})$ and $\v{d}_\v{k}$ to extract possible
-basis functions given the symmetry group of the square lattice.
+basis-functions given the symmetry group of the square lattice.
 
-\subsection{Even basis functions}
+\subsection{Even basis-functions}
 
 We remember from Eq.~\eqref{eq:Group:pdRep:psiRep} that the function $\psi(\v{k})$ transforms as 
 \begin{equation}
@@ -747,7 +747,7 @@ g:\psi(\v{k}) = \psi(g^{-1}:\v{k}),
 \end{equation}
 under a group
 transformation $g$. Operating on the Fourier expansion of $\psi(\v{k})$ in Eq.~\eqref{eq:Group:SLH:psiFourier} with the projection operator
-defined in Eq.~\eqref{eq:Group:Irr:Pro:proOpDef} by an arbitrary \ac{ir} $\Gamma$ yields
+defined in Eq.~\eqref{eq:Group:Irr:Pro:proOpDef} by an arbitrary \ac{ir} $\Gamma$, yields
 \begin{equation}
     \label{eq:Group:SLH:even:Ppsi}
     \begin{split}
@@ -774,19 +774,19 @@ of the group elements in $C_{4v}$ to calculate the expressions $g^{-1}:\v{k}$ in
 \end{equation}
 %
 Since the projection operators $P_{ll}^{(\Gamma)}$ projects onto the subspace of vectors belonging to the \ac{ir} $\Gamma$, if we
-let the different basis functions of the \ac{ir}s $\Gamma$ be denoted $\psi^{(\Gamma),q,m}(\v{k})$, then we expect the projection to produce the result
+let the different basis-functions of the \ac{ir}s $\Gamma$ be denoted $\psi^{(\Gamma),q,m}(\v{k})$, then we expect the projection to produce the result
 \begin{equation}
     \label{eq:Group:SLH:even:expectedProjection}
     P_{l,l}^{(\Gamma)}\psi(\v{k}) = \sum_{q}c_{q,l}\psi^{(\Gamma),q,l}(\v{k}),
 \end{equation}
 by the property of projection operators in Eq.~\eqref{eq:Group:Irr:Pro:generalProApplication}. Here $q$ again enumerates the version of the basis of $\Gamma$ possible in the space of different $\psi(\v{k})$, and $c_{q,l}$ are the coefficients of
-$\psi(\v{k})$ in the basis of the \ac{ir} basis functions. Comparing Eqs.~\eqref{eq:Group:SLH:even:expectedProjection} and \eqref{eq:Group:SLH:even:projections},
+$\psi(\v{k})$ in the basis of the \ac{ir} basis-functions. Comparing Eqs.~\eqref{eq:Group:SLH:even:expectedProjection} and \eqref{eq:Group:SLH:even:projections},
 we see that different sets of basis vectors can be obtained for the \ac{ir}s by including different order terms in the $\v{R}$-sum,
 \ie different lattice neighbour sites. It is also worth noting that the \ac{ir} $\Gamma_5$ does not exist in the space of possible $\psi(\v{k})$,
 since it is an odd representation.
 
-Including on-site, nearest neighbor and next-nearest neighbor sites in the $\v{R}$ sum of the projected arbitrary function $\psi(\v{k})$ on the $\Gamma_1$ subspace in
-Eq.~\eqref{eq:Group:SLH:even:expectedProjection} we see that any such function can be constructed from the three basis functions
+Including on-site, nearest neighbour and next-nearest neighbour sites in the $\v{R}$ sum of the projected arbitrary function $\psi(\v{k})$ on the $\Gamma_1$ subspace in
+Eq.~\eqref{eq:Group:SLH:even:expectedProjection}, we see that any such function can be constructed from the three basis-functions
 \begin{subequations}
     \label{eq:Group:SLH:even:G1basis}
     \begin{align}
@@ -798,11 +798,11 @@ Eq.~\eqref{eq:Group:SLH:even:expectedProjection} we see that any such function c
         \psi^{(\Gamma_1),3}(\v{k}) &= \frac{1}{\pi}\cos k_x \cos k_y.
     \end{align}
 \end{subequations}
-Each of these functions give a complete basis function set of the $\Gamma_1$ \ac{ir} which can be checked by calculating how they transform under
+Each of these functions give a complete basis-function set of the $\Gamma_1$ \ac{ir} which can be checked by calculating how they transform under
 group elements $g\in C_{4v}$. In this case, since this is the trivial $\Gamma_1$ representation, the functions are symmetric under all group elements $g$ which
 produces the character $1$ for all conjugation classes (compare with the first row in Table~\ref{tab:Group:Symm:characterTable}). 
 
-These basis functions are automatically
+These basis-functions are automatically
 mutually orthogonal since they belong to different \ac{ir} version subspaces and their normalization coefficients have been chosen such that they are normal
 on the $1^\text{st}$ Brillouin zone, \ie
 \begin{equation}
@@ -810,8 +810,7 @@ on the $1^\text{st}$ Brillouin zone, \ie
     \int_{-\pi}^\pi\int_{-\pi}^\pi\!\textrm{d}k_x\textrm{d}k_y\;\psi^{(\Gamma_1),q}(\v{k})^\ast\psi^{(\Gamma_1),q'}(\v{k}) = \delta_{qq'}.
 \end{equation}
 
-Inserting up to next-nearest neighbor sites for $\v{R}$ in the projected functions under the remaining \ac{ir}s, we find the orthonormal basis 
-functions
+Inserting up to next-nearest neighbor sites for $\v{R}$ in the projected functions under the remaining \ac{ir}s, we find the orthonormal basis-functions
 \begin{subequations}
     \label{eq:Group:SLH:even:bases}
     \begin{align}
@@ -821,24 +820,24 @@ functions
         \psi^{(\Gamma_4)}(\v{k}) &= \frac{1}{\pi}\sin k_x\sin k_y,
     \end{align}
 \end{subequations}
-of the representations $\Gamma_3$ and $\Gamma_4$ respectively. The $\Gamma_3$ basis is found by expansion of $\v{R}$ to nearest neighbor, while the one for $\Gamma_4$
-is found at the next-nearest neighbor. To get a basis vector for the representation $\Gamma_2$ we would need to expand beyond the next-nearest neighbor site.
+of the representations $\Gamma_3$ and $\Gamma_4$, respectively. The $\Gamma_3$ basis is found by expansion of $\v{R}$ to nearest neighbor, while the one for $\Gamma_4$
+is found at the next-nearest neighbor. To get a basis vector for the representation $\Gamma_2$, we would need to expand beyond the next-nearest neighbor site.
 
-The basis functions in Eqs.~\eqref{eq:Group:SLH:even:bases} and \eqref{eq:Group:SLH:even:G1basis} are also known as square lattice harmonics.
+The basis-functions in Eqs.~\eqref{eq:Group:SLH:even:bases} and \eqref{eq:Group:SLH:even:G1basis} are also known as square lattice harmonics.
 The set of square lattice harmonic functions includes the set of functions found when expanding
 $\v{R}$ to arbitrary sites. As we have seen, they can be grouped and found through consideration of the \ac{ir}s of the symmetry group of the
-square lattice. We have so far only considered even-in-$\v{k}$ basis functions. In the next section we will complete our discussion of square lattice harmonics
+square lattice. We have so far only considered even-in-$\v{k}$ basis-functions. In the next section we will complete our discussion of square lattice harmonics
 with the inclusion of odd functions.
 
 
-\subsection{Odd basis functions}
+\subsection{Odd basis-functions}
 
-Any state made out of odd basis functions is fully determined by the coefficients $\v{d}_\v{k}$. These coefficients
+Any state made from exclusively odd basis-functions, is fully determined by the coefficients $\v{d}_\v{k}$. As we derived in Section~\ref{sec:Group:pdRep}, these coefficients
 transform as\footnote{See Eq.~\eqref{eq:Group:pdRep:dTransformation}.} $g:\v{d}_\v{k} = R(g)\v{d}_{g^{-1}:\v{k}}$
 under group elements $g\in C_{4v}$, where $R(g)$ are the representation matrices in Eq.~\eqref{eq:Group:Symm:dRepresentation}.
 Otherwise, finding bases for irreducible representations can be done by following the same procedure as that outlined for even functions in the last Section.
 
-As an example we consider finding a basis for the $\Gamma_5$ irreducible representation of the group $C_{4v}$ in the space of odd functions $\v{d}_\v{k}$.
+As an example, we consider finding a basis for the $\Gamma_5$ irreducible representation of the group $C_{4v}$ in the space of odd functions $\v{d}_\v{k}$.
 Acting on the Fourier expansion of the arbitrary function $\v{d}_\v{k}$ in Eq.~\eqref{eq:Group:SLH:dFourier} with the projection operators Eq.~\eqref{eq:Group:Irr:Pro:proOpDef}
 down on the subspace of the \ac{ir} $\Gamma_5$ of the symmetry group $C_{4v}$, yields the results
 \begin{subequations}
@@ -850,10 +849,10 @@ down on the subspace of the \ac{ir} $\Gamma_5$ of the symmetry group $C_{4v}$, y
         P_{2,2}^{(\Gamma_5)}\v{d}_\v{k} &= \frac{\hat{\v{z}}}{\sqrt{N}}\sum_\v{R}d_{\v{R},z}\sin R_xk_y\cos R_yk_y,
     \end{align}
 \end{subequations}
-for the two basis functions of $\Gamma_5$\footnote{Since $\Gamma_5$ is two-dimensional as opposed to the other \ac{ir}s in $C_{4v}$, any complete basis for $\Gamma_5$ requires two basis
+for the two basis-functions of $\Gamma_5$\footnote{Since $\Gamma_5$ is two-dimensional as opposed to the other \ac{ir}s in $C_{4v}$, any complete basis for $\Gamma_5$ requires two basis
 functions that can be related through transformation by a group element.}. 
 As in the spin-singlet case, we get different versions of the $\Gamma_5$ basis vectors depending on the order of our expansion in $\v{R}$.
-Expanding to nearest neighbor sites and normalizing such that the states are orthonormal, produces the basis functions
+Expanding to nearest neighbor sites and normalizing such that the states are orthonormal, produces the basis-functions
 \begin{subequations}
     \label{eq:Group:SLH:odd:G5basis}
     \begin{align}
@@ -869,14 +868,14 @@ of the two-dimensional \ac{ir} $\Gamma_5$.
 \label{sec:Group:Potential}
 
 Let at first $\hat{V}$ be a general two-body operator that acts on an $N$-particle state which is a vector in $\hil_N = \otimes_{i=1}^N\hil$. The
-single particle Hilbert space $\hil$ in question is quantified by momentum and spin such that $\hil=\Span\{\ket{\v{k},s}\}$. Denoting for the moment
+single particle Hilbert space $\hil$ in question, is quantified by momentum and spin, such that $\hil=\Span\{\ket{\v{k},s}\}$. Denoting for the moment
 the specific combinations of $\v{k}$ and $s$ as $\alpha$ as a shorthand, then $\hat{V}$ acts on basis vectors in $\hil_N$ such that
 \begin{equation}
     \label{eq:Group:Potential:twoBodyInteraction}
     \hat{V}\ket{\alpha_1}\ldots\ket{\alpha_N} = \sum_{1\leq i<j\leq N}\hat{V}_{ij}\ket{\alpha_1}\ldots\ket{\alpha_N},
 \end{equation}
-by definition of being a two-body operator \cite{NegeleOrland98}. Here $\hat{V}_{ij}$ is an operator that only acts on the $i$th and $j$th ket. Even though $\hat{V}$ acts on
-$\hil_N$, because of how it can be written in terms of $\hat{V}_{ij}$ and this only acts on two states at a time, it follows that $\hat{V}$ is
+by definition of being a two-body operator \cite{NegeleOrland98}. Here, $\hat{V}_{ij}$ is an operator that only acts on the $i$th and $j$th ket. Even though $\hat{V}$ acts on
+$\hil_N$, because of how it can be written in terms of $\hat{V}_{ij}$, and this only acts on two states at a time, it follows that $\hat{V}$ is
 completely determined by its action on the reduced two-particle Hilbert space $\hil_2$. This implies that $\hat{V}$ is fully described by its matrix elements
 \begin{equation}
     \label{eq:Group:Potential:genTwoBodyMatrixElem}
@@ -887,30 +886,30 @@ Inserting back the $\ket{\v{k},s}$ notation, these matrix elements are referred 
     \label{eq:Group:Potential:momSpinPotentialMatrixElems}
     V_{\v{k}_1\v{k}_2\v{k}_3\v{k}_4;\,s_1s_2s_3s_4} = \bra{\v{k}_1s_1}\bra{\v{k}_2s_2}\hat{V}\ket{\v{k}_4s_4}\ket{\v{k}_3s_3}.
 \end{equation}
-When $\hat{V}$ is a BCS operator acting on the BCS Hilbert space described in the previous section, these matrix elements are denoted
+When $\hat{V}$ is a BCS operator acting on the BCS Hilbert space described in Section~\ref{sec:Group:BCSHil}, these matrix elements are denoted
 \begin{equation}
     \label{eq:Group:Potential:bcsTwoBodyMatrixElem}
     V_{\v{k}\v{k}';\,s_1s_2s_3s_4} = \bra{\v{k}s_1}\bra{-\v{k}s_2}\hat{V}\ket{\v{k}'s_4}\ket{-\v{k}'s_3}.
 \end{equation}
 
 Since $\hat{V}$ is Hermitian, it must be diagonalizable in some basis of eigenfunctions. Barring accidental degeneracy, a basis for a $d$-degenerate
-eigenvalue is also a basis for an \ac{ir} of the symmetry group $G$ of the Hamiltonian \cite{Inui90}. In the case of accidental degeneracy
-then this $d$-dimensional vector space consists of several non-intersecting subspaces where each subspace is a basis for a (possibly different) \ac{ir}. Note
-that this does not mean that (barring accidental degeneracy) there exists one separate eigenvalue for each \ac{ir} of $G$ since there might be
+eigenvalue is also a basis for an \ac{ir} of the symmetry group $G$ of the Hamiltonian \cite{Inui90}. In the case of accidental degeneracy,
+then this $d$-dimensional vector space consists of several non-intersecting subspaces, where each subspace is a basis for a (possibly different) \ac{ir}. Note
+that this does not mean that (barring accidental degeneracy) there exists one separate eigenvalue for each \ac{ir} of $G$, since there might be
 several different eigenvalues with different eigenspace bases but where all of them are bases for the same \ac{ir}. Regardless of these details,
 the connection between \ac{ir}s and the eigenvalues of $\hat{V}$ is a great help in finding the bases for which it is
 diagonal.
 
 Let the basis for a $d_\Gamma$-dimensional \ac{ir} $\Gamma$ be denoted $\{\ket{\Gamma,q_\Gamma,m}\}_{m=1}^{d_\Gamma}$, where $\hat{V}$ has an eigenvalue $V_{\Gamma,q_\Gamma}$
 for the vectors in this basis, and $q_\Gamma$ is an index enumerating the different versions of bases of $\Gamma$ that $\hat{V}$ might have
-in its set of eigenspace bases. Since $\hat{V}$ is diagonal in this set of bases then
+in its set of eigenspace bases. Since $\hat{V}$ is diagonal in this set of bases, then
 \begin{equation}
     \label{eq:Group:Potential:potIrrepDecomp}
     \hat{V} = \sum_{\Gamma q_\Gamma}V_{\Gamma,q_\Gamma}\sum_{m=1}^{d_\Gamma}\ket{\Gamma,q_\Gamma,m}\bra{\Gamma,q_\Gamma,m}.
 \end{equation}
 Because of the potential for accidental degeneracy\footnote{A degeneracy of an eigenvalue is \emph{accidental} if two degenerate eigenvectors belong to different \ac{ir} vector spaces,
-while a non-accidental degeneracy of an eigenvalue happens when the eigenvectors in the eigen-space belong to a several-dimensional \ac{ir}.} then,
-we can not guarantee that $V_{\Gamma,q_\Gamma}\neq V_{\Gamma',q_{\Gamma'}}$ for different $\Gamma$ and $\Gamma'$.
+while a non-accidental degeneracy of an eigenvalue happens when the eigenvectors in the eigen-space belong to a several-dimensional \ac{ir}.},
+we cannot guarantee that $V_{\Gamma,q_\Gamma}\neq V_{\Gamma',q_{\Gamma'}}$ for different $\Gamma$ and $\Gamma'$.
 Inserting this expression for $\hat{V}$ into the matrix elements in Eq.~\eqref{eq:Group:Potential:bcsTwoBodyMatrixElem} lets us write them in terms of
 \ac{ir} basis vectors in the momentum spin function representation:
 \begin{equation}
@@ -926,14 +925,14 @@ where
 We can separate the set of different \ac{ir} bases into bases that have vectors that transform either symmetrically or anti-symmetrically
 with respect to the group element of space inversion $P$. We call the representations of such bases even or odd representations. Even representations are those that map
 $P$ to the identity operator $\mathbb{1}$ and as a consequence have functions with the symmetry $\Psi^{\Gamma,q_\Gamma,m}_{s_1s_2}(-\v{k}) = \Psi^{\Gamma,q_\Gamma,m}_{s_1s_2}(\v{k})$. Writing
-the spin-indices of these functions in terms of Pauli matrices by using the expansion in Eq.~\eqref{eq:Group:BCSHil:arb:pauli} and using the fermionic symmetry
+the spin-indices of these functions in terms of Pauli matrices by using the expansion in Eq.~\eqref{eq:Group:BCSHil:arb:pauli}, and using the fermionic symmetry
 following the same logic as Section~\ref{sec:Group:BCSHil}, then functions of even representations $a$ can be written
 \begin{equation}
     \label{eq:Group:Potential:evenIrrepFunctions}
     \Psi^{a,q_a,m}_{s_1s_2}(\v{k}) = \psi^{a,q_a,m}_\v{k}i\sigma^y_{s_1s_2}.
 \end{equation}
 Odd representations $b$ map $P$ to the inversion operator $I$ such that $\Psi^{b,q_b,m}_{s_1s_2}(-\v{k}) = -\Psi^{b,q_b,m}_{s_1s_2}(\v{k})$. Expanding in Pauli
-matrices then yields
+matrices, then yields
 \begin{equation}
     \label{eq:Group:Potential:oddIrrepFunctions}
     \Psi^{b,q_b,m}_{s_1s_2}(\v{k}) = \v{d}^{b,q_b,m}_{\v{k}}\cdot(\v{\sigma}i\sigma^y)_{s_1s_2}.
@@ -947,7 +946,7 @@ Eq.~\eqref{eq:Group:Potential:irrepPotMatrixElem}, we arrive at the fully expand
         & + \sum_{bq_b}V_{b,q_b}\sum_{m=1}^{d_b}\big(\v{d}^{b,q_b,m}_{\v{k}}\cdot\v{\sigma}i\sigma^y\big)_{s_1s_2}\Big[\big(\v{d}^{b,q_b,m}_{-\v{k}'}\cdot\v{\sigma}i\sigma^y\big)_{s_3s_4}\Big]^\dagger.
     \end{split}
 \end{equation}
-In this use of the dagger notation, the adjoint acts on both of the matrix indices of spin and the momentum-index such that
+In this use of the dagger notation, the adjoint acts on both the spin- and momentum matrix indices, such that
 $\v{d}_{-\v{k}}^\dagger = \v{d}_\v{k}^\ast$ and $\sigma_{s_1s_2}^\dagger = \sigma_{s_2s_1}^\ast$.
 
 On a square lattice, the functions $\psi_\v{k}^{a,q_a,m}$ and $\v{d}_\v{k}^{b,q_b,m}$ of the eigenspace basis vectors $\ket{\Gamma,q_\Gamma,m}$ are given by
@@ -960,7 +959,7 @@ of Eq.~\eqref{eq:Group:Potential:fullyExpandedPotMatrixElem}, we can first find 
 Then we can simply insert these eigenvalues and the known form of $\psi_\v{k}^{a,q_a,m}$
 and $\v{d}_\v{k}^{b,q_b,m}$ into Eq.~\eqref{eq:Group:Potential:fullyExpandedPotMatrixElem}, and we have a symmetry-decomposed potential!
 
-Writing the potential on this form easily lets us see if there are any attractive symmetric channels in the potential which could lead to an instability and thus a
-phase-transition by pairing of the electrons according to the specified symmetry. A low energy effective theory can then be found in the unstable symmetry
-channel by using the channels square lattice harmonics in determining the $\v{J}$s in the Hubbard Stratonovich transformation in Eq.~\eqref{eq:Field:HS:complexIntegral}, and then
-perform a saddle-point approximation.
+Writing the potential on this form, easily lets us see if there are any attractive symmetric channels in the potential, which could lead to an instability and thus a
+phase-transition by pairing of the electrons according to the specified symmetry. A low energy effective theory can then be found in the unstable symmetry-channel
+by using the channel's square-lattice harmonics in determining the $\v{J}$s in the Hubbard-Stratonovich transformation in Eq.~\eqref{eq:Field:HS:complexIntegral}, and then
+performing a saddle-point approximation.

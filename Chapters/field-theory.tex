@@ -3,11 +3,11 @@
 %
 \noindent In this chapter we will give a short introduction to the use of Gra\ss mann variables
 and complex numbers in the calculation of the field-integrals in the
-partition function and how they can be used to transform the
+partition function. We will also describe how these variables can be used to transform the
 expression for the action through the \ac{hs} transformation.
 
 A field theoretic expression for the quantum mechanical partition function $\mathcal{Z}$
-is obtained by using a coherent state basis. A coherent state is the eigen-state of an annihilation operator, thus it
+is obtained by using a coherent state basis. A coherent state is the eigen-state of an annihilation operator; thus, it
 produces an eigenvalue when operated on by the annihilation operator. Letting $\hat{H}$ be the quantum mechanical
 Hamiltonian of the system for which we are interested in calculating the partition function, $\mu$ be the chemical
 potential and $\hat{N}$ be the number operator, then the partition function is defined as
@@ -25,7 +25,7 @@ a state. The functional integral then takes the form
 \end{equation}
 The integration variable $\tau$ is the imaginary time and a $\tau$-dependence is implicit in the notation such that $\xi_\alpha = \xi_\alpha(\tau)$.
 This path-integral notation is a shorthand for a more involved expression where the imaginary time-dependence of $\tau$ is
-split into a collection of time-indexed coherent state eigenfunctions $\xi_{\alpha,\tau}$ and the integration measure
+split into a collection of time-indexed coherent state eigenfunctions $\xi_{\alpha,\tau}$, and the integration measure
 is a product over these indices and the quantum-state indices $\alpha$. For further detail we refer to Ref.~\cite{NegeleOrland98}
 which we will follow for a large part of this chapter.
 
@@ -44,7 +44,7 @@ an algebra, differentiation can be defined such that
     \label{eq:Field:Ferm:Grass:diff}
     \frac{\mathrm{d}}{\mathrm{d}\xi_{\alpha_m}}\;\phi\,\xi_{\alpha_1}\cdots\xi_{\alpha_n} = (-1)^{m-1}\phi\,\xi_{\alpha_1}\cdots\xi_{\alpha_{m-1}}\xi_{\alpha_{m+1}}\cdots\xi_{\alpha_n},
 \end{equation}
-provided the generator $\xi_{\alpha_m}$ is in the number and $0$ otherwise. The factors of $(-1)$ comes from anti-commuting
+provided that the generator $\xi_{\alpha_m}$ is in the number, and $0$ otherwise. The factors of $(-1)$ comes from anti-commuting
 the generator $\xi_{\alpha_m}$ such that it is next to the differentiation operator. In Gra\ss mann algebra, integration
 can (perhaps a little non-intuitively) be defined such that it acts in the same way as differentiation, i.e. generators
 have to be anti-commuted until they are next to the symbolic infinitesimal differential $\mathrm{d}\xi_{\alpha}$, and then use
@@ -57,7 +57,7 @@ while
     \label{eq:Field:Ferm:Grass:int2}
     \int\!\mathrm{d}\xi\;1 = 0.
 \end{equation}
-If the integral consists of several differentials of generators, then these differentials also has to be anti-commuted such that $\mathrm{d}\xi_1\mathrm{d}\xi_2 = -\mathrm{d}\xi_2\mathrm{d}\xi_1$.
+If the integral consists of several differentials of generators, then these differentials also have to be anti-commuted such that $\mathrm{d}\xi_1\mathrm{d}\xi_2 = -\mathrm{d}\xi_2\mathrm{d}\xi_1$.
 On an algebra consisting of $2n$ generators we define conjugation as a map from the first half of the generators $\{\xi_{\alpha_i}\}_{i=1}^n$
 to the other half $\{\xi_{\alpha_i}^\ast\}_{i=1}^n$ and in such a way that when applied to a particular number
 \begin{equation}
@@ -68,7 +68,7 @@ for $\phi\in\mathbb{C}$.
 
 \subsection{Nambu Spinor}
 
-In the Nambu notation we group spin-dependent Gra\ss mann numbers $\xi_\up$ and $\xi_\dn^\ast$, which correspond to the
+In the Nambu notation, we group spin-dependent Gra\ss mann numbers $\xi_\up$ and $\xi_\dn^\ast$, which correspond to the
 annihilation- and creation-operators $\hat{c}_\up^\dagger$ and $\hat{c}_\dn$, in a vector called a Nambu spinor
 \begin{equation}
     \label{eq:Field:Ferm:Nambu:vector}
@@ -83,13 +83,13 @@ A sesquilinear form can then be created with this vector and its adjoint such th
     \label{eq:Field:Ferm:Nambu:terms}
     \v{\xi}^\dagger S\v{\xi} = S_{11}\xi_\up^\ast\xi_\up + S_{22}\xi_\dn^\ast\xi_\dn + S_{12}\xi_\up^\ast\xi_\dn^\ast + S_{21}\xi_\up\xi_\dn.
 \end{equation}
-This allows any action that contains spin-dependent terms of the form of the right hand side of Eq.~\eqref{eq:Field:Ferm:Nambu:terms} to
+This allows any action that contains spin-dependent terms of the form of the right-hand side of Eq.~\eqref{eq:Field:Ferm:Nambu:terms} to
 be put on sesquilinear form. Assuming this is the case, then the partition function in the field-integral representation takes the form
 \begin{equation}
     \label{eq:Field:Ferm:Nambu:partitionFunction}
     \mathcal{Z} = \int\!\mathcal{D}[\xi^\ast\,\xi]\;e^{-\int_0^\beta\!\mathrm{d}\tau\;\v{\xi}^\dagger_\gamma S_{\gamma\delta}\v{\xi}_\delta}.
 \end{equation}
-In this equation, the indices $\gamma$ and $\delta$ is an arbitrary collection of quantum numbers needed to specify a state other than spin,
+In this equation, the indices $\gamma$ and $\delta$ are arbitrary collections of quantum numbers needed to specify a state other than spin,
 for example they could be momentum indices $\gamma = \v{k}, \delta = \v{k}'$, and summation over these repeated indices is implicitly understood.
 
 Splitting the integral over $\tau$ into $M$ imaginary time-slices and expanding the path integral measure into a product of individual integrals
@@ -109,7 +109,7 @@ The result is then that the partition function in Eq.~\eqref{eq:Field:Ferm:Nambu
 becomes $\mathcal{Z} = \det S$. To calculate this determinant one has to consider the matrix $S$ as also a matrix with
 time-slice indices. This is perhaps most easily accomplished using the Matsubara formalism in which the $\tau$ dependence is substituted with a dependence on Matsubara
 frequencies through a Fourier-like transform. More details on this formalism can be found in Section~\ref{sec:Field:Mats}, but first we consider
-what to do when a spin-dependent action can't be written on the form in Eq.~\eqref{eq:Field:Ferm:Nambu:terms}.
+what to do when a spin-dependent action cannot be written on the form in Eq.~\eqref{eq:Field:Ferm:Nambu:terms}.
 
 \subsection{Extended Nambu Spinor}
 
@@ -117,8 +117,8 @@ From Eq.~\eqref{eq:Field:Ferm:Nambu:terms} we see that the Nambu spinor sesquili
 operators of differing spins, e.g. a term $\propto \hat{c}_\up^\dagger\hat{c}_\dn$. 
 In general, a quadratic Hamiltonian can contain any combination of spin-indices of the form $\hat{c}_{s_1}\hat{c}_{s_2}$, $\hat{c}_{s_1}^\dagger\hat{c}_{s_2}$,
 $\hat{c}_{s_1}\hat{c}_{s_2}^\dagger$ and
-$\hat{c}_{s_1}^\dagger\hat{c}_{s_2}^\dagger$. This gives in total $16$ different combinations and to accommodate them all we thus need a $4\times4$ matrix.
-Exchanging to Gra\ss mann numbers we define the vector
+$\hat{c}_{s_1}^\dagger\hat{c}_{s_2}^\dagger$. This gives in total $16$ different combinations, and to accommodate them all we thus need a $4\times4$ matrix.
+Exchanging to Gra\ss mann numbers, we define the vector
 \begin{equation}
     \label{eq:Field:Ferm:ExNambu:spinor}
     \v{\xi}_\gamma = 
@@ -154,13 +154,13 @@ of the partition function field integral
     \mathcal{Z} = \int\!\mathcal{D}[\xi^\ast\,\xi]\;e^{-\int_0^\beta\!\mathrm{d}\tau\;\tilde{\xi}_{\gamma,i}S_{\gamma i; \delta j}\tilde{\xi}_{\delta, j}}.
 \end{equation}
 Even though this superficially looks like the field integral in Eq.~\eqref{eq:Field:Ferm:Nambu:partitionFunction}, we now have a bilinear and not a sesquilinear
-form, and $S$ is now a $2n\times2n$ matrix and not an $n\times n$ matrix. This means that we can not use the integral in Eq.~\eqref{eq:Field:Ferm:Nambu:quadraticGrassmannInt}
+form, and $S$ is now a $2n\times2n$ matrix and not an $n\times n$ matrix. This means that we cannot use the integral in Eq.~\eqref{eq:Field:Ferm:Nambu:quadraticGrassmannInt}
 to evaluate the integral, but instead have to rely on the more general Gaussian Gra\ss mann integral
 \begin{equation}
     \label{eq:Field:Ferm:ExNambu:pfaffianIntegral}
     \int\prod_{i}(\mathrm{d}\tilde{\xi}_i)\;e^{-\frac{1}{2}\tilde{\xi}_iS_{ij}\tilde{\xi}_j} = \pfaff(S),
 \end{equation}
-which applies for any antisymmetric matrix $S$. The right hand side is called the Pfaffian $\pfaff(S)$ of the matrix $S$ and is defined for any antisymmetric
+which applies for any antisymmetric matrix $S$. The right-hand side is called the Pfaffian $\pfaff(S)$ of the matrix $S$ and is defined for any antisymmetric
 matrix to be given by
 \begin{equation}
     \label{eq:Field:Ferm:ExNambu:pfaffianDef}
@@ -181,14 +181,14 @@ equal to $\int\prod_{i=1}^{2n}\mathrm{d}\tilde{\xi}_i$ such that Eq.~\eqref{eq:F
 } %
 %
 in Eq.~\eqref{eq:Field:Ferm:ExNambu:partitionFunction}
-after applying the proper discretization of the imaginary time then yields the result
+after applying the proper discretization of the imaginary time, then yields the result
 \begin{equation}
     \label{eq:Field:Ferm:ExNambu:partitionFinal}
     \mathcal{Z} = \int\!\mathcal{D}[\xi^\ast\,\xi]\;e^{-\int_0^\beta\!\mathrm{d}\tau\;\tilde{\xi}_{\gamma,i}S_{\gamma i; \delta j}\tilde{\xi}_{\delta, j}} = \sqrt{\det(S)}.
 \end{equation}
 We have chosen the positive result in $\pfaff(S) = \pm\sqrt{\det(S)}$ since the partition function $\mathcal{Z}$ needs to be positive on physical grounds.
-The matrix $S$ on the right hand side of Eq.~\eqref{eq:Field:Ferm:ExNambu:partitionFinal}, which we take the determinant of, is the full matrix one gets after
-discretizing the imaginary time into slices which is usually done through the Matsubara-frquency formalism.
+The matrix $S$ on the right-hand side of Eq.~\eqref{eq:Field:Ferm:ExNambu:partitionFinal}, which we take the determinant of, is the full matrix one gets after
+discretizing the imaginary time into slices which is usually done through the Matsubara-frequency formalism.
 
 Now that we know that the partition function is given in terms of the determinant of the action-matrix $S$, we can use this information to manipulate the definition
 of $\tilde{\xi}_{\gamma,i}$ so that we can still write the action as a sesquilinear form. In particular, switching the position of $\xi_{\gamma,s}^\ast$ and
@@ -199,13 +199,13 @@ we can thus rewrite the bilinear form such that
     \label{eq:Field:Ferm:ExNambu:bilinearToSesqui}
     \v{\xi}_\gamma^\trans S_{\gamma\delta}\v{\xi}_\delta = \v{\xi}_\gamma^\dagger S'_{\gamma\delta}\v{\xi}_\delta.
 \end{equation}
-Now the integral over the exponent has not changed since all we have done is simply re-ordering its terms. However, since exchange of rows in a determinant
-at most produces a minus sign and we do this twice we get that $\det S = \det S'$ and we can write
+Now, the integral over the exponent has not changed since all we have done is simply re-ordering its terms. However, since exchange of rows in a determinant
+at most produces a minus sign and we do this twice, we get that $\det S = \det S'$, and we can write
 \begin{equation}
     \label{eq:Field:Ferm:ExNambu:partitionFunction:sesquilinear}
     \mathcal{Z} = \int\!\mathcal{D}[\xi^\ast\,\xi]\;e^{-\int_0^\beta\!\mathrm{d}\tau\;\v{\xi}_{\gamma}^\dagger S'_{\gamma\delta}\v{\xi}_{\delta}} = \sqrt{\det(S')}.
 \end{equation}
-where we need to remember that $S'$ is the row switched matrix of an antisymmetric matrix $S$.
+In this equation, it is important to remember that $S'$ is the row-switched matrix of an antisymmetric matrix $S$.
 
 
 \section{Matsubara formalism}
@@ -236,7 +236,7 @@ $\nu_n$ where $\nu_n = 2n\pi/\beta$. The inverse relations are given by
 
 \subsection{Matsubara sums}
 
-When the Matsubara formalism $\xi_{\alpha,n}$ is used for the field variables in the action of a partition-function field-integral we will often
+When the Matsubara formalism $\xi_{\alpha,n}$ is used for the field variables in the action of a partition-function field-integral, we will often
 need to evaluate infinite  sums of Matsubara frequencies of the form
 \begin{equation}
     \label{eq:Field:Mats:genSum}
@@ -244,7 +244,7 @@ need to evaluate infinite  sums of Matsubara frequencies of the form
 \end{equation}
 where $f_n$ is either a fermionic- or bosonic Matsubara-frequency, 
 to evaluate the field integral. A useful strategy in such evaluations is to transform the sum to a complex integral by using reverse residue
-integration. We consider the complex contour integral along a path $\mathcal{C}$ running counter-clockwise around the complex plane infinitesimally close to
+integration. We consider the complex contour integral along a path $\mathcal{C}$ running counterclockwise around the complex plane infinitesimally close to
 the imaginary axis as shown in Fig.~\ref{fig:Field:Mats:integrationContour}. 
 %
 \newcommand\hor{1.5}
@@ -300,22 +300,22 @@ the imaginary axis as shown in Fig.~\ref{fig:Field:Mats:integrationContour}.
   % Left pole
   \cross[-3.2+\hor,0.5,0.2];
 \end{tikzpicture}
-\caption{Integration contour for the Matsubara sum $\sum_nh(if_n)$. The contour is marked by a solid line and is imagined to continue
+\caption{Integration contour for the Matsubara sum $\sum_nh(if_n)$. The contour is marked by a solid line and is imagined continuing
 to $\pm i\infty$.
-The crosses along the imaginary axis symbolizes the simple poles of the Fermi-Dirac distribution-function.
+The crosses along the imaginary axis symbolize the simple poles of the Fermi-Dirac distribution-function.
 A deformed integration contour is shown with dashed lines that is imagined to cross the real axis at $\pm\infty$.
 This contour then encloses a simple pole on the left and a branch cut on the right belonging to the summand.}
   \label{fig:Field:Mats:integrationContour}
 \end{figure}
 %
 The integrand we consider is given by the product of the summand
-and the complex continuation of the Fermi-Dirac- or Bose-Einstein-distribution function
+and the complex continuation of the Fermi-Dirac- or Bose-Einstein distribution-function
 \begin{equation}
     \label{eq:Field:Mats:distributionFunction}
     n_\zeta(z) = (e^{\beta z} - \zeta)^{-1},\quad z\in\mathbb{C},
 \end{equation}
 depending on whether the Matsubara
-frequency in the sum is of fermionic ($\zeta = +1$) or bosonic ($\zeta = -1$) nature. This function has simple poles\footnote{That
+frequency in the sum is of fermionic ($\zeta = -1$) or bosonic ($\zeta = +1$) nature. This function has simple poles\footnote{That
 the poles are simple, i.e. $1$st order, is easily seen by expanding the exponential around $if_n$ to leading order.} %
  at $z = if_n$ and thus integration
 around the contour results in a sum of residues of the integrand at these poles such that we get
@@ -323,8 +323,8 @@ around the contour results in a sum of residues of the integrand at these poles 
     \label{eq:Field:Mats:sumToIntegral}
     \sum_nh(if_n) = \frac{\zeta\beta}{2\pi i}\oint_{\mathcal{C}}\!\mathrm{d}z\;h(z)n_\zeta(z),
 \end{equation}
-given that $h(z)$ does not contain any poles at these points. The contour can now be continuously deformed at will as long as it does not cross any
-singularities which can greatly facilitate the calculation of the integral. The default approach is to see if the integrand vanishes as $\abs{z}\to\infty$,
+given that $h(z)$ does not contain any poles at these points. The contour can now be continuously deformed at will, as long as it does not cross any
+singularities, which can greatly facilitate the calculation of the integral. The default approach is to see if the integrand vanishes as $\abs{z}\to\infty$,
 in which case it is usually useful to expand the contour as much as possible as illustrated by the deformed contour $\mathcal{C}'$ in
 Figure~\ref{fig:Field:Mats:integrationContour}. 
 
@@ -341,39 +341,39 @@ Using the method outlined above, we may calculate the sums
 
 \section{Hubbard-Stratonovich transformation}
 
-The \ac{hs} transformation is a transformation in the fields of a theory where a new complex field is introduced
+The \ac{hs} transformation is a transformation in the fields of a theory, where a new complex field is introduced
 in order to convert a term that is quadratic in an existing field variable, into a linear coupling between
 the existing- and new field. This is particularly useful when the existing field is Fermionic and thus
-a Gra\ss mann variable since it makes it possible to consider low energy exitations of the theory using \eg a saddle-point
-approximation. It is however important to point out that the transformation itself is not in any way approximative, but is
+a Gra\ss mann variable, since it makes it possible to consider low energy excitations of the theory using \eg\ a saddle-point
+approximation. It is however important to point out that the transformation itself is not in any way approximative but is
 an exact transformation that maintains all information of the original theory.
 
 In technical terms, the \ac{hs} transformation can be viewed simply as the solution of a complex multivariate integral.
 Let $A$ have a strictly positive Hermitian part and $\v{J}$ be a vector of
-coefficients that could contain Gra\ss mann variables or complex variables. Then
+coefficients that could contain Gra\ss mann- or complex variables. Then
 \begin{equation}
     \label{eq:Field:HS:complexIntegral}
     e^{\v{J}^\dagger A \v{J}} = \det A^{-1}\int_{\mathbb{C}}\prod_{i}\bigg[\frac{\mathrm{d}z_i^\ast\mathrm{d}z_i}{2\pi i}\bigg]e^{-(\v{z}^\dagger A^{-1}\v{z} + \v{z}^\dagger \v{J} + \v{J}^\dagger\v{z})},
 \end{equation}
 exchanges a quadratic term in $\v{J}$ with an integration over the complex $\v{z}$ variables.
-Since $\v{J}$ usually represents some field in a field theory, the new $\v{z}$ is called the auxiliary field or the conjugate
+Since $\v{J}$ usually represents some field in a field theory, the new $\v{z}$ is called the auxiliary- or conjugate
 field because of its linear coupling to $\v{J}$.
-In the less general case that $A$ is an Hermitian matrix, this formula is proved simply by completing the square, then
+In the less general case that $A$ is a Hermitian matrix, this formula is proved simply by completing the square, then
 diagonalizing $A$ by a unitary transformation and calculating the resulting integrals by the formula 
 $\int_{\mathbb{C}}\!\mathrm{d}z^\ast\mathrm{d}z\,e^{-azz^\ast} = 2\pi i /a$. 
 
-From Eq.~\eqref{eq:Field:HS:complexIntegral} we see that
+From Eq.~\eqref{eq:Field:HS:complexIntegral}, we see that
 what we have to do to perform the \ac{hs} transformation is first to make a choice for what to interpret as part
 of the matrix $A$ and what to interpret as part of $\v{J}$. We then have to check that this definition of $A$ leads to its
-Hermitian part having only positive eigenvalues. Finally we need to know an analytical expression for its inverse.
-It is usually the first step that is the most difficult since this dictates the low energy excitation a subsequent saddle point
+Hermitian part having only positive eigenvalues. Finally, we need to know an analytical expression for its inverse.
+It is usually the first step that is the most difficult, since this dictates the low energy excitation a subsequent saddle point
 approximation or a stationary phase approximation will produce.
-Typically we are interested in transforming a Fermionic interaction potential of the form
+Typically, we are interested in transforming a Fermionic interaction potential of the form
 \begin{equation}
     \label{eq:Field:HS:typicalInteactionPotential}
     V = \frac{1}{2}\sum_{\alpha\beta\gamma\delta}V_{\alpha\beta\gamma\delta}\xi^\ast_\alpha\xi^\ast_\beta\xi_\delta\xi_\gamma,
 \end{equation}
-where $\xi_\alpha$ are Gra\ss mann variables, which can be sketched in the way of single-vertex diagram in Figure~\ref{fig:Field:HS:twoBodyInteraction}.
+where $\xi_\alpha$ are Gra\ss mann variables, which can be sketched in the way of the single-vertex diagram in Figure~\ref{fig:Field:HS:twoBodyInteraction}.
 \begin{figure}[h]
     \begin{center}
 
@@ -391,13 +391,13 @@ considered to be part of $\v{J}$ and consequently $\v{J}^\dagger$. The direct ch
 the identification $J_i \sim \xi_\alpha^\ast\xi_\gamma$,
 the Cooper channel\footnote{Also known as the particle-particle channel.} is defined by the identification $J_i \sim \xi_\delta\xi_\gamma$ while the
 exchange channel is given by the identification $J_i \sim \xi_\alpha^\ast\xi_\delta$. Depending on exactly how $\v{J}$ is chosen, the Gaussian
-integral in Eq.~\eqref{eq:Field:HS:complexIntegral} might have to be modified. For example in the case of the direct- and exchange-channel, the
-exponential argument on the left side will have the form $\v{J}^\trans A\v{J}$ which necessitates the Gaussian integral identity
+integral in Eq.~\eqref{eq:Field:HS:complexIntegral} might have to be modified. For example, in the case of the direct- and exchange-channel, the
+exponential argument on the left side will have the form $\v{J}^\trans A\v{J}$, which necessitates the Gaussian integral identity
 \begin{equation}
     \label{eq:Field:HS:realIntegral}
     e^{-\frac{1}{2}\v{J}^\trans A\v{J}} = \sqrt{\det A^{-1}}\int_{\mathbb{R}}\!\prod_i\bigg[\frac{\mathrm{d}x_i}{\sqrt{2\pi}}\bigg]e^{-\frac{1}{2}\v{x}^\trans A^{-1}\v{x} - i\v{J}^\trans\v{x}},
 \end{equation}
-where the auxiliary field $\v{x}$ now is a real conjugate field.
+where the auxiliary field $\v{x}$ now is a \emph{real} conjugate field.
 
 
 \subsection{Transformation in symmetry channels}
@@ -405,7 +405,7 @@ where the auxiliary field $\v{x}$ now is a real conjugate field.
 In the Cooper-channel of the \ac{hs} transformation, the complex field $\v{z}$ is conjugate to some combination
 of pairs of annihilation operators $\hat{c}_\delta \hat{c}_\gamma$ (or their corresponding Gra\ss mann variables).
 The symmetry of the specific combination in turn then determines the symmetry of any low energy field theory obtained
-through a subsequent stationary phase approximation. By diagonalizing the interaction potential $\hat{V}$ into its particular
+through a subsequent stationary phase approximation. By diagonalizing the interaction potential $\hat{V}$ into its different
 irreducible representations as we will do in Section~\ref{sec:Group:Potential}, then a \ac{hs} transformation
 in a specific symmetry channel is done by identifying $\v{J}$ with \ac{ir} basis function combinations of latter operators. 
 
@@ -428,7 +428,7 @@ the interaction potential is simply written
     \hat{V} = \sum_{\v{q},b,m}\hat{J}_\v{q}^{(b_m)\,\dagger}v^{(b)}\hat{J}_\v{q}^{(b_m)}.
 \end{equation}
 In the path-integral representation of the partition function, the annihilation operators become Gra\ss mann variables which we denote
-by writing $J$ instead of $\hat{J}$ such that the contribution from the interaction potential results in the exponential
+by writing $J$ instead of $\hat{J}$, such that the contribution from the interaction potential results in the exponential
 \begin{equation}
     \label{eq:Field:HS:Symm:potentialExp}
     \mathcal{Z}_I = e^{-\int_0^\beta\!\mathrm{d}\tau\sum_{\v{q},b,m}J_\v{q}^{(b_m)\,\dagger}v^{(b)}J_\v{q}^{(b_m)}}.
@@ -445,9 +445,9 @@ Comparing Eq.~\eqref{eq:Field:HS:Symm:fieldHSTransform} and \eqref{eq:Field:HS:S
     \label{eq:Field:HS:Symm:Matrix}
     A_{ij} = A_{b,m,\v{q};\,b',m',\v{q}'} = -\delta_{\v{q}\v{q}'}\delta_{mm'}\delta_{bb'}v^{(b)},
 \end{equation}
-which is trivially Hermetic and positive definite provided $v^{(b)}<0$. In this case we say that the irreducible representation $b$ is an
+which is trivially Hermitian and positive definite provided $v^{(b)}<0$. In this case we say that the irreducible representation $b$ is an
 attractive channel. $A$ is in this case also trivially invertible with $A_{ij}^{-1} = -\delta_{ij}/v^{(b)}$.
-Writing out all the indices we finally arrive at the \ac{hs} transformation of the interaction potential in individually
+Writing out all the indices, we finally arrive at the \ac{hs} transformation of the interaction potential in individually
 attractive symmetry channels
 \begin{equation}
     \label{eq:Field:HS:Symm:HSTransformedPotentialExp}
@@ -459,7 +459,7 @@ where
     J^{(b_m)}_\v{q} = \sum_{\v{k}\,s_1s_2}d_{s_1s_2}^{(b),m}(\v{k})\xi_{\frac{\v{q}}{2}-\v{k},s_1}\xi_{\frac{\v{q}}{2}+\v{k},s_2}
 \end{equation}
 in terms of Gra\ss mann variables $\xi$. We note that this derivation does not assume either odd or even basis functions for the
-irreducible representations and works just as well for either.
+irreducible representations and thus works just as well for either.
 
 \section{Field theory approximations}
 
@@ -481,7 +481,7 @@ case.} %
 of a bosonic field integral, we create an expansion of the free energy around
 the field configuration $\{\eta^c_\alpha\}$ where the action $S$ is stationary and a minimum. This configuration
 is the main contribution to the integral in Eq.~\eqref{eq:Field:Stat:partitionFunction} since it provides the maximum of
-the exponent,
+the exponent
 and determines the leading order asymptotic behavior as $l\to\infty$. It also corresponds in a sense to a classical solution
 and gives in the case of the Feynman path-integral for the evolution operator of a single particle in an external potential,
 the classical Euler-Lagrange equations.
@@ -507,7 +507,7 @@ in Eq.~\eqref{eq:Field:Stat:stationaryCondition} then yields the equation
     \label{eq:Field:Stat:hubbardStationary}
     |\eta^c|\Big(\frac{1}{U} - \frac{1}{N}\sum_\v{q}\frac{1}{2E_\v{q}}\tanh\frac{\beta E_\v{q}}{2}\Big) = 0,
 \end{equation}
-which has two solutions: one given by $\eta^c = 0$ and one given by setting the terms in the parenthesis equal to $0$. The last non-trivial solution
+which has two solutions: one given by $\eta^c = 0$, and one given by setting the terms in the parenthesis equal to $0$. The last non-trivial solution
 is a form of the BCS solution and represents the order-parameter in an $s$-wave superconductor. Because of the parameter $\beta$, this
 solution will be temperature dependent and disappears at some critical temperature at which the two solutions for $\eta_c$ converge.
 
@@ -533,7 +533,7 @@ a contribution to the integral of the form
     \label{eq:Field:Stat:determinantContribution}
     \sqrt{\det G^{-1}(\eta_\alpha,\eta_\alpha^\ast)} = e^{\frac{1}{2}\tr\ln G^{-1}},
 \end{equation}
-where $G^{-1}$ is the result of the integration of a quadratic fermionic action, and will in general depend on the auxiliary bosonic fields
+where $G^{-1}$ is the result of the integration of a quadratic fermionic action and will in general depend on the auxiliary bosonic fields
 $\eta_\alpha$ and $\eta_\alpha^\ast$ in a non-linear way. Then the matrix $G^{-1}$ can be decomposed in a matrix $G_0^{-1}$ that results purely
 from fermionic integration, and a matrix $\phi$ that is dependent on the auxiliary fields $\eta_\alpha$ and importantly vanishes as $\eta_\alpha\to0$,
 such that $G^{-1} = G_0^{-1} + \phi$. When the system is close to the phase transition such that the auxiliary fields are small, then this
@@ -551,9 +551,9 @@ a closed loop by the trace.
 
 \subsection{Gradient expansion}
 
-The gradient expansion rests on the assumption that the fields are sufficiently smooth such that progressively higher order derivatives with
-respect to the field parameters, are progressively smaller,
-\ie we assume 
+The gradient expansion rests on the assumption that the fields are sufficiently smooth, such that progressively higher order derivatives with
+respect to the field parameters are progressively smaller,
+\ie\ we assume 
 \begin{equation}
     \label{eq:Field:Grad:gradientComparison}
     l_\alpha^n|\partial_\alpha^n\eta_\alpha| \gg l_\alpha^{n+1}|\partial_\alpha^{n+1}\eta_\alpha|,
@@ -563,14 +563,14 @@ In practice this usually means that given a momentum-dependent action density, $
 spacing\footnote{This could be the spacing between hopping sites, \ie stationary ions in an electron model.} $a_i$. Then we expand the
 explicit $\v{q}$ dependence in the action density in the small parameters $a_iq_i$ as a Maclaurin series. In the following notation, we will
 assume the length parameter $a^i$ is present in the notation $q^i$ where appropriate. The momentum dependence of the fields
-themselves should not be expanded as our goal is to have terms of the form $(q^i)^n(\tilde{\eta}_{\v{q},\alpha})^m$. If we then let partial momentum-derivatives
-only act on the explicite momentum-dependence in $S$, and neglecting the field dependence in the notation
+themselves should not be expanded, as our goal is to have terms of the form $(q^i)^n(\tilde{\eta}_{\v{q},\alpha})^m$. If we then let partial momentum-derivatives
+only act on the explicit momentum-dependence in $S$, and neglecting the field dependence in the notation
 for $S$, the expanded action can be written as the series
 \begin{equation}
     \label{eq:Field:Grad:actionExpansion}
     S(\v{q}) = S(\v{0}) + \frac{\partial S}{\partial q^i}(\v{0})\,q^i + \frac{1}{2!}\frac{\partial^2S}{\partial q^i\partial q^j}(\v{0})\,q^iq^j + \mathcal{O}(q^3).
 \end{equation}
-Usually, the linear term cancels by symmetry of the underlying lattice. In general it is smart to here check for terms that cancel by considering any internal
+Usually, the linear term cancels by symmetry of the underlying lattice. In general, it is smart to here check for terms that cancel by considering any internal
 momentum sums that may be included in the coefficients.
 
 Terms with products between fields $\eta_{\v{q},\alpha}$ and $q^i$ lead to gradients of the spatially dependent fields $\eta_{\v{R},\alpha}$, which is why the

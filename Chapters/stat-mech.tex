@@ -6,7 +6,7 @@ to extract not precise information about what each and every particle is doing, 
 information about what most of the particles are doing. One can imagine this process as zooming out
 from a detailed view of individual entities and viewing the resulting collection through squinted eyes.
 This amounts to treating the collection in a course-grained manner. Through such eyes, only the most significant
-behavior is perceptable such that it can be understood and described in a simplified way.
+behavior is perceptible such that it can be understood and described in a simplified way.
 
 \section{Canonical ensemble and the partition function}
 
@@ -15,9 +15,9 @@ function. Once this function is known, all the heavy lifting is done since most 
 quantities can be extracted from it following already established systematic steps.
 To calculate the partition function is theoretically very simple: we sum the quantity $e^{-\beta E_i}$
 over all the possible states of the system. Every state is a particular configuration of things in
-the system and since all things in the system have a certain energy, the energy of a system state is
-given by the sum of all these things' individual energy, pluss any energy given by interactions between
-then.
+the system, and since all things in the system have a certain energy, the energy of a system state is
+given by the sum of all these things' individual energy, plus any energy given by interactions between
+them.
 If we label
 each state of the system with the index $i$, then we can denote the energy of each state $E_i$. The
 definition of the partition function $Z$ in the canonical ensemble can then be written
@@ -33,10 +33,10 @@ countable.
 As we can see, the essential ingredients needed to calculate the partition function is one: to be able to
 enumerate all possible states $i$ of the system, and two: to be able to calculate their corresponding energies $E_i$.
 Since we have used the summation sign $\sum_i$ in Eq.~\eqref{eq:statMech:partDef}, we have 
-assumed that there exists a countable number of different states. However if there is one thing in the
+assumed that there exists a countable number of different states. However, if there is one thing in the
 system that can change in a continuous fashion, which we would measure using the set of real numbers
 $\mathbb{R}$ and some unit, then the number of states is infinite and uncountable. In this case we sum over the
-different numbers of states by simply integrating over the things that are continuous and the unit
+different numbers of states by simply integrating over the things that are continuous, and the unit
 of the partition function becomes the product of the units of the continuous variables (things) unless
 we normalize by some constant dimensionful quantity.
 In most cases, it is the position $\v{r}$ and momentum $\v{p}$ of particles in the system that are continuous, hence
@@ -68,7 +68,7 @@ are restricted to operators that have real expectation-values, as opposed to the
 deals with. This is to enforce the connection between observables and measurements, which we intuitively understand
 to always be reducible to a series of real values, \ie points on a line.
 
-We are interested in statistical information on observables of systems consisting of many quantum mechanical particles.
+We are interested in statistical information on observables of systems consisting of several quantum mechanical particles.
 To get this information we need some kind of probability distribution of the
 different states of the system. We are imagining that we for each such state (indexed by $j$) can calculate
 a real number for the thing (observable) we are interested in measuring. Let's call this observable $O$. Then
@@ -83,7 +83,7 @@ we know from probability theory that the expectation value of $O$ is
     \label{eq:statMech:statMean}
     \avg{O} = \sum_jo_jP_j.
 \end{equation}
-The probability distribution $P_j$ is in the canonical ensamble given by a Maxwell-distribution
+The probability distribution $P_j$ is in the canonical ensemble given by a Maxwell-distribution
 \begin{equation}
     \label{eq:statMech:probDist}
     P_j = e^{-\beta E_j}/Z,
@@ -96,15 +96,15 @@ normalized by the partition function $Z$. Inserting this we get
 
 The observable of specific heat at constant volume $C_v$ is particularly important in the study of phase transitions
 since its thermal
-behavior can be used to classify these transitions into particular categories. The specific heat is the measure
+behavior can be used to classify these transitions into categories. The specific heat is the measure
 of how much energy must be transferred to the system for its temperature to change by an infinitesimal amount
 given constant volume of the system. Thus it is defined by the equation $C_v = (\frac{\partial E}{\partial T})_V$.
-In the canonical ensamble, this quantity is calculated by
+In the canonical ensemble, this quantity is calculated by
 \begin{equation}
     \label{eq:statMech:specificHeat}
     C_v = k_\text{B}\beta^2(\avg{E^2}-\avg{E}^2) = -k_\text{B}\beta^2\Big(2\frac{\partial F}{\partial\beta}+\beta\frac{\partial^2 F}{\partial\beta^2}\Big).
 \end{equation}
-From this form of the specific heat we see that it can be interpreted as a measure of the variance or width of the
+From this form of the specific heat, we see that it can be interpreted as a measure of the variance or width of the
 distribution of energies, and also that it is related to the second derivative of the free energy. Any discontinuity
 in the second derivative of the free energy, thus implies a discontinuity in the specific heat.
 
@@ -113,16 +113,16 @@ in the second derivative of the free energy, thus implies a discontinuity in the
 The experimental discovery of superconductivity was a surprise to the scientists at the time. No theoretical model
 had so far predicted the properties that the experimentalists were measuring. The theoretical models in use at that
 time predicted a decrease in resistivity as the temperature was lowered, but its sudden disappearance was completely
-unprecedented and impossible to explain classically in a convincing manner. Thus superconductivity seemed to demand
+unprecedented and impossible to explain classically in a convincing manner. Therefore, superconductivity seemed to demand
 a radically different understanding of how electrons moved inside atomic structures.
 
 \subsection{Landau Model}
 
 Before such an understanding had been developed, Ginzburg and Landau took a shortcut and came up with a theory
-that could describe the phenomenon of superconductivity without knowing its microscopic origin. In other words
+that could describe the phenomenon of superconductivity without knowing its microscopic origin. In other words,
 they treated superconductivity as a black box and instead of asking what was inside to give the box's output,
 they used the output to determine a small set of \emph{material parameters} which could then be used to predict
-how the box would react to a large range of stimuli or conditions. Now given a large enough number of parameter
+how the box would react to a large range of stimuli or conditions. Now, given a large enough number of parameters,
 you can usually construct a model to fit any set of experimental observations that you like. The merit of this theory
 came from use of symmetry arguments to reduce this set into only a few parameters, which still allowed it to describe the
 observations, while also embedding the theory with great predictive power.
@@ -140,7 +140,7 @@ can also be described by a modified Landau theory, however we will here focus on
 In the magnetization of a metal it is the individual spins that become ordered along a particular direction.
 
 The second idea is that at the phase transition, it is the appearance of this order that should dominate the behaviour
-of the system, to the exclusion of all other effects. Thus the system should be described in terms of the order-parameter
+of the system, to the exclusion of all other effects. Thus, the system should be described in terms of the order-parameter,
 and since this is infinitesimally small close to the transition, the free energy can be expanded in a Maclaurin-series
 with respect to this parameter as
 \begin{equation}
@@ -150,7 +150,7 @@ with respect to this parameter as
 
 The real constants $F_0$ and $c_i$ constitute the set of material parameters of the theory and this set can then
 be reduced by any symmetries that we suspect should be inherent in the underlying theory. For example, if $\Psi$
-should represent the order parameter of magnetization of a system of ising spins, which can point either up or
+should represent the order parameter of magnetization of a system of Ising-spins, which can point either up or
 down, then the free energy should be invariant to this global choice, i.e. we need to enforce that the free energy
 be invariant with respect to the transformation $\Psi \mapsto -\Psi$. Then all the constants $c_i$ for odd $i$
 vanish.
@@ -158,9 +158,9 @@ vanish.
 In the case of superconductivity, the order parameter $\Psi$ represents the probability amplitude of the collective
 state of the superfluid of Cooper-paired electrons such that $\abs{\Psi}$ can be interpreted as the density of such
 electron pairs. Since $\Psi$ is complex, it has to be combined with its complex conjugate $\Psi^\ast$ in ways that
-yield real numbers to produce terms that are valid in the free energy since $F$ itself should be a real number.
+yield real numbers to produce terms that are valid in the free energy, since $F$ itself should be a real number.
 Furthermore, the phenomenon of superconductivity is produced as a result of the breaking of $U(1)$ symmetry, so $F$
-needs also to be $U(1)$ symmetric, i.e. it has to be invariant under the transformation $\Psi \mapsto e^{i\phi}\Psi$
+also needs to be $U(1)$ symmetric, i.e. it has to be invariant under the transformation $\Psi \mapsto e^{i\phi}\Psi$
 for $\phi\in\mathbb{R}$. These restrictions result in the free energy
 \begin{equation}
     \label{eq:statMech:LandauU1}
@@ -177,7 +177,7 @@ The minimum is then found by the condition
 \end{equation}
 which yields the possibilities $\abs{\Psi} = 0$ or $\abs{\Psi} = \sqrt{a/2b}$. The first case gives the energy $F = F_0$, while the second
 gives $F = F_0 - a^2/(4b)$. We see that the second case is energetically favorable, but only exists and is different from
-the first case when $a>0$. Furthermore, the second case represents the ordered state since in this case the order-parameter $\abs{\Psi} \neq 0$,
+the first case when $a>0$. Furthermore, the second case represents the ordered state, since in this case the order-parameter $\abs{\Psi} \neq 0$,
 in the conventional Landau theory\footnote{Actually this only represents when Cooper-pairs are forming and the real onset
 of superconductivity is determined by the point in parameter-space where the gauge-mass becomes non-zero, which is closely
 related but not exactly the same as where the density of Cooper-pairs becomes non-zero. The real onset of superconductivity is
@@ -185,7 +185,7 @@ thus more related to when the phase of the wave-function settles on a value.}.
 
 It is the thermodynamic parameter of temperature that traditionally determines whether a system is in one phase or another.
 Looking at the free energy in Eq.~\eqref{eq:statMech:LandauU1}, the order parameter $\Psi$ is the dynamical variable 
-of the theory while the explicit temperature dependence lies in the material parameters $a$ and $b$. Denoting the
+of the theory while the explicit temperature dependence lies in the material parameters $a$ and $b$. Denoting 
 the critical temperature where the phase transition happens $T_c$, the dimensionless parameter
 $t = (T-T_c)/T_c$ is small close to the critical point which means that it can be used to expand the temperature-dependence
 of the material parameters such that
@@ -200,11 +200,11 @@ of the material parameters such that
 Now we argue for what terms to keep in these expansions. Since $a(T)$ should change sign at $t=0$ based on the discussion of
 Eq.~\eqref{eq:statMech:LandauExtreme}, then we only keep odd terms of $a$.
 Since we need $b(T)>0$ for the theory to be thermodynamically stable it seems that $b_0$ is the important term that needs to be
-larger than any negative contributions from the other terms. Keeping only lowest order terms then the expansions reduce to
+larger than any negative contributions from the other terms. Keeping only lowest order terms, then the expansions reduce to
 $a(T) = a_1(T-T_c)/T_c$ and $b(T) = b_0$. Since the ordered state is the solution of the theory when $a>0$ and this ordered
 state exists at temperatures $T<T_c$ then $a_1<0$ and the final temperature dependence of $a$ becomes
 $a(T) = -\abs{a_1}(T-T_c)/T_c$. From this temperature dependence, it is straightforward to derive critical exponents, the specific
-heat etc. See Ref.~\cite{Nishimori15}.
+heat, etc. See Ref.~\cite{Nishimori15}.
 
 \subsection{Gradient Terms}
 
@@ -216,14 +216,14 @@ a gradient expansion of $f$ in
     \label{eq:statMech:gradTerms:gradExpansion}
     F = \int\d{^3r}f(\Psi, \nabla\Psi, \nabla^2\Psi, \nabla^3\Psi, \ldots).
 \end{equation}
-Keeping only the lowest order in this expansion that is invariant under $U(1)$ symmetry we get the term
+Keeping only the lowest order in this expansion that is invariant under $U(1)$ symmetry, we get the term
 $\abs{\nabla\Psi}^2$ added to the free energy $F$ in Eq.~\eqref{eq:statMech:LandauU1}.
 
-Perhaps the single most important phenomenon of superconductivity from a theoretical stand-point is the fact that it expels
+Perhaps the single most important phenomenon of superconductivity from a theoretical standpoint is the fact that it expels
 magnetic fields, hence it is clear that any theory that attempts to explain superconductivity needs to have some way for the
 superconducting order to interact with magnetic fields. The standard way to achieve this is through the recipe of
-\emph{minimal coupling}, where the vector potential $\v{A}$ times a constant is subtracted with from any momentum
-in the previously neutral theory. Specifically $\v{p}\mapsto \v{p}-q/c\v{A}$ where $q$ is the charge of the particle and
+\emph{minimal coupling}, where the vector potential $\v{A}$ times a constant is subtracted from any momentum
+in the previously neutral theory. Specifically, $\v{p}\mapsto \v{p}-q/c\v{A}$, where $q$ is the charge of the particle and
 $c$ is the speed of light. Using this trick, then the free energy density becomes
 \begin{equation}
     \label{eq:statMech:gradTerms:GLequation}
@@ -240,8 +240,8 @@ For unconventional symmetries, the form of the gradient terms can vary substanti
 Eq.~\eqref{eq:statMech:gradTerms:GLequation}. Even if the transition can be described by a single component, \ie a
 single function $\Psi$, then an unconventional symmetry could still lead to anisotropies in the gradient terms such that
 $K$ in Eq.~\eqref{eq:statMech:gradTerms:GLequation} becomes directionally dependent.
-An example is single-component pairing in a tetragonal crystal. The symmetry group of tetragonal crystals is denoted $D_{4h}$ in the Shoenflies
-notation and consists of four-fold rotations in, and mirror symmetry about the $xy$-plane. The rotational symmetry
+An example is single-component pairing in a tetragonal crystal. The symmetry group of tetragonal crystals is denoted $D_{4h}$ in the Sch\"onflies
+notation and consists of four-fold rotations in, and mirror symmetry about, the $xy$-plane. The rotational symmetry
 makes the gradient isotropic in the plane, but because of the lack of symmetry in the $z$-direction, the gradient
 terms in general must take the form
 \begin{equation}
@@ -256,8 +256,8 @@ of irreducible representations and group theory, see Chapter~\ref{chap:Group}.}.
 describing the order, we need several complex functions $\eta_i$. 
 
 A chiral $p$-wave superconductor has a pairing state that
-belongs to such a two-dimensional irreducible representation which comes from the $\Gamma_5$ irreducible representation of the
-tetragonal symmetry group $D_{4h}$. This representation consist of two components $\eta_x$ and $\eta_y$ that combine
+belongs to such a two-dimensional irreducible representation. It comes from the $\Gamma_5$ irreducible representation of the
+tetragonal symmetry group $D_{4h}$. This representation consists of two components $\eta_x$ and $\eta_y$ that combine
 to form the general gradient terms
 \begin{equation}
     \label{eq:statMech:gradTerms:chiralPWave}
