@@ -1,0 +1,54 @@
+\clearpage
+% Remove numbers from pages separating papers.
+\pagestyle{empty}
+\renewcommand*{\chapterpagestyle}{empty}
+
+% Format the chapter* command to make it look different than the other chapters.
+% The definition of the command: \chapterlineswithprefixformat{level}{number}{text}
+\makeatletter
+\renewcommand{\chapterlineswithprefixformat}[3]{
+\centering\@hangfrom{#2}{#3\par\vspace{-3pt}}
+\centerline{\rule{0.67\textwidth}{0.5\ruleWidth}}
+}
+\makeatother
+
+% Paper I
+\chapter*{Paper I}
+\label{pap:I}
+\begin{center}
+{\bfseries Fredrik Nicolai Krohg and Asle Sudb\o{}}\\
+\bigskip
+\textit{Derivation of a Ginzburg-Landau free energy density of a $p+ip$ superconductor from spin-orbit coupling with mixed gradient terms}\\
+\bigskip
+Physical Review B {\bfseries 98}, 014510 (2018)
+\end{center}
+\cleardoublepage
+\includepdf[pages=-]{Papers/PaperI.pdf}
+
+
+% Paper II
+\chapter*{Paper II}
+\label{pap:II}
+\begin{center}
+    {\bfseries Fredrik Nicolai Krohg, H\r{a}vard Homleid Haugen, Egor Babaev, Julien Garaud, and Asle Sudb\o{}}\\
+\bigskip
+\textit{Thermal fluctuations and vortex lattice structures in chiral $p$-wave superconductors: Robustness of double-quanta vortices}\\
+\bigskip
+Physical Review B {\bfseries 103}, 214517 (2021)
+\end{center}
+\cleardoublepage
+\includepdf[pages=-]{Papers/PaperII.pdf}
+
+
+% Paper III
+\chapter*{Paper III}
+\label{pap:III}
+\begin{center}
+    {\bfseries H\r{a}vard Homleid Haugen, Egor Babaev, Fredrik Nicolai Krohg, and Asle Sudb\o{}}\\
+\bigskip
+\textit{First order superconducting phase transition in chiral $p+ip$ system}\\
+\bigskip
+ARXIV: 2106.01007
+\end{center}
+\cleardoublepage
+\includepdf[pages=-]{Papers/PaperIII.pdf}
